@@ -1,0 +1,20 @@
+[
+  {
+    "module": "academic_navigation",
+    "question": "How do I log in to the AC System?",
+    "answer": "[PLACEHOLDER] To log in to the AC System: 1) Go to [AC System URL]. 2) Enter your student ID (e.g. S123456789). 3) Enter your default password (usually your IC/passport number). 4) Change your password on first login. Main features: course registration, grade checking, timetable viewing.",
+    "keywords": ["AC system", "login", "portal", "student portal", "grades", "timetable", "course"]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How do I apply for leave?",
+    "answer": "[PLACEHOLDER] Leave applications are submitted via [Leave System URL]. Important: this system is only accessible on the XMUM campus network (Wi-Fi or LAN). Steps: 1) Connect to campus Wi-Fi. 2) Log in with your student credentials. 3) Click 'New Leave Application'. 4) Fill in dates and reason. 5) Submit — your advisor will be notified automatically.",
+    "keywords": ["leave", "apply", "application", "absent", "absence", "sick leave", "campus wifi"]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How do I download the academic calendar?",
+    "answer": "[PLACEHOLDER] The XMUM Academic Calendar (PDF) can be downloaded from the official website: [URL]. It lists term start/end dates, public holidays, exam periods, and semester breaks.",
+    "keywords": ["academic calendar", "calendar", "schedule", "semester", "exam", "holiday", "download"]
+  }
+]

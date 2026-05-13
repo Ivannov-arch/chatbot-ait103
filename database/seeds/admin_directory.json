@@ -1,0 +1,26 @@
+[
+  {
+    "module": "admin_directory",
+    "question": "Where is the International & Student Affairs office?",
+    "answer": "[PLACEHOLDER] The International & Student Affairs office is located at [building name], [floor/room]. Office hours: Monday–Friday, [time]. Email: [email@xmu.edu.my].",
+    "keywords": ["international", "student affairs", "office", "location", "contact"]
+  },
+  {
+    "module": "admin_directory",
+    "question": "How do I register for a course?",
+    "answer": "[PLACEHOLDER] Course registration is done via the official AC System portal at [URL]. Log in with your student ID and password. Registration opens on [date]. Beware of unofficial third-party links — always use the official XMUM portal.",
+    "keywords": ["register", "course", "registration", "enrol", "sign up"]
+  },
+  {
+    "module": "admin_directory",
+    "question": "How do I pay my tuition fees?",
+    "answer": "[PLACEHOLDER] Tuition fees can be paid through [official payment portal URL]. Accepted methods: [bank transfer, online banking, etc.]. Avoid paying through unofficial channels to prevent scams.",
+    "keywords": ["pay", "payment", "tuition", "fees", "bank", "scam"]
+  },
+  {
+    "module": "admin_directory",
+    "question": "Where is the Accommodation Services office?",
+    "answer": "[PLACEHOLDER] The Accommodation Services (Housing) office is located at [building/block]. Office hours: Monday–Friday, [time]. Contact: [phone/email].",
+    "keywords": ["accommodation", "housing", "hostel", "office", "contact"]
+  }
+]

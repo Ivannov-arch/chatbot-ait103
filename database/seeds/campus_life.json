@@ -1,0 +1,38 @@
+[
+  {
+    "module": "campus_life",
+    "question": "How do I connect to the campus Wi-Fi?",
+    "answer": "[PLACEHOLDER] To connect to XMUM campus Wi-Fi: 1) Select the SSID '[XMUM-WiFi]' on your device. 2) Open a browser — a login page should appear. 3) Enter your student ID and password. 4) Click Connect. If the page does not appear, navigate to [captive portal URL].",
+    "keywords": ["wifi", "wi-fi", "internet", "connect", "network", "login"]
+  },
+  {
+    "module": "campus_life",
+    "question": "Where is the canteen and what food is available?",
+    "answer": "[PLACEHOLDER] The main canteen is at [location]. It is open [hours]. Food options include: Chinese, Western, Halal, and vegetarian stalls. A second canteen is located at [location 2].",
+    "keywords": ["canteen", "food", "eat", "halal", "vegetarian", "chinese", "western", "cafeteria", "lunch", "dinner"]
+  },
+  {
+    "module": "campus_life",
+    "question": "What are the hostel rules?",
+    "answer": "[PLACEHOLDER] Key hostel rules include: no overnight guests of opposite gender, quiet hours after [time], no cooking in rooms, keep common areas clean. Full rules are in the XMUM Student Handbook.",
+    "keywords": ["hostel", "accommodation", "rules", "dorm", "dormitory", "resident"]
+  },
+  {
+    "module": "campus_life",
+    "question": "How do I submit a hostel maintenance request?",
+    "answer": "[PLACEHOLDER] To submit a maintenance request: 1) Log in to [maintenance portal URL]. 2) Click 'New Request'. 3) Select your block and room number. 4) Describe the issue and submit. You will receive an email confirmation.",
+    "keywords": ["maintenance", "repair", "hostel", "room", "broken", "fix", "request"]
+  },
+  {
+    "module": "campus_life",
+    "question": "What are the library opening hours?",
+    "answer": "[PLACEHOLDER] The XMUM Library is open: Monday–Friday [time], Saturday [time], Sunday [time or Closed]. The library is located at [building].",
+    "keywords": ["library", "hours", "open", "close", "borrow", "book"]
+  },
+  {
+    "module": "campus_life",
+    "question": "How do I borrow and return books from the library?",
+    "answer": "[PLACEHOLDER] To borrow: present your student card at the circulation desk or use the self-checkout machine. Loan period: [X] days. To return: place books in the return slot at the library entrance or hand them to library staff.",
+    "keywords": ["library", "borrow", "return", "book", "loan", "circulation"]
+  }
+]
