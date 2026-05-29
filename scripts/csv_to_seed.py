@@ -59,11 +59,11 @@ def csv_to_json(csv_path: str):
         out_path = output_dir / f"{module}.json"
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(items, f, indent=2, ensure_ascii=False)
-        print(f"SUCCESS: [{module}] {len(items)} items -> {out_path}")
+        print(f"✅ [{module}] {len(items)} items → {out_path}")
         total += len(items)
 
-    print(f"\nDone: {total} items across {len(modules)} modules are ready to be seeded.")
-    print("Next step: Run `python -m database.seed`")
+    print(f"\n🎉 Total: {total} items from {len(modules)} modules ready to be seeded.")
+    print("Run: python -m database.seed")
 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ def parse_qa_file(module: str, txt_path: str):
     path = pathlib.Path(txt_path)
     if not path.exists():
         print(f"ERROR: File not found: {txt_path}")
-        sys.exit(1)
+        return
 
     content = path.read_text(encoding="utf-8")
     blocks = [b.strip() for b in content.split("---") if b.strip()]
@@ -36,20 +36,19 @@ def parse_qa_file(module: str, txt_path: str):
             elif line.startswith("A:"):
                 entry["answer"] = line[2:].strip()
             elif line.startswith("K:"):
-                entry["keywords"] = [k.strip() for k in line[2:].split(",") if k.strip()]
+                entry["keywords"] = [k.strip() for k in line[2:].split(",")]
 
         if entry["question"] and entry["answer"]:
             items.append(entry)
         else:
             skipped += 1
-            print(f"  [SKIP] Incomplete block (missing Q or A)")
+            print(f"  [SKIP] Incomplete block: {block[:50]}...")
 
     output_path = pathlib.Path(f"database/seeds/{module}.json")
-    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(items, f, indent=2, ensure_ascii=False)
 
-    print(f"SUCCESS: {len(items)} Q&A pairs saved to {output_path}")
+    print(f"✅ {len(items)} Q&A saved to {output_path}")
     if skipped:
         print(f"         ({skipped} blocks skipped due to missing information)")
 
