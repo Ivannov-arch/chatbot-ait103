@@ -4,250 +4,288 @@
 
 6 Roles → 4 Batches (Sprints) → ~30 Linear Issues
 
-Setiap anggota tim mendapatkan **role utama** (sesuai rubrik) dan
-**file teknis utama** yang menjadi tanggung jawab penuh mereka.
-File `Z_Placeholder_` tetap tersedia sebagai referensi — bukan untuk di-copy-paste,
-tapi untuk dipahami alurnya lalu ditulis ulang dengan pemahaman sendiri.
+Each team member is assigned a main role (based on the rubric) and a main technical file for which they are fully responsible.
+The `Z_Placeholder_` file remains available for reference — not for copying and pasting,
+but for understanding the flow and rewriting with your own understanding.
 
 ---
 
-## 👥 Pemetaan Role → Anggota → File Utama
+## 👥 Role → Member → Main File Mapping
 
-| # | Role (Rubrik)                       | File Utama yang Dimiliki                                  |
-|---|-------------------------------------|-----------------------------------------------------------|
-| 1 | **Intent Recognition**              | `chatbot/intent_classifier.py`                            |
-| 2 | **Entity Extraction**               | `chatbot/preprocessor.py` *(file baru)*                   |
-| 3 | **Response Matching & Retrieval**   | `chatbot/retriever.py`, `database/client.py`, `database/schema.sql` |
-| 4 | **Context & Session Management**    | `chatbot/context_manager.py`                              |
+| # | Role (Rubrik) | Owned Main File |
+|---|----------------------------------------------------------------------------|---------------------------------------------------------------------|
+| 1 | **Intent Recognition** | `chatbot/intent_classifier.py` |
+| 2 | **Entity Extraction** | `chatbot/preprocessor.py` *(new file)* |
+| 3 | **Response Matching & Retrieval** | `chatbot/retriever.py`, `database/client.py`, `database/schema.sql` |
+| 4 | **Context & Session Management** | `chatbot/context_manager.py` |
 | 5 | **Fallback Handling & Response Generation** | `chatbot/responder.py`, `chatbot/bot.py`, `chatbot/main.py` |
-| 6 | **NLP & Text Preprocessing**        | `database/seeds/*.json`, `database/seed.py`, keyword normalization |
+| 6 | **NLP & Text Preprocessing** | `database/seeds/*.json`, `database/seed.py`, keyword normalization |
 
 ---
 
-## 🗂️ Dataset: Siapa yang Bertanggung Jawab?
+## 🗂️ Dataset: Who is Responsible?
 
-> **Pimpinan Dataset: Role 6 — NLP & Text Preprocessing**
+> **Dataset Lead: Role 6 — NLP & Text Preprocessing**
 
-### Mengapa Role 6?
-Karena chatbot ini adalah **Pure Retrieval-Based**, kualitas dataset (file `.json` di `database/seeds/`) adalah komponen paling kritis. Bukan modelnya, tapi datanya yang menentukan kecerdasan bot. Role 6 paling memahami:
-- Bagaimana kata kunci (`keywords`) harus dinormalisasi agar mudah dicocokkan.
-- Format JSON yang benar untuk diproses oleh `seed.py`.
-- Konsistensi struktur data di seluruh modul.
+### Why Role 6?
+Since this chatbot is **Pure Retrieval-Based**, the quality of the dataset (`.json` file in `database/seeds/`) is the most critical component. It's not the model, but the data that determines the bot's intelligence. Role 6 best understands:
+- How keywords should be normalized for easy matching.
+- The correct JSON format for processing by `seed.py`.
+- Consistency of data structures across modules.
 
-### Kontribusi Setiap Anggota ke Dataset:
-Meskipun Role 6 yang **memimpin dan mengkurasi**, setiap anggota **wajib berkontribusi konten** dari area modul mereka:
+### Each Member's Contribution to the Dataset:
+While Role 6 **leads and curates**, each member is **required to contribute content** from their module area:
 
-| Siapa | Berkontribusi Konten untuk |
-|-------|---------------------------|
-| Role 1 (Intent) | Daftar keyword per modul untuk file `intent_classifier.py` |
-| Role 2 (Entity) | Daftar sinonim (contoh: "wifi" = "internet" = "network") |
-| Role 3 (Retrieval) | Memastikan JSON seed kompatibel dengan query Supabase |
-| Role 4 (Context) | Contoh Q&A multi-turn untuk menguji konteks |
-| Role 5 (Fallback) | Daftar pertanyaan yang seharusnya trigger fallback |
-| Role 6 (NLP Lead) | **Kurasi final, format, review, dan upload ke Supabase** |
+| Who | Contributes Content to |
+|---------------------------------------|
+| Role 1 (Intent) | List of keywords per module for the `intent_classifier.py` file |
+| Role 2 (Entity) | List of synonyms (e.g., "wifi" = "internet" = "network") |
+| Role 3 (Retrieval) | Ensure JSON seed is compatible with Supabase queries |
+| Role 4 (Context) | Example multi-turn Q&A to test the context |
+| Role 5 (Fallback) | List of questions that should trigger the fallback |
+| Role 6 (NLP Lead) | **Final curation, formatting, review, and upload to Supabase** |
 
 ---
 
-## 🚀 Batch 0 — Setup & Onboarding *(Semua Anggota, Minggu 1)*
+## 🚀 Batch 0 — Setup & Onboarding *(All Members, Week 1)*
 
-Setiap orang menyelesaikan ini secara **paralel** dan **mandiri**.
-Ini adalah *pre-condition* sebelum Batch 1 bisa dimulai.
+Everyone completes this in **parallel** and **independently**.
+This is a *pre-condition* before Batch 1 can begin.
 
-### Issues Linear (Assigned to Everyone):
+### Linear Issues (Assigned to Everyone):
 
 ```
-[SETUP-1] Clone repo & buat virtual environment Python
-[SETUP-2] Buat file .env dari .env.example, isi dengan Supabase key tim
-[SETUP-3] Install requirements.txt & verifikasi tidak ada error
-[SETUP-4] Baca file Z_Placeholder_ milikmu sendiri (30 menit)
-[SETUP-5] Baca README.md dari awal sampai akhir
-[SETUP-6] Buat akun Supabase (jika belum ada) & join project
+[SETUP-1] Clone the repo and create a Python virtual environment
+[SETUP-2] Create a .env file from .env.example, fill it with your Supabase team key
+[SETUP-3] Install requirements.txt and verify there are no errors
+[SETUP-4] Read your own Z_Placeholder_ file (30 minutes)
+[SETUP-5] Read README.md from start to finish
+[SETUP-6] Create a Supabase account (if you don't have one) and join the project
 ```
 
-> ⚠️ **CRITICAL**: Batch 1 tidak boleh dimulai sebelum semua orang selesai SETUP.
+> ⚠️ **CRITICAL**: Batch 1 must not start until everyone has completed SETUP.
 
 ---
 
-## 🏗️ Batch 1 — Foundation Layer *(Minggu 1-2)*
+## 🏗️ Batch 1 — Foundation Layer *(Weeks 1-2)*
 
-Batch ini membangun fondasi database. **Role 3 dan Role 6 adalah yang memimpin.**
-Anggota lain boleh mulai riset dan merancang logika modul mereka di atas kertas.
+This batch builds the database foundation. **Role 3 and Role 6 are the leaders.**
+Other members may begin researching and designing their module logic on paper.
 
 ### Role 3 — Response Matching & Retrieval
 
 ```
-[DB-1] Baca dan pahami Z_Placeholder_schema.sql
-[DB-2] Tulis schema.sql dari scratch (tabel knowledge_items + conversation_logs)
-[DB-3] Run schema.sql di Supabase SQL Editor & screenshot hasilnya
-[DB-4] Baca dan pahami Z_Placeholder_client.py
-[DB-5] Implementasi database/client.py (fungsi get_client())
-[DB-6] Test koneksi Supabase: python -c "from database.client import get_client; print(get_client())"
+[DB-1] Read and understand Z_Placeholder_schema.sql
+[DB-2] Write schema.sql from scratch (knowledge_items + conversation_logs tables)
+[DB-3] Run schema.sql in Supabase SQL Editor and screenshot the results
+[DB-4] Read and understand Z_Placeholder_client.py
+[DB-5] Implement database/client.py (get_client() function)
+[DB-6] Test Supabase connection: python -c "from database.client import get_client; print(get_client())"
 ```
 
 ### Role 6 — NLP & Text Preprocessing (Dataset Lead)
 
 ```
-[DATA-1] Kumpulkan informasi Module 1 (Admin Directory) dari Student Handbook XMUM
-[DATA-2] Kumpulkan informasi Module 2 (Campus Life) dari Student Handbook XMUM  
-[DATA-3] Kumpulkan informasi Module 3 (Academic Navigation) dari website resmi XMUM
-[DATA-4] Tulis admin_directory.json (min. 8 Q&A pairs, lengkap dengan keywords)
-[DATA-5] Tulis campus_life.json (min. 10 Q&A pairs)
-[DATA-6] Tulis academic_navigation.json (min. 6 Q&A pairs)
-[DATA-7] Baca dan pahami Z_Placeholder_seed.py
-[DATA-8] Implementasi database/seed.py
-[DATA-9] Test: python -m database.seed → verifikasi data masuk ke Supabase
+[DATA-1] Collect Module 1 (Admin Directory) information from Student Handbook XMUM
+[DATA-2] Collect Module 2 (Campus Life) information from Student Handbook XMUM
+[DATA-3] Gather information for Module 3 (Academic Navigation) from the official XMUM website
+[DATA-4] Write admin_directory.json (min. 8 Q&A pairs, complete with keywords)
+[DATA-5] Write campus_life.json (min. 10 Q&A pairs)
+[DATA-6] Write academic_navigation.json (min. 6 Q&A pairs)
+[DATA-7] Read and understand Z_Placeholder_seed.py
+[DATA-8] Implement database/seed.py
+[DATA-9] Test: python -m database.seed → verify data entry into Supabase
 ```
 
-### Anggota Lain (Batch 1 Side Task):
+### Other Members (Batch 1 Side Task):
 ```
-[PLAN-1] Role 1: Buat draf dictionary keyword untuk 3 modul (di kertas/Notion)
-[PLAN-2] Role 2: Buat draf daftar sinonim kata kunci (wifi=internet, hostel=dorm, dll.)
-[PLAN-3] Role 4: Rancang struktur data session (format dict yang akan disimpan)
-[PLAN-4] Role 5: Rancang pesan fallback dan format response akhir ke user
+[PLAN-1] Role 1: Draft a keyword dictionary for the 3 modules (on paper/Notion)
+[PLAN-2] Role 2: Draft a list of synonyms for keywords (wifi=internet, hostel=dorm, etc.)
+[PLAN-3] Role 4: Design the session data structure (dict format to be saved)
+[PLAN-4] Role 5: Design the fallback message and final response format to the user
 ```
 
 ---
 
-## ⚙️ Batch 2 — Core Logic *(Minggu 2-3)*
+## ⚙️ Batch 2 — Core Logic *(Weeks 2-3)*
 
-Batch ini adalah jantung proyek. Setiap orang **mengerjakan file utama mereka secara paralel**.
-Tidak ada ketergantungan langsung antar role di batch ini, kecuali Role 5 yang butuh
-output dari Role 1, 2, dan 3.
+This batch builds the database foundation. **Roles 3 and 6 are the leaders.**
+Other members may begin research and design their module logic on paper.
+
+### Role 3 — Response Matching & Retrieval
+
+```
+[DB-1] Read and understand Z_Placeholder_schema.sql
+[DB-2] Write schema.sql from scratch (knowledge_items + conversation_logs tables)
+[DB-3] Run schema.sql in Supabase SQL Editor and screenshot the results
+[DB-4] Read and understand Z_Placeholder_client.py
+[DB-5] Implement database/client.py (get_client() function)
+[DB-6] Test Supabase connection: python -c "from database.client import get_client; print(get_client())"
+```
+
+### Role 6 — NLP & Text Preprocessing (Dataset Lead)
+
+```
+[DATA-1] Collect Module 1 (Admin Directory) information from Student Handbook XMUM
+[DATA-2] Collect Module 2 (Campus Life) information from Student Handbook XMUM
+[DATA-3] Gather information for Module 3 (Academic Navigation) from the official XMUM website
+[DATA-4] Write admin_directory.json (min. 8 Q&A pairs, complete with keywords)
+[DATA-5] Write campus_life.json (min. 10 Q&A pairs)
+[DATA-6] Write academic_navigation.json (min. 6 Q&A pairs)
+[DATA-7] Read and understand Z_Placeholder_seed.py
+[DATA-8] Implement database/seed.py
+[DATA-9] Test: python -m database.seed → verify data entry into Supabase
+```
+
+### Other Members (Batch 1 Side Task):
+```
+[PLAN-1] Role 1: Draft a keyword dictionary for the 3 modules (on paper/Notion)
+[PLAN-2] Role 2: Draft a list of synonyms for keywords (wifi=internet, hostel=dorm, etc.)
+[PLAN-3] Role 4: Design the session data structure (dict format to be saved)
+[PLAN-4] Role 5: Design the fallback message and final response format to the user
+```
+
+---
+
+## ⚙️ Batch 2 — Core Logic *(Weeks 2-3)*
+
+This batch is the heart of the project. Everyone works on their core files in parallel.
+
+There are no direct dependencies between roles in this batch, except for Role 5, which requires output from Roles 1, 2, and 3.
 
 ### Role 1 — Intent Recognition
 
 ```
-[INTENT-1] Baca Z_Placeholder_intent_classifier.py & pahami alurnya
-[INTENT-2] Definisikan dictionary KEYWORD_MAP: {module_name: [list of keywords]}
-           Gunakan draf dari PLAN-1 sebagai dasar
-[INTENT-3] Implementasi fungsi classify(message: str) -> str
-           Logic: lowercase input → cek setiap kata → return module yang cocok → fallback "unknown"
-[INTENT-4] Test manual di terminal: 
-           python -c "from chatbot.intent_classifier import IntentClassifier; ic = IntentClassifier(); print(ic.classify('where is the library'))"
-[INTENT-5] Pastikan test di tests/test_intent_classifier.py lulus (uncomment & run pytest)
+[INTENT-1] Read Z_Placeholder_intent_classifier.py and understand the flow.
+[INTENT-2] Define the dictionary KEYWORD_MAP: {module_name: [list of keywords]}
+Use the draft from PLAN-1 as a basis.
+[INTENT-3] Implement the function classify(message: str) -> str
+Logic: lowercase input → check each word → return matching module → fallback "unknown"
+[INTENT-4] Manual test in the terminal:
+python -c "from chatbot.intent_classifier import IntentClassifier; ic = IntentClassifier(); print(ic.classify('where is the library'))"
+[INTENT-5] Ensure the test is tests/test_intent_classifier.py passed (uncomment & run pytest)
 ```
 
 ### Role 2 — Entity Extraction
 
 ```
-[ENTITY-1] Buat file baru: chatbot/preprocessor.py (tidak ada Z_Placeholder, ini orisinal!)
-[ENTITY-2] Implementasi fungsi normalize(text: str) -> str
-           (lowercase, strip whitespace, hapus tanda baca)
-[ENTITY-3] Implementasi fungsi extract_keywords(text: str) -> list[str]
-           (pecah kalimat menjadi kata-kata kunci yang relevan, hilangkan stopwords)
-[ENTITY-4] Buat SYNONYM_MAP dari draf PLAN-2:
-           {"internet": "wifi", "dorm": "hostel", "borrow": "loan", ...}
-[ENTITY-5] Implementasi fungsi expand_synonyms(keywords: list[str]) -> list[str]
-[ENTITY-6] Test manual: pastikan "how do i connect to the internet" → ["wifi", "connect", "campus"]
+[ENTITY-1] Create a new file: chatbot/preprocessor.py (no Z_Placeholder, this is original!)
+[ENTITY-2] Implement the function normalize(text: str) -> str
+(lowercase, strip whitespace, remove punctuation)
+[ENTITY-3] Implement the function extract_keywords(text: str) -> list[str]
+(break the sentence into relevant keywords, remove stopwords)
+[ENTITY-4] Create a SYNONYM_MAP from the draft PLAN-2:
+{"internet": "wifi", "dorm": "hostel", "borrow": "loan", ...}
+[ENTITY-5] Implement the function expand_synonyms(keywords: list[str]) -> list[str]
+[ENTITY-6] Manual test: verify "how do I connect to the internet" → ["wifi", "connect", "campus"]
 ```
 
 ### Role 3 — Response Matching & Retrieval
 
 ```
-[RETRIEVAL-1] Baca Z_Placeholder_retriever.py & pahami strategi ILIKE vs FTS
-[RETRIEVAL-2] Implementasi Retriever.search() menggunakan ILIKE matching dulu
-               (sederhana: cari di kolom 'keywords' atau 'question')
-[RETRIEVAL-3] Test search dengan data yang sudah di-seed:
-               python -c "from chatbot.retriever import Retriever; r = Retriever(); print(r.search('campus_life', 'library'))"
-[RETRIEVAL-4] (Bonus) Upgrade ke PostgreSQL Full-Text Search jika ILIKE kurang akurat
-[RETRIEVAL-5] Uncomment & jalankan tests/test_retriever.py
+[RETRIEVAL-1] Read Z_Placeholder_retriever.py and understand the ILIKE vs. FTS strategy
+[RETRIEVAL-2] Implement Retriever.search() using ILIKE matching first
+(simple: search in the 'keywords' or 'question' column)
+[RETRIEVAL-3] Test search with seeded data:
+python -c "from chatbot.retriever import Retriever; r = Retriever(); print(r.search('campus_life', 'library'))"
+[RETRIEVAL-4] (Bonus) Upgrade to PostgreSQL Full-Text Search if ILIKE is inaccurate
+[RETRIEVAL-5] Uncomment and run tests/test_retriever.py
 ```
 
 ### Role 4 — Context & Session Management
 
 ```
-[CTX-1] Baca Z_Placeholder_context_manager.py & pahami konsep session
-[CTX-2] Implementasi ContextManager.__init__ dengan in-memory dict
-[CTX-3] Implementasi add_turn(session_id, role, message)
-[CTX-4] Implementasi get_history(session_id) → list[dict]
-[CTX-5] Implementasi clear(session_id)
-[CTX-6] Pastikan MAX_TURNS dibaca dari .env (gunakan os.getenv)
-[CTX-7] Test manual: tambah 3 turn, get history, verifikasi urutan benar
+[CTX-1] Read Z_Placeholder_context_manager.py and understand the session concept
+[CTX-2] Implement ContextManager.__init__ with an in-memory dict
+[CTX-3] Implement add_turn(session_id, role, message)
+[CTX-4] Implement get_history(session_id) → list[dict]
+[CTX-5] Implement clear(session_id)
+[CTX-6] Ensure MAX_TURNS is read from .env (use os.getenv)
+[CTX-7] Manual test: add 3 turns, get history, verify correct order
 ```
 
 ### Role 5 — Fallback Handling & Response Generation
 
 ```
-[RESP-1] Baca Z_Placeholder_responder.py
-[RESP-2] Implementasi Responder.format() → pilih result terbaik dari list, return string bersih
-[RESP-3] Definisikan FALLBACK_MESSAGE yang ramah dan informatif
-[RESP-4] Baca Z_Placeholder_bot.py — ini adalah file integrasi utama!
-[RESP-5] Implementasi Bot.__init__ (inisialisasi semua komponen)
-[RESP-6] Implementasi Bot.chat(session_id, message) → pipeline lengkap:
-         preprocessor → intent_classifier → retriever → responder
-[RESP-7] Baca Z_Placeholder_main.py
-[RESP-8] Implementasi terminal REPL loop di main.py (gunakan python-dotenv di sini)
-[RESP-9] End-to-end test: python -m chatbot.main → coba beberapa pertanyaan nyata
+[RESP-1] Read Z_Placeholder_responder.py
+[RESP-2] Implement Responder.format() → select the best result from the list, return a clean string
+[RESP-3] Define a friendly and informative FALLBACK_MESSAGE
+[RESP-4] Read Z_Placeholder_bot.py — this is the main integration file!
+[RESP-5] Implement Bot.__init__ (initialize all components)
+[RESP-6] Implement Bot.chat(session_id, message) → complete pipeline:
+preprocessor → intent_classifier → retriever → responder
+[RESP-7] Read Z_Placeholder_main.py
+[RESP-8] Implement the terminal REPL loop in ma
 ```
 
 ---
 
-## 🔗 Batch 3 — Integration & API *(Minggu 3-4)*
+## 🔗 Batch 3 — Integration & API *(Week 3-4)*
 
-Batch ini menggabungkan semua modul ke dalam API layer.
-**Role 5 memimpin** karena mereka sudah pegang `bot.py`.
-**Role 3 membantu** karena familiar dengan layer database.
-
-```
-[API-1]  Role 5: Baca Z_Placeholder_app.py
-[API-2]  Role 5: Implementasi api/app.py (FastAPI instance + CORS middleware)
-[API-3]  Role 3: Implementasi api/schemas/chat_schema.py (ChatRequest + ChatResponse Pydantic)
-[API-4]  Role 3: Implementasi api/routes/health.py (GET /health)
-[API-5]  Role 5: Implementasi api/routes/chat.py (POST /chat menggunakan Bot.chat())
-[API-6]  Role 5: Mount semua router di app.py
-[API-7]  Role 4: Update api/routes/chat.py untuk include session management
-[API-8]  ALL:   Integration test — jalankan server & test dengan curl atau Postman:
-         curl -X POST http://localhost:8000/chat \
-              -H "Content-Type: application/json" \
-              -d '{"session_id":"test-1","message":"where is the library?"}'
-```
-
----
-
-## ✅ Batch 4 — Testing & Polish *(Minggu 4)*
+This batch combines all modules into an API layer.
+**Role 5 leads** because they already know bot.py.
+**Role 3 assists** because they are familiar with the database layer.
 
 ```
-[TEST-1] Role 1: Lengkapi & jalankan tests/test_intent_classifier.py
-[TEST-2] Role 3: Lengkapi & jalankan tests/test_retriever.py
-[TEST-3] Role 5: Lengkapi & jalankan tests/test_responder.py
-[TEST-4] Role 3: Lengkapi & jalankan tests/test_api.py
-[TEST-5] Role 6: Review ulang semua seed data — apakah ada jawaban yang tidak akurat?
-[TEST-6] Role 2: Test end-to-end dengan sinonim — apakah "internet" bisa temukan jawaban wifi?
-[TEST-7] Role 4: Test multi-turn conversation — apakah konteks terjaga antar pertanyaan?
-[TEST-8] Role 5: Test fallback — pastikan pertanyaan out-of-scope dijawab dengan benar
-[TEST-9] ALL:   Run pytest untuk semua tests
-[DOC-1]  ALL:   Update README.md dengan anggota tim dan informasi final
+[API-1] Role 5: Read Z_Placeholder_app.py
+[API-2] Role 5: Implement api/app.py (FastAPI instance + CORS middleware)
+[API-3] Role 3: Implement api/schemas/chat_schema.py (ChatRequest + ChatResponse Pydantic)
+[API-4] Role 3: Implement api/routes/health.py (GET /health)
+[API-5] Role 5: Implement api/routes/chat.py (POST /chat using Bot.chat())
+[API-6] Role 5: Mount all routers in app.py
+[API-7] Role 4: Update api/routes/chat.py to include session management
+[API-8] ALL: Integration test — run server & test with curl or Postman:
+curl -X POST http://localhost:8000/chat \
+-H "Content-Type: application/json" \
+-d '{"session_id":"test-1","message":"where is the library?"}'
 ```
 
 ---
 
-## 📊 Ringkasan Beban Kerja per Role
+## ✅ Batch 4 — Testing & Polishing *(Week 4)*
+
+```
+[TEST-1] Role 1: Complete & run tests/test_intent_classifier.py
+[TEST-2] Role 3: Complete & run tests/test_retriever.py
+[TEST-3] Role 5: Complete & run tests/test_responder.py
+[TEST-4] Role 3: Complete & run tests/test_api.py
+[TEST-5] Role 6: Review all seed data — are there any inaccurate answers?
+[TEST-6] Role 2: End-to-end synonym testing — can "internet" find the answer to wifi?
+[TEST-7] Role 4: Test multi-turn conversation — is context maintained between questions?
+[TEST-8] Role 5: Test fallback — ensure out-of-scope questions are answered correctly
+[TEST-9] ALL: Run pytest for all tests
+[DOC-1] ALL: Update README.md with team members and final information
+```
+
+---
+
+## 📊 Workload Summary per Role
 
 | Role | Batch 0 | Batch 1 | Batch 2 | Batch 3 | Batch 4 | Est. Issues |
-|------|---------|---------|---------|---------|---------|-------------|
-| Intent Recognition | ✅ | Rancang | 5 issues | - | 1 issue | ~8 |
-| Entity Extraction | ✅ | Rancang | 6 issues | - | 1 issue | ~9 |
+|------|----------|---------|---------|---------|---------|---------|
+| Intent Recognition | ✅ | Design | 5 issues | - | 1 issue | ~8 |
+| Entity Extraction | ✅ | Design | 6 issues | - | 1 issue | ~9 |
 | Response Matching & Retrieval | ✅ | 6 issues | 5 issues | 2 issues | 1 issue | ~16 |
-| Context & Session Management | ✅ | Rancang | 7 issues | 1 issue | 1 issue | ~11 |
-| Fallback & Response Generation | ✅ | Rancang | 9 issues | 3 issues | 2 issues | ~16 |
+| Context & Session Management | ✅ | Design | 7 issues | 1 issue | 1 issue | ~11 |
+| Fallback & Response Generation | ✅ | Design | 9 issues | 3 issues | 2 issues | ~16 |
 | NLP & Text Preprocessing | ✅ | 9 issues | 6 issues | - | 2 issues | ~19 |
 
 ---
 
-## 🗓️ Rekomendasi Timeline Linear (4 Minggu)
+## 🗓️ Recommended Linear Timeline (4 Weeks)
 
-| Cycle | Batches | Deadline |
-|-------|---------|----------|
-| Sprint 1 | Batch 0 + Batch 1 | Akhir Minggu 1 |
-| Sprint 2 | Batch 2 (semua role paralel) | Akhir Minggu 3 |
-| Sprint 3 | Batch 3 + Batch 4 | Akhir Minggu 4 |
+| Cycles | Batches | Deadlines |
+|-------|----------|----------|
+| Sprint 1 | Batch 0 + Batch 1 | End of Week 1 |
+| Sprint 2 | Batch 2 (all roles parallel) | End of Week 3 |
+| Sprint 3 | Batch 3 + Batch 4 | End of Week 4 |
 
 ---
 
-## 💡 Tips untuk Linear Setup
+## 💡 Tips for Linear Setup
 
-1. **Project**: Buat 1 Project bernama `XMUM Campus Chatbot`
-2. **Labels**: Buat label per role: `intent`, `entity`, `retrieval`, `context`, `fallback`, `nlp-data`
+1. **Project**: Create a project named `XMUM Campus Chatbot`
+2. **Labels**: Create labels per role: `intent`, `entity`, `retrieval`, `context`, `fallback`, `nlp-data`
 3. **States**: `Backlog → Todo → In Progress → In Review → Done`
-4. **Priority**: Issues di Batch 1 (DB-1 s/d DATA-9) semua set ke **Urgent**
-5. **Cycles**: Buat 3 Cycles sesuai tabel timeline di atas
+4. **Priority**: Set all issues in Batch 1 (DB-1 to DATA-9) to **Urgent**
+5. **Cycles**: Create 3 cycles according to the timeline above
