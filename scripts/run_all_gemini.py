@@ -33,8 +33,8 @@ def main():
             
         # Add a delay to respect Gemini API rate limits (15 RPM for free tier)
         if index < len(raw_files):
-            print("Waiting 5 seconds before the next request to respect rate limits...")
-            time.sleep(5)
+            print("Waiting 10 seconds before the next request to respect rate limits...")
+            time.sleep(10)
             
     print(f"\n{'='*60}")
     print(f"Batch processing completed! Successfully processed {success_count} out of {len(raw_files)} files.")

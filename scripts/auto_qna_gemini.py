@@ -35,6 +35,14 @@ def convert_text_to_csv(input_file, output_file, module_name):
         print(f"Failed to read file {input_file}: {e}")
         return False
         
+    # Check if the file is empty to save API quota
+    if not raw_text.strip():
+        print(f"[SKIP] File {input_file} is empty! Skipping Gemini request to save quota.")
+        # Create an empty CSV file so the next steps don't break
+        with open(output_file, "w", encoding="utf-8-sig") as f:
+            f.write("module,question,answer,keywords\n")
+        return True
+        
     prompt = f"""
     Analyze the following raw text from a university website and extract all important factual information into a comprehensive list of Question and Answer (Q&A) pairs.
     Format the output EXACTLY as a CSV without markdown code blocks, with the following header:
