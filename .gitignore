@@ -41,3 +41,6 @@ logs/
 # Node (if frontend is added)
 node_modules/
 .next/
+
+# NLTK data (downloaded at runtime by chatbot/entity_recognizer.py)
+nltk_data/
