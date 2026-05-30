@@ -1,20 +1,783 @@
 [
   {
     "module": "academic_navigation",
-    "question": "How do I log in to the AC System?",
-    "answer": "[PLACEHOLDER] To log in to the AC System: 1) Go to [AC System URL]. 2) Enter your student ID (e.g. S123456789). 3) Enter your default password (usually your IC/passport number). 4) Change your password on first login. Main features: course registration, grade checking, timetable viewing.",
-    "keywords": ["AC system", "login", "portal", "student portal", "grades", "timetable", "course"]
+    "question": "What types of undergraduate programmes does Xiamen University Malaysia (XMUM) offer?",
+    "answer": "XMUM offers a wide range of carefully designed undergraduate programmes spanning academic disciplines like business, communication, science, technology, arts and social sciences, energy and chemical engineering, marine sciences, computing and data science, artificial intelligence and robotics, mathematics and physics, and traditional Chinese medicine.",
+    "keywords": [
+      "programmes",
+      "disciplines",
+      "fields",
+      "range"
+    ]
   },
   {
     "module": "academic_navigation",
-    "question": "How do I apply for leave?",
-    "answer": "[PLACEHOLDER] Leave applications are submitted via [Leave System URL]. Important: this system is only accessible on the XMUM campus network (Wi-Fi or LAN). Steps: 1) Connect to campus Wi-Fi. 2) Log in with your student credentials. 3) Click 'New Leave Application'. 4) Fill in dates and reason. 5) Submit — your advisor will be notified automatically.",
-    "keywords": ["leave", "apply", "application", "absent", "absence", "sick leave", "campus wifi"]
+    "question": "What specific programmes are offered under Economics and Management?",
+    "answer": "Under Economics and Management, XMUM offers Bachelor of Management in Accounting (Honours), Bachelor of Economics in Finance (Honours), Bachelor of Management in International Business (Honours), Bachelor of Management in E-Commerce (Honours), and Bachelor of Management in Hospitality Management (Honours).",
+    "keywords": [
+      "Economics",
+      "Management",
+      "programmes",
+      "degrees"
+    ]
   },
   {
     "module": "academic_navigation",
-    "question": "How do I download the academic calendar?",
-    "answer": "[PLACEHOLDER] The XMUM Academic Calendar (PDF) can be downloaded from the official website: [URL]. It lists term start/end dates, public holidays, exam periods, and semester breaks.",
-    "keywords": ["academic calendar", "calendar", "schedule", "semester", "exam", "holiday", "download"]
+    "question": "What specific programmes are offered under Communication?",
+    "answer": "Under Communication, XMUM offers Bachelor of Arts in Journalism (Honours), Bachelor of Arts in Advertising (Honours), and Bachelor of Arts in Communication (Honours).",
+    "keywords": [
+      "Communication",
+      "Journalism",
+      "Advertising",
+      "Arts"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What specific programmes are offered under Computing and Data Science?",
+    "answer": "Under Computing and Data Science, XMUM offers Bachelor of Engineering in Computer Science and Technology (Honours), Bachelor of Engineering in Software Engineering (Honours), Bachelor of Engineering in Digital Media Technology (Honours), Bachelor of Engineering in Cyber Security (Honours), and Bachelor of Engineering in Data Science (Honours).",
+    "keywords": [
+      "Computing",
+      "Data Science",
+      "Engineering",
+      "Software"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What specific programmes are offered under Artificial Intelligence and Robotics?",
+    "answer": "Under Artificial Intelligence and Robotics, XMUM offers Bachelor of Electrical and Electronics Engineering (Hons), Bachelor of Engineering in Artificial Intelligence (Honours), and Bachelor of Robotics and Automation Engineering with Honours.",
+    "keywords": [
+      "AI",
+      "Robotics",
+      "Engineering",
+      "Electrical"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How many methods are available to apply to XMUM?",
+    "answer": "There are three easy methods to apply to XMUM: Online Application, Email Application, and Paper Application.",
+    "keywords": [
+      "application",
+      "methods",
+      "apply",
+      "enrollment"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the application fee for XMUM?",
+    "answer": "The application fee for XMUM is RM100 and is non-refundable.",
+    "keywords": [
+      "application",
+      "fee",
+      "cost",
+      "non-refundable"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the registration fee for XMUM?",
+    "answer": "The registration fee for XMUM is RM200 and is non-refundable.",
+    "keywords": [
+      "registration",
+      "fee",
+      "cost",
+      "non-refundable"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What payment methods are accepted for fees at XMUM?",
+    "answer": "XMUM accepts Cash, Cheque or Bank Draft, Bank Transfer, and Flywire (for new international students).",
+    "keywords": [
+      "payment",
+      "methods",
+      "fees",
+      "options"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "Who is the beneficiary for fee payments made via bank transfer?",
+    "answer": "The beneficiary for fee payments made via bank transfer is \"XMU JIAGENG EDUCATION DEVELOPMENT SDN BHD\".",
+    "keywords": [
+      "beneficiary",
+      "payment",
+      "bank",
+      "transfer"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the required supporting documents for application?",
+    "answer": "Required supporting documents include a certified copy of academic transcripts, a certified copy of diploma/certificate, NRIC (Malaysians) or passport (International), Scholarship & Grant Form (if applicable), and proof of fee payment.",
+    "keywords": [
+      "documents",
+      "required",
+      "application",
+      "supporting"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How can students apply for on-campus accommodation?",
+    "answer": "Students may apply for on-campus accommodation during the application process, with details provided in the official application materials.",
+    "keywords": [
+      "accommodation",
+      "on-campus",
+      "apply",
+      "housing"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "Who should be contacted for admissions inquiries at XMUM?",
+    "answer": "For admissions inquiries, you can contact admissions@xmu.edu.my.",
+    "keywords": [
+      "admissions",
+      "contact",
+      "email",
+      "inquiry"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is Flywire and who is it for?",
+    "answer": "Flywire is a service partnered with XMUM to streamline fee payments for international students, allowing them to pay in their home currency with benefits like online payment tracking, no bank fees, and 24/7 multilingual customer support.",
+    "keywords": [
+      "Flywire",
+      "international",
+      "payments",
+      "fees"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the payment amounts for new international students using Flywire?",
+    "answer": "New international students can pay Admin Fees (RM 3,068) or Admin Fees & Security Deposit (RM 4,068) using Flywire.",
+    "keywords": [
+      "Flywire",
+      "international",
+      "fees",
+      "deposit"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "Where can I find more information about scholarships and financial aids?",
+    "answer": "More information about scholarships and financial aids can be found by visiting the \"Scholarships & Financial Aids\" section of the website.",
+    "keywords": [
+      "scholarships",
+      "financial",
+      "aids",
+      "information"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the registration and orientation dates for the February Semester 2025?",
+    "answer": "Registration Days: 7 & 8 Feb 2025. Orientation Day: 9 Feb 2025.",
+    "keywords": [
+      "academic calendar",
+      "February",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Examination Week for the February Semester 2025?",
+    "answer": "The Examination Week for the February Semester 2025 is from 17 - 24 Mar 2025.",
+    "keywords": [
+      "examination",
+      "February",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Semester Break after the February Semester 2025?",
+    "answer": "The Semester Break after the February Semester 2025 is from 22 - 27 Mar 2025.",
+    "keywords": [
+      "semester break",
+      "February",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the registration and orientation dates for the April Semester 2025?",
+    "answer": "Registration Days: 28 & 29 Mar 2025. Orientation Day: 30 Mar 2025.",
+    "keywords": [
+      "academic calendar",
+      "April",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Examination Week for the April Semester 2025?",
+    "answer": "The Examination Week for the April Semester 2025 is from 21 Jul - 1 Aug 2025.",
+    "keywords": [
+      "examination",
+      "April",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Semester Break after the April Semester 2025?",
+    "answer": "The Semester Break after the April Semester 2025 is from 2 Aug - 18 Sep 2025.",
+    "keywords": [
+      "semester break",
+      "April",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the registration and orientation dates for the September Semester 2025?",
+    "answer": "Registration Days: 19 & 20 Sep 2025. Orientation Day: 21 Sep 2025.",
+    "keywords": [
+      "academic calendar",
+      "September",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Examination Week for the September Semester 2025?",
+    "answer": "The Examination Week for the September Semester 2025 is from 12 - 23 Jan 2026.",
+    "keywords": [
+      "examination",
+      "September",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Semester Break after the September Semester 2025?",
+    "answer": "The Semester Break after the September Semester 2025 is from 24 Jan - 19 Feb 2026.",
+    "keywords": [
+      "semester break",
+      "September",
+      "2025"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the registration and orientation dates for the February Semester 2026?",
+    "answer": "Registration Days: 20 & 21 Feb 2026. Orientation Day: 22 Feb 2026.",
+    "keywords": [
+      "academic calendar",
+      "February",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Examination Week for the February Semester 2026?",
+    "answer": "The Examination Week for the February Semester 2026 is from 30 Mar - 3 Apr 2026.",
+    "keywords": [
+      "examination",
+      "February",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the registration and orientation dates for the April Semester 2026?",
+    "answer": "Registration Days: 3 & 4 Apr 2026. Orientation Day: 5 Apr 2026.",
+    "keywords": [
+      "academic calendar",
+      "April",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Examination Week for the April Semester 2026?",
+    "answer": "The Examination Week for the April Semester 2026 is from 20 - 31 Jul 2026.",
+    "keywords": [
+      "examination",
+      "April",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Semester Break after the April Semester 2026?",
+    "answer": "The Semester Break after the April Semester 2026 is from 1 Aug - 24 Sep 2026.",
+    "keywords": [
+      "semester break",
+      "April",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the registration and orientation dates for the September Semester 2026?",
+    "answer": "Registration Days: 25 & 26 Sep 2026. Orientation Day: 27 Sep 2026.",
+    "keywords": [
+      "academic calendar",
+      "September",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Examination Week for the September Semester 2026?",
+    "answer": "The Examination Week for the September Semester 2026 is from 11 - 21 Jan 2027.",
+    "keywords": [
+      "examination",
+      "September",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is the Semester Break after the September Semester 2026?",
+    "answer": "The Semester Break after the September Semester 2026 is from 23 Jan - 11 Feb 2027.",
+    "keywords": [
+      "semester break",
+      "September",
+      "2026"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is provided to registered students for academic purposes?",
+    "answer": "Registered students are given a university email, ID, and password to access the Academic Affairs Online System for course registration and other academic-related purposes.",
+    "keywords": [
+      "student services",
+      "academic system",
+      "login"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the refund policy for tuition fees upon withdrawal?",
+    "answer": "Students withdrawing within the first two teaching weeks of a new semester are eligible for a 50% tuition fee refund. After two weeks, there is no refund.",
+    "keywords": [
+      "tuition fees",
+      "refund",
+      "withdrawal"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the fee policy if an application for deferment is received and approved before the semester starts?",
+    "answer": "If an application for deferment is received and approved before the semester starts, the student is exempted from paying any fees for the semester.",
+    "keywords": [
+      "deferment",
+      "fees",
+      "exemption"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the fee policy if a student applies for deferment after the semester starts?",
+    "answer": "If a student applies for deferment after the semester starts, paid tuition fees will be transferred to the next semester. A 50% refund is given if deferment is within the first two teaching weeks; no refund after two weeks.",
+    "keywords": [
+      "deferment",
+      "fees",
+      "refund"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the maximum credit hours allowed for a long semester?",
+    "answer": "The maximum credit hours for a long semester is 21.",
+    "keywords": [
+      "credit hours",
+      "long semester"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the maximum credit hours allowed for a short semester?",
+    "answer": "The maximum credit hours for a short semester is 7.",
+    "keywords": [
+      "credit hours",
+      "short semester"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the timeframe for adding or dropping courses?",
+    "answer": "The designated timeframe for adding or dropping courses is TWO weeks for a long semester or ONE week for a short semester from the start date. Late applications (before week 5 for long, week 2 for short) may be considered for specific circumstances.",
+    "keywords": [
+      "course registration",
+      "add/drop",
+      "timeframe"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the minimum credit requirement students must maintain when dropping courses?",
+    "answer": "Students who wish to drop courses must maintain the minimum credit requirement for the semester (60% of the maximum credits per semester).",
+    "keywords": [
+      "course dropping",
+      "minimum credits"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What happens if a student receives a 'Fail' grade in a compulsory course?",
+    "answer": "If students receive a 'Fail' grade in a compulsory course, they are required to retake the same course.",
+    "keywords": [
+      "retake course",
+      "fail grade",
+      "compulsory"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the fee policy for course retakes effective January 1, 2024?",
+    "answer": "Effective 1 January 2024, all course retake attempts are subject to a chargeable fee: RM500.00 per credit hour for Art and Business courses, RM550.00 per credit hour for Science courses, and RM500.00 per credit hour for General Elective / MPU courses.",
+    "keywords": [
+      "retake course",
+      "fees",
+      "policy"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the methods of course assessment?",
+    "answer": "Course assessment methods can vary and may include continuous assessment (mid-terms, tests, assignments, laboratory work, presentations) and/or a final assessment (final examination).",
+    "keywords": [
+      "course assessment",
+      "methods",
+      "evaluation"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the minimum attendance requirement for each course?",
+    "answer": "The minimum attendance requirement for each course is 80%.",
+    "keywords": [
+      "attendance",
+      "minimum",
+      "course"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the eligibility criteria for final examinations?",
+    "answer": "All registered and active students are required to participate in final examinations, provided they have completed official course registration, cleared all outstanding fees, and are not barred from the examination.",
+    "keywords": [
+      "final examination",
+      "eligibility",
+      "fees"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "Under what grounds can students defer their final examinations?",
+    "answer": "Students may be allowed to defer their final examinations on medical and compassionate grounds and/or valid reasons accepted by the University; common illness or fever will not be considered.",
+    "keywords": [
+      "examination deferment",
+      "medical",
+      "compassionate"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the deadline for submitting a Deferment Form for final examinations?",
+    "answer": "The completed Deferment Form and supporting documents must be submitted to the Academic Affairs Office before the scheduled date of the examination, preferably before the examination week.",
+    "keywords": [
+      "examination deferment",
+      "deadline",
+      "form"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When is each student's personal examination timetable released?",
+    "answer": "The Academic Affairs Office will release each student's personal examination timetable one week before the final examination week.",
+    "keywords": [
+      "examination schedule",
+      "release"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What items are permitted in the examination room?",
+    "answer": "Permitted items include stationery, student ID for identification, and water bottles without labels or covers.",
+    "keywords": [
+      "examination",
+      "permitted items"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What happens if a student is found with unauthorized materials during an examination?",
+    "answer": "If students are found with unauthorized materials, it will be assumed they have used them, no defence will be accepted, and all unauthorized materials will be confiscated.",
+    "keywords": [
+      "examination",
+      "unauthorized materials",
+      "misconduct"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the earliest and latest a student can leave the examination room?",
+    "answer": "Students are not permitted to leave the examination room during the first 60 minutes after the examination starts and the last 15 minutes before it ends, except for sudden needs.",
+    "keywords": [
+      "examination",
+      "leaving room",
+      "time limits"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What happens if a student arrives 30 minutes or more after the examination starts?",
+    "answer": "Students who arrive 30 minutes or more after the examination starts will not be allowed to take the examination.",
+    "keywords": [
+      "examination",
+      "late arrival",
+      "penalty"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How are the Grade Point Average (GPA) and Cumulative Grade Point Average (CGPA) calculated?",
+    "answer": "GPA = (credits attempted for each course x grade point awarded for the course) / The total credits attempted in a semester. CGPA = Σ (credits earned for each course x grade point awarded for the course) / The cumulative credits earned over all semesters.",
+    "keywords": [
+      "GPA",
+      "CGPA",
+      "calculation",
+      "grades"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the grade threshold for Chemical Engineering and Electrical and Electronics Engineering students to pass a core/major/elective course?",
+    "answer": "Chemical Engineering and Electrical and Electronics Engineering students must obtain a threshold mark of 40 in the final examination and achieve an overall mark of 55 or above to pass a core/major/elective course.",
+    "keywords": [
+      "grade threshold",
+      "engineering"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the grade threshold for Computer Science and Technology, Software Engineering, Digital Media Technology, Cyber Security, Artificial Intelligence, Data Science, English Language and Literature, Chinese Studies, Accounting, Finance, International Business, and E-Commerce students to pass a core/major/elective course?",
+    "answer": "These students must obtain a threshold mark of 40 in all assessment components, including the final examination, and an overall mark of 55 or above to pass a core/major/elective course.",
+    "keywords": [
+      "grade threshold",
+      "computer science",
+      "business"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the grade threshold for Traditional Chinese Medicine students to pass a core/major/elective course?",
+    "answer": "Traditional Chinese Medicine students must obtain a threshold mark of 50 in all assessment components, including the final examination, and an overall mark of 55 or above to pass a core/major/elective course.",
+    "keywords": [
+      "grade threshold",
+      "TCM"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the grade threshold for Mathematics and Applied Mathematics students to pass a MAT-coded course?",
+    "answer": "Mathematics and Applied Mathematics students must obtain a threshold mark of 40 in all continuous assessment components, and an overall mark of 55 or above to pass a MAT-coded course.",
+    "keywords": [
+      "grade threshold",
+      "mathematics"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What happens if a student is found guilty of cheating in an examination?",
+    "answer": "If proven guilty of cheating in an examination, the student will be considered to have failed the examination, receive a \"Fail\" grade, and will be required to retake the same course.",
+    "keywords": [
+      "cheating",
+      "examination",
+      "penalty",
+      "retake"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What penalties can the SDBC impose for examination misconduct?",
+    "answer": "Penalties may include a zero mark for the specific examination paper or all assessments, a one-semester suspension, requirement to retake affected assessments, expulsion from the University (for previous cases), a fine, or withholding of grades/transcript/degree.",
+    "keywords": [
+      "SDBC",
+      "penalties",
+      "examination misconduct"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How can students appeal against their examination results?",
+    "answer": "Students can appeal by requesting a re-marking of their final examination answer script for a specific course, submitting the appeal form to the Academic Affairs Office during the first week of a new semester.",
+    "keywords": [
+      "appeal",
+      "examination results",
+      "re-marking"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the fee for appealing an examination result?",
+    "answer": "An appeal fee of RM50.00 will be charged for each course, payable at the Finance Office.",
+    "keywords": [
+      "appeal",
+      "fees",
+      "examination result"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "Under what conditions is an examination appeal considered successful and eligible for a refund?",
+    "answer": "An appeal is considered successful if the newly awarded mark is higher than the previous one, in which case the payment made for the appeal will be refunded to the student.",
+    "keywords": [
+      "appeal",
+      "successful",
+      "refund"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the additional fees for international students?",
+    "answer": "International students are required to pay a refundable Security Deposit of RM1,000 and an International Student Fee of RM2,500 per academic year.",
+    "keywords": [
+      "international students",
+      "fees",
+      "deposit"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "When are semester fees due?",
+    "answer": "Students are required to pay the first semester fees upon enrolment and subsequently within seven (7) working days from the commencement of the new semester.",
+    "keywords": [
+      "fees",
+      "payment",
+      "deadline"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What happens if semester fees are not paid by the due date?",
+    "answer": "Students will be automatically barred from attending classes and may have access to facilities withdrawn. Certificates will be withheld at graduation if fees are outstanding. An administrative charge of RM30.00 per week will be imposed after the 7th day.",
+    "keywords": [
+      "fees",
+      "late payment",
+      "consequences"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the accepted modes of fee payment at XMUM?",
+    "answer": "Payment of fees can be made via Finance Office or Online Banking (ePayment portal, online fund transfer), Cheque/Bank Draft, Credit Cards, Direct Bank-In & Telegraphic Transfer (TT), and Cash.",
+    "keywords": [
+      "fee payment",
+      "modes",
+      "options"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is required to register a motor vehicle with the Student Affairs Office?",
+    "answer": "To register a vehicle, students must submit a Student Vehicle Registration Form with photocopies of their Vehicle Registration Card, Student ID, valid Driving License, and an authorization letter if the student is not the owner.",
+    "keywords": [
+      "vehicle registration",
+      "requirements"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the booking fee for student residences?",
+    "answer": "A non-refundable Booking Fee to Residence Application Fee of Ringgit Malaysia One Hundred (RM100) has to be paid when submitting the \"Student Residences Application Form\".",
+    "keywords": [
+      "residences",
+      "booking fee",
+      "application"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "Is the booking fee for student residences ever refundable?",
+    "answer": "The booking fee is refundable only if the University fails to allocate accommodation to the applicants.",
+    "keywords": [
+      "residences",
+      "booking fee",
+      "refund"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What is the administrative fee for requesting a change of unit in student residences?",
+    "answer": "An administration fee of Ringgit Malaysia Thirty (RM30) will be imposed for requesting a change of unit.",
+    "keywords": [
+      "residences",
+      "room change",
+      "fee"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the library's operation hours during weekdays?",
+    "answer": "The library's operation hours are Monday to Friday from 9:00 AM to 10:00 PM.",
+    "keywords": [
+      "library",
+      "hours",
+      "weekdays"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the library's operation hours during weekends and public holidays?",
+    "answer": "The library's operation hours are Saturday and Sunday from 9:00 AM to 5:00 PM, and on Public Holidays from 9:00 AM to 5:00 PM (except for specific closed holidays).",
+    "keywords": [
+      "library",
+      "hours",
+      "weekends",
+      "holidays"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "What are the overdue fines for books and course reserve items?",
+    "answer": "Overdue fines are RM 0.20 per day for general books and RM 0.50 per hour for Course Reserve items.",
+    "keywords": [
+      "library",
+      "fines",
+      "overdue"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How do students enroll in a course on Moodle?",
+    "answer": "To enroll in a course on Moodle, students log in with their Campus ID and password, select a course, and enter the Enrolment Key provided by the lecturer.",
+    "keywords": [
+      "IT",
+      "Moodle",
+      "course enrollment"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How can students submit questions or feedback to the IT or Library department?",
+    "answer": "Students can use AskA (https://app.xmu.edu.my/AskA) by logging in with their Campus ID and Password to submit questions or feedback.",
+    "keywords": [
+      "IT",
+      "Library",
+      "AskA",
+      "feedback"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "question": "How can students provide feedback regarding cafeterias?",
+    "answer": "Students can provide feedback via email (canteen.inquiry@xmu.edu.my), scanning a QR code for an online form (AskA), writing in the anonymous feedback book at the counter, or through the canteen supervision committee under the student council.",
+    "keywords": [
+      "cafeteria",
+      "feedback",
+      "channels"
+    ]
   }
 ]

@@ -1,26 +1,221 @@
 [
   {
     "module": "admin_directory",
-    "question": "Where is the International & Student Affairs office?",
-    "answer": "[PLACEHOLDER] The International & Student Affairs office is located at [building name], [floor/room]. Office hours: Monday–Friday, [time]. Email: [email@xmu.edu.my].",
-    "keywords": ["international", "student affairs", "office", "location", "contact"]
+    "question": "Who founded Xiamen University (XMU)?",
+    "answer": "Xiamen University (XMU) was founded by the Malayan Chinese Mr. Tan Kah Kee.",
+    "keywords": [
+      "founder",
+      "XMU",
+      "Tan Kah Kee"
+    ]
   },
   {
     "module": "admin_directory",
-    "question": "How do I register for a course?",
-    "answer": "[PLACEHOLDER] Course registration is done via the official AC System portal at [URL]. Log in with your student ID and password. Registration opens on [date]. Beware of unofficial third-party links — always use the official XMUM portal.",
-    "keywords": ["register", "course", "registration", "enrol", "sign up"]
+    "question": "Why was Xiamen University Malaysia (XMUM) established?",
+    "answer": "Xiamen University Malaysia (XMUM) was established as a historic reciprocation, 93 years after XMU was founded, in the country where its founder, Mr. Tan Kah Kee, achieved great career success.",
+    "keywords": [
+      "establishment",
+      "reciprocation",
+      "Tan Kah Kee",
+      "Malaysia"
+    ]
   },
   {
     "module": "admin_directory",
-    "question": "How do I pay my tuition fees?",
-    "answer": "[PLACEHOLDER] Tuition fees can be paid through [official payment portal URL]. Accepted methods: [bank transfer, online banking, etc.]. Avoid paying through unofficial channels to prevent scams.",
-    "keywords": ["pay", "payment", "tuition", "fees", "bank", "scam"]
+    "question": "What spirit does Xiamen University Malaysia (XMUM) pledge to uphold?",
+    "answer": "Xiamen University Malaysia (XMUM) pledges to uphold Mr. Tan Kah Kee's spirit of selfless dedication to the noble causes of education.",
+    "keywords": [
+      "Tan Kah Kee",
+      "spirit",
+      "education",
+      "dedication"
+    ]
   },
   {
     "module": "admin_directory",
-    "question": "Where is the Accommodation Services office?",
-    "answer": "[PLACEHOLDER] The Accommodation Services (Housing) office is located at [building/block]. Office hours: Monday–Friday, [time]. Contact: [phone/email].",
-    "keywords": ["accommodation", "housing", "hostel", "office", "contact"]
+    "question": "What is the financial status of Xiamen University Malaysia (XMUM)?",
+    "answer": "Xiamen University Malaysia (XMUM) is a not-for-profit institution, and no surplus funds will be repatriated to China.",
+    "keywords": [
+      "not-for-profit",
+      "financial",
+      "funds",
+      "China"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "How will surplus funds at Xiamen University Malaysia (XMUM) be utilized?",
+    "answer": "Any surplus funds at Xiamen University Malaysia (XMUM) will be channelled back into research and scholarships for its students.",
+    "keywords": [
+      "surplus funds",
+      "research",
+      "scholarships"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the significance of Xiamen University Malaysia (XMUM)'s establishment for China-Malaysia relations?",
+    "answer": "The establishment of Xiamen University Malaysia (XMUM) sets new heights in educational cooperation and exchange between China and Malaysia.",
+    "keywords": [
+      "cooperation",
+      "China",
+      "Malaysia",
+      "education"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is XMU's goal for its Malaysia campus (XMUM)?",
+    "answer": "XMU aims to build its Malaysia campus (XMUM) into one of Malaysia's best universities, enriching the tertiary education landscape and producing high-quality, internationally competitive talents.",
+    "keywords": [
+      "goal",
+      "best university",
+      "tertiary education",
+      "talents"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the vision of Xiamen University Malaysia (XMUM)?",
+    "answer": "The vision of Xiamen University Malaysia (XMUM) is to become a university with a distinct global outlook, featuring first-class teaching and research, and embracing cultural diversity.",
+    "keywords": [
+      "vision",
+      "global outlook",
+      "teaching",
+      "research"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the mission of Xiamen University Malaysia (XMUM)?",
+    "answer": "The mission of Xiamen University Malaysia (XMUM) is to nurture young talents with dignity and wisdom, transforming them into fine citizens who will contribute to the prosperity and social progress of Malaysia, China, and Southeast Asia.",
+    "keywords": [
+      "mission",
+      "nurture talents",
+      "citizens",
+      "social progress"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the full name of the university?",
+    "answer": "The full name of the university is Xiamen University Malaysia (XMUM).",
+    "keywords": [
+      "university",
+      "name",
+      "XMUM"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the motto of Xiamen University Malaysia (XMUM)?",
+    "answer": "The motto of XMUM is \"Pursuing Excellence, Striving For Perfection\".",
+    "keywords": [
+      "XMUM",
+      "motto",
+      "excellence",
+      "perfection"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is Xiamen University Malaysia's (XMUM) vision?",
+    "answer": "XMUM aspires to become a university with a distinct global outlook, featuring first-class teaching and research, and embracing cultural diversity.",
+    "keywords": [
+      "XMUM",
+      "vision",
+      "global outlook"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is Xiamen University Malaysia's (XMUM) mission?",
+    "answer": "To nurture young talents with dignity and wisdom, turning them into fine citizens of the region who will contribute to the prosperity of the people and social progress of Malaysia, China and Southeast Asia.",
+    "keywords": [
+      "XMUM",
+      "mission",
+      "nurture",
+      "talents"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "When is the Revision Week for the April Semester 2025?",
+    "answer": "The Revision Week for the April Semester 2025 is from 14 - 20 Jul 2025.",
+    "keywords": [
+      "revision",
+      "April",
+      "2025"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "When is the Revision Week for the September Semester 2025?",
+    "answer": "The Revision Week for the September Semester 2025 is from 5 - 11 Jan 2026.",
+    "keywords": [
+      "revision",
+      "September",
+      "2025"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "When is the Revision Week for the April Semester 2026?",
+    "answer": "The Revision Week for the April Semester 2026 is from 13 - 19 Jul 2026.",
+    "keywords": [
+      "revision",
+      "April",
+      "2026"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "When is the Revision Week for the September Semester 2026?",
+    "answer": "The Revision Week for the September Semester 2026 is from 4 - 10 Jan 2027.",
+    "keywords": [
+      "revision",
+      "September",
+      "2026"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What happens if a student fails to register within the stipulated time after receiving an admission offer?",
+    "answer": "If students fail to register within the stipulated time, they are deemed to have declined the admission offer, although late registration may be allowed within 1-2 weeks with plausible reasons and supporting evidence.",
+    "keywords": [
+      "admission",
+      "registration",
+      "deadline"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "Are students terminated for disciplinary problems eligible for re-admission?",
+    "answer": "No, students who have been terminated by the university due to disciplinary problems will not be eligible for re-admission.",
+    "keywords": [
+      "re-admission",
+      "disciplinary",
+      "ineligible"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the mission of the XMUM Counselling Centre?",
+    "answer": "The XMUM Counselling Centre aims to promote the mental well-being of all students, meeting their unique needs irrespective of age, socioeconomic status, ethnicity, culture, religion, gender identity, and sexual orientation.",
+    "keywords": [
+      "Counselling Centre",
+      "mission",
+      "well-being"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "question": "What is the mission of the Career Services Office (CSO)?",
+    "answer": "CSO aspires to equip students with tools, skills, and resources to explore, develop, and manage their career pathways, enabling them to emerge as career-ready graduates with great humanistic capacity, professional knowledge, and skills.",
+    "keywords": [
+      "Career Services",
+      "mission",
+      "student careers"
+    ]
   }
 ]

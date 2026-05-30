@@ -1,9 +1,4 @@
 # scripts/auto_qna_gemini.py
-from scripts.Z_Placeholder_auto_qna_gemini import output_csv
-import pathlib
-from scripts.Z_Placeholder_auto_qna_gemini import target_file
-from http import client
-from ast import Import
 import os
 import sys
 import pathlib
@@ -11,7 +6,7 @@ import pathlib
 try:
     from google import genai
 except ImportError:
-    print("ERROR: google-genai library is not installed")
+    print("ERROR: google-genai library is not installed.")
     print("Run: pip install google-genai")
     sys.exit(1)
 
@@ -26,12 +21,12 @@ def convert_text_to_csv(input_file, output_file, module_name):
     if not os.environ.get("GEMINI_API_KEY"):
         print("ERROR: GEMINI_API_KEY environment variable is not set!")
         print("In terminal (Powershell), run:")
-        print("$env:GEMINI_API_KEY='YOUR_KEY_HERE'")
+        print('$env:GEMINI_API_KEY="YOUR_API_KEY_HERE"')
         return False
 
     client = genai.Client()
     
-    # Try reading the file, handling powershell utf-16le redirection
+    # Try reading the file, handling powershell utf-16le redirection if necessary
     try:
         with open(input_file, "r", encoding="utf-8") as f:
             raw_text = f.read()
@@ -40,19 +35,20 @@ def convert_text_to_csv(input_file, output_file, module_name):
             with open(input_file, "r", encoding="utf-16") as f:
                 raw_text = f.read()
         except Exception as e:
-            print(f"Failed to read {input_file}")
+            print(f"Failed to read file {input_file}: {e}")
+            return False
     except Exception as e:
-        print(f"Failed to read {input_file}")
+        print(f"Failed to read file {input_file}: {e}")
         return False
-
+        
     # Check if the file is empty to save API quota
     if not raw_text.strip():
-        print(f"[SKIP] file {input_file} is empty! Skipping Gemini request to save quota")
-        # Create an empty csv so next steps dont break
+        print(f"[SKIP] File {input_file} is empty! Skipping Gemini request to save quota.")
+        # Create an empty CSV file so the next steps don't break
         with open(output_file, "w", encoding="utf-8-sig") as f:
             f.write("module,question,answer,keywords\n")
         return True
-
+        
     prompt = f"""
     Analyze the following raw text from a university website and extract all important factual information into a comprehensive list of Question and Answer (Q&A) pairs.
     Format the output EXACTLY as a CSV without markdown code blocks, with the following header:
@@ -70,15 +66,14 @@ def convert_text_to_csv(input_file, output_file, module_name):
     """
     
     print(f"[PROCESSING] Sending text ({len(raw_text)} characters) to Gemini API...")
-
     try:
         response = client.models.generate_content(
-            model='gemini-2.0-flash-lite',  # cost-effective for text
+            model='gemini-2.5-flash',
             contents=prompt,
         )
-
+        
         output_text = response.text.strip()
-        # clean up markdown code blocks if AI outputs them
+        # Clean up markdown backticks if AI outputs them
         if output_text.startswith("```csv"):
             output_text = output_text[6:].strip()
         elif output_text.startswith("```"):
@@ -88,33 +83,30 @@ def convert_text_to_csv(input_file, output_file, module_name):
 
         with open(output_file, "w", encoding="utf-8-sig") as f:
             f.write(output_text)
-
+            
         print(f"[SUCCESS] Q&A successfully saved in CSV format at: {output_file}")
         return True
     except Exception as e:
         print(f"[ERROR] Failed to process data: {e}")
         return False
 
-
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python scripts/auto_qna_gemini.py <file_raw.txt>")
         print("Example: python scripts/auto_qna_gemini.py database/seeds/clubs_societies_raw.txt")
         sys.exit(1)
-
+        
     target_file = sys.argv[1]
-
+    
     # Automate module naming
-    # example : database/seeds/clubs_societies_raw.txt -> module: clubs_societies, output: ..._qa.csv
+    # example: database/seeds/clubs_societies_raw.txt -> module: clubs_societies, output: ..._qa.csv
     base_name = pathlib.Path(target_file).stem
     module_name = base_name.replace("_raw", "")
-
+    
     output_dir = pathlib.Path(target_file).parent
     output_csv = output_dir / f"{module_name}_qa.csv"
-
+    
     success = convert_text_to_csv(target_file, output_csv, module_name)
     if not success:
         sys.exit(1)
 
-    # call the next script with the generated CSV
-    print("\n[NEXT STEP] Running CSV to SQL script...")
