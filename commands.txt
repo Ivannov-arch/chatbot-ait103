@@ -1,0 +1,6 @@
+# Dari folder projek:
+.venv\Scripts\Activate.ps1
+
+# Verifikasi — seharusnya sekarang menunjuk ke .venv:
+python -c "import sys; print(sys.executable)"
+# Output yang benar: C:\Coding\Univ Tasks\final-ait103\.venv\Scripts\python.exe
