@@ -53,6 +53,57 @@ def map_module(row):
     
     return mapping.get(original, 'campus_life')
 
+def map_sub_intent(row):
+    original = row.get('module', '').strip()
+    question = row.get('question', '').lower()
+    
+    # Special handling for mixed xmum_handbook_ocr
+    if original == 'xmum_handbook_ocr':
+        if any(w in question for w in ['motto', 'vision', 'mission', 'full name', 'history', 'chancellor', 'president']):
+            return 'about_xmum'
+        elif any(w in question for w in ['semester', 'calendar', 'week', 'date', 'orientation']):
+            return 'courses_syllabus'
+        elif any(w in question for w in ['exam', 'grade', 'gpa', 'cgpa', 'credit', 'retake', 'fail', 'warning']):
+            return 'exams_grades'
+        elif any(w in question for w in ['admission', 'fee', 'register', 'enrol', 'tuition', 'scholarship']):
+            return 'finance_fees'
+        elif any(w in question for w in ['hostel', 'room', 'accommodation', 'dorm']):
+            return 'hostel_rules_maintenance'
+        elif any(w in question for w in ['wifi', 'internet', 'network', 'email', 'portal', 'it']):
+            return 'it_connectivity'
+        elif any(w in question for w in ['canteen', 'food', 'dining', 'cafeteria', 'cafe', 'halal', 'vegetarian', 'eat']):
+            return 'food_dining'
+        elif any(w in question for w in ['card', 'id', 'matric']):
+            return 'documents_identity'
+        else:
+            return 'general_info'
+    sub_intent_mapping = {
+        'about_xmum': 'about_xmum',
+        'contact_us': 'contact_us',
+        'accommodation': 'housing_application',
+        'accommodation_faq': 'hostel_rules_maintenance',
+        'career_services': 'internship_career',
+        'clubs_societies': 'clubs_activities',
+        'counseling': 'health_safety',
+        'facilities': 'facilities_services',
+        'student_activities': 'clubs_activities',
+        'student_affairs': 'clubs_activities',
+        'student_card': 'documents_identity',
+        'student_email': 'it_connectivity',
+        'it_policy': 'it_connectivity',
+        'it_services': 'it_connectivity',
+        'wifi_network': 'it_connectivity',
+        'student_helpdesk': 'it_connectivity',
+        'library': 'library',
+        'international_handbook': 'visa_immigration',
+        'postgrad_handbook': 'postgrad_resources',
+        'programmes': 'courses_syllabus',
+        'scholarship': 'finance_fees',
+    }
+    
+    return sub_intent_mapping.get(original, 'general_info')
+
+
 def main():
     target_dir = "database/seeds"
     csv_files = glob.glob(os.path.join(target_dir, "*_qa.csv"))
@@ -100,6 +151,7 @@ def main():
                 continue
 
             mapped_mod = map_module(row)
+            mapped_sub = map_sub_intent(row)
 
             # Clean keywords
             keywords_raw = row.get('keywords', '')
@@ -108,6 +160,7 @@ def main():
             # 1. Structure for JSON files
             item = {
                 'module': mapped_mod,
+                'sub_intent': mapped_sub,
                 'question': clean_value(row['question']),
                 'answer': clean_value(row['answer']),
                 'keywords': keywords
@@ -117,6 +170,7 @@ def main():
             # 2. Structure for Combined CSV (with keywords kept as string)
             csv_item = {
                 'module': mapped_mod,
+                'sub_intent': mapped_sub,
                 'question': clean_value(row['question']),
                 'answer': clean_value(row['answer']),
                 'keywords': ",".join(keywords)
