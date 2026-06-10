@@ -1,6 +1,7 @@
 [
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "Who founded Xiamen University (XMU)?",
     "answer": "Xiamen University (XMU) was founded by the Malayan Chinese Mr. Tan Kah Kee.",
     "keywords": [
@@ -11,6 +12,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "Why was Xiamen University Malaysia (XMUM) established?",
     "answer": "Xiamen University Malaysia (XMUM) was established as a historic reciprocation, 93 years after XMU was founded, in the country where its founder, Mr. Tan Kah Kee, achieved great career success.",
     "keywords": [
@@ -22,6 +24,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What spirit does Xiamen University Malaysia (XMUM) pledge to uphold?",
     "answer": "Xiamen University Malaysia (XMUM) pledges to uphold Mr. Tan Kah Kee's spirit of selfless dedication to the noble causes of education.",
     "keywords": [
@@ -33,6 +36,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the financial status of Xiamen University Malaysia (XMUM)?",
     "answer": "Xiamen University Malaysia (XMUM) is a not-for-profit institution, and no surplus funds will be repatriated to China.",
     "keywords": [
@@ -44,6 +48,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "How will surplus funds at Xiamen University Malaysia (XMUM) be utilized?",
     "answer": "Any surplus funds at Xiamen University Malaysia (XMUM) will be channelled back into research and scholarships for its students.",
     "keywords": [
@@ -54,6 +59,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the significance of Xiamen University Malaysia (XMUM)'s establishment for China-Malaysia relations?",
     "answer": "The establishment of Xiamen University Malaysia (XMUM) sets new heights in educational cooperation and exchange between China and Malaysia.",
     "keywords": [
@@ -65,6 +71,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is XMU's goal for its Malaysia campus (XMUM)?",
     "answer": "XMU aims to build its Malaysia campus (XMUM) into one of Malaysia's best universities, enriching the tertiary education landscape and producing high-quality, internationally competitive talents.",
     "keywords": [
@@ -76,6 +83,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the vision of Xiamen University Malaysia (XMUM)?",
     "answer": "The vision of Xiamen University Malaysia (XMUM) is to become a university with a distinct global outlook, featuring first-class teaching and research, and embracing cultural diversity.",
     "keywords": [
@@ -87,6 +95,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the mission of Xiamen University Malaysia (XMUM)?",
     "answer": "The mission of Xiamen University Malaysia (XMUM) is to nurture young talents with dignity and wisdom, transforming them into fine citizens who will contribute to the prosperity and social progress of Malaysia, China, and Southeast Asia.",
     "keywords": [
@@ -98,6 +107,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the full name of the university?",
     "answer": "The full name of the university is Xiamen University Malaysia (XMUM).",
     "keywords": [
@@ -108,6 +118,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the motto of Xiamen University Malaysia (XMUM)?",
     "answer": "The motto of XMUM is \"Pursuing Excellence, Striving For Perfection\".",
     "keywords": [
@@ -119,6 +130,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is Xiamen University Malaysia's (XMUM) vision?",
     "answer": "XMUM aspires to become a university with a distinct global outlook, featuring first-class teaching and research, and embracing cultural diversity.",
     "keywords": [
@@ -129,6 +141,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is Xiamen University Malaysia's (XMUM) mission?",
     "answer": "To nurture young talents with dignity and wisdom, turning them into fine citizens of the region who will contribute to the prosperity of the people and social progress of Malaysia, China and Southeast Asia.",
     "keywords": [
@@ -140,6 +153,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "When is the Revision Week for the April Semester 2025?",
     "answer": "The Revision Week for the April Semester 2025 is from 14 - 20 Jul 2025.",
     "keywords": [
@@ -150,6 +164,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "When is the Revision Week for the September Semester 2025?",
     "answer": "The Revision Week for the September Semester 2025 is from 5 - 11 Jan 2026.",
     "keywords": [
@@ -160,6 +175,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "When is the Revision Week for the April Semester 2026?",
     "answer": "The Revision Week for the April Semester 2026 is from 13 - 19 Jul 2026.",
     "keywords": [
@@ -170,6 +186,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "When is the Revision Week for the September Semester 2026?",
     "answer": "The Revision Week for the September Semester 2026 is from 4 - 10 Jan 2027.",
     "keywords": [
@@ -180,6 +197,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What happens if a student fails to register within the stipulated time after receiving an admission offer?",
     "answer": "If students fail to register within the stipulated time, they are deemed to have declined the admission offer, although late registration may be allowed within 1-2 weeks with plausible reasons and supporting evidence.",
     "keywords": [
@@ -190,6 +208,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "Are students terminated for disciplinary problems eligible for re-admission?",
     "answer": "No, students who have been terminated by the university due to disciplinary problems will not be eligible for re-admission.",
     "keywords": [
@@ -200,6 +219,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the mission of the XMUM Counselling Centre?",
     "answer": "The XMUM Counselling Centre aims to promote the mental well-being of all students, meeting their unique needs irrespective of age, socioeconomic status, ethnicity, culture, religion, gender identity, and sexual orientation.",
     "keywords": [
@@ -210,6 +230,7 @@
   },
   {
     "module": "admin_directory",
+    "sub_intent": "about_xmum",
     "question": "What is the mission of the Career Services Office (CSO)?",
     "answer": "CSO aspires to equip students with tools, skills, and resources to explore, develop, and manage their career pathways, enabling them to emerge as career-ready graduates with great humanistic capacity, professional knowledge, and skills.",
     "keywords": [

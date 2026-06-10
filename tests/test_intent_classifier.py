@@ -26,17 +26,30 @@ def classifier():
 class TestIntentClassifier:
     """PLACEHOLDER test suite for IntentClassifier."""
 
-    def test_returns_string(self, classifier):
-        """classify() should always return a string."""
+    def test_returns_tuples(self, classifier):
+        """classify() should always return a tuple."""
         result = classifier.classify("hello")
-        assert isinstance(result, str)
+        assert isinstance(result, tuple)
+        assert len(result) == 2
+        assert isinstance(result[0], str)
+        assert isinstance(result[1], float)
 
     def test_unknown_for_empty_input(self, classifier):
         """Empty input should return 'unknown'."""
         # PLACEHOLDER — update once implemented
         result = classifier.classify("")
-        assert result == "unknown"
+        assert result == ("unknown", "unknown")
 
+    def test_campus_life_library(self, classifier):
+        assert classifier.classify("Where is the library?") == ("campus_life", "library")
+    def test_campus_life_wifi(self, classifier):
+        assert classifier.classify("how do I connect to the wifi?") == ("campus_life", "it_connectivity")
+    def test_admin_directory_about(self, classifier):
+        assert classifier.classify("Who is the founder of XMU?") == ("admin_directory", "about_xmum")
+    def test_academic_navigation_exams(self, classifier):
+        assert classifier.classify("When is the final exam?") == ("academic_navigation", "exams_grades")
+    def test_unknown_for_off_topic(self, classifier):
+        assert classifier.classify("Tell me a joke") == ("unknown", "unknown")
     # TODO: uncomment and complete once IntentClassifier is implemented
     # def test_campus_life_library(self, classifier):
     #     assert classifier.classify("Where is the library?") == "campus_life"

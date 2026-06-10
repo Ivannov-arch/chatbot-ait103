@@ -26,104 +26,152 @@ class IntentClassifier:
         #   - All keywords are LOWERCASE.
         #   - Each keyword must appear in ONLY ONE module (no duplicates across modules).
         #   - Modules are checked in order: admin → campus_life → academic.
-        self.keyword_map = {
 
-            # --- Module 1: Administrative & Official Processes ---
-            # Covers: visa, registration, fees, insurance, lost card, official letters
-            "admin_directory": [
-                # visa & immigration
-                "visa", "passport", "immigration", "emgs", "isao",
-                "overstay", "endorsement", "student pass",
-                # registration & enrollment
-                "register", "registration", "registrar", "enrollment",
-                "enrolled", "admission", "admissions", "admit", "application",
-                # fees & payments
-                "fees", "tuition", "payment", "invoice", "receipt", "pay",
-                "bursary", "scholarship", "financial aid", "refund",
-                # student id & official documents
-                "student card", "matric", "id card", "lost card",
-                "official letter", "verification", "attestation", "clearance",
-                # accommodation application (official process, not daily life)
-                "accommodation", "hostel application", "room application",
-                # insurance
-                "insurance", "coverage", "claim",
-                # offices & staff contacts
-                "admin", "administration", "staff", "employee",
-                "directory", "contact", "international office",
-                # withdrawal & deferment
-                "withdrawal", "defer", "deferment", "terminate",
-            ],
-
-            # --- Module 2: Daily Campus Life ---
-            # Covers: wifi, food, dorm daily life, transport, facilities, activities
-            "campus_life": [
-                # connectivity
-                "wifi", "wi-fi", "internet", "network", "hotspot",
-                # food & dining
-                "food", "eat", "canteen", "cafeteria", "cafe", "restaurant",
-                "meal", "halal", "vegetarian", "vegan", "drink", "hungry",
-                "menu", "breakfast", "lunch", "dinner",
-                # hostel & dorm daily life
-                "hostel", "dorm", "dormitory", "room", "roommate", "warden",
-                "curfew", "laundry", "washing", "dryer", "hostel rule",
-                # transport
-                "bus", "shuttle", "transport", "travel", "pickup",
-                "grab", "taxi", "ride", "station",
-                # shopping & outings
-                "supermarket", "minimarket", "market", "mall", "shopping",
-                "grocery", "outing", "entertainment", "nearby",
-                # sports & fitness facilities
-                "gym", "fitness", "swimming", "pool", "sports", "court",
-                # money & services
-                "atm", "bank", "money", "withdraw",
-                "printing", "photocopy", "print", "stationery",
-                # religious facilities
-                "surau", "mosque", "prayer",
-                # parking
-                "parking", "car", "motorcycle", "bicycle", "bike",
-                # health & emergency
-                "clinic", "sick", "doctor", "nurse", "health",
-                "emergency", "ambulance", "accident", "safety", "security",
-                # activities & social life
-                "club", "society", "event", "activities",
-                "cultural", "performance", "concert",
-            ],
-
+        # Maps each fine-grained sub_intent to its parent module
+        self.sub_intent_to_module = {
+            # --- Module 1: Administrative & Campus Directory ---
+            "about_xmum": "admin_directory",
+            "contact_us": "admin_directory",
+            
+            # --- Module 2: Daily Campus Life & Facilities ---
+            "hostel_rules_maintenance": "campus_life",
+            "internship_career": "campus_life",
+            "clubs_activities": "campus_life",
+            "health_safety": "campus_life",
+            "facilities_services": "campus_life",
+            # "documents_identity": "campus_life",
+            "it_connectivity": "campus_life",
+            "library": "campus_life",
+            "food_dining": "campus_life",
+            "housing_application": "campus_life",
+            
             # --- Module 3: Academic Navigation ---
-            # Covers: courses, exams, grades, leave, schedule, graduation
-            "academic_navigation": [
-                # courses & credit
-                "course", "subject", "unit", "elective", "core",
-                "credit", "credit hour", "add drop", "drop course",
-                # timetable & schedule
-                "timetable", "schedule", "class", "lecture", "tutorial", "lab",
-                "academic calendar", "semester", "trimester", "term",
-                # exams & assessments
-                "exam", "final", "midterm", "quiz", "test", "assessment",
-                "barred", "attendance",
-                # grades & results
-                "grade", "result", "cgpa", "gpa", "pointer", "pass", "fail",
-                "repeat", "retake", "appeal", "dean",
-                # assignments & submissions
-                "assignment", "homework", "project", "report", "thesis",
-                "dissertation", "submission", "deadline", "plagiarism",
-                # academic staff
-                "lecturer", "professor", "tutor", "instructor", "supervisor",
-                "coordinator", "advisor",
-                # library (as academic resource)
-                "library", "book", "borrow", "journal", "e-resource",
-                # academic leave
-                "leave", "absent", "absence", "mc",
-                # graduation & completion
-                "graduate", "graduation", "convocation", "convo",
-                "transcript", "degree", "certificate", "major", "minor",
-                # internship
-                "internship", "industrial", "practical", "intern", "placement",
-                # department / faculty
-                "department", "faculty", "syllabus", "programme",
-            ],
+            "visa_immigration": "academic_navigation",
+            "postgrad_resources": "academic_navigation",
+            "courses_syllabus": "academic_navigation",
+            "finance_fees": "academic_navigation",
+            "exams_grades": "academic_navigation",
+            "leave_attendance": "academic_navigation",
+            "admissions_enrollment": "academic_navigation",
+            "internship_career": "academic_navigation",
+            "documents_identity": "academic_navigation",
+            
         }
 
+
+        # Fine-grained keyword mapping targeting specific sub_intents
+        self.keyword_map = {
+            # about_xmum (Admin Directory)
+            "about_xmum": [
+                "about", "founder", "motto", "vision", "mission", "history", 
+                "chancellor", "president", "established", "reciprocation", 
+                "financial status", "not-for-profit"
+            ],
+            # contact_us (Admin Directory)
+            "contact_us": [
+                "contact", "phone", "email", "address", "call", "hotline", 
+                "office location", "office number"
+            ],
+            # hostel_rules_maintenance (Campus Life)
+            "hostel_rules_maintenance": [
+                "hostel", "dorm", "dormitory", "room", "roommate", "warden", 
+                "curfew", "laundry", "washing", "dryer", "hostel rule", 
+                "aircond", "maintenance", "repair", "leak", "broken", "light", "plumbing"
+            ],
+            # internship_career (Campus Life)
+            "internship_career": [
+                "internship", "industrial", "practical", "intern", "placement", 
+                "career", "job", "resume", "cv", "employment", "recruitment"
+            ],
+            # clubs_activities (Campus Life)
+            "clubs_activities": [
+                "club", "society", "event", "activities", "cultural", 
+                "performance", "concert", "co-curricular", "student council", 
+                "src", "student representative", "party", "gathering"
+            ],
+            # health_safety (Campus Life)
+            "health_safety": [
+                "clinic", "sick", "doctor", "nurse", "health", "emergency", 
+                "ambulance", "accident", "safety", "security", "counseling", 
+                "counselling", "mental", "stress", "therapist", "guard", "fire"
+            ],
+            # facilities_services (Campus Life)
+            "facilities_services": [
+                "gym", "fitness", "swimming", "pool", "sports", "court", 
+                "atm", "bank", "money", "withdraw", "printing", "photocopy", 
+                "print", "stationery", "surau", "mosque", "prayer", "parking", 
+                "car", "motorcycle", "bicycle", "bike"
+            ],
+            # documents_identity (Campus Life)
+            "documents_identity": [
+                "student card", "matric", "id card", "lost card", "student id", 
+                "replacement card"
+            ],
+            # it_connectivity (Campus Life)
+            "it_connectivity": [
+                "wifi", "wi-fi", "internet", "network", "hotspot", "portal", 
+                "student email", "email account", "it helpdesk", "it services", 
+                "wifi password", "captive portal"
+            ],
+            # library (Campus Life)
+            "library": [
+                "library", "book", "borrow", "journal", "e-resource", 
+                "librarian", "study room", "return book"
+            ],
+            "food_dining": [
+                "food", "eat", "canteen", "cafeteria", "cafe", "restaurant", 
+                "meal", "halal", "vegetarian", "vegan", "drink", "hungry", 
+                "menu", "breakfast", "lunch", "dinner", "chinese", "muslim",
+                "korean", "japanese", "indian", "western", "muslim food",
+                "korean food", "japanese food", "indian food", "western food",
+            ],
+            "housing_application": [
+                "accommodation", "hostel application", "room application", "move in",
+                "move out", "swap room", "move", "move to D" "Move to LY", "swap roommate"
+            ],
+
+            # visa_immigration (Academic Navigation)
+            "visa_immigration": [
+                "visa", "passport", "immigration", "emgs", "isao", "overstay", 
+                "endorsement", "student pass", "international student office"
+            ],
+            # postgrad_resources (Academic Navigation)
+            "postgrad_resources": [
+                "postgraduate", "postgrad", "master", "phd", "doctorate", 
+                "thesis", "dissertation", "supervisor", "research", "viva"
+            ],
+            # courses_syllabus (Academic Navigation)
+            "courses_syllabus": [
+                "course", "subject", "unit", "elective", "core", "credit", 
+                "credit hour", "add drop", "drop course", "syllabus", 
+                "programme", "department", "faculty", "curriculum"
+            ],
+            # finance_fees (Academic Navigation)
+            "finance_fees": [
+                "fees", "tuition", "payment", "invoice", "receipt", "pay", 
+                "bursary", "scholarship", "financial aid", "refund", "ptptn", 
+                "loan", "sponsor"
+            ],
+            # exams_grades (Academic Navigation)
+            "exams_grades": [
+                "exam", "final", "midterm", "quiz", "test", "assessment", 
+                "barred", "grade", "result", "cgpa", "gpa", "pointer", 
+                "pass", "fail", "repeat", "retake", "appeal", "dean", 
+                "transcript", "degree", "certificate", "graduation", 
+                "convocation", "convo"
+            ],
+            # leave_attendance (Academic Navigation)
+            "leave_attendance": [
+                "leave", "absent", "absence", "mc", "medical certificate", 
+                "attendance", "attendance policy", "apply leave", "sick leave"
+            ],
+            # admissions_enrollment (Academic Navigation)
+            "admissions_enrollment": [
+                "admission", "enrollment", "registration", "enrol", 
+                "register", "intake", "orientation"
+            ]
+        }
+    # Teruskan sub_intent ke retriever
     def _normalize(self, text: str) -> str:
         return text.lower().strip()
 
@@ -139,12 +187,13 @@ class IntentClassifier:
         """
         normalized = self._normalize(message)
 
-        for module_name, keywords in self.keyword_map.items():
+        for sub_intent, keywords in self.keyword_map.items():
             for word in keywords:
                 if word in normalized:
-                    return module_name
+                    module_name = self.sub_intent_to_module.get(sub_intent, "unknown")
+                    return module_name, sub_intent
 
-        return "unknown"
+        return "unknown", "unknown"
 
 
 if __name__ == "__main__":
@@ -160,7 +209,7 @@ if __name__ == "__main__":
             continue
         if user_input.lower() in ["quit", "exit"]:
             break
-        module = intent_classifier.classify(user_input)
+        module, sub_intent = intent_classifier.classify(user_input)
         print(f"Module detected: {module}\n")
-
+        print(f"Sub-intent detected: {sub_intent}\n")
     print("Exiting...")
