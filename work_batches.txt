@@ -1,0 +1,177 @@
+================================================================================
+                    XMUM CAMPUS CHATBOT - DEVELOPMENT TICKETS
+================================================================================
+This file contains the technical sprint tickets (CGC-02 through CGC-06) for
+Roles 2 to 6, structured like Linear issues with Goals, Specifications, 
+Acceptance Criteria, and Checklists.
+================================================================================
+
+--------------------------------------------------------------------------------
+CGC-02: Entity Extraction, Text Normalization & Synonym Expansion
+--------------------------------------------------------------------------------
+Sub-issue of: Phase 2 — Core Chatbot Logic
+Assignee: Role 2 (Entity Extraction Specialist)
+Main File: chatbot/preprocessor.py [NEW]
+
+Goal
+Build the preprocessing layer that cleans user inputs, extracts meaningful keywords,
+and expands queries using a synonym dictionary so that variations (e.g., "internet"
+or "network") successfully map to indexed keywords (e.g., "wifi").
+
+Technical Spec
+- File path: chatbot/preprocessor.py
+- Implement three core functions: normalize(), extract_keywords(), and expand_synonyms().
+- Use standard string operations or the 're' module. Keep it lightweight.
+- Create a comprehensive synonym mapping dictionary.
+
+Acceptance Criteria
+[ ] Create the new file chatbot/preprocessor.py.
+[ ] Implement normalize(text: str) -> str:
+    - Must convert all text to lowercase.
+    - Must remove common punctuation (!, ?, ., ,, ;, etc.).
+    - Must strip leading/trailing whitespace.
+[ ] Implement extract_keywords(text: str) -> list[str]:
+    - Must tokenize the normalized text into single words.
+    - Must filter out common English stop words (e.g., "how", "do", "i", "the", "a", "is", "where", "to", "for", "in").
+[ ] Define a SYNONYM_MAP dictionary containing at least 15 key campus terms:
+    - Example: {"internet": "wifi", "network": "wifi", "dorm": "hostel", "accommodation": "hostel", "grade": "cgpa", "exam": "test", "professor": "lecturer"}
+[ ] Implement expand_synonyms(keywords: list[str]) -> list[str]:
+    - Must map keywords to their standard counterparts using SYNONYM_MAP.
+    - Must avoid duplicate entries in the returned keyword list.
+[ ] Add an interactive if __name__ == "__main__": block for manual terminal testing:
+    - Example: "how do I connect to the internet?" -> normalized and expanded to include ["connect", "wifi"]
+
+--------------------------------------------------------------------------------
+CGC-03: Response Matching & Supabase Database Retrieval
+--------------------------------------------------------------------------------
+Sub-issue of: Phase 2 — Core Chatbot Logic
+Assignee: Role 3 (Response Matching & Retrieval Specialist)
+Main File: chatbot/retriever.py
+
+Goal
+Implement the retrieval engine that takes normalized keywords and queries the 
+Supabase database (specifically the knowledge_items table) to fetch the best
+matching Q&A candidates for a given module.
+
+Technical Spec
+- File path: chatbot/retriever.py
+- Use the Supabase client from database.client.
+- Match input keywords against the database columns: 'question', 'answer', and 'keywords' (which is a text[] array).
+- Implement keyword scoring: rank candidates based on how many keywords match.
+
+Acceptance Criteria
+[ ] Open chatbot/retriever.py and replace the placeholder code.
+[ ] Connect to Supabase using get_client() from database.client.
+[ ] Implement Retriever.search(module: str, query_keywords: list[str]) -> list[dict]:
+    - Must query the "knowledge_items" table.
+    - Must filter by the specific module detected by the IntentClassifier.
+    - Must perform lexical matching (checking if keywords exist in 'question', 'answer', or 'keywords' array).
+[ ] Implement matching score logic:
+    - For each candidate row returned, calculate a match score based on the number of query keywords present.
+    - Sort the list of dictionary objects in descending order of matching score.
+[ ] Gracefully handle cases where no matches are found (return an empty list [] instead of crashing).
+[ ] Add an interactive if __name__ == "__main__": block for manual terminal testing:
+    - Example: Running a query for "library" in "academic_navigation" prints the highest scoring Q&A record.
+
+--------------------------------------------------------------------------------
+CGC-04: Multi-Turn Context & Session Management
+--------------------------------------------------------------------------------
+Sub-issue of: Phase 2 — Core Chatbot Logic
+Assignee: Role 4 (Context & Session Specialist)
+Main File: chatbot/context_manager.py
+
+Goal
+Build a session-based context manager to store conversation history in memory. 
+This allows the chatbot to follow multi-turn conversations and remember what the 
+user asked in previous turns.
+
+Technical Spec
+- File path: chatbot/context_manager.py
+- Use an in-memory dictionary where keys are session_ids and values are lists of message dictionaries.
+- Support adding user and bot turns.
+- Implement an automatic history pruning limit (MAX_TURNS) read from .env.
+
+Acceptance Criteria
+[ ] Open chatbot/context_manager.py and replace the placeholder code.
+[ ] Implement ContextManager class with self.sessions = {} dictionary.
+[ ] Implement add_turn(session_id: str, role: str, message: str) -> None:
+    - Must accept roles: "user" and "bot".
+    - Must append a dict: {"role": role, "message": message, "timestamp": now} to the session's list.
+[ ] Implement get_history(session_id: str) -> list[dict]:
+    - Must return all turns for the given session ID in sequential order.
+    - If the session ID doesn't exist, return an empty list [].
+[ ] Implement clear_session(session_id: str) -> None:
+    - Must delete the key-value pair of the given session ID from self.sessions.
+[ ] Implement automatic history pruning:
+    - Read MAX_TURNS from the .env file using os.getenv("MAX_TURNS", 5).
+    - If a session's history length exceeds MAX_TURNS * 2 (turns include both user & bot), prune the oldest turns.
+[ ] Add an interactive if __name__ == "__main__": block for manual terminal testing:
+    - Simulates adding 6 consecutive user-bot turns and asserts that only the most recent turns are retained.
+
+--------------------------------------------------------------------------------
+CGC-05: Response Assembly, Fallback Handling, and Bot Integration
+--------------------------------------------------------------------------------
+Sub-issue of: Phase 2 — Core Chatbot Logic
+Assignee: Role 5 (Fallback Handling & Integration Specialist)
+Main Files: chatbot/responder.py, chatbot/bot.py, chatbot/main.py
+
+Goal
+Serve as the integration lead to tie the entire chatbot pipeline together. Set up
+the final formatting for responses, create custom fallback answers for out-of-scope
+queries, and build the primary REPL command line interface.
+
+Technical Spec
+- Files path: chatbot/responder.py, chatbot/bot.py, chatbot/main.py
+- Integrate Preprocessor, IntentClassifier, Retriever, ContextManager, and Responder.
+- Define context-aware fallback messages (e.g., direct the user to specific emails).
+
+Acceptance Criteria
+[ ] Open chatbot/responder.py and replace the placeholder:
+    - Implement Responder.format(results: list[dict]) -> str: Extract the answer from the highest scoring search result.
+    - Implement a friendly context-aware fallback message. If the intent module is known but no database results exist, direct the user to the respective office (e.g. for admin, suggest contacting ISAO at isao@xmu.edu.my).
+[ ] Open chatbot/bot.py and replace the placeholder:
+    - Initialize Preprocessor, IntentClassifier, Retriever, ContextManager, and Responder in the Bot class constructor.
+    - Implement Bot.chat(session_id: str, message: str) -> str: Run the pipeline:
+      1. Normalize and extract keywords from message.
+      2. Classify intent to get the module.
+      3. If intent is "unknown", trigger fallback.
+      4. If module is valid, use Retriever to search Supabase.
+      5. Pass search results to Responder.
+      6. Log both the user message and final bot response in ContextManager.
+[ ] Open chatbot/main.py and replace the placeholder:
+    - Implement a clean terminal interface loop (REPL) using input().
+    - Generate a random session ID at start.
+    - Let users type their question and display the bot's response.
+    - Exit gracefully when typing "exit" or "quit".
+
+--------------------------------------------------------------------------------
+CGC-06: Text Preprocessing & NLP Dataset Auditing
+--------------------------------------------------------------------------------
+Sub-issue of: Phase 2 — Core Chatbot Logic
+Assignee: Role 6 (NLP & Dataset Specialist)
+Main Files: database/seeds/*.json, database/seed.py
+
+Goal
+Maintain the absolute accuracy, consistency, and cleanliness of the chatbot's 
+knowledge base. Standardize seed keywords, remove redundancies, and implement
+automated checks to prevent retrieval errors.
+
+Technical Spec
+- Audit and clean all database/seeds/ JSON files.
+- Ensure keywords in the JSON dataset are fully normalized (lowercase, clean).
+- Verify that keywords in the seeds map properly to the synonyms defined in CGC-02.
+
+Acceptance Criteria
+[ ] Audit academic_navigation.json, campus_life.json, and admin_directory.json:
+    - Ensure all keys are lowercased.
+    - Ensure no entries contain empty questions, answers, or keyword fields.
+[ ] Check and eliminate duplicates:
+    - Run an inventory check to ensure no keywords are duplicated across different modules (to prevent IntentClassifier confusion).
+[ ] Verify synonym compatibility:
+    - Cross-check that the keywords in the seeds line up perfectly with the synonym mapping defined in the preprocessor (CGC-02).
+[ ] Validate seed.py execution:
+    - Ensure database/seed.py runs smoothly without syntax or type constraint errors from Supabase.
+[ ] (Bonus) Create a simple offline evaluation script tests/eval_dataset.py that tests 15 core campus questions against the locally saved seeds to verify coverage.
+================================================================================
+
+
