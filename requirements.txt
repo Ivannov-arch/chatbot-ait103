@@ -28,12 +28,13 @@ pytest-asyncio>=0.23.6
 nltk>=3.9.0
 
 # Data extraction (dataset pipeline)
-pdfplumber>=0.11.0          # Ekstrak teks dari PDF handbook
+pandas>=3.0.3               # Data processing and analysis
+pdfplumber>=0.11.0          # Extract text from PDF handbooks
 pytesseract>=0.3.10         # OCR for scanned PDFs
 pypdfium2>=5.8.0            # Fast PDF rendering to images
-requests>=2.32.0            # HTTP request ke website XMUM
-beautifulsoup4>=4.12.0      # Parse HTML halaman website
-lxml>=5.2.0                 # HTML parser cepat untuk BeautifulSoup
+requests>=2.32.0            # HTTP request to website XMUM
+beautifulsoup4>=4.12.0      # Parse HTML website
+lxml>=5.2.0                 # HTML parser
 
 # Optional: code quality
 # black>=24.4.0

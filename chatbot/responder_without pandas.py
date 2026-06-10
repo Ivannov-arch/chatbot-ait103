@@ -1,6 +1,6 @@
 import os
 import random
-import pandas as pd
+import csv
 from datetime import datetime
 
 
@@ -101,38 +101,54 @@ if __name__ == "__main__":
     print("XMUM CHATBOT MODULE 5 - FULL PRODUCTION TEST RUN")
     print("=" * 60)
 
-    csv_filename = "xmum_handbook_ocr_qa.csv"
+    # Try database/seeds first, then local directory
+    csv_filename = os.path.join("database", "seeds", "xmum_handbook_ocr_qa.csv")
+    if not os.path.exists(csv_filename):
+        csv_filename = "xmum_handbook_ocr_qa.csv"
 
     # Safety Check: Verifies the database exists to prevent execution crashes
     if not os.path.exists(csv_filename):
-        print(f"[CRITICAL ERROR]: Cannot find the database file '{csv_filename}' in this folder.")
-        print("Please make sure you placed the uploaded CSV file into the exact same folder as this Python script!")
+        print(f"[CRITICAL ERROR]: Cannot find the database file in '{csv_filename}'.")
+        print("Please make sure you placed the uploaded CSV file into the database/seeds/ folder!")
     else:
         print(f"[SUCCESS]: Found '{csv_filename}'. Loading database...")
-        # Load the CSV handbook dataset
-        df = pd.read_csv(csv_filename)
-        print(f"Successfully loaded {len(df)} handbook QA pairs.\n")
+        # Load the CSV handbook dataset using native csv module
+        rows = []
+        encodings = ['utf-8-sig', 'utf-16']
+        for enc in encodings:
+            try:
+                with open(csv_filename, mode='r', encoding=enc) as f:
+                    reader = csv.DictReader(f)
+                    rows = list(reader)
+                    break
+            except Exception:
+                continue
 
-        # Test 1: Perfect Match (Confidence = 0.95) -> Triggers Template Generation
-        print("--- [TEST 1: HIGH CONFIDENCE MATCH (Motto Query)] ---")
-        mock_row_1 = df.iloc[1]  # Extracts the row containing the university motto
-        response_1 = process_chatbot_output(confidence=0.95, matched_row=mock_row_1)
-        print(response_1)
-        print("\n" + "-" * 50 + "\n")
+        if not rows:
+            print("[CRITICAL ERROR]: Failed to read CSV content or file is empty.")
+        else:
+            print(f"Successfully loaded {len(rows)} handbook QA pairs.\n")
 
-        # Test 2: Vague Match (Confidence = 0.42) -> Triggers Closest Suggestion Prompt
-        print("--- [TEST 2: WEAK MATCH (Vision Query Suggestion)] ---")
-        mock_row_2 = df.iloc[2]  # Extracts the row containing the university vision statement
-        response_2 = process_chatbot_output(confidence=0.42, matched_row=mock_row_2)
-        print(f"[Bot Reply]: {response_2}")
-        print("\n" + "-" * 50 + "\n")
+            # Test 1: Perfect Match (Confidence = 0.95) -> Triggers Template Generation
+            print("--- [TEST 1: HIGH CONFIDENCE MATCH (Motto Query)] ---")
+            mock_row_1 = rows[1]  # Extracts the row containing the university motto
+            response_1 = process_chatbot_output(confidence=0.95, matched_row=mock_row_1)
+            print(response_1)
+            print("\n" + "-" * 50 + "\n")
 
-        # Test 3: Complete Failure (Confidence = 0.12) -> Triggers Logging & Fallback
-        print("--- [TEST 3: NO MATCH (Irrelevant Query)] ---")
-        user_input_3 = "Can I order chicken rice through this chatbot?"
-        response_3 = process_chatbot_output(confidence=0.12, matched_row=None, user_raw_input=user_input_3)
-        print(f"[Bot Reply]: {response_3}")
-        print("\n" + "-" * 50 + "\n")
+            # Test 2: Vague Match (Confidence = 0.42) -> Triggers Closest Suggestion Prompt
+            print("--- [TEST 2: WEAK MATCH (Vision Query Suggestion)] ---")
+            mock_row_2 = rows[2]  # Extracts the row containing the university vision statement
+            response_2 = process_chatbot_output(confidence=0.42, matched_row=mock_row_2)
+            print(f"[Bot Reply]: {response_2}")
+            print("\n" + "-" * 50 + "\n")
 
-        print("ALL TESTS COMPLETED SUCCESSFULLY WITHOUT ERROR.")
-        print("Check your folder to see the newly generated 'failed_queries.txt' file!")
+            # Test 3: Complete Failure (Confidence = 0.12) -> Triggers Logging & Fallback
+            print("--- [TEST 3: NO MATCH (Irrelevant Query)] ---")
+            user_input_3 = "Can I order chicken rice through this chatbot?"
+            response_3 = process_chatbot_output(confidence=0.12, matched_row=None, user_raw_input=user_input_3)
+            print(f"[Bot Reply]: {response_3}")
+            print("\n" + "-" * 50 + "\n")
+
+            print("ALL TESTS COMPLETED SUCCESSFULLY WITHOUT ERROR.")
+            print("Check your folder to see the newly generated 'failed_queries.txt' file!")
