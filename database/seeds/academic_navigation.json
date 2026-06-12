@@ -103,8 +103,8 @@
     "keywords": [
       "contact",
       "appointment",
-      "email",
-      "careerservices@xmu.edu.my"
+      "student email",
+      "careerservices@xmu edu my"
     ]
   },
   {
@@ -193,7 +193,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What is the application fee for XMUM?",
     "answer": "The application fee for XMUM is RM100 and is non-refundable.",
     "keywords": [
@@ -205,7 +205,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What is the registration fee for XMUM?",
     "answer": "The registration fee for XMUM is RM200 and is non-refundable.",
     "keywords": [
@@ -217,24 +217,23 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What payment methods are accepted for fees at XMUM?",
     "answer": "XMUM accepts Cash, Cheque or Bank Draft, Bank Transfer, and Flywire (for new international students).",
     "keywords": [
-      "payment",
-      "methods",
       "fees",
+      "methods",
       "options"
     ]
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "Who is the beneficiary for fee payments made via bank transfer?",
     "answer": "The beneficiary for fee payments made via bank transfer is \"XMU JIAGENG EDUCATION DEVELOPMENT SDN BHD\".",
     "keywords": [
       "beneficiary",
-      "payment",
+      "fees",
       "bank",
       "transfer"
     ]
@@ -257,7 +256,7 @@
     "question": "How can students apply for on-campus accommodation?",
     "answer": "Students may apply for on-campus accommodation during the application process, with details provided in the official application materials.",
     "keywords": [
-      "accommodation",
+      "hostel",
       "on-campus",
       "apply",
       "housing"
@@ -271,13 +270,13 @@
     "keywords": [
       "admissions",
       "contact",
-      "email",
+      "student email",
       "inquiry"
     ]
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What is Flywire and who is it for?",
     "answer": "Flywire is a service partnered with XMUM to streamline fee payments for international students, allowing them to pay in their home currency with benefits like online payment tracking, no bank fees, and 24/7 multilingual customer support.",
     "keywords": [
@@ -289,7 +288,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What are the payment amounts for new international students using Flywire?",
     "answer": "New international students can pay Admin Fees (RM 3,068) or Admin Fees & Security Deposit (RM 4,068) using Flywire.",
     "keywords": [
@@ -301,7 +300,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "Where can I find more information about scholarships and financial aids?",
     "answer": "More information about scholarships and financial aids can be found by visiting the \"Scholarships & Financial Aids\" section of the website.",
     "keywords": [
@@ -332,7 +331,7 @@
       "password",
       "reset",
       "set",
-      "email"
+      "student email"
     ]
   },
   {
@@ -349,7 +348,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "documents_identity",
+    "sub_intent": "finance_fees",
     "question": "What is the fee for a replacement Campus ID card?",
     "answer": "A replacement card is free of charge only if your card is stolen (with a police report presented), damaged, or no longer works. Otherwise, a lost card fee of RM30 will be imposed for a replacement Campus Staff/Student ID ECard.",
     "keywords": [
@@ -432,7 +431,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "exams_grades",
     "question": "When is the Examination Week for the February Semester 2025?",
     "answer": "The Examination Week for the February Semester 2025 is from 17 - 24 Mar 2025.",
     "keywords": [
@@ -465,7 +464,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "exams_grades",
     "question": "When is the Examination Week for the April Semester 2025?",
     "answer": "The Examination Week for the April Semester 2025 is from 21 Jul - 1 Aug 2025.",
     "keywords": [
@@ -498,7 +497,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "exams_grades",
     "question": "When is the Examination Week for the September Semester 2025?",
     "answer": "The Examination Week for the September Semester 2025 is from 12 - 23 Jan 2026.",
     "keywords": [
@@ -531,7 +530,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "exams_grades",
     "question": "When is the Examination Week for the February Semester 2026?",
     "answer": "The Examination Week for the February Semester 2026 is from 30 Mar - 3 Apr 2026.",
     "keywords": [
@@ -553,7 +552,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "exams_grades",
     "question": "When is the Examination Week for the April Semester 2026?",
     "answer": "The Examination Week for the April Semester 2026 is from 20 - 31 Jul 2026.",
     "keywords": [
@@ -586,7 +585,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "exams_grades",
     "question": "When is the Examination Week for the September Semester 2026?",
     "answer": "The Examination Week for the September Semester 2026 is from 11 - 21 Jan 2027.",
     "keywords": [
@@ -630,7 +629,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What is the fee policy if an application for deferment is received and approved before the semester starts?",
     "answer": "If an application for deferment is received and approved before the semester starts, the student is exempted from paying any fees for the semester.",
     "keywords": [
@@ -641,7 +640,7 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What is the fee policy if a student applies for deferment after the semester starts?",
     "answer": "If a student applies for deferment after the semester starts, paid tuition fees will be transferred to the next semester. A 50% refund is given if deferment is within the first two teaching weeks; no refund after two weeks.",
     "keywords": [
@@ -677,7 +676,7 @@
     "answer": "The designated timeframe for adding or dropping courses is TWO weeks for a long semester or ONE week for a short semester from the start date. Late applications (before week 5 for long, week 2 for short) may be considered for specific circumstances.",
     "keywords": [
       "course registration",
-      "add/drop",
+      "add drop",
       "timeframe"
     ]
   },
@@ -829,8 +828,7 @@
     "keywords": [
       "gpa",
       "cgpa",
-      "calculation",
-      "grades"
+      "calculation"
     ]
   },
   {
@@ -943,18 +941,17 @@
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "When are semester fees due?",
     "answer": "Students are required to pay the first semester fees upon enrolment and subsequently within seven (7) working days from the commencement of the new semester.",
     "keywords": [
       "fees",
-      "payment",
       "deadline"
     ]
   },
   {
     "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
+    "sub_intent": "finance_fees",
     "question": "What happens if semester fees are not paid by the due date?",
     "answer": "Students will be automatically barred from attending classes and may have access to facilities withdrawn. Certificates will be withheld at graduation if fees are outstanding. An administrative charge of RM30.00 per week will be imposed after the 7th day.",
     "keywords": [
@@ -1080,7 +1077,7 @@
     "question": "How can students provide feedback regarding cafeterias?",
     "answer": "Students can provide feedback via email (canteen.inquiry@xmu.edu.my), scanning a QR code for an online form (AskA), writing in the anonymous feedback book at the counter, or through the canteen supervision committee under the student council.",
     "keywords": [
-      "cafeteria",
+      "canteen",
       "feedback",
       "channels"
     ]
