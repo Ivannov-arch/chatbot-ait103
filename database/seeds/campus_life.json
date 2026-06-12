@@ -44,7 +44,7 @@
       "application",
       "fee",
       "non-refundable",
-      "RM100"
+      "rm100"
     ]
   },
   {
@@ -67,7 +67,7 @@
     "keywords": [
       "deposit",
       "refundable",
-      "RM500",
+      "rm500",
       "check-in"
     ]
   },
@@ -152,7 +152,7 @@
       "establishment",
       "history",
       "pioneer",
-      "China"
+      "china"
     ]
   },
   {
@@ -186,7 +186,7 @@
     "keywords": [
       "parent university",
       "ranking",
-      "XMU",
+      "xmu",
       "global"
     ]
   },
@@ -198,7 +198,7 @@
     "keywords": [
       "location",
       "address",
-      "Sepang",
+      "sepang",
       "airport"
     ]
   },
@@ -256,8 +256,8 @@
     "keywords": [
       "language",
       "instruction",
-      "English",
-      "Chinese"
+      "english",
+      "chinese"
     ]
   },
   {
@@ -292,7 +292,7 @@
       "foundation",
       "recognition",
       "transfer",
-      "MOHE"
+      "mohe"
     ]
   },
   {
@@ -338,7 +338,7 @@
     "keywords": [
       "graduation",
       "credits",
-      "CGPA",
+      "cgpa",
       "requirements"
     ]
   },
@@ -459,7 +459,7 @@
       "security",
       "safety",
       "hostel",
-      "CCTV"
+      "cctv"
     ]
   },
   {
@@ -611,10 +611,10 @@
     "question": "What department manages clubs and societies at Xiamen University Malaysia?",
     "answer": "The Extra-Curricular Activities (ECA) Department manages clubs and societies at Xiamen University Malaysia.",
     "keywords": [
-      "ECA",
+      "eca",
       "department",
-      "Xiamen",
-      "Malaysia"
+      "xiamen",
+      "malaysia"
     ]
   },
   {
@@ -624,7 +624,7 @@
     "answer": "The overall goal of joining clubs and societies at Xiamen University Malaysia is to \"Unleash Your Potential\" through Extra-Curricular Activities (ECA).",
     "keywords": [
       "potential",
-      "ECA",
+      "eca",
       "activities",
       "growth"
     ]
@@ -806,7 +806,7 @@
     "question": "What is the physical address of Xiamen University Malaysia Campus?",
     "answer": "\"The physical address of Xiamen University Malaysia Campus is Jalan Sunsuria",
     "keywords": [
-      "Bandar Sunsuria"
+      "bandar sunsuria"
     ]
   },
   {
@@ -860,7 +860,7 @@
     "question": "What are the website and phone numbers for the Xiamen University China Office?",
     "answer": "\"The website for the China Office is xmu.edu.cn and the phone numbers are +86 592 2183989 / 2188700.\"",
     "keywords": [
-      "\"China"
+      "\"china"
     ]
   },
   {
@@ -883,7 +883,7 @@
     "keywords": [
       "learning",
       "services",
-      "Moodle",
+      "moodle",
       "printing"
     ]
   },
@@ -894,7 +894,7 @@
     "answer": "Users can access Library E-Resources, OPAC, E-Books, and E-Journals.",
     "keywords": [
       "e-resources",
-      "OPAC",
+      "opac",
       "e-books",
       "e-journals"
     ]
@@ -905,7 +905,7 @@
     "question": "What is the OPAC system and what are its functions?",
     "answer": "The OPAC (Online Public Access Catalog) system allows patrons to search diverse book collections (course reserves, reference, general reading), access account information, check borrowed books, and view fines.",
     "keywords": [
-      "OPAC",
+      "opac",
       "catalog",
       "search",
       "books"
@@ -953,7 +953,7 @@
     "question": "Where can I find information about the Makerspace at Xiamen University Malaysia Library?",
     "answer": "Information is available regarding About Makerspace, How to Apply, Safety Guidelines, Rules and Regulations, and the Makerspace Calendar.",
     "keywords": [
-      "Makerspace",
+      "makerspace",
       "apply",
       "guidelines",
       "rules"
@@ -968,7 +968,7 @@
       "spaces",
       "cinema",
       "instruction",
-      "Makerspace"
+      "makerspace"
     ]
   },
   {
@@ -991,7 +991,7 @@
     "keywords": [
       "helpdesk",
       "contact",
-      "XMUM",
+      "xmum",
       "students"
     ]
   },
@@ -1049,7 +1049,7 @@
     "answer": "The Student Helpdesk offers Student Verification for purposes such as lost/damaged student ID card reports and public transport discount card registration.",
     "keywords": [
       "verification",
-      "ID card",
+      "id card",
       "transport",
       "discount"
     ]
@@ -1072,7 +1072,7 @@
     "question": "Can students make PTPTN enquiries at the Student Helpdesk?",
     "answer": "Yes, the Student Helpdesk handles PTPTN Enquiries.",
     "keywords": [
-      "PTPTN",
+      "ptptn",
       "enquiries",
       "financial",
       "loan"
@@ -1135,7 +1135,7 @@
     "question": "How can I customize my campus email settings?",
     "answer": "\"After signing in",
     "keywords": [
-      "click on the gear icon in the top right corner of the page to customize your email and Office 365 settings"
+      "click on the gear icon in the top right corner of the page to customize your email and office 365 settings"
     ]
   },
   {
@@ -1144,7 +1144,7 @@
     "question": "What applications can I access through my campus email login?",
     "answer": "\"Through your campus email login",
     "keywords": [
-      "you can access Outlook (Email)"
+      "you can access outlook (email)"
     ]
   },
   {
@@ -1173,8 +1173,8 @@
     "question": "What platform is used for campus email and other services?",
     "answer": "\"All users can access campus email using Microsoft 365 Outlook and other valuable Microsoft 365 cloud services.\"",
     "keywords": [
-      "Microsoft 365",
-      "Outlook",
+      "microsoft 365",
+      "outlook",
       "cloud services"
     ]
   },
@@ -1204,7 +1204,7 @@
     "question": "Is the University responsible for recovery of lost data from campus email or Microsoft 365 services?",
     "answer": "\"No",
     "keywords": [
-      "the University does not take any responsibility for the recovery of saved files or data loss on Microsoft 365 applications and services.\""
+      "the university does not take any responsibility for the recovery of saved files or data loss on microsoft 365 applications and services.\""
     ]
   },
   {
@@ -1222,7 +1222,7 @@
     "question": "How can I reset my campus email password if I forgot it while on campus?",
     "answer": "\"If on campus",
     "keywords": [
-      "you can visit the Library Circulation Counter (A3 2nd Floor) with your Campus ECard/IC/Passport"
+      "you can visit the library circulation counter (a3 2nd floor) with your campus ecard/ic/passport"
     ]
   },
   {
@@ -1231,7 +1231,7 @@
     "question": "How can I reset my campus email password if I forgot it while off campus?",
     "answer": "\"If off campus",
     "keywords": [
-      "you can raise an AskA request (app.xmu.edu.my/aska) and attach a softcopy of your Campus ECard/IC/Passport for identity verification.\""
+      "you can raise an aska request (app.xmu.edu.my/aska) and attach a softcopy of your campus ecard/ic/passport for identity verification.\""
     ]
   },
   {
@@ -1306,7 +1306,7 @@
       "role",
       "contact",
       "students",
-      "XMUM"
+      "xmum"
     ]
   },
   {
@@ -1364,7 +1364,7 @@
     "answer": "Student Verification is provided for purposes such as lost/damaged student ID card reports and public transport discount card registration.",
     "keywords": [
       "verification",
-      "ID card",
+      "id card",
       "transport",
       "discount"
     ]
@@ -1387,7 +1387,7 @@
     "question": "Does the Student Helpdesk handle PTPTN enquiries?",
     "answer": "Yes, the Student Helpdesk provides assistance and services for PTPTN Enquiries.",
     "keywords": [
-      "PTPTN",
+      "ptptn",
       "enquiries",
       "questions",
       "loan"
@@ -1412,8 +1412,8 @@
     "answer": "Users can access the WIFI network through the University’s Central Authentication System (CAS) and obtain an IP address and configuration setting automatically via DHCP.",
     "keywords": [
       "access",
-      "CAS",
-      "DHCP",
+      "cas",
+      "dhcp",
       "authentication"
     ]
   },
@@ -1436,7 +1436,7 @@
     "answer": "The WIFI SSIDs for students are 'Student-5G' or 'Student'.",
     "keywords": [
       "student",
-      "SSID",
+      "ssid",
       "name",
       "identification"
     ]
@@ -1460,7 +1460,7 @@
     "answer": "The WIFI SSIDs for staff are 'Staff-5G' or 'Staff'. The password will be advised by the IT Department. Currently, user authentication is not required, but it will be imposed in a later phase.",
     "keywords": [
       "staff",
-      "SSID",
+      "ssid",
       "password",
       "authentication"
     ]
@@ -1471,8 +1471,8 @@
     "question": "What is the WIFI SSID for the International Academic Exchange Centre and how do users get the password?",
     "answer": "The WIFI SSID for the International Academic Exchange Centre is 'XMU-IAEC'. The password will be advised by IAEC staff.",
     "keywords": [
-      "IAEC",
-      "SSID",
+      "iaec",
+      "ssid",
       "password",
       "access"
     ]
@@ -1486,7 +1486,7 @@
       "router",
       "personal",
       "approval",
-      "IT"
+      "it"
     ]
   },
   {
@@ -1496,7 +1496,7 @@
     "answer": "The WIFI name (SSID) for personal use cannot begin with 'XMU' and cannot use the same SSID names as Guest, Staff, Student, etc.",
     "keywords": [
       "personal",
-      "SSID",
+      "ssid",
       "restrictions",
       "naming"
     ]
@@ -1521,7 +1521,7 @@
     "keywords": [
       "support",
       "contact",
-      "IT",
+      "it",
       "assistance"
     ]
   },
@@ -1532,7 +1532,7 @@
     "answer": "Students are required to be appropriately attired in a manner befitting the status of university students at all times and must wear their student ID card in all academic and public venues. They must also abide by guidelines for specific sports/recreational venues.",
     "keywords": [
       "dress code",
-      "student ID",
+      "student id",
       "general rules"
     ]
   },
@@ -1607,7 +1607,7 @@
     "question": "What are the required purposes for carrying a student ID card on campus?",
     "answer": "The student ID card is required for entering the campus, paying fees at the Finance Office, using library facilities, sitting for final examinations, and any other purposes on campus.",
     "keywords": [
-      "student ID",
+      "student id",
       "campus access",
       "facilities"
     ]
@@ -1631,7 +1631,7 @@
     "answer": "Malaysian students can change their study programme by filling out a prescribed form from the Academic Affairs Office and submitting it within two weeks before the end of a semester, provided they meet the new programme's entry requirements.",
     "keywords": [
       "change programme",
-      "Malaysian students"
+      "malaysian students"
     ]
   },
   {
@@ -1740,7 +1740,7 @@
     "question": "What is the Student Discipline and Behaviour Committee (SDBC) responsible for?",
     "answer": "The SDBC is a committee responsible for handling academic disciplinary-related matters and imposing penalties on students found to have committed misconduct.",
     "keywords": [
-      "SDBC",
+      "sdbc",
       "discipline",
       "misconduct"
     ]
@@ -1764,7 +1764,7 @@
     "keywords": [
       "graduation",
       "requirements",
-      "CGPA",
+      "cgpa",
       "fees"
     ]
   },
@@ -1774,7 +1774,7 @@
     "question": "What are the office hours for the Academic Affairs Office?",
     "answer": "The Academic Affairs Office (Room A3#702) is open Monday to Friday from 8:30 am to 5:30 pm, with a lunch break from 12:30 pm to 1:30 pm.",
     "keywords": [
-      "Academic Affairs",
+      "academic affairs",
       "office hours",
       "contact"
     ]
@@ -1785,7 +1785,7 @@
     "question": "What are the contact details and office hours for the Finance Office?",
     "answer": "The Finance Office (Room A3-7-11) is open Monday to Friday from 9:00 am to 5:00 pm. Email: finance@xmu.edu.my, Phone: 03-8800 6856.",
     "keywords": [
-      "Finance Office",
+      "finance office",
       "contact",
       "office hours"
     ]
@@ -1796,7 +1796,7 @@
     "question": "What services does the Student Helpdesk provide?",
     "answer": "The Student Helpdesk provides assistance with student vehicle registration, feedback, lost and found, student verification, student personal accident insurance, and PTPTN enquiries.",
     "keywords": [
-      "Student Helpdesk",
+      "student helpdesk",
       "services",
       "support"
     ]
@@ -1807,7 +1807,7 @@
     "question": "What is the policy on lost/damaged student ID cards?",
     "answer": "Lost/damaged ID cards must be immediately reported to the Student Helpdesk during working hours and will incur an administrative charge. Only one student ID card is permitted per person at a time.",
     "keywords": [
-      "student ID",
+      "student id",
       "lost",
       "damaged",
       "policy"
@@ -1830,7 +1830,7 @@
     "question": "Where can students get information about PTPTN (National Higher Education Fund Corporation)?",
     "answer": "Students can visit the helpdesk of the Student Affairs Office to consult on PTPTN eligibilities, loan amounts, online application flow chat, online schedule, and application guidelines.",
     "keywords": [
-      "PTPTN",
+      "ptptn",
       "enquiries",
       "student affairs"
     ]
@@ -1841,7 +1841,7 @@
     "question": "What are the contact details and office hours for the Student Affairs Office?",
     "answer": "The Student Affairs Office (Room B1 # 107) is open Monday to Friday from 8:30 am to 5:30 pm. International Student Affairs Office email: internationaloffice@xmu.edu.my, Phone: 03-8800 6838 / 03-8705 5048.",
     "keywords": [
-      "Student Affairs",
+      "student affairs",
       "contact",
       "office hours"
     ]
@@ -1852,7 +1852,7 @@
     "question": "What services does the Counselling Centre provide?",
     "answer": "The Counselling Centre provides free individual and group counselling, supporting students with adaptation, self-exploration, study stress, emotion, grief and loss, sexuality/gender, family, boy-girl relationships, friendship, and career guidance.",
     "keywords": [
-      "Counselling Centre",
+      "counselling centre",
       "services",
       "support"
     ]
@@ -1863,7 +1863,7 @@
     "question": "How can students make an appointment with the Counselling Centre?",
     "answer": "Students can make an appointment by visiting http://www.xmu.edu.my/2017/0527/c14709a285624/page.htm or https://forms.office.com/r/thC285mijta.",
     "keywords": [
-      "Counselling Centre",
+      "counselling centre",
       "appointment",
       "booking"
     ]
@@ -1874,7 +1874,7 @@
     "question": "What are the contact details and office hours for the Counselling Centre?",
     "answer": "The Counselling Centre (Room B1 # 111) is open Monday to Friday from 8:30 am to 5:30 pm. Email: counselling@xmu.edu.my, Phone: 03-8705 5059.",
     "keywords": [
-      "Counselling Centre",
+      "counselling centre",
       "contact",
       "office hours"
     ]
@@ -1885,7 +1885,7 @@
     "question": "What core activities does the Career Services Office (CSO) organize?",
     "answer": "CSO organizes career coaching, Industry Engagement Sessions (IES), Grill The Drill Series (GTD), Industrial Visits, Structured Internship Briefings (SIB), Internship & Job Placement Support, Campus Career Fairs, and On-campus recruitment (OCR).",
     "keywords": [
-      "Career Services",
+      "career services",
       "activities",
       "events"
     ]
@@ -1896,7 +1896,7 @@
     "question": "What is the contact number for the Career Services Office?",
     "answer": "The contact number for the Career Services Office is 03-8705 5300.",
     "keywords": [
-      "Career Services",
+      "career services",
       "contact",
       "phone"
     ]
@@ -1907,7 +1907,7 @@
     "question": "What is the main purpose of the International Student Affairs Office (ISAO)?",
     "answer": "The main purpose of ISAO is to provide advice, information, and support for all international students at XMUM throughout their student lifecycle, from student pass application to graduation.",
     "keywords": [
-      "ISAO",
+      "isao",
       "international students",
       "support"
     ]
@@ -1918,7 +1918,7 @@
     "question": "What kind of specialist advice does ISAO provide to international students?",
     "answer": "ISAO provides professional and specialist advice on student pass/visa processes, including new applications, endorsements, transfers, extensions/renewals, cancellations, and related requirements like medical screening and insurance.",
     "keywords": [
-      "ISAO",
+      "isao",
       "student visa",
       "immigration"
     ]
@@ -1964,7 +1964,7 @@
     "keywords": [
       "international students",
       "attendance",
-      "CGPA"
+      "cgpa"
     ]
   },
   {
@@ -1973,7 +1973,7 @@
     "question": "What are the contact details and office hours for the International Student Affairs Office?",
     "answer": "The International Student Affairs Office (Room B1 # 104) is open Monday to Friday from 9:00 am to 5:00 pm. Email: internationaloffice@xmu.edu.my, Phone: 03-8800 6838 / 03-8705 5048.",
     "keywords": [
-      "International Student",
+      "international student",
       "contact",
       "office hours"
     ]
@@ -1984,7 +1984,7 @@
     "question": "What is the purpose of the Extra-curricular Activities Guidebook?",
     "answer": "The Guidebook is designed to assist in the formation and operation of students' clubs and societies, and to help create an efficient and clear administrative focus.",
     "keywords": [
-      "ECA",
+      "eca",
       "guidebook",
       "clubs",
       "societies"
@@ -2030,7 +2030,7 @@
     "question": "When must an Annual General Meeting (AGM) for clubs/societies be held?",
     "answer": "An Annual General Meeting (AGM) must be held in October each year.",
     "keywords": [
-      "AGM",
+      "agm",
       "clubs",
       "societies",
       "timing"
@@ -2066,7 +2066,7 @@
     "keywords": [
       "event proposal",
       "submission",
-      "ECA"
+      "eca"
     ]
   },
   {
@@ -2108,7 +2108,7 @@
     "question": "What are the contact details and office hours for Extra-Curricular Activities (ECA)?",
     "answer": "Extra-Curricular Activities (Room B1 # B1-103) is open Monday to Friday from 8:30 am to 5:30 pm. Email: ECA@xmu.edu.my, Phone: 03-8800 6818.",
     "keywords": [
-      "ECA",
+      "eca",
       "contact",
       "office hours"
     ]
@@ -2297,7 +2297,7 @@
     "question": "What is the location and operating hours of The English Lounge?",
     "answer": "The English Lounge is located at B1G03 and is open from 9 am to 6 pm every weekday. Consultation hours are 2 pm to 5 pm on Mon, Wed & Fri, and by appointment.",
     "keywords": [
-      "English Lounge",
+      "english lounge",
       "location",
       "hours"
     ]
@@ -2308,7 +2308,7 @@
     "question": "What services are provided at The English Lounge?",
     "answer": "The English Lounge provides personalized/small-group coaching, peer mentoring, a \"Writing Clinic\", access to English reference books, audio-visual materials, novels, newspapers, magazines, eLearning resources, a self-directed digital portal, and \"Let's Chat\" coffee chat sessions.",
     "keywords": [
-      "English Lounge",
+      "english lounge",
       "services",
       "language support"
     ]
@@ -2319,7 +2319,7 @@
     "question": "What are the contact details for The English Lounge?",
     "answer": "Email: eled@xmu.edu.my or jennymaganran@xmu.edu.my. Phone: 03-8880 5112 or 017-674 0300.",
     "keywords": [
-      "English Lounge",
+      "english lounge",
       "contact",
       "phone"
     ]
@@ -2418,7 +2418,7 @@
     "question": "What is the general policy regarding IT facilities and campus network use?",
     "answer": "IT facilities and campus network are primarily for educational use. Users are prohibited from viewing pornographic websites, downloading unauthorized copyrighted materials, or engaging in online gambling. Misconduct can lead to suspension, expulsion, or legal proceedings.",
     "keywords": [
-      "IT",
+      "it",
       "network use",
       "policy",
       "rules"
@@ -2430,8 +2430,8 @@
     "question": "How can students connect to the campus Wi-Fi?",
     "answer": "Students can connect to the campus Wi-Fi network named \"Student-5G\" or \"Student\" using the security key/password \"xmustudent\".",
     "keywords": [
-      "IT",
-      "Wi-Fi",
+      "it",
+      "wi-fi",
       "connection"
     ]
   },
@@ -2441,7 +2441,7 @@
     "question": "Is it allowed to use personal wireless routers on campus?",
     "answer": "To use personal wireless routers, approval from the IT Department is required. The Wi-Fi name (SSID) for personal use cannot begin with \"XMU\" or use existing SSID names like Staff, Guest, Student.",
     "keywords": [
-      "IT",
+      "it",
       "personal router",
       "rules"
     ]
@@ -2452,7 +2452,7 @@
     "question": "What is the official communication channel used by the University for announcements?",
     "answer": "The University will use email as one of the communication channels to make announcements.",
     "keywords": [
-      "IT",
+      "it",
       "email",
       "communication"
     ]
@@ -2463,8 +2463,8 @@
     "question": "What IT facilities and services can be accessed using the Campus ID?",
     "answer": "The Campus ID can be used to access book borrowing, door access, discussion room bookings, VPN access, University learning portal (Moodle), Academic Affairs Online Systems, AskA, and the student portal.",
     "keywords": [
-      "IT",
-      "Campus ID",
+      "it",
+      "campus id",
       "access"
     ]
   },
@@ -2474,8 +2474,8 @@
     "question": "What is the Campus ECard used for?",
     "answer": "The Campus ECard can be used in canteens, supermarkets, and for Library's fine payments.",
     "keywords": [
-      "IT",
-      "Campus ECard",
+      "it",
+      "campus ecard",
       "payments"
     ]
   },
@@ -2485,8 +2485,8 @@
     "question": "How can users access XMUM's secured network remotely?",
     "answer": "Users can access XMUM's secured network remotely via WebVPN (https://linc.xmu.edu.my/ -> Technologies -> Network & Connectivity -> Secured Network Access (VPN)) using their Campus ID and password, limited to academic and research purposes.",
     "keywords": [
-      "IT",
-      "VPN",
+      "it",
+      "vpn",
       "remote access"
     ]
   },
@@ -2496,7 +2496,7 @@
     "question": "What are the contact details and office hours for the IT Department?",
     "answer": "The IT Department (B1-G09, A3-1st Floor-103) is open Monday - Friday from 8:30 am to 5:30 pm. Phone: 03-8705 5003, 03-8705 5014. Email: ITService@xmu.edu.my.",
     "keywords": [
-      "IT",
+      "it",
       "contact",
       "office hours"
     ]
@@ -2507,8 +2507,8 @@
     "question": "What are the general services provided by the Operations and Maintenance Department?",
     "answer": "The Operations and Maintenance Department is responsible for the functionality and well-being of XMUM in terms of outdoor surroundings and indoor building-related facilities, as well as providing a safe and secured environment.",
     "keywords": [
-      "Operations",
-      "Maintenance",
+      "operations",
+      "maintenance",
       "services"
     ]
   },
@@ -2518,8 +2518,8 @@
     "question": "What are the operation hours for the Operations and Maintenance Department?",
     "answer": "Weekdays (Mon-Fri): 8:30 am to 5:30 pm (full department), after 5:30 pm (Security & Maintenance only). Weekends & Public Holidays: 24 hours (Security only), 8:30 am to midnight (Maintenance only).",
     "keywords": [
-      "Operations",
-      "Maintenance",
+      "operations",
+      "maintenance",
       "hours"
     ]
   },
@@ -2606,8 +2606,8 @@
     "question": "What are the contact details and office hours for the Operations and Maintenance Department?",
     "answer": "The Operations and Maintenance Department (Room B11 # G13) is open Monday to Friday from 8:30 am to 5:30 pm. Maintenance Hotline: 017-313 5947. Security Hotline: 019-348 9999.",
     "keywords": [
-      "Operations",
-      "Maintenance",
+      "operations",
+      "maintenance",
       "contact",
       "hours"
     ]

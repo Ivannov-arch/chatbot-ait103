@@ -20,7 +20,7 @@
       "students",
       "graduates",
       "support",
-      "XMUM"
+      "xmum"
     ]
   },
   {
@@ -78,7 +78,7 @@
     "answer": "Industry Partnerships and Memorandums of Understanding (MoUs) create long-term collaborations that offer students early access to job offers, mentorship, and real-world projects.",
     "keywords": [
       "partnerships",
-      "MoUs",
+      "mous",
       "job offers",
       "mentorship"
     ]
@@ -115,7 +115,7 @@
     "keywords": [
       "location",
       "office",
-      "B1-107",
+      "b1-107",
       "contact"
     ]
   },
@@ -137,8 +137,8 @@
     "question": "What specific programmes are offered under Economics and Management?",
     "answer": "Under Economics and Management, XMUM offers Bachelor of Management in Accounting (Honours), Bachelor of Economics in Finance (Honours), Bachelor of Management in International Business (Honours), Bachelor of Management in E-Commerce (Honours), and Bachelor of Management in Hospitality Management (Honours).",
     "keywords": [
-      "Economics",
-      "Management",
+      "economics",
+      "management",
       "programmes",
       "degrees"
     ]
@@ -149,10 +149,10 @@
     "question": "What specific programmes are offered under Communication?",
     "answer": "Under Communication, XMUM offers Bachelor of Arts in Journalism (Honours), Bachelor of Arts in Advertising (Honours), and Bachelor of Arts in Communication (Honours).",
     "keywords": [
-      "Communication",
-      "Journalism",
-      "Advertising",
-      "Arts"
+      "communication",
+      "journalism",
+      "advertising",
+      "arts"
     ]
   },
   {
@@ -161,10 +161,10 @@
     "question": "What specific programmes are offered under Computing and Data Science?",
     "answer": "Under Computing and Data Science, XMUM offers Bachelor of Engineering in Computer Science and Technology (Honours), Bachelor of Engineering in Software Engineering (Honours), Bachelor of Engineering in Digital Media Technology (Honours), Bachelor of Engineering in Cyber Security (Honours), and Bachelor of Engineering in Data Science (Honours).",
     "keywords": [
-      "Computing",
-      "Data Science",
-      "Engineering",
-      "Software"
+      "computing",
+      "data science",
+      "engineering",
+      "software"
     ]
   },
   {
@@ -173,10 +173,10 @@
     "question": "What specific programmes are offered under Artificial Intelligence and Robotics?",
     "answer": "Under Artificial Intelligence and Robotics, XMUM offers Bachelor of Electrical and Electronics Engineering (Hons), Bachelor of Engineering in Artificial Intelligence (Honours), and Bachelor of Robotics and Automation Engineering with Honours.",
     "keywords": [
-      "AI",
-      "Robotics",
-      "Engineering",
-      "Electrical"
+      "ai",
+      "robotics",
+      "engineering",
+      "electrical"
     ]
   },
   {
@@ -281,7 +281,7 @@
     "question": "What is Flywire and who is it for?",
     "answer": "Flywire is a service partnered with XMUM to streamline fee payments for international students, allowing them to pay in their home currency with benefits like online payment tracking, no bank fees, and 24/7 multilingual customer support.",
     "keywords": [
-      "Flywire",
+      "flywire",
       "international",
       "payments",
       "fees"
@@ -293,7 +293,7 @@
     "question": "What are the payment amounts for new international students using Flywire?",
     "answer": "New international students can pay Admin Fees (RM 3,068) or Admin Fees & Security Deposit (RM 4,068) using Flywire.",
     "keywords": [
-      "Flywire",
+      "flywire",
       "international",
       "fees",
       "deposit"
@@ -380,7 +380,7 @@
       "staff",
       "replacement",
       "lost",
-      "eForm"
+      "eform"
     ]
   },
   {
@@ -415,7 +415,7 @@
     "keywords": [
       "assistance",
       "support",
-      "IT",
+      "it",
       "contact"
     ]
   },
@@ -426,7 +426,7 @@
     "answer": "Registration Days: 7 & 8 Feb 2025. Orientation Day: 9 Feb 2025.",
     "keywords": [
       "academic calendar",
-      "February",
+      "february",
       "2025"
     ]
   },
@@ -437,7 +437,7 @@
     "answer": "The Examination Week for the February Semester 2025 is from 17 - 24 Mar 2025.",
     "keywords": [
       "examination",
-      "February",
+      "february",
       "2025"
     ]
   },
@@ -448,7 +448,7 @@
     "answer": "The Semester Break after the February Semester 2025 is from 22 - 27 Mar 2025.",
     "keywords": [
       "semester break",
-      "February",
+      "february",
       "2025"
     ]
   },
@@ -459,7 +459,7 @@
     "answer": "Registration Days: 28 & 29 Mar 2025. Orientation Day: 30 Mar 2025.",
     "keywords": [
       "academic calendar",
-      "April",
+      "april",
       "2025"
     ]
   },
@@ -470,7 +470,7 @@
     "answer": "The Examination Week for the April Semester 2025 is from 21 Jul - 1 Aug 2025.",
     "keywords": [
       "examination",
-      "April",
+      "april",
       "2025"
     ]
   },
@@ -481,7 +481,7 @@
     "answer": "The Semester Break after the April Semester 2025 is from 2 Aug - 18 Sep 2025.",
     "keywords": [
       "semester break",
-      "April",
+      "april",
       "2025"
     ]
   },
@@ -492,7 +492,7 @@
     "answer": "Registration Days: 19 & 20 Sep 2025. Orientation Day: 21 Sep 2025.",
     "keywords": [
       "academic calendar",
-      "September",
+      "september",
       "2025"
     ]
   },
@@ -503,7 +503,7 @@
     "answer": "The Examination Week for the September Semester 2025 is from 12 - 23 Jan 2026.",
     "keywords": [
       "examination",
-      "September",
+      "september",
       "2025"
     ]
   },
@@ -514,7 +514,7 @@
     "answer": "The Semester Break after the September Semester 2025 is from 24 Jan - 19 Feb 2026.",
     "keywords": [
       "semester break",
-      "September",
+      "september",
       "2025"
     ]
   },
@@ -525,7 +525,7 @@
     "answer": "Registration Days: 20 & 21 Feb 2026. Orientation Day: 22 Feb 2026.",
     "keywords": [
       "academic calendar",
-      "February",
+      "february",
       "2026"
     ]
   },
@@ -536,7 +536,7 @@
     "answer": "The Examination Week for the February Semester 2026 is from 30 Mar - 3 Apr 2026.",
     "keywords": [
       "examination",
-      "February",
+      "february",
       "2026"
     ]
   },
@@ -547,7 +547,7 @@
     "answer": "Registration Days: 3 & 4 Apr 2026. Orientation Day: 5 Apr 2026.",
     "keywords": [
       "academic calendar",
-      "April",
+      "april",
       "2026"
     ]
   },
@@ -558,7 +558,7 @@
     "answer": "The Examination Week for the April Semester 2026 is from 20 - 31 Jul 2026.",
     "keywords": [
       "examination",
-      "April",
+      "april",
       "2026"
     ]
   },
@@ -569,7 +569,7 @@
     "answer": "The Semester Break after the April Semester 2026 is from 1 Aug - 24 Sep 2026.",
     "keywords": [
       "semester break",
-      "April",
+      "april",
       "2026"
     ]
   },
@@ -580,7 +580,7 @@
     "answer": "Registration Days: 25 & 26 Sep 2026. Orientation Day: 27 Sep 2026.",
     "keywords": [
       "academic calendar",
-      "September",
+      "september",
       "2026"
     ]
   },
@@ -591,7 +591,7 @@
     "answer": "The Examination Week for the September Semester 2026 is from 11 - 21 Jan 2027.",
     "keywords": [
       "examination",
-      "September",
+      "september",
       "2026"
     ]
   },
@@ -602,7 +602,7 @@
     "answer": "The Semester Break after the September Semester 2026 is from 23 Jan - 11 Feb 2027.",
     "keywords": [
       "semester break",
-      "September",
+      "september",
       "2026"
     ]
   },
@@ -827,8 +827,8 @@
     "question": "How are the Grade Point Average (GPA) and Cumulative Grade Point Average (CGPA) calculated?",
     "answer": "GPA = (credits attempted for each course x grade point awarded for the course) / The total credits attempted in a semester. CGPA = Σ (credits earned for each course x grade point awarded for the course) / The cumulative credits earned over all semesters.",
     "keywords": [
-      "GPA",
-      "CGPA",
+      "gpa",
+      "cgpa",
       "calculation",
       "grades"
     ]
@@ -861,7 +861,7 @@
     "answer": "Traditional Chinese Medicine students must obtain a threshold mark of 50 in all assessment components, including the final examination, and an overall mark of 55 or above to pass a core/major/elective course.",
     "keywords": [
       "grade threshold",
-      "TCM"
+      "tcm"
     ]
   },
   {
@@ -892,7 +892,7 @@
     "question": "What penalties can the SDBC impose for examination misconduct?",
     "answer": "Penalties may include a zero mark for the specific examination paper or all assessments, a one-semester suspension, requirement to retake affected assessments, expulsion from the University (for previous cases), a fine, or withholding of grades/transcript/degree.",
     "keywords": [
-      "SDBC",
+      "sdbc",
       "penalties",
       "examination misconduct"
     ]
@@ -1057,8 +1057,8 @@
     "question": "How do students enroll in a course on Moodle?",
     "answer": "To enroll in a course on Moodle, students log in with their Campus ID and password, select a course, and enter the Enrolment Key provided by the lecturer.",
     "keywords": [
-      "IT",
-      "Moodle",
+      "it",
+      "moodle",
       "course enrollment"
     ]
   },
@@ -1068,9 +1068,9 @@
     "question": "How can students submit questions or feedback to the IT or Library department?",
     "answer": "Students can use AskA (https://app.xmu.edu.my/AskA) by logging in with their Campus ID and Password to submit questions or feedback.",
     "keywords": [
-      "IT",
-      "Library",
-      "AskA",
+      "it",
+      "library",
+      "aska",
       "feedback"
     ]
   },
