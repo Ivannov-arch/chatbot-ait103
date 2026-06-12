@@ -216,7 +216,7 @@ if __name__ == "__main__":
     
     # Initialize retriever
     retriever = KnowledgeRetriever(csv_path)
-    print(f"✓ Loaded {len(retriever.knowledge_base)} items from knowledge base\n")
+    print(f" Loaded {len(retriever.knowledge_base)} items from knowledge base\n")
     
     # Test queries
     test_queries = [
@@ -229,10 +229,10 @@ if __name__ == "__main__":
         best, score, all_scores = retriever.retrieve(module, query)
         
         if best:
-            print(f"✓ Best match: {best.question}")
+            print(f" Best match: {best.question}")
             print(f"  Score: {score:.1f}")
             print(f"  Answer: {best.answer[:80]}...")
         else:
-            print("✗ No match found")
+            print(" No match found")
         print()
 
