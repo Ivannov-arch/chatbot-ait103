@@ -1,7 +1,7 @@
 # ============================================================================
 # chatbot/flask_api.py
 #
-# Flask REST API — connect your Python backend to the HTML frontend
+# Flask REST API - connect your Python backend to the HTML frontend
 #
 # This allows your existing HTML frontend to communicate with the
 # Python NLP pipeline via HTTP requests.
@@ -208,10 +208,10 @@ def initialize_chatbot():
     
     try:
         chatbot = XMUMChatbot()
-        print(f"✓ Chatbot initialized with Supabase")
+        print(f" Chatbot initialized with Supabase")
         print(f"  Loaded {len(chatbot.retriever.knowledge_base)} knowledge items")
     except Exception as e:
-        print(f"❌ Error initializing chatbot: {e}")
+        print(f" Error initializing chatbot: {e}")
         raise
 
 
@@ -242,8 +242,8 @@ def main():
         initialize_chatbot()
         
         # Start Flask server
-        print(f"\n🚀 Starting server on http://{args.host}:{args.port}")
-        print(f"📚 API Docs: http://{args.host}:{args.port}/")
+        print(f"\n Starting server on http://{args.host}:{args.port}")
+        print(f" API Docs: http://{args.host}:{args.port}/")
         print("\nPress CTRL+C to stop.\n")
         
         app.run(
@@ -253,10 +253,10 @@ def main():
         )
     
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         exit(1)
     except KeyboardInterrupt:
-        print("\n\n👋 Shutting down...")
+        print("\n\n Shutting down...")
         exit(0)
 
 

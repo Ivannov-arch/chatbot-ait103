@@ -1,7 +1,7 @@
 # ============================================================================
 # chatbot/chatbot_main.py
 #
-# Main Chatbot Controller — orchestrates the full NLP pipeline:
+# Main Chatbot Controller - orchestrates the full NLP pipeline:
 #   1. Entity Recognition (entity_recognizer.py)
 #   2. Intent Classification (intent_classifier.py)
 #   3. Knowledge Retrieval (retriever.py)
@@ -271,14 +271,14 @@ class ResponseFormatter:
             f"🤖 XMUMC Assistant Response",
             "=" * 70,
             f"\nAnswer:\n{response.answer}",
-            f"\n📊 Confidence: {response.confidence_score:.1%}",
+            f"\n Confidence: {response.confidence_score:.1%}",
         ]
         
         if response.matched_question:
-            lines.append(f"📌 Matched Question: {response.matched_question}")
+            lines.append(f" Matched Question: {response.matched_question}")
         
         if response.debug_info:
-            lines.append(f"\n🔧 Debug Info:\n{response.debug_info}")
+            lines.append(f"\n Debug Info:\n{response.debug_info}")
         
         lines.append("\n" + "=" * 70)
         return "\n".join(lines)
@@ -319,7 +319,7 @@ def run_interactive_cli():
         if not user_input:
             continue
         if user_input.lower() in ["quit", "exit"]:
-            print("\nGoodbye! 👋")
+            print("\nGoodbye! ")
             break
         
         response = chatbot.process_message(user_input, debug=True)
@@ -335,7 +335,7 @@ if __name__ == "__main__":
     try:
         run_interactive_cli()
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         print(f"Make sure .env file has SUPABASE_URL and SUPABASE_ANON_KEY")
         import sys
         sys.exit(1)

@@ -1,7 +1,7 @@
 # ============================================================================
 # chatbot/retriever.py
 #
-# Retriever — fetches answers from Supabase database based on:
+# Retriever - fetches answers from Supabase database based on:
 #   1. Intent classification (module + sub_intent)
 #   2. Entity extraction
 #   3. Keyword/template matching
@@ -63,7 +63,7 @@ class KnowledgeRetriever:
             )
         
         self.supabase = create_client(supabase_url, supabase_key)
-        print("[Retriever] ✓ Connected to Supabase")
+        print("[Retriever]  Connected to Supabase")
     
     def _load_from_supabase(self) -> None:
         """Load knowledge base from Supabase database."""
@@ -72,7 +72,7 @@ class KnowledgeRetriever:
             response = self.supabase.table("knowledge_items").select("*").execute()
             
             data = response.data
-            print(f"[Retriever] ✓ Loaded {len(data)} items from Supabase")
+            print(f"[Retriever]  Loaded {len(data)} items from Supabase")
             
             for row in data:
                 module = row.get('module', '').lower()
@@ -101,7 +101,7 @@ class KnowledgeRetriever:
                 self.module_index[module].append(item)
         
         except Exception as e:
-            print(f"[Retriever] ❌ Error loading from Supabase: {e}")
+            print(f"[Retriever]  Error loading from Supabase: {e}")
             raise
     
     def retrieve(
@@ -222,7 +222,7 @@ if __name__ == "__main__":
     try:
         # Initialize retriever (loads from Supabase)
         retriever = KnowledgeRetriever()
-        print(f"[Test] ✓ Loaded {len(retriever.knowledge_base)} items from Supabase\n")
+        print(f"[Test]  Loaded {len(retriever.knowledge_base)} items from Supabase\n")
         
         # Test queries
         test_queries = [
@@ -235,7 +235,7 @@ if __name__ == "__main__":
             best, score, all_scores = retriever.retrieve(module, query)
             
             if best:
-                print(f"✓ Best match: {best.question}")
+                print(f" Best match: {best.question}")
                 print(f"  Score: {score:.1f}")
                 print(f"  Answer: {best.answer[:100]}...")
             else:
@@ -243,5 +243,5 @@ if __name__ == "__main__":
             print()
     
     except Exception as e:
-        print(f"❌ Error during test: {e}")
+        print(f"Error during test: {e}")
         print("Make sure .env file exists with SUPABASE_URL and SUPABASE_ANON_KEY")
