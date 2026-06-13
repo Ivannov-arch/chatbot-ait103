@@ -1,6 +1,6 @@
 ================================================================================
   XMUM CAMPUS CHATBOT — DEVELOPMENT TICKETS (CGC-02 to CGC-06)
-  Version 2 — Reviewed & Restructured
+  Version 3 — Progress Review & Revised Criteria (2026-06-13)
 ================================================================================
   This file assigns specific, atomic, self-contained tickets to Roles 2-6.
   Each ticket is modeled after a professional Linear issue:
@@ -15,16 +15,26 @@
     CGC-02 (Preprocessor) and CGC-03 (Retriever) are independent.
     CGC-04 (Context) is independent.
     CGC-05 (Responder + Bot) DEPENDS on CGC-02, CGC-03, CGC-04.
+
+  STATUS KEY:
+    [x] = Completed and verified
+    [~] = Partially done / needs revision
+    [ ] = Not started
+
+  IMPORTANT — git pull required before working:
+    All contributors must run: git pull origin main
+    Files on remote may not exist locally yet.
 ================================================================================
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CGC-02 | Entity Extraction & Text Normalization
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Role     : 2 — Entity Extraction
+Role     : 2 — Entity Extraction (guitarjun11-art)
 Branch   : feature/CGC-02-preprocessor
-New File : chatbot/preprocessor.py
+File     : chatbot/preprocessor.py
 Depends  : None (fully standalone)
+STATUS   : ✅ COMPLETE — reviewed 2026-06-13
 
 Goal
 ────
@@ -38,7 +48,8 @@ Without this, every synonym variation by the user returns nothing.
 Context
 ───────
 Called early in Bot.chat() before IntentClassifier and Retriever run.
-The output of extract_keywords() feeds directly into Retriever.search().
+The output of expand_synonyms(extract_keywords(normalize(message))) feeds
+directly into Retriever.search() as the keywords list.
 
 Function Signatures (do not change — other files depend on these)
 ──────────────────────────────────────────────────────────────────
@@ -48,62 +59,78 @@ Function Signatures (do not change — other files depend on these)
 
 Acceptance Criteria
 ───────────────────
-[ ] Create chatbot/preprocessor.py from scratch (no Z_Placeholder exists for this).
+[x] Create chatbot/preprocessor.py from scratch.
 
-[ ] normalize(text: str) -> str
+[x] normalize(text: str) -> str
     Must:
       - Lowercase the entire string.
       - Strip leading and trailing whitespace.
-      - Remove punctuation characters: ! ? . , ; : ' " ( )
+      - Remove punctuation characters: ! ? . , ; : ' " ( ) { } [ ]
+      - Replace "/" with a space.
+      - Collapse multiple spaces into one.
     Must NOT:
       - Remove spaces between words.
       - Alter digits (e.g., "block 2" stays "block 2").
     Test case: normalize("Where is the Canteen???") == "where is the canteen"
 
-[ ] extract_keywords(text: str) -> list[str]
+[x] extract_keywords(text: str) -> list[str]
     Must:
       - Tokenize the normalized text into individual words.
-      - Remove these English stop words at minimum:
-        {"how", "do", "i", "the", "a", "an", "is", "where", "to",
-         "for", "in", "can", "my", "what", "when", "who", "does", "are"}
+      - Remove English stop words (minimum set plus extras like "please", "tell",
+        "there", "about", "could", "would", "me", "of", "on", "or", "with").
       - Return only non-empty tokens.
     Test case: extract_keywords("how do i connect to the internet")
                == ["connect", "internet"]
 
-[ ] SYNONYM_MAP (dict[str, str] at module level)
-    Must contain at minimum these 20 mappings:
-      "internet"    -> "wifi"
-      "network"     -> "wifi"
-      "connection"  -> "wifi"
-      "dorm"        -> "hostel"
-      "dormitory"   -> "hostel"
+[x] SYNONYM_MAP (dict[str, str] at module level)
+    Contains 30+ mappings, including at minimum:
+      "internet"      -> "wifi"
+      "network"       -> "wifi"
+      "connection"    -> "wifi"
+      "wi-fi"         -> "wifi"
+      "dorm"          -> "hostel"
+      "dormitory"     -> "hostel"
       "accommodation" -> "hostel"
-      "room"        -> "hostel"
-      "grade"       -> "cgpa"
-      "pointer"     -> "cgpa"
-      "result"      -> "grade"
-      "professor"   -> "lecturer"
-      "instructor"  -> "lecturer"
-      "borrow"      -> "library"
-      "book"        -> "library"
-      "cafe"        -> "canteen"
-      "cafeteria"   -> "canteen"
-      "food court"  -> "canteen"
-      "mc"          -> "leave"
-      "sick"        -> "medical"
-      "tuition"     -> "fees"
+      "residence"     -> "hostel"
+      "room"          -> "hostel"
+      "grade"         -> "cgpa"
+      "grades"        -> "cgpa"
+      "pointer"       -> "cgpa"
+      "result"        -> "grade"
+      "professor"     -> "lecturer"
+      "instructor"    -> "lecturer"
+      "borrow"        -> "library"
+      "book"          -> "library"
+      "cafe"          -> "canteen"
+      "cafeteria"     -> "canteen"
+      "food court"    -> "canteen"
+      "mc"            -> "leave"
+      "sick"          -> "medical"
+      "tuition"       -> "fees"
+      "payment"       -> "fees"
+      "pay"           -> "fees"
+      "email"         -> "student email"
+      "ecard"         -> "campus ecard"
+      "id"            -> "student id"
 
-[ ] expand_synonyms(keywords: list[str]) -> list[str]
+[x] expand_synonyms(keywords: list[str]) -> list[str]
     Must:
+      - Handle multi-word phrases (e.g., "food court" maps to "canteen").
       - Map each keyword through SYNONYM_MAP if a match exists.
       - Keep the keyword unchanged if not in SYNONYM_MAP.
       - Return a deduplicated list (no duplicate values).
+      - Handles chained synonyms (cycles are protected against infinite loops).
     Test case: expand_synonyms(["connect", "internet"]) == ["connect", "wifi"]
 
-[ ] Add if __name__ == "__main__": block:
+[x] Add if __name__ == "__main__": block:
     - Prompt the user for input in a loop.
     - Print the normalized text, extracted keywords, and expanded keywords.
-    - Exit on "quit".
+    - Exit on "quit" or "exit".
+
+[x] BONUS — build_search_terms(text: str) -> list[str]
+    Combines extract_keywords + expand_synonyms in one call, deduplicating
+    the union of raw keywords and their expanded forms.
+    (This is called by Bot.chat() — see CGC-05.)
 
 Test Command (run this to verify your work)
 ────────────────────────────────────────────
@@ -124,10 +151,11 @@ Test Command (run this to verify your work)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CGC-03 | Response Matching & Supabase Retrieval
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Role     : 3 — Response Matching & Retrieval
+Role     : 3 — Response Matching & Retrieval (Marinoune)
 Branch   : feature/CGC-03-retriever
 File     : chatbot/retriever.py
 Depends  : database/client.py (already implemented — get_client())
+STATUS   : ⚠️ PARTIAL — logic is excellent, interface must be revised
 
 Goal
 ────
@@ -138,70 +166,94 @@ will save the answer quality.
 
 Context
 ───────
-Called from Bot.chat() after IntentClassifier returns the module and Preprocessor
-returns the expanded keyword list. Returns a list[dict] which Responder then
-formats into a readable string.
+Called from Bot.chat() after IntentClassifier returns the module and sub_intent,
+and after Preprocessor returns the expanded keyword list.
+Returns a list[dict] which Responder then formats into a readable string.
 
-Reference the Z_Placeholder_retriever.py to understand the database schema:
+The IntentClassifier.classify() now returns TWO values: (module, sub_intent).
+The search() method receives both so it can filter more precisely.
+
+NOTE ON CURRENT IMPLEMENTATION (Marinoune):
+  The scoring algorithm in the current code is GOOD — keep it.
+  Specifically: exact whole-word match (+2.0), partial match (+1.0),
+  entity boost (+3.0 for standard entities, +1.5 for proper nouns).
+  The _is_whole_word_match() regex prevents false positives (e.g. "it" matching "kit").
+  Only the external interface needs to be fixed. Do not rewrite the logic.
+
+Database schema — knowledge_items table in Supabase:
   - id          UUID
   - module      TEXT
+  - sub_intent  TEXT    <- use this for finer filtering
   - question    TEXT
   - answer      TEXT
-  - keywords    TEXT[]   <- PostgreSQL array type
+  - keywords    TEXT[]  <- PostgreSQL array type
   - created_at  TIMESTAMPTZ
 
-Function Signatures (do not change — Bot.chat() depends on these)
-──────────────────────────────────────────────────────────────────
+Function Signatures (do not change — Bot.chat() depends on these exact names)
+──────────────────────────────────────────────────────────────────────────────
   Retriever.__init__(self)
-  Retriever.search(module: str, keywords: list[str], top_k: int = 3) -> list[dict]
+  Retriever.search(module: str, keywords: list[str], top_k: int = 3,
+                   sub_intent: str = None,
+                   entities: dict = None) -> list[dict]
 
 Acceptance Criteria
 ───────────────────
-[ ] Replace the placeholder in chatbot/retriever.py.
+[x] Scoring algorithm implemented with weighted matching:
+    - Exact whole-word match of keyword in row's keywords/question: +2.0 pts
+    - Partial match: +1.0 pt
+    - Entity match (standard types): +3.0 pts
+    - Entity match (proper nouns): +1.5 pts
+    - Uses regex \b word boundary to prevent substring false positives.
+
+[x] _is_whole_word_match(word, text) helper implemented.
+
+[x] if __name__ == "__main__": test block exists.
+
+[ ] RENAME class from KnowledgeRetriever -> Retriever
+    (Bot.chat() does: from chatbot.retriever import Retriever)
 
 [ ] Retriever.__init__(self)
     - Must call get_client() from database.client and store as self.client.
-    - Must NOT make any database queries during init.
+    - Must NOT make any database queries during __init__.
+    - Keep the module_index dict internally for fast lookup after data is fetched.
+    NOTE: The current CSV-based loader is acceptable as a local testing fallback.
+    Add an optional constructor parameter: Retriever(csv_fallback_path=None)
+    so that if Supabase is unreachable during dev, the CSV is used instead.
 
-[ ] Retriever.search(module, keywords, top_k=3) -> list[dict]
-    Strategy (implement in this order — test each step):
+[ ] RENAME method from retrieve() -> search(), with this exact signature:
+      search(module: str, keywords: list[str], top_k: int = 3,
+             sub_intent: str = None, entities: dict = None) -> list[dict]
+    - `keywords` replaces `user_message` — the preprocessor has already run.
+      Internally, reconstruct a query string as: " ".join(keywords) for scoring.
+    - `sub_intent` is optional — if provided, pre-filter rows by sub_intent
+      before scoring (reduces noise).
+    - `entities` maps to the old `extracted_entities` parameter — pass through
+      to _score_item() unchanged.
 
-    Step 1 — Filter by module:
-      Query knowledge_items where module == the given module string.
-
-    Step 2 — Score each row:
-      For each row returned, calculate a match_score:
-        match_score = number of query keywords found in the row's 'keywords' array
-                    + number of query keywords found as substrings in the 'question'
-      A keyword is considered a match if it appears as a substring (case-insensitive).
-
-    Step 3 — Filter and sort:
-      - Discard rows with match_score == 0.
-      - Sort remaining rows by match_score descending.
-      - Return only the top_k rows (default: 3).
-
-    Step 4 — Return format:
-      Each dict in the returned list must contain at minimum:
-        {"question": str, "answer": str, "keywords": list, "score": int}
+[ ] Fix return type from Tuple -> list[dict]:
+    Each dict in the returned list must contain:
+      {"question": str, "answer": str, "keywords": list, "score": float}
+    Sort descending by score. Return only top_k results.
+    Discard rows with score == 0.
 
 [ ] Handle edge cases:
-    - If the Supabase query raises an exception, catch it, print the error, and return [].
+    - If the Supabase query raises an exception, catch it, print the error,
+      and attempt CSV fallback if csv_fallback_path was set; otherwise return [].
     - If keywords is an empty list, return [] immediately (no DB query needed).
     - If no rows score above 0, return [].
 
-[ ] Add if __name__ == "__main__": block:
-    - Hardcode a test: search("academic_navigation", ["library", "borrow"])
-    - Print the top result's question and answer.
+[ ] Update if __name__ == "__main__": block to call search() with the new name.
 
 Test Command (run this to verify your work)
 ────────────────────────────────────────────
   python -c "
   from chatbot.retriever import Retriever
   r = Retriever()
-  results = r.search('academic_navigation', ['library'])
+  results = r.search('campus_life', ['library', 'borrow'])
   print('Results found:', len(results))
   if results:
       print('Top result:', results[0]['question'])
+      print('Score:', results[0]['score'])
   else:
       print('No results — check that the database is seeded')
   "
@@ -210,10 +262,11 @@ Test Command (run this to verify your work)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CGC-04 | Multi-Turn Context & Session Management
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Role     : 4 — Context & Session Management
+Role     : 4 — Context & Session Management (UNASSIGNED)
 Branch   : feature/CGC-04-context-manager
 File     : chatbot/context_manager.py
 Depends  : None (standalone in-memory structure)
+STATUS   : ❌ NOT STARTED — file is empty. BLOCKING CGC-05.
 
 Goal
 ────
@@ -230,8 +283,8 @@ ContextManager is initialized once inside Bot.__init__().
 Bot.chat() calls add_turn() after every user message and every bot reply.
 Bot.reset() calls clear() to wipe a session.
 
-IMPORTANT: Read Z_Placeholder_context_manager.py first — the skeleton is mostly
-correct. Your job is to refine it and make it production-ready.
+Read Z_Placeholder_context_manager.py first — the skeleton is mostly
+correct. Your job is to implement it and make it production-ready.
 
 Function Signatures (do not change — Bot depends on these exact names)
 ───────────────────────────────────────────────────────────────────────
@@ -242,7 +295,7 @@ Function Signatures (do not change — Bot depends on these exact names)
 
 Acceptance Criteria
 ───────────────────
-[ ] Replace the placeholder in chatbot/context_manager.py.
+[ ] Replace the empty stub in chatbot/context_manager.py.
 
 [ ] Read MAX_TURNS from .env using os.getenv("MAX_TURNS", "5").
     - Convert the result to int. Default to 5 if not set.
@@ -255,7 +308,8 @@ Acceptance Criteria
 [ ] add_turn(session_id, role, message) -> None
     Must:
     - Accept role values: "user" or "bot" only. Raise ValueError for anything else.
-    - Append {"role": role, "message": message} to self._store[session_id].
+    - Append {"role": role, "message": message, "timestamp": datetime.now().isoformat()}
+      to self._store[session_id].
     - After appending, trim self._store[session_id] to the last (max_turns * 2) items.
     - Create the session list automatically if session_id is new.
 
@@ -292,11 +346,11 @@ Test Command (run this to verify your work)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CGC-05 | Responder, Bot Orchestrator & CLI Interface
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Role     : 5 — Fallback Handling & Response Generation
+Role     : 5 — Fallback Handling & Response Generation (lai chun chyi)
 Branch   : feature/CGC-05-bot-integration
 Files    : chatbot/responder.py, chatbot/bot.py, chatbot/main.py
-Depends  : CGC-02 (Preprocessor), CGC-03 (Retriever), CGC-04 (ContextManager)
-           WAIT for CGC-02/03/04 to be merged before implementing Bot.chat()
+Depends  : CGC-02 (Preprocessor ✅), CGC-03 (Retriever ⚠️), CGC-04 (Context ❌)
+STATUS   : ⚠️ PARTIAL — responder.py done differently, bot.py and main.py are empty
 
 Goal
 ────
@@ -306,33 +360,73 @@ This ticket produces the finished, talking chatbot. It has three parts:
   3. main.py    — the terminal REPL where a user can actually have a conversation.
 
 This is the role where everything comes together. Test early and often.
+Wait for CGC-03 (Marinoune) and CGC-04 to be completed before implementing Bot.chat().
+
 
 PART A — chatbot/responder.py
 ─────────────────────────────
-Read Z_Placeholder_responder.py first.
+STATUS: [~] Implemented but with a different architecture than specified.
+
+NOTE ON CURRENT IMPLEMENTATION (lai chun chyi):
+  The current responder.py uses a confidence-score-based approach
+  (process_chatbot_output(confidence, matched_row)) which is a standalone design
+  not connected to the pipeline. It also imports pandas which is a heavy dependency.
+  The confidence score is not produced by any other component in the pipeline.
+
+  The responder must be revised to accept list[dict] from Retriever.search()
+  instead of a (confidence, matched_row) tuple.
+  The greeting template and fallback logging ideas are GOOD — keep them.
 
 Acceptance Criteria
 ───────────────────
-[ ] Implement Responder.format(results: list[dict], query: str) -> str
-    - If results is empty, return the FALLBACK_MESSAGE.
-    - If results has 1 item, return its "answer" directly.
-    - If results has 2+ items, return the top result's "answer" only (the best match).
-      Optionally append: "\n\nRelated: <second result question>" as a hint.
+[x] get_varied_fallback_phrase() — random varied fallback messages exist.
 
-[ ] Improve FALLBACK_MESSAGE — it must be module-aware.
-    - Change the function signature to: format(results, query, module="unknown") -> str
-    - If module is "admin_directory":
-        fallback = "I couldn't find that info. Try contacting ISAO at isao@xmu.edu.my."
-    - If module is "campus_life":
-        fallback = "I couldn't find that info. Try the Student Affairs Office at student.affairs@xmu.edu.my."
-    - If module is "academic_navigation":
-        fallback = "I couldn't find that. Contact your academic advisor or the Registrar's Office."
-    - If module is "unknown":
-        fallback = "I'm not sure what you're asking. Try asking about campus facilities, academic matters, or administrative services."
+[x] log_unrecognized_query(raw_text) — logs failed queries with timestamp
+    to failed_queries.txt. Keep this.
+
+[x] generate_template_response(official_answer, user_name) — wraps the answer
+    in a greeting+date template. Keep this, but make user_name optional (default
+    to "Student" — do not hardcode "Alex").
+
+[ ] REMOVE: process_chatbot_output(confidence, matched_row) — this function
+    will not be called by bot.py. Replace it with Responder.format() below.
+
+[ ] REMOVE: import pandas — not needed in the responder.
+
+[ ] Implement class Responder with method:
+      format(results: list[dict], query: str, module: str = "unknown") -> str
+
+    Logic:
+    - If results is empty: return a module-aware fallback message (see below).
+    - If results has 1+ items: call generate_template_response(results[0]["answer"])
+      and optionally append "\n\nRelated: <second result question>" if len > 1.
+
+[ ] Module-aware fallback messages inside format():
+    - module == "admin_directory"     -> "I couldn't find that info. Try contacting
+                                         ISAO at isao@xmu.edu.my."
+    - module == "campus_life"         -> "I couldn't find that info. Try the Student
+                                         Affairs Office at student.affairs@xmu.edu.my."
+    - module == "academic_navigation" -> "I couldn't find that. Contact your academic
+                                         advisor or the Registrar's Office."
+    - module == "unknown"             -> "I'm not sure what you're asking. Try asking
+                                         about campus facilities, academic matters,
+                                         or administrative services."
+    Also call log_unrecognized_query(query) when results is empty.
+
+Test Command
+────────────
+  python -c "
+  from chatbot.responder import Responder
+  r = Responder()
+  print(r.format([], 'random question', 'campus_life'))
+  fake = [{'question': 'Where is the library?', 'answer': 'Block A, 2nd floor.', 'keywords': ['library'], 'score': 3.0}]
+  print(r.format(fake, 'library', 'campus_life'))
+  "
+
 
 PART B — chatbot/bot.py
 ────────────────────────
-Read Z_Placeholder_bot.py first.
+STATUS: [ ] NOT STARTED — file is empty.
 
 Acceptance Criteria
 ───────────────────
@@ -344,8 +438,8 @@ Acceptance Criteria
     Execute this pipeline in order:
       Step 1: Log user message:
         self.context.add_turn(session_id, "user", message)
-      Step 2: Classify intent:
-        module = self.intent.classify(message)
+      Step 2: Classify intent (note: returns TUPLE now):
+        module, sub_intent = self.intent.classify(message)
       Step 3: Preprocess message:
         from chatbot.preprocessor import normalize, extract_keywords, expand_synonyms
         keywords = expand_synonyms(extract_keywords(normalize(message)))
@@ -353,7 +447,7 @@ Acceptance Criteria
         If module == "unknown" OR keywords is empty:
           results = []
         Else:
-          results = self.retriever.search(module, keywords)
+          results = self.retriever.search(module, keywords, sub_intent=sub_intent)
       Step 5: Format reply:
         reply = self.responder.format(results, message, module)
       Step 6: Log bot reply:
@@ -363,9 +457,19 @@ Acceptance Criteria
 [ ] Implement Bot.reset(session_id: str) -> None:
     - Call self.context.clear(session_id).
 
+Test Command
+────────────
+  python -c "
+  from chatbot.bot import Bot
+  bot = Bot()
+  reply = bot.chat('test-session', 'Where is the library?')
+  print('Bot reply:', reply)
+  "
+
+
 PART C — chatbot/main.py
 ─────────────────────────
-Read Z_Placeholder_main.py first.
+STATUS: [ ] NOT STARTED — file is empty.
 
 Acceptance Criteria
 ───────────────────
@@ -385,15 +489,16 @@ Test Command (run the full bot)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CGC-06 | Dataset Audit, Validation & Keyword Normalization
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Role     : 6 — NLP & Text Preprocessing Lead
+Role     : 6 — NLP & Text Preprocessing Lead (guitarjun11-art)
 Branch   : feature/CGC-06-dataset-audit
 Files    : database/seeds/*.json, scripts/validate_seeds.py (new)
 Depends  : None (can be worked on in parallel with all other tickets)
+STATUS   : ✅ COMPLETE — reviewed 2026-06-13
 
 Goal
 ────
 The chatbot is only as good as its data. Garbage in = garbage out.
-This ticket ensures the 357 seeded rows are factually correct, structurally
+This ticket ensures the seeded rows are factually correct, structurally
 consistent, and keyword-compatible with the synonym map in CGC-02.
 
 If a keyword in the JSON seed is "Internet" (capital I) and the SYNONYM_MAP
@@ -402,33 +507,38 @@ This audit catches and fixes problems like that before integration testing.
 
 Acceptance Criteria
 ───────────────────
-[ ] Write scripts/validate_seeds.py (new file).
+[x] Write scripts/validate_seeds.py (new file).
     This script, when run, must:
 
     Check 1 — Structural Integrity:
-      - Load each of the 3 JSON files.
-      - Assert every row has non-empty "module", "question", "answer", "keywords".
-      - Print a PASS/FAIL report per file.
+      [x] Load each of the 3 JSON files.
+      [x] Assert every row has non-empty "module", "question", "answer", "keywords".
+      [x] Print a PASS/FAIL report per file.
 
     Check 2 — Keyword Normalization:
-      - Assert every keyword in every row is fully lowercase (no capital letters).
-      - Print which rows have uppercase keywords and which file they belong to.
+      [x] Assert every keyword in every row is fully lowercase (no capital letters).
+      [x] Print which rows have uppercase keywords and which file they belong to.
 
     Check 3 — No cross-module keyword conflicts:
-      - Build a flat dictionary of keyword -> [modules it appears in].
-      - Flag any keyword that appears in 2 or more different modules.
-      - Print a warning for each conflict found (this helps tune IntentClassifier).
+      [x] Build a flat dictionary of keyword -> [modules it appears in].
+      [x] Flag any keyword that appears in 2 or more different modules.
+      [x] Print a warning for each conflict found.
 
-    Check 4 — Synonym compatibility (run AFTER CGC-02 is done):
-      - Import SYNONYM_MAP from chatbot.preprocessor.
-      - Check that no keyword in the seeds is a synonym key that should already
-        be normalized (e.g., "internet" should not be a keyword; "wifi" should be).
-      - Print warnings for every incompatible keyword found.
+    Check 4 — Synonym compatibility:
+      [x] Import SYNONYM_MAP from chatbot.preprocessor.
+      [x] Check that no keyword in the seeds is a synonym key that should already
+          be normalized (e.g., "internet" should not appear; "wifi" should).
+      [x] Print warnings for every incompatible keyword found.
 
-[ ] Fix any issues found by the validation script directly in the JSON files.
+[x] Fix issues found directly in the JSON seed files:
+    - Corrected sub_intent values that were incorrectly set to "general_info".
+    - Replaced "wi-fi" and "connection" keywords with "wifi" (canonical synonym).
+    - Replaced "email" with "student email" (canonical synonym per CGC-02 map).
+    - Fixed sub_intent classifications for library, health_safety, hostel,
+      food_dining, and it_connectivity rows.
 
-[ ] Final seed re-upload:
-    - After fixing, truncate the knowledge_items table in Supabase SQL Editor:
+[ ] REMAINING — Final seed re-upload after all JSON edits are confirmed:
+    - Truncate the knowledge_items table in Supabase SQL Editor:
         TRUNCATE TABLE knowledge_items;
     - Re-run: python -m database.seed
     - Confirm the row count matches the local JSON count.
@@ -439,7 +549,23 @@ Test Command (run the audit)
 
 
 ================================================================================
+  SUMMARY — Ticket Status (2026-06-13)
+================================================================================
+
+  CGC-02 (EvanChrs23) — preprocessor.py      : ✅ COMPLETE
+  CGC-03 (Marinoune)       — retriever.py          : ⚠️ NEEDS INTERFACE REVISION
+  CGC-04 (UNASSIGNED)      — context_manager.py    : ❌ NOT STARTED — BLOCKER
+  CGC-05 (lai chun chyi)   — responder/bot/main    : ⚠️ PARTIAL (bot.py + main.py empty)
+  CGC-06 (guitarjun11-art) — seeds + validation    : ✅ COMPLETE (re-upload pending)
+
+  CRITICAL PATH TO COMPLETION:
+    1. git pull origin main  (everyone — get remote files locally)
+    2. CGC-04: Implement context_manager.py  (unblocks the entire pipeline)
+    3. CGC-03: Marinoune revises retriever interface  (rename class/method, fix return type)
+    4. CGC-05: lai chun chyi implements bot.py, revises responder, implements main.py
+    5. CGC-06: Re-upload seeds to Supabase after all fixes confirmed
+    6. Integration test: python -m chatbot.main
+
+================================================================================
   END OF TICKETS
-  Total tickets: 5 (CGC-02 through CGC-06)
-  Branch convention: feature/CGC-0X-short-description
 ================================================================================
