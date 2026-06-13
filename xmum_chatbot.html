@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XMUMC Campus Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      background: #fff;
+    }
+
+    /* ── Header ── */
+    .chat-header {
+      background: #1a3a5c;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-header .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #2e6da4;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 600; color: #fff;
+      flex-shrink: 0;
+    }
+    .chat-header .title { font-size: 15px; font-weight: 600; color: #fff; }
+    .chat-header .sub { font-size: 12px; color: #a8c4e0; margin-top: 2px; }
+
+    /* ── Suggestions ── */
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 12px 16px 8px;
+      background: #f7f9fb;
+      border-bottom: 1px solid #e8edf2;
+    }
+    .sug-label {
+      font-size: 12px;
+      color: #888;
+      align-self: center;
+      flex-basis: 100%;
+      margin-bottom: 2px;
+    }
+    .sug-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      padding: 5px 11px;
+      border-radius: 20px;
+      border: 1px solid #c8d8e8;
+      background: #fff;
+      color: #1a3a5c;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .sug-btn:hover { background: #e6f0fa; border-color: #2e6da4; }
+    .sug-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Messages ── */
+    .messages {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 340px;
+      max-height: 440px;
+      overflow-y: auto;
+      background: #fff;
+    }
+
+    .msg { display: flex; gap: 8px; align-items: flex-start; }
+    .msg.user { flex-direction: row-reverse; }
+
+    .bubble {
+      max-width: 78%;
+      padding: 11px 15px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #1a1a1a;
+    }
+    .msg.bot .bubble {
+      background: #f0f4f8;
+      border-radius: 4px 14px 14px 14px;
+    }
+    .msg.user .bubble {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 14px 4px 14px 14px;
+    }
+
+    /* debug info under bot bubble */
+    .debug-pill {
+      font-size: 11px;
+      margin-top: 7px;
+      padding: 4px 9px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid #dde5ee;
+      color: #556;
+      display: inline-block;
+    }
+    .debug-pill b { color: #1a3a5c; }
+
+    .score-bar {
+      display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap;
+    }
+    .score-item {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: #eef2f6;
+      color: #667;
+      border: 1px solid #dde5ee;
+    }
+    .score-item.top {
+      background: #d4edda;
+      color: #1a6630;
+      border-color: #a3d4af;
+      font-weight: 500;
+    }
+
+    /* avatar icons */
+    .mini-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #e8edf2;
+      border: 1px solid #d0dae5;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #667;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .msg.user .mini-av { background: #2e6da4; color: #fff; border-color: #2e6da4; }
+
+    /* ── Input row ── */
+    .input-row {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #f7f9fb;
+      border-top: 1px solid #e8edf2;
+    }
+    .input-row input {
+      flex: 1;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #c8d8e8;
+      outline: none;
+      background: #fff;
+      color: #1a1a1a;
+      transition: border-color 0.15s;
+    }
+    .input-row input:focus { border-color: #2e6da4; }
+    .input-row button {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: #1a3a5c;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .input-row button:hover { background: #2e6da4; }
+    .input-row button:disabled { 
+      background: #999; 
+      cursor: not-allowed; 
+    }
+
+    .loading {
+      font-size: 12px;
+      color: #888;
+      font-style: italic;
+    }
+
+    .api-status {
+      padding: 8px 12px;
+      background: #fff3cd;
+      border-bottom: 1px solid #ffeaa7;
+      font-size: 12px;
+      color: #856404;
+      text-align: center;
+    }
+    .api-status.connected { background: #d4edda; color: #155724; border-color: #c3e6cb; }
+    .api-status.error { background: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+
+    /* scrollbar */
+    .messages::-webkit-scrollbar { width: 4px; }
+    .messages::-webkit-scrollbar-track { background: transparent; }
+    .messages::-webkit-scrollbar-thumb { background: #c8d8e8; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="api-status" id="apiStatus">
+    Connecting to backend...
+  </div>
+
+  <div class="chat-header">
+    <div class="avatar">XMU</div>
+    <div>
+      <div class="title">XMUM New Student Campus Assistant</div>
+      <div class="sub">NLP-Powered Campus Assistant with Python Backend</div>
+    </div>
+  </div>
+
+  <div class="suggestions" id="sugs">
+    <div class="sug-label">Quick questions:</div>
+  </div>
+
+  <div class="messages" id="msgs"></div>
+
+  <div class="input-row">
+    <input id="inp" type="text" placeholder="Ask about campus (e.g. library hours, scholarship, hostel...)" />
+    <button id="sendBtn" onclick="handleSend()">Send ➜</button>
+  </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────
+// CONFIGURATION
+// ─────────────────────────────────────────────────────────────────────────
+const API_BASE_URL = 'http://localhost:5000';  // Change if backend on different server
+const DEBUG_MODE = true;  // Set to false to hide debug info in production
+const SHOW_DEBUG = true;  // Show debug pills in chat
+
+let apiConnected = false;
+let isLoading = false;
+
+// ─────────────────────────────────────────────────────────────────────────
+// API COMMUNICATION
+// ─────────────────────────────────────────────────────────────────────────
+
+async function checkApiHealth() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/health`);
+    if (response.ok) {
+      apiConnected = true;
+      updateApiStatus('connected', '✓ Connected to backend');
+      return true;
+    }
+  } catch (e) {
+    updateApiStatus('error', '✗ Backend not running on ' + API_BASE_URL);
+  }
+  return false;
+}
+
+async function sendMessageToBackend(message) {
+  if (!apiConnected) {
+    return {
+      error: 'Backend not connected',
+      answer: 'Sorry, the backend is not running. Please start the Flask server.'
+    };
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: message,
+        debug: SHOW_DEBUG
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API Error:', error);
+    return {
+      error: error.message,
+      answer: 'Sorry, there was an error communicating with the backend.'
+    };
+  }
+}
+
+async function fetchSuggestions() {
+  if (!apiConnected) return [];
+  
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/suggestions?limit=10`);
+    if (!response.ok) throw new Error('Failed to fetch suggestions');
+    const data = await response.json();
+    return data.suggestions || [];
+  } catch (error) {
+    console.error('Failed to fetch suggestions:', error);
+    return [];
+  }
+}
+
+function updateApiStatus(status, message) {
+  const el = document.getElementById('apiStatus');
+  el.textContent = message;
+  el.className = `api-status ${status}`;
+  if (status === 'connected') {
+    setTimeout(() => {
+      el.style.display = 'none';
+    }, 2000);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// UI FUNCTIONS
+// ─────────────────────────────────────────────────────────────────────────
+
+function addMsg(role, html, debugData) {
+  const msgs = document.getElementById("msgs");
+  const wrap = document.createElement("div");
+  wrap.className = "msg " + role;
+
+  const av = document.createElement("div");
+  av.className = "mini-av";
+  av.textContent = role === "user" ? "👤" : "🤖";
+
+  const bub = document.createElement("div");
+  bub.className = "bubble";
+  bub.innerHTML = html;
+
+  // Add debug info if provided
+  if (debugData && SHOW_DEBUG) {
+    if (debugData.matched_question) {
+      const pill = document.createElement("div");
+      pill.className = "debug-pill";
+      const conf = (debugData.confidence * 100).toFixed(0);
+      pill.innerHTML = `<b>Best match:</b> "${debugData.matched_question}" — confidence ${conf}%`;
+      bub.appendChild(pill);
+    }
+
+    // Module and entity info
+    if (debugData.module || debugData.entities) {
+      const info = document.createElement("div");
+      info.className = "debug-pill";
+      let infoText = '';
+      if (debugData.module) infoText += `module: ${debugData.module}`;
+      if (debugData.sub_intent) infoText += ` | intent: ${debugData.sub_intent}`;
+      info.textContent = infoText;
+      bub.appendChild(info);
+    }
+  }
+
+  wrap.appendChild(av);
+  wrap.appendChild(bub);
+  msgs.appendChild(wrap);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function setLoading(loading) {
+  isLoading = loading;
+  const btn = document.getElementById("sendBtn");
+  const inp = document.getElementById("inp");
+  btn.disabled = loading;
+  inp.disabled = loading;
+  
+  if (loading) {
+    const msgs = document.getElementById("msgs");
+    const wrap = document.createElement("div");
+    wrap.className = "msg bot";
+    const av = document.createElement("div");
+    av.className = "mini-av";
+    av.textContent = "🤖";
+    const bub = document.createElement("div");
+    bub.className = "bubble loading";
+    bub.textContent = "Thinking...";
+    wrap.appendChild(av);
+    wrap.appendChild(bub);
+    wrap.id = "loadingMsg";
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+  } else {
+    const loadingMsg = document.getElementById("loadingMsg");
+    if (loadingMsg) loadingMsg.remove();
+  }
+}
+
+async function handleInput(text) {
+  if (!text.trim() || isLoading) return;
+  
+  addMsg("user", text);
+  document.getElementById("inp").value = "";
+  
+  setLoading(true);
+  
+  // Send to backend
+  const result = await sendMessageToBackend(text);
+  
+  setLoading(false);
+  
+  // Display response
+  if (result.error) {
+    addMsg("bot", `<em>${result.answer}</em>`, null);
+  } else {
+    addMsg("bot", result.answer, {
+      matched_question: result.matched_question,
+      confidence: result.confidence,
+      module: result.module,
+      sub_intent: result.sub_intent,
+      entities: result.entities
+    });
+  }
+}
+
+function handleSend() {
+  const inp = document.getElementById("inp");
+  const val = inp.value.trim();
+  if (val && !isLoading) {
+    handleInput(val);
+  }
+}
+
+document.getElementById("inp").addEventListener("keydown", e => {
+  if (e.key === "Enter" && !isLoading) handleSend();
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// INITIALIZATION
+// ─────────────────────────────────────────────────────────────────────────
+
+async function initializeChatbot() {
+  // Check API health
+  const connected = await checkApiHealth();
+  
+  if (connected) {
+    // Load suggestions from backend
+    const suggestions = await fetchSuggestions();
+    
+    const sugsEl = document.getElementById("sugs");
+    if (suggestions.length > 0) {
+      suggestions.forEach(s => {
+        const btn = document.createElement("button");
+        btn.className = "sug-btn";
+        btn.textContent = s.substring(0, 40) + (s.length > 40 ? '...' : '');
+        btn.title = s;
+        btn.onclick = () => { 
+          document.getElementById("inp").value = s; 
+          handleSend(); 
+        };
+        sugsEl.appendChild(btn);
+      });
+    }
+  }
+  
+  // Greeting message
+  setTimeout(() => {
+    addMsg("bot", "Hello! I'm the XMUM Campus Assistant 👋<br>Ask me anything about campus life, library, hostel, scholarships, WiFi, food, transport, and more!", null);
+  }, 300);
+}
+
+// Start initialization on page load
+window.addEventListener('load', initializeChatbot);
+</script>
+</body>
+</html>
