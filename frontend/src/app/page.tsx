@@ -1,65 +1,346 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+
+interface DebugData {
+  matched_question?: string;
+  confidence?: number;
+  module?: string;
+  sub_intent?: string;
+  entities?: string[];
+}
+
+interface Message {
+  id: string;
+  role: "user" | "bot";
+  text: string;
+  error?: boolean;
+  debugData?: DebugData;
+}
+
+export default function ChatbotHome() {
+  const [apiBaseUrl, setApiBaseUrl] = useState<string>("");
+  const [apiStatus, setApiStatus] = useState<"connecting" | "connected" | "error">("connecting");
+  const [apiStatusMessage, setApiStatusMessage] = useState<string>("Connecting to backend...");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [inputVal, setInputVal] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showDebug, setShowDebug] = useState<boolean>(true);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Setup API URL on client side
+  useEffect(() => {
+    const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+    setApiBaseUrl(url);
+  }, []);
+
+  // Initialize and check health
+  useEffect(() => {
+    if (!apiBaseUrl) return;
+
+    let isMounted = true;
+
+    async function initialize() {
+      // 1. Health check with fallback paths
+      let connected = false;
+      let checkUrl = `${apiBaseUrl}/api/health`;
+
+      try {
+        let response = await fetch(checkUrl);
+        if (response.ok) {
+          connected = true;
+        } else {
+          checkUrl = `${apiBaseUrl}/health`;
+          response = await fetch(checkUrl);
+          if (response.ok) {
+            connected = true;
+          }
+        }
+      } catch (err) {
+        try {
+          checkUrl = `${apiBaseUrl}/health`;
+          const response = await fetch(checkUrl);
+          if (response.ok) {
+            connected = true;
+          }
+        } catch (e) {
+          connected = false;
+        }
+      }
+
+      if (!isMounted) return;
+
+      if (connected) {
+        setApiStatus("connected");
+        setApiStatusMessage("✓ Connected to backend");
+        
+        // Hide status bar after 3 seconds
+        setTimeout(() => {
+          if (isMounted) {
+            setApiStatusMessage("");
+          }
+        }, 3000);
+
+        // 2. Fetch suggestions with fallback paths
+        try {
+          let sugUrl = `${apiBaseUrl}/api/suggestions?limit=10`;
+          let res = await fetch(sugUrl);
+          if (!res.ok) {
+            sugUrl = `${apiBaseUrl}/suggestions?limit=10`;
+            res = await fetch(sugUrl);
+          }
+          if (res.ok) {
+            const data = await res.json();
+            if (isMounted) {
+              setSuggestions(data.suggestions || []);
+            }
+          }
+        } catch (sugErr) {
+          console.error("Failed to load suggestions:", sugErr);
+        }
+      } else {
+        setApiStatus("error");
+        setApiStatusMessage(`✗ Backend not running on ${apiBaseUrl}`);
+      }
+    }
+
+    initialize();
+
+    // Greeting message
+    const greetingTimeout = setTimeout(() => {
+      if (isMounted) {
+        setMessages([
+          {
+            id: "greeting",
+            role: "bot",
+            text: "Hello! I'm the XMUM Campus Assistant 👋<br>Ask me anything about campus life, library, hostel, scholarships, WiFi, food, transport, and more!",
+          },
+        ]);
+      }
+    }, 300);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(greetingTimeout);
+    };
+  }, [apiBaseUrl]);
+
+  // Scroll to bottom on new messages
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isLoading]);
+
+  // Handle sending message
+  const handleSend = async (textToSend?: string) => {
+    const text = (textToSend || inputVal).trim();
+    if (!text || isLoading) return;
+
+    const userMsgId = `user-${Date.now()}`;
+    setMessages((prev) => [...prev, { id: userMsgId, role: "user", text: text }]);
+    setInputVal("");
+    setIsLoading(true);
+
+    let answer = "Sorry, there was an error communicating with the backend.";
+    let errorOccurred = false;
+    let debug: DebugData | undefined;
+
+    try {
+      let chatUrl = `${apiBaseUrl}/api/chat`;
+      let payload = { message: text, debug: showDebug };
+      
+      let response;
+      try {
+        response = await fetch(chatUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      } catch (err) {
+        chatUrl = `${apiBaseUrl}/chat`;
+        response = await fetch(chatUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      }
+
+      if (!response.ok && response.status === 404 && chatUrl.includes("/api/chat")) {
+        chatUrl = `${apiBaseUrl}/chat`;
+        response = await fetch(chatUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      }
+
+      if (response && response.ok) {
+        const data = await response.json();
+        answer = data.answer || "No response received.";
+        debug = {
+          matched_question: data.matched_question,
+          confidence: data.confidence,
+          module: data.module,
+          sub_intent: data.sub_intent,
+          entities: data.entities,
+        };
+      } else {
+        errorOccurred = true;
+        answer = `Sorry, the backend returned an error (HTTP ${response?.status || "Unknown"}).`;
+      }
+    } catch (err) {
+      console.error("Chat API Error:", err);
+      errorOccurred = true;
+      if (apiStatus !== "connected") {
+        answer = "Sorry, the backend is not connected. Please make sure the Python server is running.";
+      } else {
+        answer = "Sorry, failed to connect to the chat API.";
+      }
+    }
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `bot-${Date.now()}`,
+        role: "bot",
+        text: answer,
+        error: errorOccurred,
+        debugData: debug,
+      },
+    ]);
+    setIsLoading(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="app">
+      {/* API Status Bar */}
+      {apiStatusMessage && (
+        <div className={`api-status ${apiStatus}`}>
+          {apiStatusMessage}
+        </div>
+      )}
+
+      {/* Chat Header */}
+      <div className="chat-header">
+        <div className="chat-header-left">
+          <div className="avatar">XMU</div>
+          <div>
+            <div className="title">XMUM New Student Campus Assistant</div>
+            <div className="sub">NLP-Powered Campus Assistant with Python Backend</div>
+          </div>
+        </div>
+        
+        {/* Actions (Toggle Debug & Admin Link) */}
+        <div className="header-actions">
+          <button
+            onClick={() => setShowDebug(!showDebug)}
+            className="btn-outline"
+          >
+            {showDebug ? "Debug: On" : "Debug: Off"}
+          </button>
+          <Link href="/admin/login" className="btn-primary">
+            Admin CMS
+          </Link>
+        </div>
+      </div>
+
+      {/* Suggestions Chips */}
+      {suggestions.length > 0 && (
+        <div className="suggestions">
+          <div className="sug-label">Quick questions:</div>
+          {suggestions.map((sug, idx) => (
+            <button
+              key={idx}
+              className="sug-btn"
+              onClick={() => handleSend(sug)}
+              disabled={isLoading}
+            >
+              {sug.length > 40 ? `${sug.substring(0, 40)}...` : sug}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Messages Window */}
+      <div className="messages" id="msgs">
+        {messages.map((msg) => (
+          <div key={msg.id} className={`msg ${msg.role}`}>
+            <div className="mini-av">
+              {msg.role === "user" ? "👤" : "🤖"}
+            </div>
+            <div className="bubble">
+              <div dangerouslySetInnerHTML={{ __html: msg.text }} />
+
+              {/* Render debug info if active and provided */}
+              {showDebug && msg.debugData && msg.role === "bot" && !msg.error && (
+                <>
+                  {msg.debugData.matched_question && (
+                    <div className="debug-pill">
+                      <b>Best match:</b> &ldquo;{msg.debugData.matched_question}&rdquo; 
+                      {msg.debugData.confidence !== undefined && (
+                        <> — confidence {(msg.debugData.confidence * 100).toFixed(0)}%</>
+                      )}
+                    </div>
+                  )}
+                  {(msg.debugData.module || msg.debugData.sub_intent) && (
+                    <div className="debug-pill">
+                      {msg.debugData.module && `module: ${msg.debugData.module}`}
+                      {msg.debugData.sub_intent && ` | intent: ${msg.debugData.sub_intent}`}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        ))}
+
+        {/* Loading Indicator */}
+        {isLoading && (
+          <div className="msg bot" id="loadingMsg">
+            <div className="mini-av">🤖</div>
+            <div className="bubble loading">
+              Thinking
+              <span className="dots-container">
+                <span className="dot"></span>
+                <span className="dot"></span>
+                <span className="dot"></span>
+              </span>
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input row */}
+      <div className="input-row">
+        <input
+          id="inp"
+          type="text"
+          value={inputVal}
+          onChange={(e) => setInputVal(e.target.value)}
+          onKeyDown={handleKeyDown}
+          disabled={isLoading}
+          placeholder="Ask about campus (e.g. library hours, scholarship, hostel...)"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <button
+          id="sendBtn"
+          onClick={() => handleSend()}
+          disabled={!inputVal.trim() || isLoading}
+        >
+          Send ➜
+        </button>
+      </div>
     </div>
   );
 }
