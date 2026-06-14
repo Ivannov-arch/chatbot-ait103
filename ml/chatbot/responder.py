@@ -1,9 +1,68 @@
 # responder.py
+from chatbot_main import ChatbotResponse
 import os
 import random
 import pandas as pd
 from datetime import datetime
+from typing import Dict, List, Optional, Tuple
+import json
 
+class ResponseFormatter:
+    """Format ChatbotResponse for different output targets."""
+    
+    @staticmethod
+    def _to_dict(response: ChatbotResponse) -> Dict:
+        """Convert response to dictionary (for JSON API)."""
+        return {
+            "answer": response.answer,
+            "confidence": response.confidence_score,
+            "matched_question": response.matched_question,
+            "module": response.module,
+            "sub_intent": response.sub_intent,
+            "entities": response.extracted_entities,
+            "debug": response.debug_info
+        }
+
+    @staticmethod
+    def _to_json(response: ChatbotResponse) -> str:
+        """Convert response to JSON string."""
+        return json.dumps(ResponseFormatter._to_dict(response), indent=2)
+
+    @staticmethod
+    def _to_console(response: ChatbotResponse):
+        """Format for console/CLI output."""
+        lines = [
+            "=" * 70,
+            f"🤖 XMUMC Assistant Response",
+            "=" * 70,
+            f"\nAnswer:\n{response.answer}",
+            f"\n Confidence: {response.confidence_score:.1%}",
+        ]
+        
+        if response.matched_question:
+            lines.append(f" Matched Question: {response.matched_question}")
+        
+        if response.debug_info:
+            lines.append(f"\n Debug Info:\n{response.debug_info}")
+        
+        lines.append("\n" + "=" * 70)
+        return "\n".join(lines)
+
+    @staticmethod
+    def to_html_debug(response: ChatbotResponse) -> str:
+        """Format as HTML for embedding in web UI (like your original)."""
+        html = f"""
+        <div class="bot-response">
+            <div class="answer">{response.answer}</div>
+            <div class="debug-pill">
+                <b>Best match:</b> "{response.matched_question}" 
+                — confidence {response.confidence_score:.1f}
+            </div>
+        </div>
+        """
+        return html.strip()
+
+        
 
 def log_unrecognized_query(raw_text):
     """
