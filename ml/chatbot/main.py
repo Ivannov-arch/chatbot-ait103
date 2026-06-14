@@ -1,5 +1,4 @@
 # main.py
-from chatbot.intent_classifier import user_input
 from chatbot.bot import Bot
 from chatbot.responder import ResponseFormatter
 def main():
