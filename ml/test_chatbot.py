@@ -21,12 +21,11 @@ print("=" * 70)
 # Test 1: Check files exist
 print("\n[1/6] Checking files...")
 required_files = [
-    "entity_recognizer.py",
-    "intent_classifier.py",
-    "retriever.py",
+    "chatbot/entity_recognizer.py",
+    "chatbot/intent_classifier.py",
+    "chatbot/retriever.py",
     "chatbot_main.py",
     "flask_api.py",
-    "knowledge_base.csv",
     "requirements.txt"
 ]
 
@@ -67,7 +66,7 @@ except ImportError:
 # Test 3: Test entity recognizer
 print("\n[3/6] Testing entity recognizer...")
 try:
-    from entity_recognizer import extract_entities
+    from chatbot.entity_recognizer import extract_entities
     
     test_input = "Where is the library?"
     entities = extract_entities(test_input)
@@ -86,7 +85,7 @@ except Exception as e:
 # Test 4: Test intent classifier
 print("\n[4/6] Testing intent classifier...")
 try:
-    from intent_classifier import IntentClassifier
+    from chatbot.intent_classifier import IntentClassifier
     
     classifier = IntentClassifier()
     test_input = "How do I register for courses?"
@@ -107,13 +106,9 @@ except Exception as e:
 # Test 5: Test retriever
 print("\n[5/6] Testing knowledge retriever...")
 try:
-    from retriever import KnowledgeRetriever
+    from chatbot.retriever import KnowledgeRetriever
     
-    if not os.path.exists("knowledge_base.csv"):
-        print("❌ knowledge_base.csv not found")
-        sys.exit(1)
-    
-    retriever = KnowledgeRetriever("knowledge_base.csv")
+    retriever = KnowledgeRetriever()
     
     if len(retriever.knowledge_base) == 0:
         print("⚠ Warning: Knowledge base is empty")
@@ -136,7 +131,7 @@ print("\n[6/6] Testing full chatbot pipeline...")
 try:
     from chatbot_main import XMUMChatbot, ResponseFormatter
     
-    chatbot = XMUMChatbot("knowledge_base.csv")
+    chatbot = XMUMChatbot()
     
     # Test a simple query
     test_queries = [
@@ -164,7 +159,10 @@ except Exception as e:
 # Test 7: Test Flask API
 print("\n[BONUS] Testing Flask API...")
 try:
-    from flask_api import app
+    from flask_api import app, initialize_chatbot
+    
+    # Initialize the global chatbot instance for API tests
+    initialize_chatbot()
     
     # Create test client
     client = app.test_client()

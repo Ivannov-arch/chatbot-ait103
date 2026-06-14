@@ -14,10 +14,10 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 import json
 
-# Import your friends' modules
-from entity_recognizer import extract_entities, print_entities
-from intent_classifier import IntentClassifier
-from retriever import KnowledgeRetriever, KnowledgeItem
+# Import your friends' modules from the chatbot package
+from chatbot.entity_recognizer import extract_entities, print_entities
+from chatbot.intent_classifier import IntentClassifier
+from chatbot.retriever import KnowledgeRetriever, KnowledgeItem
 
 
 @dataclass
