@@ -140,9 +140,19 @@ class KnowledgeRetriever:
         scores.sort(key=lambda x: x[1], reverse=True)
         
         best_item = scores[0][0] if scores else None
-        best_score = scores[0][1] if scores else 0.0
+        best_raw_score = scores[0][1] if scores else 0.0
+    
+        # Calculate max possible score and normalize to 0-100%
+        max_possible = max([len(item.keywords) * 2.0 for item in candidates]) if candidates else 1.0
+        best_score = min(100.0, (best_raw_score / max_possible) * 100) if max_possible > 0 else 0.0
+    
+        # Normalize all scores too
+        normalized_scores = [
+        (item, min(100.0, (raw_score / max_possible) * 100))
+        for item, raw_score in scores
+        ]
         
-        return best_item, best_score, scores
+        return best_item, best_score, normalized_scores
     
     def _score_item(
         self,
@@ -239,7 +249,7 @@ if __name__ == "__main__":
                 print(f"  Score: {score:.1f}")
                 print(f"  Answer: {best.answer[:100]}...")
             else:
-                print("✗ No match found")
+                print(" No match found")
             print()
     
     except Exception as e:

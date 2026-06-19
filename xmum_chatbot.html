@@ -353,7 +353,7 @@ function addMsg(role, html, debugData) {
     if (debugData.matched_question) {
       const pill = document.createElement("div");
       pill.className = "debug-pill";
-      const conf = (debugData.confidence * 100).toFixed(0);
+      const conf = Math.round(debugData.confidence).toFixed(0);
       pill.innerHTML = `<b>Best match:</b> "${debugData.matched_question}" — confidence ${conf}%`;
       bub.appendChild(pill);
     }
