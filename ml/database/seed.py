@@ -19,7 +19,7 @@ import pathlib
 from database.client import get_admin_client
 
 SEEDS_DIR = pathlib.Path(__file__).parent / "seeds"
-MODULES = ["admin_directory", "campus_life", "academic_navigation"]
+MODULES = ["general", "admin_directory", "campus_life", "academic_navigation"]
 
 # How many rows to insert per API call (Supabase recommends <= 500)
 BATCH_SIZE = 100
@@ -57,6 +57,11 @@ def main():
     client = get_admin_client()
     print("Connection OK.")
 
+    print("\nClearing existing knowledge items...")
+    # Delete all rows in the table to prevent duplicates during re-seed
+    client.table("knowledge_items").delete().neq("id", "00000000-0000-0000-0000-000000000000").execute()
+    print("Clear complete.")
+
     grand_total = 0
     for module in MODULES:
         print(f"\n[MODULE: {module}]")
@@ -66,6 +71,7 @@ def main():
         inserted = insert_in_batches(client, items, module)
         grand_total += inserted
         print(f"  Done: {inserted} rows inserted for '{module}'.")
+
 
     print("\n" + "=" * 55)
     print(f"  Seeding complete. Total rows inserted: {grand_total}")

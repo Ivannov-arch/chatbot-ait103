@@ -30,9 +30,15 @@ def get_admin_client() -> Client:
     url = os.getenv("SUPABASE_URL")
     key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
 
-    if not url or not key:
+    # If the service role key is missing or is the default placeholder, fall back to anon key
+    if not url or not key or key == "your-service-role-key-here":
+        anon_key = os.getenv("SUPABASE_ANON_KEY")
+        if anon_key:
+            print("  [WARN] SUPABASE_SERVICE_ROLE_KEY is missing or placeholder. Falling back to SUPABASE_ANON_KEY.")
+            return create_client(url, anon_key)
         raise EnvironmentError(
             "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env file."
         )
 
     return create_client(url, key)
+
