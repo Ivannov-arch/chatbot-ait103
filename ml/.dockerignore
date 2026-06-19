@@ -1,0 +1,33 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment files (inject via Render/Docker env vars)
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# NLTK local cache (will be downloaded on first run inside container)
+nltk_data/
+
+# PDF source files (not needed at runtime)
+*.pdf
+
+# Dev/test/scripts not needed in production
+tests/
+scripts/
+docs/
+
+# Placeholder files
+Z_Placeholder_*
+
+# Misc
+*.log
+failed_queries.txt
+ignore_this_file_work_batches.txt
+*.txt
+!requirements.txt
