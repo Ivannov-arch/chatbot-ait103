@@ -79,13 +79,14 @@ class XMUMChatbot:
         # ──────────────────────────────────────────────────────────────
         module, sub_intent = self.intent_classifier.classify(user_message)
         
+        print("MODULE:", module)
+        print("SUB_INTENT:", sub_intent)
+
         # ──────────────────────────────────────────────────────────────
         # Step 3: Retrieve Answer
         # ──────────────────────────────────────────────────────────────
         if module == "unknown":
-            return self._handle_unknown(
-                user_message, entities, debug
-            )
+            print("UNKNOWN INTENT - TRYING RETRIEVER ANYWAY")
         
         best_item, confidence, all_scores = self.retriever.retrieve(
             module=module,

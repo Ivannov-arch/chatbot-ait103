@@ -29,6 +29,7 @@ chatbot = None
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
+    print("CHAT ENDPOINT HIT")
     """
     Main chat endpoint.
     

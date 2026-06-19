@@ -124,9 +124,20 @@ class KnowledgeRetriever:
             - best_score: Confidence score of the best match
             - all_scores: List of (item, score) sorted by score descending
         """
+        print("=== RETRIEVER CALLED ===")
+        print("MESSAGE:", repr(user_message))
+        print("MODULE:", module)
         # Get items from the relevant module
-        candidates = self.module_index.get(module, [])
-        
+        if module == "unknown":
+            candidates = [
+                item
+                for items in self.module_index.values()
+                for item in items
+            ]
+            print("SEARCHING ALL ITEMS:", len(candidates))
+        else:
+            candidates = self.module_index.get(module, [])
+        print("CANDIDATE COUNT:", len(candidates))
         if not candidates:
             return None, 0.0, []
         
@@ -180,10 +191,14 @@ class KnowledgeRetriever:
         message_lower = user_message.lower()
         matched_keywords = []
         
+        print("MESSAGE:", repr(user_message))
+        print("KEYWORDS:", item.keywords)
+        
         # Strategy 1: Exact and partial keyword matches
         for keyword in item.keywords:
             # Exact match (higher weight)
             if keyword in message_lower:
+                print("MATCHED KEYWORD:", keyword)
                 # Check if it's a whole word, not substring
                 if self._is_whole_word_match(keyword, message_lower):
                     score += 2.0
