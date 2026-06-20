@@ -2,7 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
 
+// ─── Admin whitelist ────────────────────────────────────────────────────────
+const ADMIN_EMAILS = ["admin@xmum.edu.my", "dev@xmum.edu.my"];
+
+// ─── Types ───────────────────────────────────────────────────────────────────
 interface DebugData {
   matched_question?: string;
   confidence?: number;
@@ -19,302 +24,284 @@ interface Message {
   debugData?: DebugData;
 }
 
+// ─── Suggested topics shown as chips ─────────────────────────────────────────
+const FALLBACK_SUGGESTIONS = [
+  "Library opening hours",
+  "How to connect to WiFi",
+  "Hostel application",
+  "Scholarship requirements",
+  "Cafeteria menu",
+  "Bus schedule",
+];
+
 export default function ChatbotHome() {
-  const [apiBaseUrl, setApiBaseUrl] = useState<string>("");
-  const [apiStatus, setApiStatus] = useState<"connecting" | "connected" | "error">("connecting");
-  const [apiStatusMessage, setApiStatusMessage] = useState<string>("Connecting to backend...");
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [inputVal, setInputVal] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showDebug, setShowDebug] = useState<boolean>(true);
+  const [apiBaseUrl, setApiBaseUrl]     = useState("");
+  const [apiStatus, setApiStatus]       = useState<"connecting" | "connected" | "error">("connecting");
+  const [apiStatusMsg, setApiStatusMsg] = useState("Connecting to backend...");
+  const [messages, setMessages]         = useState<Message[]>([]);
+  const [suggestions, setSuggestions]   = useState<string[]>([]);
+  const [inputVal, setInputVal]         = useState("");
+  const [isLoading, setIsLoading]       = useState(false);
+
+  // Debug — hidden from regular users, shown only to admins (Supabase session check)
+  const [isAdmin, setIsAdmin]           = useState(false);
+  const [showDebug, setShowDebug]       = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef       = useRef<HTMLInputElement>(null);
 
-  // Setup API URL on client side
+  // ── Check Supabase admin session ─────────────────────────────────────────
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    setApiBaseUrl(url);
+    async function checkAdmin() {
+      const { data } = await supabase.auth.getSession();
+      const email = data?.session?.user?.email;
+      if (email && ADMIN_EMAILS.includes(email)) {
+        setIsAdmin(true);
+      }
+    }
+    checkAdmin();
   }, []);
 
-  // Initialize and check health
+  // ── Resolve API base URL ──────────────────────────────────────────────────
+  useEffect(() => {
+    setApiBaseUrl(process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000");
+  }, []);
+
+  // ── Health check + greeting + suggestions ─────────────────────────────────
   useEffect(() => {
     if (!apiBaseUrl) return;
+    let alive = true;
 
-    let isMounted = true;
-
-    async function initialize() {
-      // 1. Health check with fallback paths
-      let connected = false;
-      let checkUrl = `${apiBaseUrl}/api/health`;
-
-      try {
-        let response = await fetch(checkUrl);
-        if (response.ok) {
-          connected = true;
-        } else {
-          checkUrl = `${apiBaseUrl}/health`;
-          response = await fetch(checkUrl);
-          if (response.ok) {
-            connected = true;
-          }
-        }
-      } catch (err) {
+    async function init() {
+      // Health check with path fallback
+      let ok = false;
+      for (const path of ["/api/health", "/health"]) {
         try {
-          checkUrl = `${apiBaseUrl}/health`;
-          const response = await fetch(checkUrl);
-          if (response.ok) {
-            connected = true;
-          }
-        } catch (e) {
-          connected = false;
-        }
+          const r = await fetch(`${apiBaseUrl}${path}`);
+          if (r.ok) { ok = true; break; }
+        } catch { /* try next */ }
       }
 
-      if (!isMounted) return;
+      if (!alive) return;
 
-      if (connected) {
+      if (ok) {
         setApiStatus("connected");
-        setApiStatusMessage("✓ Connected to backend");
-        
-        // Hide status bar after 3 seconds
-        setTimeout(() => {
-          if (isMounted) {
-            setApiStatusMessage("");
-          }
-        }, 3000);
+        setApiStatusMsg("✓ Connected");
+        setTimeout(() => alive && setApiStatusMsg(""), 3000);
 
-        // 2. Fetch suggestions with fallback paths
-        try {
-          let sugUrl = `${apiBaseUrl}/api/suggestions?limit=10`;
-          let res = await fetch(sugUrl);
-          if (!res.ok) {
-            sugUrl = `${apiBaseUrl}/suggestions?limit=10`;
-            res = await fetch(sugUrl);
-          }
-          if (res.ok) {
-            const data = await res.json();
-            if (isMounted) {
-              setSuggestions(data.suggestions || []);
+        // Fetch suggestions
+        for (const path of ["/api/suggestions?limit=8", "/suggestions?limit=8"]) {
+          try {
+            const r = await fetch(`${apiBaseUrl}${path}`);
+            if (r.ok) {
+              const d = await r.json();
+              if (alive) setSuggestions(d.suggestions || []);
+              break;
             }
-          }
-        } catch (sugErr) {
-          console.error("Failed to load suggestions:", sugErr);
+          } catch { /* try next */ }
         }
       } else {
         setApiStatus("error");
-        setApiStatusMessage(`✗ Backend not running on ${apiBaseUrl}`);
+        setApiStatusMsg("Backend offline — using fallback suggestions");
+        setSuggestions(FALLBACK_SUGGESTIONS);
       }
     }
 
-    initialize();
-
-    // Greeting message
-    const greetingTimeout = setTimeout(() => {
-      if (isMounted) {
-        setMessages([
-          {
-            id: "greeting",
-            role: "bot",
-            text: "Hello! I'm the XMUM Campus Assistant 👋<br>Ask me anything about campus life, library, hostel, scholarships, WiFi, food, transport, and more!",
-          },
-        ]);
+    // Greeting
+    const t = setTimeout(() => {
+      if (alive) {
+        setMessages([{
+          id: "greeting",
+          role: "bot",
+          text: "Hi there! 👋 I'm <strong>XMUM Campus Assistant</strong>.<br/>Ask me anything — library, hostel, WiFi, scholarships, food, transport, and more!",
+        }]);
       }
-    }, 300);
+    }, 250);
 
-    return () => {
-      isMounted = false;
-      clearTimeout(greetingTimeout);
-    };
+    init();
+    return () => { alive = false; clearTimeout(t); };
   }, [apiBaseUrl]);
 
-  // Scroll to bottom on new messages
+  // ── Auto-scroll ───────────────────────────────────────────────────────────
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
-  // Handle sending message
-  const handleSend = async (textToSend?: string) => {
-    const text = (textToSend || inputVal).trim();
+  // ── Send message ──────────────────────────────────────────────────────────
+  const handleSend = async (override?: string) => {
+    const text = (override ?? inputVal).trim();
     if (!text || isLoading) return;
 
-    const userMsgId = `user-${Date.now()}`;
-    setMessages((prev) => [...prev, { id: userMsgId, role: "user", text: text }]);
+    setMessages(prev => [...prev, { id: `u-${Date.now()}`, role: "user", text }]);
     setInputVal("");
     setIsLoading(true);
+    inputRef.current?.focus();
 
     let answer = "Sorry, there was an error communicating with the backend.";
-    let errorOccurred = false;
+    let hasError = false;
     let debug: DebugData | undefined;
 
     try {
-      let chatUrl = `${apiBaseUrl}/api/chat`;
-      let payload = { message: text, debug: showDebug };
-      
-      let response;
-      try {
-        response = await fetch(chatUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      } catch (err) {
-        chatUrl = `${apiBaseUrl}/chat`;
-        response = await fetch(chatUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+      const payload = { message: text, debug: showDebug };
+      let response: Response | undefined;
+
+      for (const path of ["/api/chat", "/chat"]) {
+        try {
+          response = await fetch(`${apiBaseUrl}${path}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (response.ok || response.status !== 404) break;
+        } catch { /* try next */ }
       }
 
-      if (!response.ok && response.status === 404 && chatUrl.includes("/api/chat")) {
-        chatUrl = `${apiBaseUrl}/chat`;
-        response = await fetch(chatUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      }
-
-      if (response && response.ok) {
-        const data = await response.json();
-        answer = data.answer || "No response received.";
+      if (response?.ok) {
+        const d = await response.json();
+        answer = d.answer || "No response received.";
         debug = {
-          matched_question: data.matched_question,
-          confidence: data.confidence,
-          module: data.module,
-          sub_intent: data.sub_intent,
-          entities: data.entities,
+          matched_question: d.matched_question,
+          confidence: d.confidence,
+          module: d.module,
+          sub_intent: d.sub_intent,
+          entities: d.entities,
         };
       } else {
-        errorOccurred = true;
-        answer = `Sorry, the backend returned an error (HTTP ${response?.status || "Unknown"}).`;
+        hasError = true;
+        answer = apiStatus !== "connected"
+          ? "Backend is not connected. Please start the Python server."
+          : `Backend error (HTTP ${response?.status ?? "?"}).`;
       }
-    } catch (err) {
-      console.error("Chat API Error:", err);
-      errorOccurred = true;
-      if (apiStatus !== "connected") {
-        answer = "Sorry, the backend is not connected. Please make sure the Python server is running.";
-      } else {
-        answer = "Sorry, failed to connect to the chat API.";
-      }
+    } catch {
+      hasError = true;
+      answer = "Failed to reach the backend. Is the server running?";
     }
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `bot-${Date.now()}`,
-        role: "bot",
-        text: answer,
-        error: errorOccurred,
-        debugData: debug,
-      },
-    ]);
+    setMessages(prev => [...prev, {
+      id: `b-${Date.now()}`, role: "bot", text: answer, error: hasError, debugData: debug,
+    }]);
     setIsLoading(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleSend();
-    }
+    if (e.key === "Enter") handleSend();
   };
 
-  return (
-    <div className="app">
-      {/* API Status Bar */}
-      {apiStatusMessage && (
-        <div className={`api-status ${apiStatus}`}>
-          {apiStatusMessage}
-        </div>
-      )}
+  // ── Status dot colour ─────────────────────────────────────────────────────
+  const statusDot = {
+    connecting: "bg-amber-400 animate-pulse",
+    connected:  "bg-emerald-400",
+    error:      "bg-red-500",
+  }[apiStatus];
 
-      {/* Chat Header */}
-      <div className="chat-header">
-        <div className="chat-header-left">
-          <div className="avatar">XMU</div>
+  return (
+    <div className="chat-shell">
+
+      {/* ── Header ── */}
+      <header className="chat-header">
+        <div className="chat-header-brand">
+          <div className="brand-avatar">XMU</div>
           <div>
-            <div className="title">XMUM New Student Campus Assistant</div>
-            <div className="sub">NLP-Powered Campus Assistant with Python Backend</div>
+            <p className="brand-name">XMUM Campus Assistant</p>
+            <p className="brand-sub">NLP-Powered · Python Backend</p>
           </div>
         </div>
-        
-        {/* Actions (Toggle Debug & Admin Link) */}
-        <div className="header-actions">
-          <button
-            onClick={() => setShowDebug(!showDebug)}
-            className="btn-outline"
-          >
-            {showDebug ? "Debug: On" : "Debug: Off"}
-          </button>
-          <Link href="/admin/login" className="btn-primary">
-            Admin CMS
+
+        <div className="chat-header-actions">
+          {/* Connection status */}
+          <span className="status-chip">
+            <span className={`status-dot ${statusDot}`} />
+            {apiStatusMsg || (apiStatus === "connected" ? "Online" : "Connecting…")}
+          </span>
+
+          {/* Debug toggle — only rendered if admin session detected */}
+          {isAdmin && (
+            <button
+              onClick={() => setShowDebug(v => !v)}
+              className={`pill-btn ${showDebug ? "pill-btn--active" : ""}`}
+              title="Admin-only debug toggle"
+            >
+              🛠 Debug {showDebug ? "On" : "Off"}
+            </button>
+          )}
+
+          <Link href="/admin/login" className="pill-btn pill-btn--primary">
+            Admin CMS →
           </Link>
         </div>
-      </div>
+      </header>
 
-      {/* Suggestions Chips */}
+      {/* ── Suggestion chips ── */}
       {suggestions.length > 0 && (
-        <div className="suggestions">
-          <div className="sug-label">Quick questions:</div>
-          {suggestions.map((sug, idx) => (
-            <button
-              key={idx}
-              className="sug-btn"
-              onClick={() => handleSend(sug)}
-              disabled={isLoading}
-            >
-              {sug.length > 40 ? `${sug.substring(0, 40)}...` : sug}
-            </button>
-          ))}
+        <div className="chip-bar">
+          <span className="chip-label">Try asking:</span>
+          <div className="chip-list">
+            {suggestions.map((s, i) => (
+              <button
+                key={i}
+                className="chip"
+                disabled={isLoading}
+                onClick={() => handleSend(s)}
+              >
+                {s.length > 42 ? `${s.slice(0, 42)}…` : s}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Messages Window */}
-      <div className="messages" id="msgs">
-        {messages.map((msg) => (
-          <div key={msg.id} className={`msg ${msg.role}`}>
-            <div className="mini-av">
-              {msg.role === "user" ? "👤" : "🤖"}
+      {/* ── Messages ── */}
+      <div className="messages-pane" id="msgs">
+        {messages.map(msg => (
+          <div key={msg.id} className={`msg-row msg-row--${msg.role}`}>
+
+            <div className={`msg-avatar ${msg.role === "user" ? "msg-avatar--user" : ""}`}>
+              {msg.role === "user" ? "U" : "🤖"}
             </div>
-            <div className="bubble">
+
+            <div className={`bubble ${msg.role === "user" ? "bubble--user" : "bubble--bot"} ${msg.error ? "bubble--error" : ""}`}>
               <div dangerouslySetInnerHTML={{ __html: msg.text }} />
 
-              {/* Render debug info if active and provided */}
-              {showDebug && msg.debugData && msg.role === "bot" && !msg.error && (
-                <>
+              {/* Debug panel (admin only) */}
+              {isAdmin && showDebug && msg.debugData && msg.role === "bot" && !msg.error && (
+                <div className="debug-panel">
+                  <p className="debug-title">🛠 Debug Info</p>
                   {msg.debugData.matched_question && (
-                    <div className="debug-pill">
-                      <b>Best match:</b> &ldquo;{msg.debugData.matched_question}&rdquo; 
-                      {msg.debugData.confidence !== undefined && (
-                        <> — confidence {(msg.debugData.confidence * 100).toFixed(0)}%</>
-                      )}
+                    <div className="debug-row">
+                      <span className="debug-key">Best match</span>
+                      <span className="debug-val">"{msg.debugData.matched_question}"</span>
                     </div>
                   )}
-                  {(msg.debugData.module || msg.debugData.sub_intent) && (
-                    <div className="debug-pill">
-                      {msg.debugData.module && `module: ${msg.debugData.module}`}
-                      {msg.debugData.sub_intent && ` | intent: ${msg.debugData.sub_intent}`}
+                  {msg.debugData.confidence !== undefined && (
+                    <div className="debug-row">
+                      <span className="debug-key">Confidence</span>
+                      <span className="debug-val">{(msg.debugData.confidence * 100).toFixed(1)}%</span>
                     </div>
                   )}
-                </>
+                  {msg.debugData.module && (
+                    <div className="debug-row">
+                      <span className="debug-key">Module</span>
+                      <span className="debug-val">{msg.debugData.module}</span>
+                    </div>
+                  )}
+                  {msg.debugData.sub_intent && (
+                    <div className="debug-row">
+                      <span className="debug-key">Intent</span>
+                      <span className="debug-val">{msg.debugData.sub_intent}</span>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           </div>
         ))}
 
-        {/* Loading Indicator */}
+        {/* Typing indicator */}
         {isLoading && (
-          <div className="msg bot" id="loadingMsg">
-            <div className="mini-av">🤖</div>
-            <div className="bubble loading">
-              Thinking
-              <span className="dots-container">
-                <span className="dot"></span>
-                <span className="dot"></span>
-                <span className="dot"></span>
-              </span>
+          <div className="msg-row msg-row--bot">
+            <div className="msg-avatar">🤖</div>
+            <div className="bubble bubble--bot bubble--typing">
+              <span /><span /><span />
             </div>
           </div>
         )}
@@ -322,23 +309,29 @@ export default function ChatbotHome() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input row */}
-      <div className="input-row">
+      {/* ── Input ── */}
+      <div className="input-bar">
         <input
+          ref={inputRef}
           id="inp"
           type="text"
           value={inputVal}
-          onChange={(e) => setInputVal(e.target.value)}
+          onChange={e => setInputVal(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={isLoading}
-          placeholder="Ask about campus (e.g. library hours, scholarship, hostel...)"
+          placeholder="Ask me anything about XMUM campus…"
+          autoComplete="off"
         />
         <button
           id="sendBtn"
           onClick={() => handleSend()}
           disabled={!inputVal.trim() || isLoading}
+          aria-label="Send message"
         >
-          Send ➜
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
         </button>
       </div>
     </div>
