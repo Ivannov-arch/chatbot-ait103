@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
+
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -14,37 +16,34 @@ export default function AdminLogin() {
 
   // Check if mock session exists
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("admin_logged_in");
-    if (isLoggedIn === "true") {
-      router.push("/admin");
-    }
+    supabase.auth.getSession().then(({
+      data }) => {
+        if (data.session) {
+          router.push("/admin");
+        }
+      });
     const systemPrefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
     setIsDark(systemPrefersDark);
   }, [router]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setErrorMsg("");
     setSuccessMsg("");
 
-    setTimeout(() => {
-      if (email === "admin@xmum.edu.my" && password === "admin123") {
-        localStorage.setItem("admin_logged_in", "true");
-        localStorage.setItem("admin_email", email);
-        setSuccessMsg("Access granted. Redirecting to dashboard...");
-        setTimeout(() => {
-          router.push("/admin");
-        }, 800);
-      } else {
-        setErrorMsg(
-          "Invalid credentials. Please check your email and password.",
-        );
-        setLoading(false);
-      }
-    }, 900);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setErrorMsg(error.message)
+    } else {
+      setSuccessMsg("Access granted. Redirecting to dashboard...");
+      setTimeout(() => {
+        router.push("/admin");
+      }, 800);
+    }
   };
 
   return (
@@ -186,9 +185,6 @@ export default function AdminLogin() {
                   : "bg-indigo-50/50 border-indigo-100 text-indigo-900"
               }`}
             >
-              <div className="font-bold flex items-center gap-1 mb-2 text-xs">
-                💡 Demo Mode
-              </div>
               <div className="grid grid-cols-[50px_1fr] gap-y-1.5 font-mono leading-relaxed">
                 <span className="opacity-70">Email:</span>
                 <span className="font-semibold select-all cursor-pointer hover:underline">

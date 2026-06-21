@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
+
 
 /* ──────────────────────────────────────────
    Inline SVG icon helpers
@@ -182,32 +184,29 @@ export default function AdminLayout({
   const isLoginPage = pathname === "/admin/login";
 
   useEffect(() => {
-    function checkAuth() {
-      const isLoggedIn = localStorage.getItem("admin_logged_in");
-      const email = localStorage.getItem("admin_email");
-
-      if (isLoggedIn !== "true") {
+    supabase.auth.getSession().then(({ data }) => {
+      const session = data.session;
+      if (!session) {
         if (!isLoginPage) router.push("/admin/login");
         else setLoading(false);
       } else {
-        setUserEmail(email || "admin@xmum.edu.my");
+        setUserEmail(session.user.email ?? null);
         if (isLoginPage) router.push("/admin");
         else setLoading(false);
       }
-    }
-    checkAuth();
+    });
   }, [router, isLoginPage]);
+
 
   useEffect(() => {
     setMobileSidebarOpen(false);
   }, [pathname]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("admin_logged_in");
-    localStorage.removeItem("admin_email");
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     setUserEmail(null);
-    router.push("/admin/login");
-  };
+    router.push("/admin/login")
+  }
 
   if (loading) {
     return (
