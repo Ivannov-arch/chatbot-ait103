@@ -37,11 +37,28 @@ class Bot:
     def __init__(self):
         """
         Initialize the chatbot with all required components.
-        Loads knowledge base from Supabase.
+        Loads knowledge base from the configured source.
         """
         self.intent_classifier = IntentClassifier()
         self.retriever = KnowledgeRetriever()
-        print("[Chatbot] ✓ Initialized with intent classifier and Supabase knowledge base")
+        print(
+            "[Chatbot] ✓ Initialized with intent classifier and "
+            f"{self.retriever.source} knowledge base"
+        )
+
+    ACADEMIC_RESPONSE_LABELS = {
+        "academic_system": "Academic System",
+        "courses_syllabus": "Course Registration",
+        "leave_attendance": "Leave & Attendance",
+        "academic_calendar": "Academic Calendar",
+        "exams_grades": "Exams & Results",
+        "programme_transfer": "Programme Transfer",
+        "finance_fees": "Fees & Scholarships",
+        "admissions_enrollment": "Admissions & Enrollment",
+        "visa_immigration": "Visa & Immigration",
+        "postgrad_resources": "Postgraduate Resources",
+        "internship_career": "Career & Internship",
+    }
 
     def process_message(
         self,
@@ -70,6 +87,11 @@ class Bot:
 
         # Step 3: Retrieve Answer
         if module == "unknown":
+            fallback_response = self._try_global_retrieval(
+                user_message, entities, debug, reason="intent_unknown"
+            )
+            if fallback_response:
+                return fallback_response
             return self._handle_unknown(user_message, entities, debug)
 
         best_item, confidence, all_scores = self.retriever.retrieve(
@@ -86,7 +108,41 @@ class Bot:
                 module, sub_intent, entities, debug
             )
         else:
+            fallback_response = self._try_global_retrieval(
+                user_message, entities, debug, reason=f"no_match:{module}/{sub_intent}"
+            )
+            if fallback_response:
+                return fallback_response
             return self._handle_no_match(module, entities, debug)
+
+    def _try_global_retrieval(
+        self,
+        user_message: str,
+        entities: Dict[str, List[str]],
+        debug: bool,
+        reason: str,
+    ) -> Optional[ChatbotResponse]:
+        """Fallback to all modules when intent classification is too narrow."""
+        best_item, confidence, all_scores = self.retriever.retrieve_across_modules(
+            user_message=user_message,
+            extracted_entities=entities,
+        )
+
+        if not best_item or confidence < 4.0:
+            return None
+
+        response = self._build_success_response(
+            best_item,
+            confidence,
+            all_scores,
+            best_item.module,
+            best_item.sub_intent or "unknown",
+            entities,
+            debug,
+        )
+        if response.debug_info:
+            response.debug_info += f" | [Fallback] global_retrieval:{reason}"
+        return response
 
     def _handle_greeting(self, debug: bool) -> ChatbotResponse:
         """Handle greeting-only messages before NLP classification."""
@@ -129,15 +185,42 @@ class Bot:
                 best_item, confidence, top_alternatives, entities, module, sub_intent
             )
 
+        matched_sub_intent = best_item.sub_intent or sub_intent
+
         return ChatbotResponse(
-            answer=best_item.answer,
+            answer=self._format_answer(best_item, module, matched_sub_intent),
             confidence_score=confidence,
             matched_question=best_item.question,
             module=module,
-            sub_intent=sub_intent,
+            sub_intent=matched_sub_intent,
             extracted_entities=entities if entities else None,
             top_alternatives=top_alternatives,
             debug_info=debug_info
+        )
+
+    def _format_answer(
+        self,
+        best_item: KnowledgeItem,
+        module: str,
+        sub_intent: str,
+    ) -> str:
+        """Apply small module-aware presentation templates."""
+        if module != "academic_navigation":
+            return best_item.answer
+
+        label = self.ACADEMIC_RESPONSE_LABELS.get(sub_intent, "Academic Navigation")
+        answer = best_item.answer.strip()
+
+        reminder = (
+            "For official action, use the relevant XMUM system or contact the "
+            "Academic Affairs Office / responsible office if your case is personal, "
+            "urgent, or deadline-sensitive."
+        )
+
+        return (
+            f"{label}\n"
+            f"- Answer: {answer}\n"
+            f"- Reminder: {reminder}"
         )
 
     def _handle_no_match(

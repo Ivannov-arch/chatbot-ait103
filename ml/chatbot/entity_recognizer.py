@@ -103,6 +103,10 @@ ENTITY_CATALOG: Dict[str, tuple[str, list[str]]] = {
         ["wi-fi", "wifi", "wi fi", "campus network", "internet connection",
          "internet", "network"],
     ),
+    "student email": (
+        "facility",
+        ["student email", "campus email", "outlook", "office 365", "teams"],
+    ),
     "room": (
         "facility",
         ["room", "block"],
@@ -112,7 +116,9 @@ ENTITY_CATALOG: Dict[str, tuple[str, list[str]]] = {
     "International & Student Affairs": (
         "office",
         ["international affairs", "student affairs", "international office",
-         "student office", "isa", "i&sa"],
+         "student office", "isa", "i&sa", "isao",
+         "international student affairs",
+         "international student affairs office"],
     ),
     "Accommodation Services": (
         "office",
@@ -138,7 +144,19 @@ ENTITY_CATALOG: Dict[str, tuple[str, list[str]]] = {
     "academic calendar": (
         "academic",
         ["academic calendar", "school calendar", "semester calendar",
-         "term dates", "exam schedule"],
+         "term dates", "exam schedule", "semester break", "sem break",
+         "term break", "revision week", "registration days",
+         "orientation day"],
+    ),
+    "student pass": (
+        "academic",
+        ["student pass", "student visa", "visa renewal", "visa cancellation",
+         "emgs", "eval", "evisa", "i-kad", "ikad", "mdac"],
+    ),
+    "postgraduate studies": (
+        "academic",
+        ["postgraduate", "postgrad", "master", "phd", "ph.d.",
+         "doctorate", "thesis", "dissertation", "viva", "psu"],
     ),
     "course registration": (
         "academic",
