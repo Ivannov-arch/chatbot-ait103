@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
-
 export default function AdminLogin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -16,12 +15,11 @@ export default function AdminLogin() {
 
   // Check if mock session exists
   useEffect(() => {
-    supabase.auth.getSession().then(({
-      data }) => {
-        if (data.session) {
-          router.push("/admin");
-        }
-      });
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        router.push("/admin");
+      }
+    });
     const systemPrefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
@@ -34,10 +32,13 @@ export default function AdminLogin() {
     setErrorMsg("");
     setSuccessMsg("");
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
-      setErrorMsg(error.message)
+      setErrorMsg(error.message);
     } else {
       setSuccessMsg("Access granted. Redirecting to dashboard...");
       setTimeout(() => {

@@ -56,8 +56,9 @@ export default function ChatbotHome() {
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Mobile sidebar open/close state
+  // Mobile & Desktop sidebar states
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
 
   // Debug — hidden from regular users, shown only to admins (Supabase session check)
   const [isAdmin, setIsAdmin] = useState(false);
@@ -271,7 +272,7 @@ export default function ChatbotHome() {
   }[apiStatus];
 
   return (
-    <div className="flex h-screen w-full overflow-hidden relative">
+    <div className="flex h-screen w-full overflow-hidden relative bg-slate-900">
       {/* Backdrop overlay — mobile only, closes sidebar on outside click */}
       {isSidebarOpen && (
         <div
@@ -280,46 +281,73 @@ export default function ChatbotHome() {
         />
       )}
 
-      {/* Sidebar — static on desktop, off-canvas drawer on mobile */}
+      {/* Sidebar — Blue theme (bg-blue-950) & Dynamic width on large screens (lg) */}
       <aside
-        className={`fixed md:static inset-y-0 left-0 z-50 w-80 bg-white border-r border-gray-200 flex flex-col h-full transform transition-transform duration-300 ease-in-out shrink-0
-          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+        className={`fixed md:static inset-y-0 left-0 z-50 bg-blue-950 border-r border-blue-900/50 flex flex-col h-full transform transition-all duration-300 ease-in-out shrink-0 text-white
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 
+          ${isDesktopCollapsed ? "md:w-16" : "md:w-80"}`}
       >
-        <div className="p-4 border-b border-gray-100 flex flex-col gap-3">
+        <div className="p-4 border-b border-blue-900/40 flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-base font-bold text-gray-800 flex items-center gap-2">
-                <span>📚</span> Campus FAQ
-              </h2>
-              <p className="text-xs text-gray-500 mt-0.5">
-                Click to ask the bot directly
-              </p>
+            {/* Only show text if not collapsed */}
+            {!isDesktopCollapsed ? (
+              <div>
+                <h2 className="text-base font-bold text-blue-200 flex items-center gap-2">
+                  <span>📚</span> Campus FAQ
+                </h2>
+                <p className="text-xs text-blue-400 mt-0.5">
+                  Click to ask the bot directly
+                </p>
+              </div>
+            ) : (
+              <div
+                className="hidden md:flex mx-auto text-xl"
+                title="Campus FAQ"
+              >
+                📚
+              </div>
+            )}
+
+            <div className="flex items-center gap-1">
+              {/* Toggle Hide/Show button for Desktop */}
+              <button
+                onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
+                className="hidden md:block text-blue-300 hover:text-white hover:bg-blue-900/50 p-1.5 rounded-lg text-sm transition-colors border border-blue-800"
+                title={
+                  isDesktopCollapsed ? "Expand Sidebar" : "Collapse Sidebar"
+                }
+              >
+                {isDesktopCollapsed ? "→" : "←"}
+              </button>
+
+              {/* Close button — mobile only */}
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="md:hidden text-blue-300 hover:text-white p-1 rounded-lg text-lg"
+              >
+                ✕
+              </button>
             </div>
-            {/* Close button — mobile only */}
-            <button
-              onClick={() => setIsSidebarOpen(false)}
-              className="md:hidden text-gray-400 hover:text-gray-600 p-1 rounded-lg text-lg"
-            >
-              ✕
-            </button>
           </div>
 
-          {/* Search Keyword */}
-          <div className="relative">
+          {/* Search Keyword — Hide completely if collapsed on large screens */}
+          <div
+            className={`relative ${isDesktopCollapsed ? "md:hidden" : "block"}`}
+          >
             <input
               type="text"
-              placeholder="Search questions or modules..."
+              placeholder="Search questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-sm pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white text-gray-700 transition-all placeholder-gray-400"
+              className="w-full text-sm pl-8 pr-3 py-1.5 bg-blue-900/40 border border-blue-800 rounded-lg focus:outline-none focus:border-blue-400 focus:bg-blue-900/60 text-white transition-all placeholder-blue-300/60"
             />
-            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs">
+            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-blue-300 pointer-events-none text-xs">
               🔍
             </span>
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-blue-300 hover:text-white text-xs"
               >
                 ✕
               </button>
@@ -327,9 +355,12 @@ export default function ChatbotHome() {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-6 select-none">
+        {/* FAQ List Content — Hide menu contents when collapsed */}
+        <div
+          className={`flex-1 overflow-y-auto p-4 space-y-6 select-none ${isDesktopCollapsed ? "md:hidden" : "block"}`}
+        >
           {Object.keys(groupedFaqs).length === 0 ? (
-            <p className="text-sm text-gray-400 text-center py-4">
+            <p className="text-sm text-blue-300/60 text-center py-4">
               {faqs.length === 0
                 ? "Loading FAQs..."
                 : "No matching questions found."}
@@ -337,7 +368,7 @@ export default function ChatbotHome() {
           ) : (
             Object.entries(groupedFaqs).map(([moduleName, items]) => (
               <div key={moduleName} className="space-y-2">
-                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider px-1">
+                <h3 className="text-xs font-bold text-blue-300 uppercase tracking-wider px-1">
                   {moduleName}
                 </h3>
                 <div className="space-y-1">
@@ -346,10 +377,10 @@ export default function ChatbotHome() {
                       key={item.id}
                       onClick={() => {
                         handleSend(item.question);
-                        setIsSidebarOpen(false); // Auto-close sidebar on mobile after selecting
+                        setIsSidebarOpen(false);
                       }}
                       disabled={isLoading}
-                      className="w-full text-left text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 px-3 py-2 rounded-lg transition-all duration-200 block truncate"
+                      className="w-full text-left text-sm text-slate-200 hover:text-white hover:bg-blue-900/50 px-3 py-2 rounded-lg transition-all duration-200 block truncate"
                       title={item.question}
                     >
                       • {item.question}
@@ -360,6 +391,18 @@ export default function ChatbotHome() {
             ))
           )}
         </div>
+
+        {/* Vertical mini indicator when sidebar is collapsed */}
+        {isDesktopCollapsed && (
+          <div
+            className="hidden md:flex flex-1 flex-col items-center pt-6 space-y-4 text-blue-400 text-sm cursor-pointer"
+            onClick={() => setIsDesktopCollapsed(false)}
+          >
+            <span className="writing-mode-vertical tracking-widest font-bold uppercase opacity-40 ">
+              FAQ PANEL
+            </span>
+          </div>
+        )}
       </aside>
 
       {/* ── CHAT CONTAINER MAIN ── */}
@@ -368,10 +411,16 @@ export default function ChatbotHome() {
           {/* ── Header ── */}
           <header className="chat-header">
             <div className="chat-header-brand flex items-center gap-2">
-              {/* Hamburger button — mobile only, opens FAQ sidebar */}
+              {/* Hamburger button — mobile or when desktop is collapsed */}
               <button
-                onClick={() => setIsSidebarOpen(true)}
-                className="md:hidden flex items-center justify-center p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors mr-1"
+                onClick={() => {
+                  if (window.innerWidth < 768) {
+                    setIsSidebarOpen(true);
+                  } else {
+                    setIsDesktopCollapsed(false);
+                  }
+                }}
+                className={`${isDesktopCollapsed ? "md:flex" : "md:hidden"} flex items-center justify-center p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors mr-1`}
                 aria-label="Open FAQ Menu"
               >
                 <svg
