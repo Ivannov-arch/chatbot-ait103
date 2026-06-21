@@ -214,7 +214,7 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                placeholder="name@xmum.edu.my"
+                placeholder="name@xmu.edu.my"
                 className={`w-full px-4 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 ${
                   isDark
                     ? "bg-slate-900 border-slate-800 text-white placeholder:text-slate-600 focus:border-transparent"
