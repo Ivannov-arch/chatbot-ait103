@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabaseClient";
 
 type BackendStatus = "checking" | "online" | "offline";
 
-export default function MockAdminDashboard() {
+export default function AdminDashboard() {
   const [stats, setStats] = useState({
     knowledgeCount: 0,
     academicCount: 0,
@@ -14,17 +14,14 @@ export default function MockAdminDashboard() {
     conversationCount: 0,
   });
 
-  const [backendUrl, setBackendUrl] = useState("");
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
   const [backendStatus, setBackendStatus] = useState<BackendStatus>("checking");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    setBackendUrl(url);
-
     const checkBackend = async () => {
       try {
-        const response = await fetch(`${url}/api/health`);
+        const response = await fetch(`${backendUrl}/api/health`);
         setBackendStatus(response.ok ? "online" : "offline");
       } catch {
         setBackendStatus("offline");
@@ -41,6 +38,17 @@ export default function MockAdminDashboard() {
           console.error("Error fetching knowledge items:", knowledgeError);
         }
 
+        const total = knowledgeItems ? knowledgeItems.length : 0;
+        const academic = knowledgeItems
+          ? knowledgeItems.filter(
+              (item) => item.module === "academic_navigation",
+            ).length
+          : 0;
+        const campusLife = knowledgeItems
+          ? knowledgeItems.filter((item) => item.module === "campus_life")
+              .length
+          : 0;
+
         let conversationCount = 0;
         try {
           const { count, error: logsError } = await supabase
@@ -53,22 +61,12 @@ export default function MockAdminDashboard() {
           console.error("Error querying conversation_logs count:", err);
         }
 
-        if (knowledgeItems) {
-          const total = knowledgeItems.length;
-          const academic = knowledgeItems.filter(
-            (item) => item.module === "academic_navigation"
-          ).length;
-          const campusLife = knowledgeItems.filter(
-            (item) => item.module === "campus_life"
-          ).length;
-
-          setStats({
-            knowledgeCount: total,
-            academicCount: academic,
-            campusLifeCount: campusLife,
-            conversationCount: conversationCount,
-          });
-        }
+        setStats({
+          knowledgeCount: total,
+          academicCount: academic,
+          campusLifeCount: campusLife,
+          conversationCount: conversationCount,
+        });
       } catch (err) {
         console.error("Error fetching stats:", err);
       } finally {
@@ -78,246 +76,148 @@ export default function MockAdminDashboard() {
 
     checkBackend();
     fetchStats();
-  }, []);
+  }, [backendUrl]);
 
   const statusConfig = {
     checking: {
-      label: "Checking connection",
-      dot: "bg-amber-400",
-      text: "text-amber-300",
+      label: "Checking system...",
+      dot: "bg-amber-400 animate-pulse",
+      text: "text-amber-400",
       softBg: "bg-amber-500/10",
-      border: "border-amber-400/20",
+      border: "border-amber-500/20",
     },
     online: {
-      label: "System online",
+      label: "System Online",
       dot: "bg-emerald-400",
-      text: "text-emerald-300",
+      text: "text-emerald-400",
       softBg: "bg-emerald-500/10",
-      border: "border-emerald-400/20",
+      border: "border-emerald-500/20",
     },
     offline: {
-      label: "System offline",
-      dot: "bg-rose-400",
-      text: "text-rose-300",
+      label: "System Offline",
+      dot: "bg-rose-400 animate-bounce",
+      text: "text-rose-400",
       softBg: "bg-rose-500/10",
-      border: "border-rose-400/20",
+      border: "border-rose-500/20",
     },
   }[backendStatus];
 
-  return (
-    <div className="min-h-screen bg-[#0b1020] text-slate-100 antialiased">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-        <div className="space-y-8 lg:space-y-10">
-          {/* =========================================================
-              1) HERO / DASHBOARD OVERVIEW
-          ========================================================= */}
-          <section className="overflow-hidden rounded-[32px] border border-white/10 bg-[#111827] shadow-[0_20px_80px_rgba(0,0,0,0.35)]">
-            <div className="grid lg:grid-cols-[1.45fr_0.95fr]">
-              <div className="p-7 sm:p-9 lg:p-12">
-                <div className="inline-flex items-center rounded-full border border-blue-400/20 bg-blue-500/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-300">
-                  XMUM Chatbot CMS
-                </div>
-
-                <div className="mt-6 max-w-2xl pa">
-                  <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                    Admin dashboard
-                  </h1>
-                  <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400 sm:text-[15px]">
-                    Manage chatbot knowledge, review conversation logs, and monitor
-                    platform health from one workspace.
-                  </p>
-                </div>
-
-                <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/admin/knowledge"
-                    className="inline-flex items-center justify-center rounded-2xl bg-blue-500 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-400"
-                  >
-                    Open Knowledge Base
-                  </Link>
-
-                  <Link
-                    href="/admin/logs"
-                    className="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3.5 text-sm font-semibold text-slate-200 transition hover:bg-white/[0.06]"
-                  >
-                    View Conversation Logs
-                  </Link>
-                </div>
-              </div>
-
-              <div className="border-t border-white/10 bg-[#0f172a] p-7 sm:p-9 lg:border-l lg:border-t-0 lg:p-10">
-                <div className="flex h-full flex-col justify-between gap-6">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                      System status
-                    </p>
-
-                    <div
-                      className={`mt-4 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-medium ${statusConfig.softBg} ${statusConfig.border} ${statusConfig.text}`}
-                    >
-                      <span
-                        className={`h-2.5 w-2.5 rounded-full ${statusConfig.dot} ${
-                          backendStatus === "checking" || backendStatus === "online"
-                            ? "animate-pulse"
-                            : ""
-                        }`}
-                      />
-                      {statusConfig.label}
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                      API endpoint
-                    </p>
-                    <div className="mt-3 rounded-xl bg-black/20 px-3 py-3 font-mono text-xs leading-6 text-slate-300 break-all">
-                      {backendUrl || "http://localhost:8000"}
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-5">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-                      Environment note
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-slate-400">
-                      If the dashboard cannot reach the backend, verify the API
-                      base URL and environment variables before checking client-side errors.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* =========================================================
-              2) KPI / STATS ROW WITH SECTION PADDING
-          ========================================================= */}
-          <section className="rounded-[32px] border border-white/10 bg-[#111827] px-6 py-7 shadow-sm sm:px-7 sm:py-8 lg:px-8 lg:py-9">
-            <div>
-              <h2 className="text-sm font-semibold text-slate-100">Overview</h2>
-              <p className="mt-1.5 text-sm text-slate-400">
-                Quick snapshot of chatbot content and activity.
-              </p>
-            </div>
-
-            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <StatCard
-                label="Total Q&A Items"
-                value={stats.knowledgeCount}
-                helper="Knowledge entries"
-                accent="text-blue-400"
-              />
-              <StatCard
-                label="Academic Topics"
-                value={stats.academicCount}
-                helper="Academic category items"
-              />
-              <StatCard
-                label="Campus Life Topics"
-                value={stats.campusLifeCount}
-                helper="Campus support content"
-              />
-              <StatCard
-                label="Conversation Logs"
-                value={stats.conversationCount}
-                helper="Tracked interactions"
-                accent="text-emerald-400"
-              />
-            </div>
-          </section>
-
-          {/* =========================================================
-              3) WORKSPACE ROW WITH SECTION PADDING
-          ========================================================= */}
-          {/* <section className="rounded-[32px] border border-white/10 bg-[#111827] px-6 py-7 shadow-sm sm:px-7 sm:py-8 lg:px-8 lg:py-9">
-            <div>
-              <h2 className="text-sm font-semibold text-slate-100">Workspace</h2>
-              <p className="mt-1.5 text-sm text-slate-400">
-                Go directly to the areas you manage most often.
-              </p>
-            </div>
-
-            <div className="mt-6 grid gap-5 lg:grid-cols-2">
-              <ActionCard
-                href="/admin/knowledge"
-                eyebrow="Content management"
-                title="Knowledge Base"
-                description="Create, edit, and organize chatbot answers, academic content, and campus information."
-                cta="Open knowledge workspace"
-              />
-
-              <ActionCard
-                href="/admin/logs"
-                eyebrow="Monitoring"
-                title="Conversation Logs"
-                description="Review user conversations, inspect fallback cases, and trace issues in chatbot responses."
-                cta="Open logs"
-              />
-            </div>
-          </section> */}
-
-          {/* =========================================================
-              4) SYSTEM OVERVIEW
-          ========================================================= */}
-          <section className="rounded-[32px] border border-white/10 bg-[#111827] px-6 py-7 shadow-[0_20px_80px_rgba(0,0,0,0.25)] sm:px-7 sm:py-8 lg:px-8 lg:py-10">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="max-w-2xl">
-                <h2 className="text-sm font-semibold text-slate-100">
-                  System overview
-                </h2>
-                <p className="mt-3 text-sm leading-7 text-slate-400">
-                  Operational details for the current admin environment. This area
-                  is meant for infrastructure visibility rather than primary navigation.
-                </p>
-              </div>
-
-              <div
-                className={`inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-medium ${statusConfig.softBg} ${statusConfig.border} ${statusConfig.text}`}
-              >
-                <span
-                  className={`h-2.5 w-2.5 rounded-full ${statusConfig.dot} ${
-                    backendStatus === "checking" || backendStatus === "online"
-                      ? "animate-pulse"
-                      : ""
-                  }`}
-                />
-                {statusConfig.label}
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-5 lg:grid-cols-3">
-              <InfoCard
-                label="Backend"
-                value={
-                  backendStatus === "checking"
-                    ? "Checking"
-                    : backendStatus === "online"
-                    ? "Online"
-                    : "Offline"
-                }
-                description="Current API health check result."
-              />
-
-              <InfoCard
-                label="API Base URL"
-                value={backendUrl || "http://localhost:8000"}
-                description="Environment target used by the dashboard."
-                mono
-              />
-
-              <InfoCard
-                label="Data Layer"
-                value="Supabase (active)"
-                description="Real-time data synchronization with Supabase."
-              />
-            </div>
-          </section>
+  if (loading) {
+    return (
+      <div className="flex h-[60vh] w-full items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <svg
+            className="animate-spin h-8 w-8 text-indigo-500"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            />
+          </svg>
+          <span className="text-slate-400 text-sm font-medium tracking-wide">
+            Loading dashboard data...
+          </span>
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full text-slate-100 overflow-auto">
+      <div className="mx-auto max-w-7xl space-y-8 lg:space-y-12">
+        {/* BARIS 1: HERO / WELCOME & STATUS */}
+        <section className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-indigo-900/20 to-slate-900/40 border border-white/5 p-6 rounded-2xl">
+          <div>
+            <h2 className="text-xl lg:text-2xl font-bold text-white">
+              Welcome back, Admin!
+            </h2>
+            <p className="text-sm text-slate-400 mt-1">
+              Here is what's happening with your system today.
+            </p>
+          </div>
+
+          {/* Live API Health Status Badge */}
+          <div
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full border ${statusConfig.border} ${statusConfig.softBg}`}
+          >
+            <span className={`w-2 h-2 rounded-full ${statusConfig.dot}`} />
+            <span
+              className={`text-[11px] font-bold tracking-wide uppercase whitespace-nowrap ${statusConfig.text}`}
+            >
+              {statusConfig.label}
+            </span>
+          </div>
+        </section>
+
+        {/* BARIS 2: REAL STATS CARD (Using your custom StatCard component) */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <StatCard
+            label="Total Knowledge Base"
+            value={stats.knowledgeCount}
+            helper="Aggregated markdown entries"
+            accent="text-indigo-400"
+          />
+          <StatCard
+            label="Academic Navigation"
+            value={stats.academicCount}
+            helper="Curriculum & maps data items"
+          />
+          <StatCard
+            label="Campus Life"
+            value={stats.campusLifeCount}
+            helper="Events, housing & facility items"
+          />
+          <StatCard
+            label="Conversation Logs"
+            value={stats.conversationCount}
+            helper="Total user interactions captured"
+            accent="text-emerald-400"
+          />
+        </section>
+
+        {/* BARIS 3: QUICK ACTIONS (Using your custom ActionCard component) */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ActionCard
+            href="/admin/knowledge"
+            eyebrow="CMS Management"
+            title="Manage Knowledge Base"
+            description="Add, edit, or remove context items feeding your LLM backend. Organize content into Academic or Campus Life categories."
+            cta="Go to Knowledge Base"
+          />
+          <ActionCard
+            href="/admin/logs"
+            eyebrow="Analytics & Audits"
+            title="Review Chat History"
+            description="Inspect real-time conversation logs to pinpoint hallucination issues, user frustration trends, or unhandled inquiries."
+            cta="Open Logs Viewer"
+          />
+        </section>
+
+        {/* BARIS 4: VISUALIZATION PLACEHOLDER */}
+        <section className="bg-slate-900/30 border border-white/5 rounded-2xl h-64 flex items-center justify-center p-6">
+          <span className="text-sm text-slate-500 italic">
+            System Charts & Analytics Visualization Container
+          </span>
+        </section>
       </div>
     </div>
   );
 }
 
+/* ──────────────────────────────────────────
+   Your Reusable Component Deliverables
+────────────────────────────────────────── */
 function StatCard({
   label,
   value,
@@ -330,14 +230,16 @@ function StatCard({
   accent?: string;
 }) {
   return (
-    <div className="rounded-3xl border border-white/10 bg-[#0f172a] p-6">
-      <p className="text-sm font-medium text-slate-400">{label}</p>
-      <div className="mt-6">
-        <span className={`text-4xl font-semibold tracking-tight ${accent}`}>
-          {value}
+    <div className="rounded-2xl border border-white/5 bg-slate-900/50 p-5">
+      <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+        {label}
+      </p>
+      <div className="mt-4">
+        <span className={`text-3xl font-bold tracking-tight ${accent}`}>
+          {value.toLocaleString()}
         </span>
       </div>
-      <p className="mt-5 text-sm text-slate-500">{helper}</p>
+      <p className="mt-3 text-xs text-slate-500">{helper}</p>
     </div>
   );
 }
@@ -358,54 +260,27 @@ function ActionCard({
   return (
     <Link
       href={href}
-      className="group rounded-[28px] border border-white/10 bg-[#0f172a] p-7 transition hover:-translate-y-0.5 hover:bg-[#141d2f]"
+      className="group rounded-2xl border border-white/5 bg-slate-900/20 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-900/50 hover:border-white/10"
     >
-      <div className="flex h-full flex-col">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-          {eyebrow}
-        </p>
-
-        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white transition group-hover:text-blue-300">
-          {title}
-        </h3>
-
-        <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400">
-          {description}
-        </p>
-
-        <div className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-slate-200">
+      <div className="flex h-full flex-col justify-between">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-indigo-400">
+            {eyebrow}
+          </p>
+          <h3 className="mt-2 text-lg font-bold tracking-tight text-white transition group-hover:text-indigo-300">
+            {title}
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-slate-400">
+            {description}
+          </p>
+        </div>
+        <div className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-slate-200">
           {cta}
-          <span className="transition-transform group-hover:translate-x-1">→</span>
+          <span className="transition-transform group-hover:translate-x-1">
+            →
+          </span>
         </div>
       </div>
     </Link>
-  );
-}
-
-function InfoCard({
-  label,
-  value,
-  description,
-  mono = false,
-}: {
-  label: string;
-  value: string;
-  description: string;
-  mono?: boolean;
-}) {
-  return (
-    <div className="rounded-3xl border border-white/10 bg-[#0f172a] p-6">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
-        {label}
-      </p>
-      <div
-        className={`mt-4 text-sm leading-7 text-slate-200 break-all ${
-          mono ? "font-mono" : "font-medium"
-        }`}
-      >
-        {value}
-      </div>
-      <p className="mt-4 text-sm leading-7 text-slate-400">{description}</p>
-    </div>
   );
 }
