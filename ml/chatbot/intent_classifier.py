@@ -8,8 +8,13 @@
 #
 # Approach:
 #   Keyword / rule-based matching — most reliable for a pure retrieval chatbot.
-#   Each keyword is checked via substring search (e.g. "market" matches "supermarket").
+#   Each keyword is checked as a whole word/phrase to avoid false positives
+#   like "intern" matching inside "internet".
 #   Keywords are unique across modules to prevent false positives.
+
+import re
+
+from chatbot.preprocessor import build_augmented_query, normalize
 
 KNOWN_MODULES = [
     "admin_directory",
@@ -127,7 +132,7 @@ class IntentClassifier:
             ],
             "housing_application": [
                 "accommodation", "hostel application", "room application", "move in",
-                "move out", "swap room", "move", "move to D" "Move to LY", "swap roommate"
+                "move out", "swap room", "move", "move to D", "Move to LY", "swap roommate"
             ],
 
             # visa_immigration (Academic Navigation)
@@ -173,9 +178,17 @@ class IntentClassifier:
         }
     # Teruskan sub_intent ke retriever
     def _normalize(self, text: str) -> str:
-        return text.lower().strip()
+        return build_augmented_query(text)
 
-    def classify(self, message: str) -> str:
+    def _keyword_matches(self, keyword: str, normalized_message: str) -> bool:
+        normalized_keyword = normalize(keyword)
+        if not normalized_keyword:
+            return False
+
+        pattern = r"\b" + re.escape(normalized_keyword) + r"\b"
+        return bool(re.search(pattern, normalized_message))
+
+    def classify(self, message: str) -> tuple[str, str]:
         """
         Classify the user message and return the best matching module name.
 
@@ -183,13 +196,14 @@ class IntentClassifier:
             message: The raw user input string.
 
         Returns:
-            One of KNOWN_MODULES or "unknown".
+            A (module, sub_intent) tuple. Module is one of KNOWN_MODULES or
+            "unknown"; sub_intent is a fine-grained category or "unknown".
         """
         normalized = self._normalize(message)
 
         for sub_intent, keywords in self.keyword_map.items():
             for word in keywords:
-                if word in normalized:
+                if self._keyword_matches(word, normalized):
                     module_name = self.sub_intent_to_module.get(sub_intent, "unknown")
                     return module_name, sub_intent
 

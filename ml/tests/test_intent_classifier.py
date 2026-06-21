@@ -32,7 +32,7 @@ class TestIntentClassifier:
         assert isinstance(result, tuple)
         assert len(result) == 2
         assert isinstance(result[0], str)
-        assert isinstance(result[1], float)
+        assert isinstance(result[1], str)
 
     def test_unknown_for_empty_input(self, classifier):
         """Empty input should return 'unknown'."""
@@ -44,8 +44,12 @@ class TestIntentClassifier:
         assert classifier.classify("Where is the library?") == ("campus_life", "library")
     def test_campus_life_wifi(self, classifier):
         assert classifier.classify("how do I connect to the wifi?") == ("campus_life", "it_connectivity")
+    def test_campus_life_internet_synonym(self, classifier):
+        assert classifier.classify("how do I connect to the internet?") == ("campus_life", "it_connectivity")
     def test_admin_directory_about(self, classifier):
         assert classifier.classify("Who is the founder of XMU?") == ("admin_directory", "about_xmum")
+    def test_admin_directory_founded_synonym(self, classifier):
+        assert classifier.classify("Who founded Xiamen University?") == ("admin_directory", "about_xmum")
     def test_academic_navigation_exams(self, classifier):
         assert classifier.classify("When is the final exam?") == ("academic_navigation", "exams_grades")
     def test_unknown_for_off_topic(self, classifier):

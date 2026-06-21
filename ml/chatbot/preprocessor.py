@@ -48,10 +48,13 @@ STOP_WORDS = {
 }
 
 SYNONYM_MAP: dict[str, str] = {
+    "founded": "founder",
     "internet": "wifi",
     "network": "wifi",
     "connection": "wifi",
     "wi-fi": "wifi",
+    "wi fi": "wifi",
+    "wireless": "wifi",
     "dorm": "hostel",
     "dormitory": "hostel",
     "accommodation": "hostel",
@@ -83,6 +86,24 @@ SYNONYM_MAP: dict[str, str] = {
     "email": "student email",
     "ecard": "campus ecard",
     "id": "student id",
+}
+
+GREETING_TERMS = {
+    "good",
+    "hello",
+    "hey",
+    "hi",
+    "morning",
+    "afternoon",
+    "evening",
+    "there",
+}
+
+GREETING_CONTEXT_TERMS = {
+    "assistant",
+    "bot",
+    "chatbot",
+    "xmum",
 }
 
 
@@ -160,6 +181,32 @@ def build_search_terms(text: str) -> list[str]:
             terms.append(term)
             seen.add(term)
     return terms
+
+
+def build_augmented_query(text: str) -> str:
+    """Return normalized text plus expanded search terms for matching."""
+    normalized_text = normalize(text)
+    search_terms = build_search_terms(text)
+    parts = [normalized_text, " ".join(search_terms)]
+    return " ".join(part for part in parts if part).strip()
+
+
+def is_greeting(text: str) -> bool:
+    """Return True for short greeting-only messages like 'hi' or 'hello'."""
+    normalized_text = normalize(text)
+    if not normalized_text:
+        return False
+
+    tokens = normalized_text.split()
+    if len(tokens) > 4:
+        return False
+
+    has_greeting = any(token in GREETING_TERMS for token in tokens)
+    only_greeting_context = all(
+        token in GREETING_TERMS or token in GREETING_CONTEXT_TERMS
+        for token in tokens
+    )
+    return has_greeting and only_greeting_context
 
 
 if __name__ == "__main__":

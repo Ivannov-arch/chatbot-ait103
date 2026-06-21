@@ -18,6 +18,8 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
+from chatbot.preprocessor import build_augmented_query, build_search_terms, normalize
+
 # Load environment variables from .env
 load_dotenv()
 
@@ -108,7 +110,8 @@ class KnowledgeRetriever:
         self,
         module: str,
         user_message: str,
-        extracted_entities: Optional[Dict[str, List[str]]] = None
+        extracted_entities: Optional[Dict[str, List[str]]] = None,
+        sub_intent: Optional[str] = None,
     ) -> Tuple[Optional[KnowledgeItem], float, List[Tuple[KnowledgeItem, float]]]:
         """
         Retrieve the best matching answer for a user query.
@@ -117,6 +120,7 @@ class KnowledgeRetriever:
             module: The classified module (from intent_classifier)
             user_message: The raw user input
             extracted_entities: Optional entities extracted by entity_recognizer
+            sub_intent: Optional fine-grained category from intent_classifier
         
         Returns:
             A tuple of:
@@ -126,6 +130,12 @@ class KnowledgeRetriever:
         """
         # Get items from the relevant module
         candidates = self.module_index.get(module, [])
+        if sub_intent and sub_intent != "unknown":
+            sub_intent_candidates = [
+                item for item in candidates if item.sub_intent == sub_intent
+            ]
+            if sub_intent_candidates:
+                candidates = sub_intent_candidates
         
         if not candidates:
             return None, 0.0, []
@@ -167,39 +177,56 @@ class KnowledgeRetriever:
             A numeric score (higher = better match)
         """
         score = 0.0
-        message_lower = user_message.lower()
-        matched_keywords = []
+        message_lower = build_augmented_query(user_message)
+        query_terms = {
+            term for term in build_search_terms(user_message)
+            if len(term) >= 3
+        }
         
         # Strategy 1: Exact and partial keyword matches
         for keyword in item.keywords:
+            keyword_lower = normalize(keyword)
+            if not keyword_lower:
+                continue
+
             # Exact match (higher weight)
-            if keyword in message_lower:
-                # Check if it's a whole word, not substring
-                if self._is_whole_word_match(keyword, message_lower):
-                    score += 2.0
-                    matched_keywords.append(keyword)
+            if self._is_whole_word_match(keyword_lower, message_lower):
+                score += 2.0
+
             # Partial match (lower weight)
-            elif keyword in message_lower or any(
-                part in keyword for part in message_lower.split()
+            elif any(
+                self._is_whole_word_match(term, keyword_lower)
+                for term in query_terms
             ):
                 score += 1.0
-                matched_keywords.append(f"{keyword}(~)")
+
+        # Strategy 2: Boost when meaningful query terms appear in the question.
+        # This breaks ties between broad keywords like "wifi" and more specific
+        # questions such as "How can students connect to the campus Wi-Fi?"
+        question_lower = normalize(item.question)
+        for term in query_terms:
+            if self._is_whole_word_match(term, question_lower):
+                score += 1.5
         
-        # Strategy 2: Entity-based scoring
+        # Strategy 3: Entity-based scoring
+        item_match_text = normalize(f"{item.question} {' '.join(item.keywords)}")
         if extracted_entities:
             # Give extra weight to entity matches
             for entity_type, entities in extracted_entities.items():
                 if entity_type in ["pos_nouns"]:
                     # Proper nouns are less reliable, lower weight
                     for entity in entities:
-                        if entity.lower() in message_lower:
-                            score += 1.5
+                        for entity_term in build_search_terms(entity) or [normalize(entity)]:
+                            if entity_term and self._is_whole_word_match(entity_term, item_match_text):
+                                score += 1.5
+                                break
                 else:
                     # Standard entities (facility, office, academic, etc.)
                     for entity in entities:
-                        entity_lower = entity.lower()
-                        if entity_lower in message_lower:
-                            score += 3.0
+                        for entity_term in build_search_terms(entity) or [normalize(entity)]:
+                            if entity_term and self._is_whole_word_match(entity_term, item_match_text):
+                                score += 3.0
+                                break
         
         return score
     

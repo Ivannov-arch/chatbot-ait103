@@ -2,6 +2,7 @@
 
 from chatbot.entity_recognizer import extract_entities
 from chatbot.intent_classifier import IntentClassifier
+from chatbot.preprocessor import is_greeting
 from chatbot.retriever import KnowledgeRetriever, KnowledgeItem
 
 from typing import Dict, List, Optional, Tuple
@@ -57,6 +58,10 @@ class Bot:
         Returns:
             ChatbotResponse with answer and metadata
         """
+        # Step 0: Handle short conversational greetings
+        if is_greeting(user_message):
+            return self._handle_greeting(debug)
+
         # Step 1: Extract Entities
         entities = extract_entities(user_message)
 
@@ -70,7 +75,8 @@ class Bot:
         best_item, confidence, all_scores = self.retriever.retrieve(
             module=module,
             user_message=user_message,
-            extracted_entities=entities
+            extracted_entities=entities,
+            sub_intent=sub_intent
         )
 
         # Step 4: Build Response
@@ -81,6 +87,24 @@ class Bot:
             )
         else:
             return self._handle_no_match(module, entities, debug)
+
+    def _handle_greeting(self, debug: bool) -> ChatbotResponse:
+        """Handle greeting-only messages before NLP classification."""
+        debug_info = ""
+        if debug:
+            debug_info = "[Preprocessor] Greeting detected before intent classification."
+
+        return ChatbotResponse(
+            answer=(
+                "Hello! I'm the XMUM Campus Assistant. "
+                "You can ask me about library hours, hostel, WiFi, scholarships, "
+                "course registration, facilities, or academic matters."
+            ),
+            confidence_score=1.0,
+            module="small_talk",
+            sub_intent="greeting",
+            debug_info=debug_info
+        )
 
     def _build_success_response(
         self,
