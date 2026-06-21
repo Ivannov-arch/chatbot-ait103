@@ -54,7 +54,10 @@ export default function ChatbotHome() {
 
   // FAQ Sidebar State & Search State
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
-  const [searchQuery, setSearchQuery] = useState(""); // 1. STATE BARU UNTUK PENCARIAN
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // 1. STATE BARU UNTUK RESPONSIVE SIDEBAR DI HP
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Debug — hidden from regular users, shown only to admins (Supabase session check)
   const [isAdmin, setIsAdmin] = useState(false);
@@ -240,7 +243,7 @@ export default function ChatbotHome() {
     if (e.key === "Enter") handleSend();
   };
 
-  // 2. LOGIKA FILTER & GROUPING BERDASARKAN KATA KUNCI
+  // Logika Filter & Grouping FAQ
   const filteredFaqs = faqs.filter((item) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -268,20 +271,40 @@ export default function ChatbotHome() {
   }[apiStatus];
 
   return (
-    <div className="flex h-screen w-full overflow-hidden">
-      {/* ── SIDEBAR FAQ (Kiri) ── */}
-      <aside className="w-80 bg-white border-r border-gray-200 flex flex-col h-full hidden md:flex shrink-0">
+    <div className="flex h-screen w-full overflow-hidden relative">
+      {/* 2. LAYER BACKDROP (Hanya muncul di HP saat Sidebar terbuka untuk menutup area luar) */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* 3. MODIFIKASI SIDEBAR: Di desktop jadi sidebar statis, di HP jadi Off-canvas Drawer */}
+      <aside
+        className={`fixed md:static inset-y-0 left-0 z-50 w-80 bg-white border-r border-gray-200 flex flex-col h-full transform transition-transform duration-300 ease-in-out shrink-0
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+      >
         <div className="p-4 border-b border-gray-100 flex flex-col gap-3">
-          <div>
-            <h2 className="text-base font-bold text-gray-800 flex items-center gap-2">
-              <span>📚</span> Campus Knowledge FAQ
-            </h2>
-            <p className="text-xs text-gray-500 mt-0.5">
-              Click any question to ask the bot directly
-            </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-base font-bold text-gray-800 flex items-center gap-2">
+                <span>📚</span> Campus FAQ
+              </h2>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Click to ask the bot directly
+              </p>
+            </div>
+            {/* Tombol Tutup Sidebar khusus ukuran HP */}
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="md:hidden text-gray-400 hover:text-gray-600 p-1 rounded-lg text-lg"
+            >
+              ✕
+            </button>
           </div>
 
-          {/* 3. INPUT BARU: SEARCH KEYWORD */}
+          {/* Search Keyword */}
           <div className="relative">
             <input
               type="text"
@@ -290,11 +313,9 @@ export default function ChatbotHome() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full text-sm pl-8 pr-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white text-gray-700 transition-all placeholder-gray-400"
             />
-            {/* Icon Kaca Pembesar (Magnifying Glass) */}
             <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs">
               🔍
             </span>
-            {/* Tombol Clear (X) jika input terisi */}
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
@@ -323,7 +344,10 @@ export default function ChatbotHome() {
                   {items.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => handleSend(item.question)}
+                      onClick={() => {
+                        handleSend(item.question);
+                        setIsSidebarOpen(false); // Otomatis tutup sidebar di HP setelah pilih soal
+                      }}
                       disabled={isLoading}
                       className="w-full text-left text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 px-3 py-2 rounded-lg transition-all duration-200 block truncate"
                       title={item.question}
@@ -338,12 +362,33 @@ export default function ChatbotHome() {
         </div>
       </aside>
 
-      {/* ── CHAT CONTAINER MAIN (Tengah Simetris) ── */}
+      {/* ── CHAT CONTAINER MAIN ── */}
       <main className="flex-1 flex justify-center items-center p-4 lg:p-6 h-full overflow-hidden">
         <div className="chat-shell w-full max-w-4xl h-full flex flex-col overflow-hidden">
           {/* ── Header ── */}
           <header className="chat-header">
-            <div className="chat-header-brand">
+            <div className="chat-header-brand flex items-center gap-2">
+              {/* 4. TOMBOL HAMBURGER DI HP UNTUK BUKA FAQ SIDEBAR */}
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="md:hidden flex items-center justify-center p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors mr-1"
+                aria-label="Open FAQ Menu"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+
               <div className="brand-avatar">XMU</div>
               <div>
                 <p className="brand-name">XMUM Campus Assistant</p>
@@ -354,8 +399,10 @@ export default function ChatbotHome() {
             <div className="chat-header-actions">
               <span className="status-chip">
                 <span className={`status-dot ${statusDot}`} />
-                {apiStatusMsg ||
-                  (apiStatus === "connected" ? "Online" : "Connecting…")}
+                <span className="hidden sm:inline">
+                  {apiStatusMsg ||
+                    (apiStatus === "connected" ? "Online" : "Connecting…")}
+                </span>
               </span>
 
               {isAdmin && (
@@ -364,12 +411,15 @@ export default function ChatbotHome() {
                   className={`pill-btn ${showDebug ? "pill-btn--active" : ""}`}
                   title="Admin-only debug toggle"
                 >
-                  🛠 Debug {showDebug ? "On" : "Off"}
+                  🛠{" "}
+                  <span className="hidden sm:inline">
+                    Debug {showDebug ? "On" : "Off"}
+                  </span>
                 </button>
               )}
 
               <Link href="/admin/login" className="pill-btn pill-btn--primary">
-                Admin CMS →
+                Admin <span className="hidden sm:inline">CMS</span> →
               </Link>
             </div>
           </header>
