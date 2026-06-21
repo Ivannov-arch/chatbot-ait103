@@ -6,6 +6,27 @@ from datetime import datetime
 from typing import Dict
 import json
 
+FALLBACK_MESSAGE = (
+    "I'm sorry, I don't have information on that topic yet. "
+    "Please try rephrasing your question or contact the relevant XMUM office."
+)
+
+
+class Responder:
+    """Small compatibility responder for legacy tests and simple search output."""
+
+    def format(self, results: list[dict], query: str = "") -> str:
+        if not results:
+            return FALLBACK_MESSAGE
+
+        best = results[0]
+        answer = best.get("answer")
+        if answer:
+            return str(answer)
+
+        return FALLBACK_MESSAGE
+
+
 class ResponseFormatter:
     """Format ChatbotResponse for different output targets."""
     

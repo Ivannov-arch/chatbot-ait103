@@ -26,3 +26,8 @@ app.add_middleware(
 
 app.include_router(chat_router, prefix="/api")
 app.include_router(health_router, prefix="/api")
+
+
+@app.get("/")
+async def root():
+    return {"message": "XMUMC Campus Assistant API"}

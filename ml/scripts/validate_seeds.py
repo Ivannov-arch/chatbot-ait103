@@ -16,11 +16,12 @@ from typing import Any
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SEEDS_DIR = PROJECT_ROOT / "database" / "seeds"
 SEED_FILES = {
+    "general.json": "general",
     "admin_directory.json": "admin_directory",
     "campus_life.json": "campus_life",
     "academic_navigation.json": "academic_navigation",
 }
-REQUIRED_FIELDS = ("module", "question", "answer", "keywords")
+REQUIRED_FIELDS = ("module", "sub_intent", "question", "answer", "keywords")
 
 
 def load_json(path: Path) -> list[dict[str, Any]]:
@@ -131,6 +132,75 @@ def find_cross_module_conflicts(
     }
 
 
+def load_sub_intent_module_map() -> dict[str, str] | None:
+    if str(PROJECT_ROOT) not in sys.path:
+        sys.path.insert(0, str(PROJECT_ROOT))
+
+    try:
+        from chatbot.intent_classifier import IntentClassifier  # type: ignore
+    except ModuleNotFoundError:
+        return None
+
+    return IntentClassifier().sub_intent_to_module
+
+
+def check_sub_intent_modules(
+    filename: str,
+    rows: list[dict[str, Any]],
+    sub_intent_map: dict[str, str],
+) -> tuple[list[str], list[str]]:
+    errors: list[str] = []
+    warnings: list[str] = []
+
+    for row_number, row in enumerate(rows, start=1):
+        module = row.get("module")
+        sub_intent = row.get("sub_intent")
+        if not isinstance(module, str) or not isinstance(sub_intent, str):
+            continue
+
+        expected_module = sub_intent_map.get(sub_intent)
+        if expected_module is None:
+            if module != "general":
+                warnings.append(
+                    f"{filename} row {row_number}: sub_intent {sub_intent!r} "
+                    "is not returned by IntentClassifier."
+                )
+            continue
+
+        if expected_module != module:
+            errors.append(
+                f"{filename} row {row_number}: sub_intent {sub_intent!r} maps "
+                f"to {expected_module!r}, not {module!r}."
+            )
+
+    return errors, warnings
+
+
+def find_duplicate_questions(
+    rows_by_file: dict[str, list[dict[str, Any]]],
+) -> list[str]:
+    seen: dict[tuple[str, str], str] = {}
+    duplicates: list[str] = []
+
+    for filename, rows in rows_by_file.items():
+        for row_number, row in enumerate(rows, start=1):
+            module = row.get("module")
+            question = row.get("question")
+            if not isinstance(module, str) or not isinstance(question, str):
+                continue
+            key = (module, " ".join(question.lower().split()))
+            first_seen = seen.get(key)
+            location = f"{filename} row {row_number}"
+            if first_seen:
+                duplicates.append(
+                    f"{location}: duplicates question already seen at {first_seen}."
+                )
+            else:
+                seen[key] = location
+
+    return duplicates
+
+
 def load_synonym_map() -> dict[str, str] | None:
     if str(PROJECT_ROOT) not in sys.path:
         sys.path.insert(0, str(PROJECT_ROOT))
@@ -195,6 +265,8 @@ def main() -> int:
     rows_by_file: dict[str, list[dict[str, Any]]] = {}
     structural_errors: list[str] = []
     lowercase_errors: list[str] = []
+    sub_intent_errors: list[str] = []
+    sub_intent_warnings: list[str] = []
 
     for filename, expected_module in SEED_FILES.items():
         path = SEEDS_DIR / filename
@@ -222,6 +294,42 @@ def main() -> int:
         else:
             print(f"[PASS] {filename}: all keywords are lowercase.")
 
+    sub_intent_map = load_sub_intent_module_map()
+    if sub_intent_map is None:
+        print("[SKIP] Sub-intent compatibility: chatbot/intent_classifier.py not found.")
+    else:
+        for filename, rows in rows_by_file.items():
+            errors, warnings = check_sub_intent_modules(
+                filename, rows, sub_intent_map
+            )
+            sub_intent_errors.extend(errors)
+            sub_intent_warnings.extend(warnings)
+
+        if sub_intent_errors:
+            print(
+                "[FAIL] Sub-intent compatibility: "
+                f"{len(sub_intent_errors)} mismatch(es)."
+            )
+        else:
+            print("[PASS] Sub-intent compatibility: no module mismatches.")
+
+        if sub_intent_warnings:
+            print(
+                "[WARN] Sub-intent coverage: "
+                f"{len(sub_intent_warnings)} sub-intent(s) are not routed."
+            )
+        else:
+            print("[PASS] Sub-intent coverage: all non-general sub-intents are routed.")
+
+    duplicate_questions = find_duplicate_questions(rows_by_file)
+    if duplicate_questions:
+        print(
+            "[FAIL] Duplicate questions: "
+            f"{len(duplicate_questions)} duplicate row(s) within the same module."
+        )
+    else:
+        print("[PASS] Duplicate questions: none within the same module.")
+
     keyword_modules = collect_keyword_modules(rows_by_file)
     conflicts = find_cross_module_conflicts(keyword_modules)
 
@@ -242,12 +350,20 @@ def main() -> int:
     print()
     print_report_list("[DETAIL] Structural issues:", structural_errors)
     print_report_list("[DETAIL] Uppercase keyword issues:", lowercase_errors)
+    print_report_list("[DETAIL] Sub-intent module issues:", sub_intent_errors)
+    print_report_list("[WARN] Unrouted sub-intents:", sub_intent_warnings)
+    print_report_list("[DETAIL] Duplicate question issues:", duplicate_questions)
     print_report_list("[WARN] Cross-module keyword conflicts:", conflicts)
     print_report_list("[DETAIL] Synonym compatibility warnings:", synonym_warnings)
 
     total_rows = sum(len(rows) for rows in rows_by_file.values())
-    failure_count = len(structural_errors) + len(lowercase_errors)
-    warning_count = len(conflicts) + len(synonym_warnings)
+    failure_count = (
+        len(structural_errors)
+        + len(lowercase_errors)
+        + len(sub_intent_errors)
+        + len(duplicate_questions)
+    )
+    warning_count = len(conflicts) + len(synonym_warnings) + len(sub_intent_warnings)
 
     print()
     print("=" * 64)

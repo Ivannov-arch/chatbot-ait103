@@ -17,6 +17,7 @@ import json
 # Import your friends' modules from the chatbot package
 from chatbot.entity_recognizer import extract_entities, print_entities
 from chatbot.intent_classifier import IntentClassifier
+from chatbot.preprocessor import is_greeting
 from chatbot.retriever import KnowledgeRetriever, KnowledgeItem
 
 
@@ -48,11 +49,14 @@ class XMUMChatbot:
     def __init__(self):
         """
         Initialize the chatbot with all required components.
-        Loads knowledge base from Supabase.
+        Loads knowledge base from the configured source.
         """
         self.intent_classifier = IntentClassifier()
-        self.retriever = KnowledgeRetriever()  # Loads from Supabase automatically
-        print("[Chatbot] ✓ Initialized with intent classifier and Supabase knowledge base")
+        self.retriever = KnowledgeRetriever()
+        print(
+            "[Chatbot] ✓ Initialized with intent classifier and "
+            f"{self.retriever.source} knowledge base"
+        )
     
     def process_message(
         self,
@@ -70,6 +74,12 @@ class XMUMChatbot:
             ChatbotResponse with answer and metadata
         """
         # ──────────────────────────────────────────────────────────────
+        # Step 0: Handle short conversational greetings
+        # ──────────────────────────────────────────────────────────────
+        if is_greeting(user_message):
+            return self._handle_greeting(debug)
+
+        # ──────────────────────────────────────────────────────────────
         # Step 1: Extract Entities
         # ──────────────────────────────────────────────────────────────
         entities = extract_entities(user_message)
@@ -83,14 +93,18 @@ class XMUMChatbot:
         # Step 3: Retrieve Answer
         # ──────────────────────────────────────────────────────────────
         if module == "unknown":
-            return self._handle_unknown(
-                user_message, entities, debug
+            fallback_response = self._try_global_retrieval(
+                user_message, entities, debug, reason="intent_unknown"
             )
+            if fallback_response:
+                return fallback_response
+            return self._handle_unknown(user_message, entities, debug)
         
         best_item, confidence, all_scores = self.retriever.retrieve(
             module=module,
             user_message=user_message,
-            extracted_entities=entities
+            extracted_entities=entities,
+            sub_intent=sub_intent
         )
         
         # ──────────────────────────────────────────────────────────────
@@ -102,7 +116,59 @@ class XMUMChatbot:
                 entities, debug
             )
         else:
+            fallback_response = self._try_global_retrieval(
+                user_message, entities, debug, reason=f"no_match:{module}/{sub_intent}"
+            )
+            if fallback_response:
+                return fallback_response
             return self._handle_no_match(module, entities, debug)
+
+    def _try_global_retrieval(
+        self,
+        user_message: str,
+        entities: Dict[str, List[str]],
+        debug: bool,
+        reason: str,
+    ) -> Optional[ChatbotResponse]:
+        """Fallback to all modules when the intent layer is too narrow."""
+        best_item, confidence, all_scores = self.retriever.retrieve_across_modules(
+            user_message=user_message,
+            extracted_entities=entities,
+        )
+
+        if not best_item or confidence < 4.0:
+            return None
+
+        response = self._build_success_response(
+            best_item=best_item,
+            confidence=confidence,
+            all_scores=all_scores,
+            module=best_item.module,
+            sub_intent=best_item.sub_intent or "unknown",
+            entities=entities,
+            debug=debug,
+        )
+        if response.debug_info:
+            response.debug_info += f" | [Fallback] global_retrieval:{reason}"
+        return response
+
+    def _handle_greeting(self, debug: bool) -> ChatbotResponse:
+        """Handle greeting-only messages before NLP classification."""
+        debug_info = ""
+        if debug:
+            debug_info = "[Preprocessor] Greeting detected before intent classification."
+
+        return ChatbotResponse(
+            answer=(
+                "Hello! I'm the XMUM Campus Assistant. "
+                "You can ask me about library hours, hostel, WiFi, scholarships, "
+                "course registration, facilities, or academic matters."
+            ),
+            confidence_score=1.0,
+            module="small_talk",
+            sub_intent="greeting",
+            debug_info=debug_info
+        )
     
     def _build_success_response(
         self,

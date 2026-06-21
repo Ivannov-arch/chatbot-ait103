@@ -9,5 +9,6 @@ async def health(request: Request):
     return {
         "status": "ok",
         "version": "1.0.0",
+        "knowledge_source": chatbot.retriever.source if chatbot else "unavailable",
         "knowledge_base_size": len(chatbot.retriever.knowledge_base) if chatbot else 0,
     }
