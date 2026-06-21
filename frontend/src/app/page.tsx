@@ -84,7 +84,7 @@ export default function ChatbotHome() {
     async function checkAdmin() {
       const { data } = await supabase.auth.getSession();
       const email = data?.session?.user?.email;
-      if (email && ADMIN_EMAILS.includes(email)) {
+      if (email) {
         setIsAdmin(true);
       }
     }
