@@ -185,18 +185,7 @@ export default function AdminLogin() {
                   ? "bg-indigo-950/20 border-indigo-900/40 text-indigo-300"
                   : "bg-indigo-50/50 border-indigo-100 text-indigo-900"
               }`}
-            >
-              <div className="grid grid-cols-[50px_1fr] gap-y-1.5 font-mono leading-relaxed">
-                <span className="opacity-70">Email:</span>
-                <span className="font-semibold select-all cursor-pointer hover:underline">
-                  admin@xmum.edu.my
-                </span>
-                <span className="opacity-70">Pass:</span>
-                <span className="font-semibold select-all cursor-pointer hover:underline">
-                  admin123
-                </span>
-              </div>
-            </div>
+            ></div>
 
             {errorMsg && (
               <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-medium rounded-xl flex items-center gap-2.5 animate-in fade-in zoom-in-95 duration-200">

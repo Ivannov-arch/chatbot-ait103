@@ -5,9 +5,6 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { getKnowledgeItems } from "@/services/knowledgeService";
 
-// ─── Admin whitelist ────────────────────────────────────────────────────────
-const ADMIN_EMAILS = ["admin@xmum.edu.my", "dev@xmum.edu.my"];
-
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface DebugData {
   matched_question?: string;

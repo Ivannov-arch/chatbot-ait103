@@ -116,9 +116,6 @@ export default function AdminLayout({
   const pathname = usePathname();
   const router = useRouter();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState<string | null>(
-    "admin@xmum.edu.my",
-  );
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
