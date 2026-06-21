@@ -56,7 +56,7 @@ export default function ChatbotHome() {
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // 1. STATE BARU UNTUK RESPONSIVE SIDEBAR DI HP
+  // Mobile sidebar open/close state
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Debug — hidden from regular users, shown only to admins (Supabase session check)
@@ -66,7 +66,7 @@ export default function ChatbotHome() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // ── Fetch FAQs untuk Sidebar ──────────────────────────────────────────────
+  // Fetch FAQs for sidebar
   useEffect(() => {
     async function loadFAQs() {
       try {
@@ -243,7 +243,7 @@ export default function ChatbotHome() {
     if (e.key === "Enter") handleSend();
   };
 
-  // Logika Filter & Grouping FAQ
+  // Filter and group FAQs by module
   const filteredFaqs = faqs.filter((item) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -272,7 +272,7 @@ export default function ChatbotHome() {
 
   return (
     <div className="flex h-screen w-full overflow-hidden relative">
-      {/* 2. LAYER BACKDROP (Hanya muncul di HP saat Sidebar terbuka untuk menutup area luar) */}
+      {/* Backdrop overlay — mobile only, closes sidebar on outside click */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity"
@@ -280,7 +280,7 @@ export default function ChatbotHome() {
         />
       )}
 
-      {/* 3. MODIFIKASI SIDEBAR: Di desktop jadi sidebar statis, di HP jadi Off-canvas Drawer */}
+      {/* Sidebar — static on desktop, off-canvas drawer on mobile */}
       <aside
         className={`fixed md:static inset-y-0 left-0 z-50 w-80 bg-white border-r border-gray-200 flex flex-col h-full transform transition-transform duration-300 ease-in-out shrink-0
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
@@ -295,7 +295,7 @@ export default function ChatbotHome() {
                 Click to ask the bot directly
               </p>
             </div>
-            {/* Tombol Tutup Sidebar khusus ukuran HP */}
+            {/* Close button — mobile only */}
             <button
               onClick={() => setIsSidebarOpen(false)}
               className="md:hidden text-gray-400 hover:text-gray-600 p-1 rounded-lg text-lg"
@@ -346,7 +346,7 @@ export default function ChatbotHome() {
                       key={item.id}
                       onClick={() => {
                         handleSend(item.question);
-                        setIsSidebarOpen(false); // Otomatis tutup sidebar di HP setelah pilih soal
+                        setIsSidebarOpen(false); // Auto-close sidebar on mobile after selecting
                       }}
                       disabled={isLoading}
                       className="w-full text-left text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 px-3 py-2 rounded-lg transition-all duration-200 block truncate"
@@ -368,7 +368,7 @@ export default function ChatbotHome() {
           {/* ── Header ── */}
           <header className="chat-header">
             <div className="chat-header-brand flex items-center gap-2">
-              {/* 4. TOMBOL HAMBURGER DI HP UNTUK BUKA FAQ SIDEBAR */}
+              {/* Hamburger button — mobile only, opens FAQ sidebar */}
               <button
                 onClick={() => setIsSidebarOpen(true)}
                 className="md:hidden flex items-center justify-center p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors mr-1"

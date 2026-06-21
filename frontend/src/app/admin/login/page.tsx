@@ -34,13 +34,13 @@ export default function AdminLogin() {
       if (email === "admin@xmum.edu.my" && password === "admin123") {
         localStorage.setItem("admin_logged_in", "true");
         localStorage.setItem("admin_email", email);
-        setSuccessMsg("Akses diberikan. Mengalihkan ke dashboard...");
+        setSuccessMsg("Access granted. Redirecting to dashboard...");
         setTimeout(() => {
           router.push("/admin");
         }, 800);
       } else {
         setErrorMsg(
-          "Kredensial salah. Silakan periksa kembali email dan password Anda.",
+          "Invalid credentials. Please check your email and password.",
         );
         setLoading(false);
       }
@@ -53,7 +53,7 @@ export default function AdminLogin() {
         isDark ? "bg-slate-950 text-slate-100" : "bg-white text-slate-900"
       }`}
     >
-      {/* ── PANEL KIRI: BRAND SHOWCASE (Hanya muncul di Desktop / Tablet Luar) ── */}
+      {/* LEFT PANEL: BRAND SHOWCASE */}
       <div
         className={`hidden md:flex md:w-[45%] lg:w-[40%] flex-col justify-between p-12 relative overflow-hidden border-r transition-colors duration-500 ${
           isDark
@@ -61,7 +61,7 @@ export default function AdminLogin() {
             : "bg-slate-50 border-slate-100"
         }`}
       >
-        {/* Pola Dekoratif Latar Belakang (Grid/Dot Pattern & Ambient Glow) */}
+        {/* Decorative background pattern */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
@@ -104,9 +104,9 @@ export default function AdminLogin() {
         </div>
       </div>
 
-      {/* ── PANEL KANAN: FORM LOGIN UTAMA (Sangat Responsif di HP) ── */}
+      {/* RIGHT PANEL: LOGIN FORM */}
       <div className="w-full md:w-[55%] lg:w-[60%] flex flex-col justify-center items-center p-6 sm:p-12 relative">
-        {/* Tombol Floating Dark Mode (Pojok Kanan Atas) */}
+        {/* Floating dark mode toggle */}
         <button
           onClick={() => setIsDark(!isDark)}
           type="button"
@@ -147,51 +147,49 @@ export default function AdminLogin() {
           )}
         </button>
 
-        {/* Kontainer Form Minimalis */}
-        <div className="w-full max-w-sm space-y-8">
-          {/* Mobile Header (Hanya tampil di ukuran Layar HP) */}
-          <div className="md:hidden space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white text-sm mx-auto">
+        <div className="w-full max-w-sm space-y-12">
+          {/* Mobile Header */}
+          <div className="md:hidden space-y-4 text-center">
+            <div className="w-12 h-12 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white text-sm mx-auto shadow-md">
               XMU
             </div>
-            <div className="text-center">
+            <div className="space-y-1">
               <h1 className="text-2xl font-bold tracking-tight">
                 Admin Portal CMS
               </h1>
               <p
-                className={`text-xs mt-1 ${isDark ? "text-slate-400" : "text-slate-500"}`}
+                className={`text-xs ${isDark ? "text-slate-400" : "text-slate-500"}`}
               >
                 Sign in to manage chatbot knowledge base
               </p>
             </div>
           </div>
 
-          {/* Desktop Form Title (Hanya muncul di Desktop) */}
-          <div className="hidden md:block space-y-2">
-            <h1 className="text-2xl font-extrabold tracking-tight">
+          {/* Desktop Form Title */}
+          <div className="hidden md:block space-y-3">
+            <h1 className="text-3xl font-extrabold tracking-tight">
               Welcome Back, Admin!
             </h1>
             <p
-              className={`text-xs ${isDark ? "text-slate-400" : "text-slate-500"}`}
+              className={`text-sm leading-normal ${isDark ? "text-slate-400" : "text-slate-500"}`}
             >
               Please sign in to access the admin dashboard and manage the
-              chatbot
+              chatbot system.
             </p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-5">
-            {/* Box Kredensial Contoh (Premium Copy-Paste Style) */}
+          <form onSubmit={handleLogin} className="space-y-6">
             <div
-              className={`p-3.5 border text-[11px] rounded-xl transition-all ${
+              className={`p-4 border text-[11px] rounded-xl transition-all ${
                 isDark
                   ? "bg-indigo-950/20 border-indigo-900/40 text-indigo-300"
                   : "bg-indigo-50/50 border-indigo-100 text-indigo-900"
               }`}
             >
-              <div className="font-bold flex items-center gap-1 mb-1 text-xs">
+              <div className="font-bold flex items-center gap-1 mb-2 text-xs">
                 💡 Demo Mode
               </div>
-              <div className="grid grid-cols-[50px_1fr] gap-x-1 font-mono leading-relaxed">
+              <div className="grid grid-cols-[50px_1fr] gap-y-1.5 font-mono leading-relaxed">
                 <span className="opacity-70">Email:</span>
                 <span className="font-semibold select-all cursor-pointer hover:underline">
                   admin@xmum.edu.my
@@ -203,26 +201,25 @@ export default function AdminLogin() {
               </div>
             </div>
 
-            {/* Alert Status Info */}
             {errorMsg && (
-              <div className="p-3.5 bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-medium rounded-xl flex items-center gap-2.5 animate-in fade-in zoom-in-95 duration-200">
+              <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-medium rounded-xl flex items-center gap-2.5 animate-in fade-in zoom-in-95 duration-200">
                 <span>⚠️</span>{" "}
                 <span className="flex-1 leading-normal">{errorMsg}</span>
               </div>
             )}
             {successMsg && (
-              <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-medium rounded-xl flex items-center gap-2.5 animate-in fade-in zoom-in-95 duration-200">
-                <span>✅</span> <span>{successMsg}</span>
+              <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-medium rounded-xl flex items-center gap-2.5 animate-in fade-in zoom-in-95 duration-200">
+                <span>✅</span>{" "}
+                <span className="flex-1 leading-normal">{successMsg}</span>
               </div>
             )}
 
-            {/* Field Input Email */}
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label
                 htmlFor="email"
                 className={`block text-[11px] font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-500"}`}
               >
-                Alamat Email
+                Email Address
               </label>
               <input
                 id="email"
@@ -231,7 +228,7 @@ export default function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                placeholder="nama@xmum.edu.my"
+                placeholder="name@xmum.edu.my"
                 className={`w-full px-4 py-3 rounded-xl border text-sm transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 ${
                   isDark
                     ? "bg-slate-900 border-slate-800 text-white placeholder:text-slate-600 focus:border-transparent"
@@ -240,13 +237,12 @@ export default function AdminLogin() {
               />
             </div>
 
-            {/* Field Input Password */}
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label
                 htmlFor="password"
                 className={`block text-[11px] font-bold uppercase tracking-wider ${isDark ? "text-slate-400" : "text-slate-500"}`}
               >
-                Kata Sandi
+                Password
               </label>
               <input
                 id="password"
@@ -264,46 +260,46 @@ export default function AdminLogin() {
               />
             </div>
 
-            {/* Tombol Sign In */}
-            <button
-              type="submit"
-              disabled={loading}
-              className={`w-full py-3 px-4 font-bold rounded-xl text-sm transition-all duration-150 flex justify-center items-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none mt-2 shadow-sm ${
-                isDark
-                  ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/10"
-                  : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/10"
-              }`}
-            >
-              {loading ? (
-                <>
-                  <svg
-                    className="animate-spin h-4 w-4 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  <span>Mengecek Akun...</span>
-                </>
-              ) : (
-                "Masuk ke Portal"
-              )}
-            </button>
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full py-3.5 px-4 font-bold rounded-xl text-sm transition-all duration-150 flex justify-center items-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none shadow-sm ${
+                  isDark
+                    ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-indigo-600/10"
+                    : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/10"
+                }`}
+              >
+                {loading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    <span>Verifying account...</span>
+                  </>
+                ) : (
+                  "Sign in to Portal"
+                )}
+              </button>
+            </div>
 
-            {/* Tombol Kembali ke Halaman Utama Chat */}
-            <div className="pt-4 text-center">
+            <div className="pt-6 text-center">
               <a
                 href="/"
                 className={`text-xs font-semibold transition-all hover:underline inline-block py-1 ${
@@ -312,7 +308,7 @@ export default function AdminLogin() {
                     : "text-slate-400 hover:text-indigo-600"
                 }`}
               >
-                ← Kembali ke Chatbot Asisten Kampus
+                &larr; Back to Campus Chatbot
               </a>
             </div>
           </form>

@@ -471,8 +471,8 @@ export default function KnowledgeBaseCMS() {
               </p>
             </div>
           ) : (
-            /* Wajib overflow-x-auto + min-w agar tabel tidak bonyok di layar mobile */
             <div className="overflow-x-auto w-full">
+              {/* Overflow scroll wrapper for table on mobile */}
               <table className="w-full text-left border-collapse min-w-[950px]">
                 <thead>
                   <tr className="bg-slate-900/80 text-slate-400 text-[10px] font-bold uppercase tracking-wider border-b border-white/5">
@@ -541,7 +541,7 @@ export default function KnowledgeBaseCMS() {
                           </div>
                         </td>
 
-                        {/* Actions (Tetap kokoh dengan w-24, anti meluber) */}
+                        {/* Actions column */}
                         <td className="py-4 px-4 text-right space-x-1 whitespace-nowrap w-24">
                           <button
                             onClick={() => openEditModal(item)}

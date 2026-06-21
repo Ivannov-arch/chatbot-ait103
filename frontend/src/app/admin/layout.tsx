@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
 /* ──────────────────────────────────────────
-   Inline SVG icon helpers (Tambahan Icon Menu & Close)
+   Inline SVG icon helpers
 ────────────────────────────────────────── */
 function IconMenu() {
   return (
@@ -177,7 +177,7 @@ export default function AdminLayout({
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); // State kontrol menu HP
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const isLoginPage = pathname === "/admin/login";
 
@@ -198,7 +198,6 @@ export default function AdminLayout({
     checkAuth();
   }, [router, isLoginPage]);
 
-  // Tutup sidebar otomatis saat pindah rute di HP
   useEffect(() => {
     setMobileSidebarOpen(false);
   }, [pathname]);
@@ -244,15 +243,18 @@ export default function AdminLayout({
 
   if (isLoginPage) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-slate-900 to-indigo-950 p-4 z-[9999]">
-        {children}
+      <div className="fixed inset-0 overflow-y-auto bg-gradient-to-br from-slate-900 to-indigo-950 z-[9999]">
+        <div className="min-h-full w-full flex items-center justify-center p-6 sm:p-10 md:p-16">
+          <div className="w-full flex justify-center items-center flex-shrink-0">
+            {children}
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="fixed inset-0 flex flex-row bg-[#0b1020] text-slate-100 z-[9999] overflow-hidden antialiased">
-      {/* OVERLAY: Muncul saat sidebar mobile aktif */}
       {mobileSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm transition-opacity duration-200"
@@ -260,7 +262,7 @@ export default function AdminLayout({
         />
       )}
 
-      {/* ── SIDEBAR RESPONSIVE ── */}
+      {/* RESPONSIVE SIDEBAR */}
       <aside
         className={`fixed md:static inset-y-0 left-0 z-50 flex flex-col justify-between w-64 flex-shrink-0 bg-[#0f172a] border-r border-white/5 overflow-hidden transition-transform duration-300 ease-in-out ${
           mobileSidebarOpen
@@ -271,7 +273,6 @@ export default function AdminLayout({
         <div className="relative">
           <div className="absolute inset-x-0 top-0 h-32 pointer-events-none bg-gradient-to-b from-indigo-500/10 to-transparent" />
 
-          {/* Logo Section */}
           <div className="relative flex items-center justify-between px-5 py-5 border-b border-white/5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-900/60">
@@ -286,7 +287,6 @@ export default function AdminLayout({
                 </p>
               </div>
             </div>
-            {/* Tombol Close Sidebar (Hanya muncul di HP) */}
             <button
               className="md:hidden text-slate-400 hover:text-white p-1"
               onClick={() => setMobileSidebarOpen(false)}
@@ -295,7 +295,6 @@ export default function AdminLayout({
             </button>
           </div>
 
-          {/* Navigasi */}
           <nav className="relative px-3 pt-4 space-y-1">
             <NavItem
               href="/admin"
@@ -326,7 +325,6 @@ export default function AdminLayout({
           </nav>
         </div>
 
-        {/* User / Sign Out Area */}
         <div className="px-3 py-4 border-t border-white/5 bg-slate-900/40">
           <div className="flex items-center gap-3 px-3 py-2 mb-3">
             <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-bold text-xs text-white shrink-0">
@@ -350,12 +348,10 @@ export default function AdminLayout({
         </div>
       </aside>
 
-      {/* ── AREA KONTEN UTAMA ── */}
+      {/* MAIN CONTENT AREA */}
       <main className="flex-1 flex flex-col w-full">
-        {/* Top Header */}
         <header className="h-14 bg-slate-900/80 border-b border-white/5 flex items-center justify-between px-4 sm:px-6 shrink-0 backdrop-blur-sm">
           <div className="flex items-center gap-3">
-            {/* Burger Button (Hanya muncul di HP) */}
             <button
               className="md:hidden text-slate-300 hover:text-white p-1.5 rounded-lg bg-white/5"
               onClick={() => setMobileSidebarOpen(true)}
@@ -375,7 +371,6 @@ export default function AdminLayout({
           </div>
         </header>
 
-        {/* Scrollable Container - Tambahkan padding di sini */}
         <div className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8 focus:outline-none">
           {children}
         </div>
