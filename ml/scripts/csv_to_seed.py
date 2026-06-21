@@ -17,8 +17,11 @@ import csv
 import json
 import pathlib
 
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parents[1]
+DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "database" / "seeds"
 
-def csv_to_json(csv_path: str):
+
+def csv_to_json(csv_path: str, output_dir: pathlib.Path = DEFAULT_OUTPUT_DIR):
     path = pathlib.Path(csv_path)
     if not path.exists():
         print(f"ERROR: File not found: {csv_path}")
@@ -27,12 +30,13 @@ def csv_to_json(csv_path: str):
     # Group by module
     modules: dict[str, list[dict]] = {}
 
-    with open(path, encoding="utf-8-sig") as f:  # utf-8-sig handles Excel BOM
-        reader = csv.DictReader(f)
+    with open(path, encoding="utf-8-sig", newline="") as f:  # utf-8-sig handles Excel BOM
+        reader = csv.DictReader(f, skipinitialspace=True)
         rows = list(reader)
 
     for row in rows:
         module = row.get("module", "").strip()
+        sub_intent = row.get("sub_intent", "").strip()
         question = row.get("question", "").strip()
         answer = row.get("answer", "").strip()
         keywords_raw = row.get("keywords", "")
@@ -44,15 +48,17 @@ def csv_to_json(csv_path: str):
 
         if module not in modules:
             modules[module] = []
-        modules[module].append({
+        item = {
             "module": module,
             "question": question,
             "answer": answer,
             "keywords": keywords,
-        })
+        }
+        if sub_intent:
+            item["sub_intent"] = sub_intent
+        modules[module].append(item)
 
     # Save each module to its respective JSON file
-    output_dir = pathlib.Path("database/seeds")
     output_dir.mkdir(parents=True, exist_ok=True)
     total = 0
     for module, items in modules.items():
