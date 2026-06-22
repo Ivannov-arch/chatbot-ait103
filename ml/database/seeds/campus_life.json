@@ -393,12 +393,19 @@
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "Are there any laundry facilities available?",
-    "answer": "Yes, there is a laundry room on the ground floor of each block, providing high-efficiency and fully automatic washing machines and dryers.",
+    "answer": "At XMUM, the self-service laundry room is located on the ground floor of each residential block. The laundry rooms provide washing machines and dryers for residents.",
     "keywords": [
       "laundry",
-      "facilities",
+      "laundry room",
+      "where is laundry room",
+      "laundry facilities",
       "washing",
-      "dryers"
+      "washing machine",
+      "dryer",
+      "dryers",
+      "residence laundry",
+      "hostel laundry",
+      "ground floor laundry"
     ]
   },
   {
@@ -1822,11 +1829,18 @@
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "How can students make an appointment with the Counselling Centre?",
-    "answer": "Students can make an appointment by visiting http://www.xmu.edu.my/2017/0527/c14709a285624/page.htm or https://forms.office.com/r/thC285mijta.",
+    "answer": "Students can make a Counselling Centre appointment through the official counselling page at https://www.xmu.edu.my/campus-life/counseling-centre or the appointment form at https://forms.office.com/r/thC285mjta. The Counselling Centre is also listed at Room B1-110 / B1 #111 during office hours.",
     "keywords": [
       "counselling centre",
+      "counseling centre",
       "appointment",
-      "booking"
+      "booking",
+      "make counselling appointment",
+      "make counseling appointment",
+      "stress appointment",
+      "mental health appointment",
+      "counselling form",
+      "counseling form"
     ]
   },
   {
@@ -2144,13 +2158,23 @@
   },
   {
     "module": "campus_life",
-    "sub_intent": "housing_application",
+    "sub_intent": "hostel_rules_maintenance",
     "question": "What are the guidelines for using public refrigerators at XMUM Residences?",
-    "answer": "All items must be stored in properly-covered, sealed containers, tagged with date of storage, owner's name, and room number. The storage period is limited to ONE week. Prohibited items include alcohol, drugs, unsealed items, strong-odour food, oversized items, and expired items.",
+    "answer": "Yes, public refrigerators are available in the common pantry on each floor of the on-campus residences. Store items in properly sealed containers, bottles, or plastic bags, and tag them clearly with your name, room number, and storage date. Items may be stored for a maximum of one week unless retagged with an updated date. Refrigerators are generally cleaned out every Thursday, and expired, untagged, or improperly stored items may be disposed of without notification.",
     "keywords": [
-      "residences",
       "public refrigerator",
-      "guidelines"
+      "public refrigerators",
+      "fridge",
+      "refrigerator",
+      "common pantry",
+      "pantry refrigerator",
+      "residence refrigerator",
+      "hostel refrigerator",
+      "food storage",
+      "tag food",
+      "clean-out",
+      "clean out",
+      "thursday clean-out"
     ]
   },
   {
@@ -2290,11 +2314,19 @@
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "How can students connect to the campus Wi-Fi?",
-    "answer": "Students can connect to the campus Wi-Fi network named \"Student-5G\" or \"Student\" using the security key/password \"xmustudent\".",
+    "answer": "Students should connect to the campus Wi-Fi network such as \"Student\" or \"Student-5G\" and log in using their Student ID / Campus ID and password when prompted. Do not use the old shared password information; if your Student ID login fails, reset your Campus ID password at https://id.xmu.edu.my or contact IT support.",
     "keywords": [
       "it",
+      "wifi",
       "wi-fi",
-      "connection"
+      "connection",
+      "wifi connection",
+      "wifi connection problem",
+      "student wifi",
+      "student-5g",
+      "student id login",
+      "campus id password",
+      "network login"
     ]
   },
   {
@@ -4261,6 +4293,176 @@
       "security emergency",
       "medical issue",
       "residence issue"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "food_dining",
+    "question": "What can I eat for lunch or dinner on campus?",
+    "answer": "For lunch or dinner, check the XMUM cafeteria / canteen options first. Common choices in the local database include Middle Eastern or Central Asian food, Chinese Muslim food, Japanese options, vegetarian food, bakery or dessert, coffee or milk tea, and other stalls depending on operating hours. If you have halal, vegetarian, or allergy requirements, verify directly with the stall before ordering.",
+    "keywords": [
+      "lunch",
+      "dinner",
+      "meal",
+      "lunch suggestion",
+      "dinner suggestion",
+      "food suggestion",
+      "food recommendation",
+      "where to eat",
+      "eat lunch",
+      "eat dinner",
+      "canteen meal",
+      "cafeteria meal"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "it_connectivity",
+    "question": "How do I solve a WiFi connection problem on campus?",
+    "answer": "For campus WiFi connection problems, connect to the student WiFi network and log in using your Student ID / Campus ID and password. If the login page does not appear, forget and reconnect to the network, try another browser, or restart WiFi. If your Student ID password is the issue, reset it at https://id.xmu.edu.my or contact IT support / raise an AskA request.",
+    "keywords": [
+      "wifi connection problem",
+      "wi-fi connection problem",
+      "cannot connect wifi",
+      "wifi login problem",
+      "student id wifi",
+      "campus id wifi",
+      "student wifi problem",
+      "network problem",
+      "wifi password",
+      "wifi issue"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "it_connectivity",
+    "question": "How do I log in to student email?",
+    "answer": "To log in to your XMUM student email, go to the Microsoft Office / Microsoft 365 portal and sign in with your campus email address, usually in the format CampusID@xmu.edu.my. Use your Campus ID password. If this is your first login, follow the password setup instructions and change the password when required.",
+    "keywords": [
+      "log in to student email",
+      "login student email",
+      "student email login",
+      "campus email login",
+      "microsoft office portal",
+      "microsoft 365 login",
+      "campusid@xmu.edu.my",
+      "campus email address"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "it_connectivity",
+    "question": "I forgot my email password, what should I do?",
+    "answer": "If you forgot your XMUM campus email password, reset it online through the CampusID portal at https://id.xmu.edu.my. If you cannot complete the reset, contact IT support to verify your identity, email it@xmu.edu.my, or raise an AskA request with the required identification documents.",
+    "keywords": [
+      "forgot email password",
+      "forgot my email password",
+      "student email password",
+      "campus email password",
+      "reset email password",
+      "email password reset",
+      "campusid portal",
+      "id.xmu.edu.my"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "it_connectivity",
+    "question": "How do I access Office 365?",
+    "answer": "Access Office 365 / Microsoft 365 through the Microsoft Office portal using your XMUM campus email address, usually CampusID@xmu.edu.my, and your Campus ID password. After signing in, you can use Outlook and other Microsoft 365 cloud services provided to students.",
+    "keywords": [
+      "office 365",
+      "access office 365",
+      "microsoft 365",
+      "microsoft office portal",
+      "outlook",
+      "teams",
+      "student email office 365",
+      "office portal"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "library",
+    "question": "How do I renew a borrowed book?",
+    "answer": "To renew a borrowed library book, check your library account through the library OPAC / online account if renewal is available, or contact the Library Circulation Counter before the due date. Renewal may not be allowed if the item is overdue, reserved by another user, or restricted by library rules.",
+    "keywords": [
+      "renew borrowed book",
+      "renew a borrowed book",
+      "renew book",
+      "library renewal",
+      "borrowed book renewal",
+      "extend book loan",
+      "library account renewal",
+      "opac renewal"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "facilities_services",
+    "question": "Where is the Student Activity Centre?",
+    "answer": "The Student Activity Centre is in Building B1. Several student facilities are associated with Building B1, including the gym on the 3rd floor, sports and activity spaces, and nearby student service areas. For a specific facility inside the Student Activity Centre, check the relevant facility guidance or ask the responsible office.",
+    "keywords": [
+      "student activity centre",
+      "student activity center",
+      "where is student activity centre",
+      "where is student activity center",
+      "sac",
+      "building b1",
+      "b1 activity centre",
+      "activity centre location"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "health_safety",
+    "question": "How do I contact campus security?",
+    "answer": "For campus security or urgent campus emergencies, call the 24-hour Security Hotline at 019-348 9999 or 019-295 9998. For non-urgent matters, follow campus security instructions or contact the relevant office during working hours.",
+    "keywords": [
+      "contact campus security",
+      "campus security",
+      "security hotline",
+      "security contact",
+      "call security",
+      "security emergency",
+      "019-348 9999",
+      "019-295 9998"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "health_safety",
+    "question": "What should I do if a student faints or has a medical emergency on campus?",
+    "answer": "If a student faints or there is an immediate medical emergency, call campus Security first at 019-348 9999 or 019-295 9998 so they can coordinate urgent assistance on campus. If the situation is life-threatening, call Malaysia emergency services at 999. Keep the student safe, do not move them unnecessarily, and ask nearby staff for help. For non-urgent healthcare, students can visit Plux Health Clinic at Block B1 Ground Floor, Unit G11.",
+    "keywords": [
+      "student fainted",
+      "fainted",
+      "medical emergency",
+      "student collapsed",
+      "near cafeteria emergency",
+      "ambulance",
+      "clinic emergency",
+      "call security ambulance clinic",
+      "plux clinic",
+      "campus emergency"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "health_safety",
+    "question": "I feel stressed and need counselling. How can I make an appointment?",
+    "answer": "XMUM students can use the Counselling Centre for mental health and study-stress support. Make an appointment through https://www.xmu.edu.my/campus-life/counseling-centre or the appointment form at https://forms.office.com/r/thC285mjta. If you feel at immediate risk or it is an emergency, contact campus Security or emergency services right away.",
+    "keywords": [
+      "feel stressed",
+      "stress counselling",
+      "stress counseling",
+      "cannot focus",
+      "mental health support",
+      "counselling appointment",
+      "counseling appointment",
+      "make counselling appointment",
+      "make counseling appointment",
+      "thc285mjta"
     ]
   }
 ]

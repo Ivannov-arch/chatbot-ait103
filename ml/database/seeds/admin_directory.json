@@ -841,5 +841,37 @@
       "office",
       "scholarships"
     ]
+  },
+  {
+    "module": "admin_directory",
+    "sub_intent": "contact_us",
+    "question": "Which official contact should parents use for admission, fees, and campus visit arrangements?",
+    "answer": "For admission enquiries and campus visit arrangements, parents should start with the Admissions contact at admissions@xmu.edu.my. For fee-specific payment or invoice matters, contact the Finance Office at finance@xmu.edu.my or 03-8800 6856. For final confirmation, use the latest contact information on XMUM official channels.",
+    "keywords": [
+      "parent call xmum",
+      "parents contact",
+      "admission fees campus visit",
+      "campus visit arrangements",
+      "official contact admission fees",
+      "admissions contact",
+      "admission enquiries",
+      "finance contact",
+      "campus visit contact"
+    ]
+  },
+  {
+    "module": "admin_directory",
+    "sub_intent": "contact_us",
+    "question": "Where can I find official office hours?",
+    "answer": "Official office hours are listed in the relevant office contact information. Common office hours in the local database are Monday to Friday, usually 8:30 am to 5:30 pm for many student-facing offices, while some offices differ, such as Finance Office 9:00 am to 5:00 pm and ISAO 9:00 am to 5:00 pm. Always confirm with the specific office for the latest official hours.",
+    "keywords": [
+      "official office hours",
+      "where can i find official office hours",
+      "office hours",
+      "official hours",
+      "working hours",
+      "counter hours",
+      "office operating hours"
+    ]
   }
 ]
