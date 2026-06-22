@@ -34,8 +34,21 @@ const FALLBACK_SUGGESTIONS = [
   "Bus schedule",
 ];
 
+const SESSION_STORAGE_KEY = "xmum-chat-session-id";
+
+function getBrowserSessionId() {
+  if (typeof window === "undefined") return "browser-default";
+
+  const existing = window.localStorage.getItem(SESSION_STORAGE_KEY);
+  if (existing) return existing;
+
+  const sessionId = `web-${crypto.randomUUID()}`;
+  window.localStorage.setItem(SESSION_STORAGE_KEY, sessionId);
+  return sessionId;
+}
+
 export default function ChatbotHome() {
-  const [apiBaseUrl, setApiBaseUrl]     = useState("");
+  const [apiBaseUrl]                    = useState(() => process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000");
   const [apiStatus, setApiStatus]       = useState<"connecting" | "connected" | "error">("connecting");
   const [apiStatusMsg, setApiStatusMsg] = useState("Connecting to backend...");
   const [messages, setMessages]         = useState<Message[]>([]);
@@ -49,6 +62,7 @@ export default function ChatbotHome() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef       = useRef<HTMLInputElement>(null);
+  const sessionIdRef   = useRef<string>("browser-default");
 
   // ── Check Supabase admin session ─────────────────────────────────────────
   useEffect(() => {
@@ -62,9 +76,9 @@ export default function ChatbotHome() {
     checkAdmin();
   }, []);
 
-  // ── Resolve API base URL ──────────────────────────────────────────────────
+  // ── Resolve browser session ───────────────────────────────────────────────
   useEffect(() => {
-    setApiBaseUrl(process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000");
+    sessionIdRef.current = getBrowserSessionId();
   }, []);
 
   // ── Health check + greeting + suggestions ─────────────────────────────────
@@ -142,7 +156,11 @@ export default function ChatbotHome() {
     let debug: DebugData | undefined;
 
     try {
-      const payload = { message: text, debug: showDebug };
+      const payload = {
+        message: text,
+        session_id: sessionIdRef.current,
+        debug: showDebug,
+      };
       let response: Response | undefined;
 
       for (const path of ["/api/chat", "/chat"]) {
@@ -269,7 +287,7 @@ export default function ChatbotHome() {
                   {msg.debugData.matched_question && (
                     <div className="debug-row">
                       <span className="debug-key">Best match</span>
-                      <span className="debug-val">"{msg.debugData.matched_question}"</span>
+                      <span className="debug-val">&quot;{msg.debugData.matched_question}&quot;</span>
                     </div>
                   )}
                   {msg.debugData.confidence !== undefined && (
