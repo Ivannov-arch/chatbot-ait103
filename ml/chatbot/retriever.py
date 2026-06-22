@@ -26,8 +26,13 @@ load_dotenv()
 
 
 LOW_SIGNAL_QUERY_TERMS = {
+    "answer",
+    "answers",
     "available",
     "campus",
+    "chatbot",
+    "current",
+    "data",
     "help",
     "information",
     "know",
@@ -35,8 +40,11 @@ LOW_SIGNAL_QUERY_TERMS = {
     "need",
     "provide",
     "provided",
+    "question",
+    "questions",
     "service",
     "services",
+    "source",
     "student",
     "students",
     "university",
@@ -203,7 +211,7 @@ class KnowledgeRetriever:
         for item in candidates:
             score = self._score_item(user_message, item, extracted_entities)
             if sub_intent and sub_intent != "unknown" and item.sub_intent == sub_intent:
-                score += 1.0
+                score += 3.0
             scores.append((item, score))
         
         # Sort by score descending
@@ -331,7 +339,6 @@ class KnowledgeRetriever:
         scores = [
             (item, self._score_item(user_message, item, extracted_entities))
             for item in self.knowledge_base
-            if item.module != "general"
         ]
         scores.sort(key=lambda x: x[1], reverse=True)
 

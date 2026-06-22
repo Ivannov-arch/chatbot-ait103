@@ -1,4 +1,6 @@
 # main.py
+from uuid import uuid4
+
 from chatbot.bot import Bot
 from chatbot.responder import ResponseFormatter
 def main():
@@ -12,6 +14,7 @@ def main():
     print("Type your questions. Type 'quit' or 'exit' to stop.\n")
     
     bot = Bot()
+    session_id = f"cli-{uuid4()}"
     
     while True:
         user_input = input("You: ").strip()
@@ -20,7 +23,7 @@ def main():
         if user_input.lower() in ["quit", "exit", "bye"]:
             print("Chatbot: Goodbye!")
             break
-        response = bot.process_message(user_input, debug=True)
+        response = bot.process_message(user_input, session_id=session_id, debug=True)
         print(ResponseFormatter._to_console(response))
         print()
 

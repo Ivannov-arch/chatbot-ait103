@@ -4,34 +4,21 @@
     "sub_intent": "internship_career",
     "question": "How can students make an appointment with the Career Services Office?",
     "answer": "Students can make an appointment by sending an email to careerservices@xmu.edu.my before visiting.",
-    "keywords": [
-      "contact",
-      "appointment",
-      "email",
-      "careerservices@xmu.edu.my"
-    ]
+    "keywords": ["contact", "appointment", "email", "careerservices@xmu.edu.my"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "What is the mission of the Career Services Office (CSO)?",
     "answer": "CSO aspires to equip students with tools, skills, and resources to explore, develop, and manage their career pathways, enabling them to emerge as career-ready graduates with great humanistic capacity, professional knowledge, and skills.",
-    "keywords": [
-      "career services",
-      "mission",
-      "student careers"
-    ]
+    "keywords": ["career services", "mission", "student careers"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "What core activities does the Career Services Office (CSO) organize?",
     "answer": "CSO organizes career coaching, Industry Engagement Sessions (IES), Grill The Drill Series (GTD), Industrial Visits, Structured Internship Briefings (SIB), Internship & Job Placement Support, Campus Career Fairs, and On-campus recruitment (OCR).",
-    "keywords": [
-      "career services",
-      "activities",
-      "events"
-    ]
+    "keywords": ["career services", "activities", "events"]
   },
   {
     "module": "academic_navigation",
@@ -98,11 +85,7 @@
     "sub_intent": "admissions_enrollment",
     "question": "What happens if a student fails to register within the stipulated time after receiving an admission offer?",
     "answer": "If students fail to register within the stipulated time, they are deemed to have declined the admission offer, although late registration may be allowed within 1-2 weeks with plausible reasons and supporting evidence.",
-    "keywords": [
-      "admission",
-      "registration",
-      "deadline"
-    ]
+    "keywords": ["admission", "registration", "deadline"]
   },
   {
     "module": "academic_navigation",
@@ -123,60 +106,35 @@
     "sub_intent": "admissions_enrollment",
     "question": "Are the foundation programmes of other institutions recognised by XMUM?",
     "answer": "Yes, we recognise foundation programmes from other institutions that are accredited by MOHE Malaysia. Admission, however, is subject to a stringent internal evaluation process.",
-    "keywords": [
-      "foundation",
-      "recognition",
-      "transfer",
-      "mohe"
-    ]
+    "keywords": ["foundation", "recognition", "transfer", "mohe"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "How many credit hours do I need to complete for graduation?",
     "answer": "The minimum credits for graduation vary for different programmes. Only when a student fulfils the minimum credits required and attains at least a CGPA of 2.0 (for foundation and undergraduate programmes), can he or she be conferred a degree.",
-    "keywords": [
-      "graduation",
-      "credits",
-      "cgpa",
-      "requirements"
-    ]
+    "keywords": ["graduation", "credits", "cgpa", "requirements"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "postgrad_resources",
     "question": "Do students have opportunities to study abroad?",
     "answer": "Yes. XMUM collaborates with more than 40 partner universities, providing students with opportunities to study abroad or join exchange programmes for one semester or an academic year. Students may also undertake internships or pursue postgraduate studies either in Malaysia or overseas. The international recognition of XMUM’s qualifications further supports graduates in building strong and successful careers.",
-    "keywords": [
-      "study abroad",
-      "exchange",
-      "international",
-      "opportunities"
-    ]
+    "keywords": ["study abroad", "exchange", "international", "opportunities"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "admissions_enrollment",
     "question": "How to apply to study at XMUM?",
     "answer": "To study here, the applicant can submit an online application, an email application or a paper application.",
-    "keywords": [
-      "application",
-      "how to apply",
-      "online",
-      "email"
-    ]
+    "keywords": ["application", "how to apply", "online", "email"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "admissions_enrollment",
     "question": "After gaining a letter of acceptance, what should an applicant do next?",
     "answer": "The applicant needs to sign the Student Acceptance Slip and email the scanned copy to the Admissions Office (admissions@xmu.edu.my).",
-    "keywords": [
-      "acceptance",
-      "post-offer",
-      "next steps",
-      "email"
-    ]
+    "keywords": ["acceptance", "post-offer", "next steps", "email"]
   },
   {
     "module": "academic_navigation",
@@ -214,89 +172,56 @@
     "sub_intent": "exams_grades",
     "question": "How often is student evaluation of teaching conducted?",
     "answer": "Student evaluation of teaching is conducted twice during the long semester and once during the short semester.",
-    "keywords": [
-      "evaluation",
-      "teaching",
-      "frequency"
-    ]
+    "keywords": ["evaluation", "teaching", "frequency"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What happens if students do not participate in the student evaluation of teaching?",
     "answer": "Final semester results will not be released within the required timeframe to students who have not participated in the evaluation process.",
-    "keywords": [
-      "evaluation",
-      "results",
-      "consequence"
-    ]
+    "keywords": ["evaluation", "results", "consequence"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What happens if a student fails to meet the minimum attendance requirement?",
     "answer": "Students who fail to meet the 80% attendance requirement without valid reasons will be barred from taking the final examination for that course and will receive a Grade F.",
-    "keywords": [
-      "attendance",
-      "consequences",
-      "examination"
-    ]
+    "keywords": ["attendance", "consequences", "examination"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is a \"CONDITIONAL PASS\" status?",
     "answer": "A \"CONDITIONAL PASS\" status (Grade Point of 1.7 or Grade C-) allows students to retake the course to achieve a \"Pass\" or higher grade, but can only be utilized ONCE throughout the student's study duration, provided GPA and CGPA are above 2.0 in the current semester.",
-    "keywords": [
-      "conditional pass",
-      "grades",
-      "retake"
-    ]
+    "keywords": ["conditional pass", "grades", "retake"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "When are official results released to students?",
     "answer": "Official results will be made available to students through the AC system within three weeks after the completion of the final examination.",
-    "keywords": [
-      "results",
-      "release",
-      "timeframe"
-    ]
+    "keywords": ["results", "release", "timeframe"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the Student Discipline and Behaviour Committee (SDBC) responsible for?",
     "answer": "The SDBC is a committee responsible for handling academic disciplinary-related matters and imposing penalties on students found to have committed misconduct.",
-    "keywords": [
-      "sdbc",
-      "discipline",
-      "misconduct"
-    ]
+    "keywords": ["sdbc", "discipline", "misconduct"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What are the graduation requirements at XMUM?",
     "answer": "To be conferred a degree, students must fulfill minimum total credit hours, attain a minimum CGPA of 2.0, have received at most one \"Conditional Pass\" status, and fully settle all outstanding fees and charges.",
-    "keywords": [
-      "graduation",
-      "requirements",
-      "cgpa",
-      "fees"
-    ]
+    "keywords": ["graduation", "requirements", "cgpa", "fees"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the main purpose of the International Student Affairs Office (ISAO)?",
     "answer": "The main purpose of ISAO is to provide advice, information, and support for all international students at XMUM throughout their student lifecycle, from student pass application to graduation.",
-    "keywords": [
-      "isao",
-      "international students",
-      "support"
-    ]
+    "keywords": ["isao", "international students", "support"]
   },
   {
     "module": "academic_navigation",
@@ -318,11 +243,7 @@
     "sub_intent": "visa_immigration",
     "question": "What is the basic rule for international students regarding student passes?",
     "answer": "All international students are required to have a valid student pass during their entire period of study in Malaysia.",
-    "keywords": [
-      "international students",
-      "student pass",
-      "rules"
-    ]
+    "keywords": ["international students", "student pass", "rules"]
   },
   {
     "module": "academic_navigation",
@@ -358,11 +279,7 @@
     "sub_intent": "visa_immigration",
     "question": "What academic requirements must international students maintain to avoid student pass revocation?",
     "answer": "International students must maintain a minimum of 80% attendance in all scheduled classes and achieve a CGPA above 2.0 for academic performance, failing which their student pass may be revoked.",
-    "keywords": [
-      "international students",
-      "attendance",
-      "cgpa"
-    ]
+    "keywords": ["international students", "attendance", "cgpa"]
   },
   {
     "module": "academic_navigation",
@@ -384,60 +301,35 @@
     "sub_intent": "internship_career",
     "question": "What is the primary role of the Career Services Office (CSO) at Xiamen University Malaysia?",
     "answer": "The Career Services Office (CSO) supports students and graduates in navigating the world of careers, turning aspirations into action, and potential into purpose.",
-    "keywords": [
-      "career",
-      "support",
-      "students",
-      "graduates"
-    ]
+    "keywords": ["career", "support", "students", "graduates"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "Who does the Career Services Office (CSO) provide support to?",
     "answer": "The Career Services Office (CSO) provides guidance and support to students and graduates of Xiamen University Malaysia (XMUM).",
-    "keywords": [
-      "students",
-      "graduates",
-      "support",
-      "xmum"
-    ]
+    "keywords": ["students", "graduates", "support", "xmum"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "What kind of assistance does Career Coaching offer?",
     "answer": "Career Coaching offers personalized one-on-one sessions to help students discover strengths, clarify goals, and explore their best-fit career path with clarity and confidence.",
-    "keywords": [
-      "coaching",
-      "strengths",
-      "goals",
-      "path"
-    ]
+    "keywords": ["coaching", "strengths", "goals", "path"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "What topics are covered in the workshops offered by the Career Services Office?",
     "answer": "Workshops cover practical skills such as crafting standout resumes, mastering interviews, and personal branding, designed to equip students for success.",
-    "keywords": [
-      "workshops",
-      "resumes",
-      "interviews",
-      "branding"
-    ]
+    "keywords": ["workshops", "resumes", "interviews", "branding"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "How does the Career Services Office connect students with employers?",
     "answer": "The Career Services Office organizes signature campus career fairs and on-campus recruitment events to connect students with recruiters and explore industries.",
-    "keywords": [
-      "career fairs",
-      "employers",
-      "recruitment",
-      "opportunities"
-    ]
+    "keywords": ["career fairs", "employers", "recruitment", "opportunities"]
   },
   {
     "module": "academic_navigation",
@@ -456,204 +348,119 @@
     "sub_intent": "internship_career",
     "question": "What benefits do Industry Partnerships and MoUs provide to students?",
     "answer": "Industry Partnerships and Memorandums of Understanding (MoUs) create long-term collaborations that offer students early access to job offers, mentorship, and real-world projects.",
-    "keywords": [
-      "partnerships",
-      "mous",
-      "job offers",
-      "mentorship"
-    ]
+    "keywords": ["partnerships", "mous", "job offers", "mentorship"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "What is the mission of the Career Services Office at Xiamen University Malaysia?",
     "answer": "The mission of the Career Services Office is to empower XMUM students to confidently pursue their purpose and potential, with heart, skill, and the support they need to thrive.",
-    "keywords": [
-      "mission",
-      "empower",
-      "purpose",
-      "potential"
-    ]
+    "keywords": ["mission", "empower", "purpose", "potential"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "internship_career",
     "question": "Where is the Career Services Office located?",
     "answer": "The Career Services Office is located at B1-107.",
-    "keywords": [
-      "location",
-      "office",
-      "b1-107",
-      "contact"
-    ]
+    "keywords": ["location", "office", "b1-107", "contact"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What types of undergraduate programmes does Xiamen University Malaysia (XMUM) offer?",
     "answer": "XMUM offers a wide range of carefully designed undergraduate programmes spanning academic disciplines like business, communication, science, technology, arts and social sciences, energy and chemical engineering, marine sciences, computing and data science, artificial intelligence and robotics, mathematics and physics, and traditional Chinese medicine.",
-    "keywords": [
-      "programmes",
-      "disciplines",
-      "fields",
-      "range"
-    ]
+    "keywords": ["programmes", "disciplines", "fields", "range"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What specific programmes are offered under Economics and Management?",
     "answer": "Under Economics and Management, XMUM offers Bachelor of Management in Accounting (Honours), Bachelor of Economics in Finance (Honours), Bachelor of Management in International Business (Honours), Bachelor of Management in E-Commerce (Honours), and Bachelor of Management in Hospitality Management (Honours).",
-    "keywords": [
-      "economics",
-      "management",
-      "programmes",
-      "degrees"
-    ]
+    "keywords": ["economics", "management", "programmes", "degrees"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What specific programmes are offered under Communication?",
     "answer": "Under Communication, XMUM offers Bachelor of Arts in Journalism (Honours), Bachelor of Arts in Advertising (Honours), and Bachelor of Arts in Communication (Honours).",
-    "keywords": [
-      "communication",
-      "journalism",
-      "advertising",
-      "arts"
-    ]
+    "keywords": ["communication", "journalism", "advertising", "arts"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What specific programmes are offered under Computing and Data Science?",
     "answer": "Under Computing and Data Science, XMUM offers Bachelor of Engineering in Computer Science and Technology (Honours), Bachelor of Engineering in Software Engineering (Honours), Bachelor of Engineering in Digital Media Technology (Honours), Bachelor of Engineering in Cyber Security (Honours), and Bachelor of Engineering in Data Science (Honours).",
-    "keywords": [
-      "computing",
-      "data science",
-      "engineering",
-      "software"
-    ]
+    "keywords": ["computing", "data science", "engineering", "software"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What specific programmes are offered under Artificial Intelligence and Robotics?",
     "answer": "Under Artificial Intelligence and Robotics, XMUM offers Bachelor of Electrical and Electronics Engineering (Hons), Bachelor of Engineering in Artificial Intelligence (Honours), and Bachelor of Robotics and Automation Engineering with Honours.",
-    "keywords": [
-      "ai",
-      "robotics",
-      "engineering",
-      "electrical"
-    ]
+    "keywords": ["ai", "robotics", "engineering", "electrical"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "How many methods are available to apply to XMUM?",
     "answer": "There are three easy methods to apply to XMUM: Online Application, Email Application, and Paper Application.",
-    "keywords": [
-      "application",
-      "methods",
-      "apply",
-      "enrollment"
-    ]
+    "keywords": ["application", "methods", "apply", "enrollment"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "admissions_enrollment",
     "question": "What is the application fee for XMUM?",
     "answer": "The application fee for XMUM is RM100 and is non-refundable.",
-    "keywords": [
-      "application",
-      "fee",
-      "cost",
-      "non-refundable"
-    ]
+    "keywords": ["application", "fee", "cost", "non-refundable"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is the registration fee for XMUM?",
     "answer": "The registration fee for XMUM is RM200 and is non-refundable.",
-    "keywords": [
-      "registration",
-      "fee",
-      "cost",
-      "non-refundable"
-    ]
+    "keywords": ["registration", "fee", "cost", "non-refundable"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What payment methods are accepted for fees at XMUM?",
     "answer": "XMUM accepts Cash, Cheque or Bank Draft, Bank Transfer, and Flywire (for new international students).",
-    "keywords": [
-      "payment",
-      "methods",
-      "fees",
-      "options"
-    ]
+    "keywords": ["payment", "methods", "fees", "options"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "Who is the beneficiary for fee payments made via bank transfer?",
     "answer": "The beneficiary for fee payments made via bank transfer is \"XMU JIAGENG EDUCATION DEVELOPMENT SDN BHD\".",
-    "keywords": [
-      "beneficiary",
-      "payment",
-      "bank",
-      "transfer"
-    ]
+    "keywords": ["beneficiary", "payment", "bank", "transfer"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "admissions_enrollment",
     "question": "What are the required supporting documents for application?",
     "answer": "Required supporting documents include a certified copy of academic transcripts, a certified copy of diploma/certificate, NRIC (Malaysians) or passport (International), Scholarship & Grant Form (if applicable), and proof of fee payment.",
-    "keywords": [
-      "documents",
-      "required",
-      "application",
-      "supporting"
-    ]
+    "keywords": ["documents", "required", "application", "supporting"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is Flywire and who is it for?",
     "answer": "Flywire is a service partnered with XMUM to streamline fee payments for international students, allowing them to pay in their home currency with benefits like online payment tracking, no bank fees, and 24/7 multilingual customer support.",
-    "keywords": [
-      "flywire",
-      "international",
-      "payments",
-      "fees"
-    ]
+    "keywords": ["flywire", "international", "payments", "fees"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the payment amounts for new international students using Flywire?",
     "answer": "New international students can pay Admin Fees (RM 3,068) or Admin Fees & Security Deposit (RM 4,068) using Flywire.",
-    "keywords": [
-      "flywire",
-      "international",
-      "fees",
-      "deposit"
-    ]
+    "keywords": ["flywire", "international", "fees", "deposit"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "Where can I find more information about scholarships and financial aids?",
     "answer": "More information about scholarships and financial aids can be found by visiting the \"Scholarships & Financial Aids\" section of the website.",
-    "keywords": [
-      "scholarships",
-      "financial",
-      "aids",
-      "information"
-    ]
+    "keywords": ["scholarships", "financial", "aids", "information"]
   },
   {
     "module": "academic_navigation",
@@ -927,63 +734,54 @@
     "sub_intent": "academic_system",
     "question": "What is provided to registered students for academic purposes?",
     "answer": "Registered students are given a university email, ID, and password to access the Academic Affairs Online System for course registration and other academic-related purposes.",
-    "keywords": [
-      "student services",
-      "academic system",
-      "login"
-    ]
+    "keywords": ["student services", "academic system", "login"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is the refund policy for tuition fees upon withdrawal?",
     "answer": "Students withdrawing within the first two teaching weeks of a new semester are eligible for a 50% tuition fee refund. After two weeks, there is no refund.",
-    "keywords": [
-      "tuition fees",
-      "refund",
-      "withdrawal"
-    ]
+    "keywords": ["tuition fees", "refund", "withdrawal"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is the fee policy if an application for deferment is received and approved before the semester starts?",
     "answer": "If an application for deferment is received and approved before the semester starts, the student is exempted from paying any fees for the semester.",
-    "keywords": [
-      "deferment",
-      "fees",
-      "exemption"
-    ]
+    "keywords": ["deferment", "fees", "exemption"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is the fee policy if a student applies for deferment after the semester starts?",
     "answer": "If a student applies for deferment after the semester starts, paid tuition fees will be transferred to the next semester. A 50% refund is given if deferment is within the first two teaching weeks; no refund after two weeks.",
-    "keywords": [
-      "deferment",
-      "fees",
-      "refund"
-    ]
+    "keywords": ["deferment", "fees", "refund"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What is the maximum credit hours allowed for a long semester?",
-    "answer": "The maximum credit hours for a long semester is 21.",
+    "answer": "The maximum credit hours for a long semester is 21. If you are asking how many credit hours your programme requires for graduation, refer to your course / programme handbook or study plan because total graduation credit requirements vary by programme.",
     "keywords": [
       "credit hours",
-      "long semester"
+      "long semester",
+      "how many credit hours do i need",
+      "credit hours needed",
+      "graduation credit hours",
+      "programme handbook",
+      "course handbook"
     ]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What is the maximum credit hours allowed for a short semester?",
-    "answer": "The maximum credit hours for a short semester is 7.",
+    "answer": "The maximum credit hours for a short semester is 7. If you need your required total programme credits, refer to your course / programme handbook or study plan because the total depends on your programme.",
     "keywords": [
       "credit hours",
-      "short semester"
+      "short semester",
+      "short semester credit limit",
+      "credit hours needed"
     ]
   },
   {
@@ -991,87 +789,56 @@
     "sub_intent": "courses_syllabus",
     "question": "What is the timeframe for adding or dropping courses?",
     "answer": "The designated timeframe for adding or dropping courses is TWO weeks for a long semester or ONE week for a short semester from the start date. Late applications (before week 5 for long, week 2 for short) may be considered for specific circumstances.",
-    "keywords": [
-      "course registration",
-      "add/drop",
-      "timeframe"
-    ]
+    "keywords": ["course registration", "add/drop", "timeframe"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the minimum credit requirement students must maintain when dropping courses?",
     "answer": "Students who wish to drop courses must maintain the minimum credit requirement for the semester (60% of the maximum credits per semester).",
-    "keywords": [
-      "course dropping",
-      "minimum credits"
-    ]
+    "keywords": ["course dropping", "minimum credits"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What happens if a student receives a 'Fail' grade in a compulsory course?",
     "answer": "If students receive a 'Fail' grade in a compulsory course, they are required to retake the same course.",
-    "keywords": [
-      "retake course",
-      "fail grade",
-      "compulsory"
-    ]
+    "keywords": ["retake course", "fail grade", "compulsory"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the fee policy for course retakes effective January 1, 2024?",
     "answer": "Effective 1 January 2024, all course retake attempts are subject to a chargeable fee: RM500.00 per credit hour for Art and Business courses, RM550.00 per credit hour for Science courses, and RM500.00 per credit hour for General Elective / MPU courses.",
-    "keywords": [
-      "retake course",
-      "fees",
-      "policy"
-    ]
+    "keywords": ["retake course", "fees", "policy"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What are the methods of course assessment?",
     "answer": "Course assessment methods can vary and may include continuous assessment (mid-terms, tests, assignments, laboratory work, presentations) and/or a final assessment (final examination).",
-    "keywords": [
-      "course assessment",
-      "methods",
-      "evaluation"
-    ]
+    "keywords": ["course assessment", "methods", "evaluation"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the minimum attendance requirement for each course?",
     "answer": "The minimum attendance requirement for each course is 80%.",
-    "keywords": [
-      "attendance",
-      "minimum",
-      "course"
-    ]
+    "keywords": ["attendance", "minimum", "course"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What are the eligibility criteria for final examinations?",
     "answer": "All registered and active students are required to participate in final examinations, provided they have completed official course registration, cleared all outstanding fees, and are not barred from the examination.",
-    "keywords": [
-      "final examination",
-      "eligibility",
-      "fees"
-    ]
+    "keywords": ["final examination", "eligibility", "fees"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "Under what grounds can students defer their final examinations?",
     "answer": "Students may be allowed to defer their final examinations on medical and compassionate grounds and/or valid reasons accepted by the University; common illness or fever will not be considered.",
-    "keywords": [
-      "examination deferment",
-      "medical",
-      "compassionate"
-    ]
+    "keywords": ["examination deferment", "medical", "compassionate"]
   },
   {
     "module": "academic_navigation",
@@ -1107,284 +874,182 @@
     "sub_intent": "exams_grades",
     "question": "What items are permitted in the examination room?",
     "answer": "Permitted items include stationery, student ID for identification, and water bottles without labels or covers.",
-    "keywords": [
-      "examination",
-      "permitted items"
-    ]
+    "keywords": ["examination", "permitted items"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What happens if a student is found with unauthorized materials during an examination?",
     "answer": "If students are found with unauthorized materials, it will be assumed they have used them, no defence will be accepted, and all unauthorized materials will be confiscated.",
-    "keywords": [
-      "examination",
-      "unauthorized materials",
-      "misconduct"
-    ]
+    "keywords": ["examination", "unauthorized materials", "misconduct"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the earliest and latest a student can leave the examination room?",
     "answer": "Students are not permitted to leave the examination room during the first 60 minutes after the examination starts and the last 15 minutes before it ends, except for sudden needs.",
-    "keywords": [
-      "examination",
-      "leaving room",
-      "time limits"
-    ]
+    "keywords": ["examination", "leaving room", "time limits"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What happens if a student arrives 30 minutes or more after the examination starts?",
     "answer": "Students who arrive 30 minutes or more after the examination starts will not be allowed to take the examination.",
-    "keywords": [
-      "examination",
-      "late arrival",
-      "penalty"
-    ]
+    "keywords": ["examination", "late arrival", "penalty"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "How are the Grade Point Average (GPA) and Cumulative Grade Point Average (CGPA) calculated?",
     "answer": "GPA = (credits attempted for each course x grade point awarded for the course) / The total credits attempted in a semester. CGPA = Σ (credits earned for each course x grade point awarded for the course) / The cumulative credits earned over all semesters.",
-    "keywords": [
-      "gpa",
-      "cgpa",
-      "calculation",
-      "grades"
-    ]
+    "keywords": ["gpa", "cgpa", "calculation", "grades"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the grade threshold for Chemical Engineering and Electrical and Electronics Engineering students to pass a core/major/elective course?",
     "answer": "Chemical Engineering and Electrical and Electronics Engineering students must obtain a threshold mark of 40 in the final examination and achieve an overall mark of 55 or above to pass a core/major/elective course.",
-    "keywords": [
-      "grade threshold",
-      "engineering"
-    ]
+    "keywords": ["grade threshold", "engineering"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the grade threshold for Computer Science and Technology, Software Engineering, Digital Media Technology, Cyber Security, Artificial Intelligence, Data Science, English Language and Literature, Chinese Studies, Accounting, Finance, International Business, and E-Commerce students to pass a core/major/elective course?",
     "answer": "These students must obtain a threshold mark of 40 in all assessment components, including the final examination, and an overall mark of 55 or above to pass a core/major/elective course.",
-    "keywords": [
-      "grade threshold",
-      "computer science",
-      "business"
-    ]
+    "keywords": ["grade threshold", "computer science", "business"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the grade threshold for Traditional Chinese Medicine students to pass a core/major/elective course?",
     "answer": "Traditional Chinese Medicine students must obtain a threshold mark of 50 in all assessment components, including the final examination, and an overall mark of 55 or above to pass a core/major/elective course.",
-    "keywords": [
-      "grade threshold",
-      "tcm"
-    ]
+    "keywords": ["grade threshold", "tcm"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the grade threshold for Mathematics and Applied Mathematics students to pass a MAT-coded course?",
     "answer": "Mathematics and Applied Mathematics students must obtain a threshold mark of 40 in all continuous assessment components, and an overall mark of 55 or above to pass a MAT-coded course.",
-    "keywords": [
-      "grade threshold",
-      "mathematics"
-    ]
+    "keywords": ["grade threshold", "mathematics"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What happens if a student is found guilty of cheating in an examination?",
     "answer": "If proven guilty of cheating in an examination, the student will be considered to have failed the examination, receive a \"Fail\" grade, and will be required to retake the same course.",
-    "keywords": [
-      "cheating",
-      "examination",
-      "penalty",
-      "retake"
-    ]
+    "keywords": ["cheating", "examination", "penalty", "retake"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What penalties can the SDBC impose for examination misconduct?",
     "answer": "Penalties may include a zero mark for the specific examination paper or all assessments, a one-semester suspension, requirement to retake affected assessments, expulsion from the University (for previous cases), a fine, or withholding of grades/transcript/degree.",
-    "keywords": [
-      "sdbc",
-      "penalties",
-      "examination misconduct"
-    ]
+    "keywords": ["sdbc", "penalties", "examination misconduct"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "How can students appeal against their examination results?",
     "answer": "Students can appeal by requesting a re-marking of their final examination answer script for a specific course, submitting the appeal form to the Academic Affairs Office during the first week of a new semester.",
-    "keywords": [
-      "appeal",
-      "examination results",
-      "re-marking"
-    ]
+    "keywords": ["appeal", "examination results", "re-marking"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What is the fee for appealing an examination result?",
     "answer": "An appeal fee of RM50.00 will be charged for each course, payable at the Finance Office.",
-    "keywords": [
-      "appeal",
-      "fees",
-      "examination result"
-    ]
+    "keywords": ["appeal", "fees", "examination result"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "Under what conditions is an examination appeal considered successful and eligible for a refund?",
     "answer": "An appeal is considered successful if the newly awarded mark is higher than the previous one, in which case the payment made for the appeal will be refunded to the student.",
-    "keywords": [
-      "appeal",
-      "successful",
-      "refund"
-    ]
+    "keywords": ["appeal", "successful", "refund"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the additional fees for international students?",
     "answer": "International students are required to pay a refundable Security Deposit of RM1,000 and an International Student Fee of RM2,500 per academic year.",
-    "keywords": [
-      "international students",
-      "fees",
-      "deposit"
-    ]
+    "keywords": ["international students", "fees", "deposit"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "When are semester fees due?",
     "answer": "Students are required to pay the first semester fees upon enrolment and subsequently within seven (7) working days from the commencement of the new semester.",
-    "keywords": [
-      "fees",
-      "payment",
-      "deadline"
-    ]
+    "keywords": ["fees", "payment", "deadline"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What happens if semester fees are not paid by the due date?",
     "answer": "Students will be automatically barred from attending classes and may have access to facilities withdrawn. Certificates will be withheld at graduation if fees are outstanding. An administrative charge of RM30.00 per week will be imposed after the 7th day.",
-    "keywords": [
-      "fees",
-      "late payment",
-      "consequences"
-    ]
+    "keywords": ["fees", "late payment", "consequences"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the accepted modes of fee payment at XMUM?",
     "answer": "Payment of fees can be made via Finance Office or Online Banking (ePayment portal, online fund transfer), Cheque/Bank Draft, Credit Cards, Direct Bank-In & Telegraphic Transfer (TT), and Cash.",
-    "keywords": [
-      "fee payment",
-      "modes",
-      "options"
-    ]
+    "keywords": ["fee payment", "modes", "options"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is required to register a motor vehicle with the Student Affairs Office?",
     "answer": "To register a vehicle, students must submit a Student Vehicle Registration Form with photocopies of their Vehicle Registration Card, Student ID, valid Driving License, and an authorization letter if the student is not the owner.",
-    "keywords": [
-      "vehicle registration",
-      "requirements"
-    ]
+    "keywords": ["vehicle registration", "requirements"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What are the library's operation hours during weekdays?",
     "answer": "The library's operation hours are Monday to Friday from 9:00 AM to 10:00 PM.",
-    "keywords": [
-      "library",
-      "hours",
-      "weekdays"
-    ]
+    "keywords": ["library", "hours", "weekdays"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What are the library's operation hours during weekends and public holidays?",
     "answer": "The library's operation hours are Saturday and Sunday from 9:00 AM to 5:00 PM, and on Public Holidays from 9:00 AM to 5:00 PM (except for specific closed holidays).",
-    "keywords": [
-      "library",
-      "hours",
-      "weekends",
-      "holidays"
-    ]
+    "keywords": ["library", "hours", "weekends", "holidays"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the official contact email for the International Student Affairs Office (ISAO)?",
     "answer": "The official contact email for the International Student Affairs Office (ISAO) at Xiamen University Malaysia is internationaloffice@xmu.edu.my.",
-    "keywords": [
-      "isao",
-      "contact",
-      "email"
-    ]
+    "keywords": ["isao", "contact", "email"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Where is the International Student Affairs Office (ISAO) located?",
     "answer": "The International Student Affairs Office (ISAO) is located at B1-104.",
-    "keywords": [
-      "isao",
-      "location",
-      "office"
-    ]
+    "keywords": ["isao", "location", "office"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What topics are covered in the International Student Handbook?",
     "answer": "The handbook covers Introduction, International Student Pre-Arrival Guidelines, International Student Post-Arrival Guidelines, and Rules and Regulations for International Students.",
-    "keywords": [
-      "handbook",
-      "topics",
-      "guide"
-    ]
+    "keywords": ["handbook", "topics", "guide"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the role of the International Student Affairs Office (ISAO) at XMUM?",
     "answer": "The International Student Affairs Office (ISAO) at XMUM plays a vital role in supporting international students throughout their academic journey, from pre-arrival guidance to visa processing, accommodation, and student welfare.",
-    "keywords": [
-      "isao",
-      "role",
-      "support"
-    ]
+    "keywords": ["isao", "role", "support"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the key objectives of the International Student Affairs Office (ISAO)?",
     "answer": "The key objectives of ISAO include providing comprehensive support services for international students, ensuring compliance with Malaysian immigration regulations, creating a welcoming environment, assisting with accommodation, medical insurance, and banking services, and organizing orientation programs and cultural exchange activities.",
-    "keywords": [
-      "isao",
-      "objectives",
-      "services"
-    ]
+    "keywords": ["isao", "objectives", "services"]
   },
   {
     "module": "academic_navigation",
@@ -1407,166 +1072,105 @@
     "sub_intent": "visa_immigration",
     "question": "How can students contact the International Student Affairs Office (ISAO)?",
     "answer": "Students can contact the ISAO at their office location (B1-104), by phone (+603-88006838), or via email (internationaloffice@xmu.edu.my). Office hours are 9am to 5pm.",
-    "keywords": [
-      "isao",
-      "contact",
-      "phone",
-      "email"
-    ]
+    "keywords": ["isao", "contact", "phone", "email"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the first step an international student must take after receiving an Offer Letter from Xiamen University Malaysia?",
     "answer": "Upon receiving an Offer Letter, students must confirm their acceptance by signing and returning the acceptance form.",
-    "keywords": [
-      "offer letter",
-      "acceptance",
-      "pre-arrival"
-    ]
+    "keywords": ["offer letter", "acceptance", "pre-arrival"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What documents are required for an eVAL (Visa Approval Letter) application?",
     "answer": "Required documents for an eVAL application include a copy of the passport (valid for at least 18 months), Offer Letter from Xiamen University Malaysia, academic transcripts and certificates, English proficiency test results (if required), passport-sized photos (white background), and the visa processing fee.",
-    "keywords": [
-      "eval",
-      "documents",
-      "requirements"
-    ]
+    "keywords": ["eval", "documents", "requirements"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "How long does the eVAL processing typically take?",
     "answer": "The eVAL processing time typically takes 4 to 12 weeks.",
-    "keywords": [
-      "eval",
-      "processing",
-      "timeline"
-    ]
+    "keywords": ["eval", "processing", "timeline"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is a Single-Entry Visa (SEV) for international students in Malaysia?",
     "answer": "The SEV is a one-time entry visa required for students from countries that need a visa to enter Malaysia, which must be obtained before arrival from the Malaysian Embassy or Consulate in the student's home country.",
-    "keywords": [
-      "sev",
-      "visa",
-      "entry"
-    ]
+    "keywords": ["sev", "visa", "entry"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Which countries are eligible to apply for an eVISA (Student) for Malaysia?",
     "answer": "Eligible countries for an eVISA (Student) include China, India, Bangladesh, Sri Lanka, Myanmar, Pakistan, and Nepal.",
-    "keywords": [
-      "evisa",
-      "eligibility",
-      "countries"
-    ]
+    "keywords": ["evisa", "eligibility", "countries"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "How long is an eVISA (Student) valid for, and what is its typical processing time?",
     "answer": "An eVISA (Student) is only valid for 3 months, and its processing time is typically 48-72 hours.",
-    "keywords": [
-      "evisa",
-      "validity",
-      "processing time"
-    ]
+    "keywords": ["evisa", "validity", "processing time"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What documents should international students have ready at the Malaysian Immigration Checkpoint upon arrival?",
     "answer": "At the Immigration Checkpoint, students should present their Flight Ticket / Boarding Pass, Visa Approval Letter (eVAL), SEV or eVISA, University Offer Letter, and Malaysia Digital Arrival Card (MDAC).",
-    "keywords": [
-      "immigration",
-      "checkpoint",
-      "documents"
-    ]
+    "keywords": ["immigration", "checkpoint", "documents"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What type of entry permit is issued to international students at the immigration checkpoint, and how long is it valid?",
     "answer": "International students will be issued a Special Pass (temporary entry permit) at the immigration checkpoint, which is valid for 30 days.",
-    "keywords": [
-      "special pass",
-      "entry permit",
-      "validity"
-    ]
+    "keywords": ["special pass", "entry permit", "validity"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the first step for international students after arriving at Xiamen University Malaysia?",
     "answer": "The first step is to attend the International Student Registration at the International Student Affairs Office (ISAO) and submit copies of their passport and entry stamp from Immigration.",
-    "keywords": [
-      "post-arrival",
-      "registration",
-      "isao"
-    ]
+    "keywords": ["post-arrival", "registration", "isao"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "How soon after arrival must international students undergo medical screening in Malaysia?",
     "answer": "All international students must undergo a medical screening at an approved Malaysian clinic within 7 days of arrival.",
-    "keywords": [
-      "medical screening",
-      "post-arrival",
-      "health"
-    ]
+    "keywords": ["medical screening", "post-arrival", "health"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "How long does the Student Pass (Long-Term Visa) application typically take after medical clearance?",
     "answer": "Once the medical screening is cleared, the Student Pass processing typically takes 4 to 6 weeks.",
-    "keywords": [
-      "student pass",
-      "processing",
-      "timeline"
-    ]
+    "keywords": ["student pass", "processing", "timeline"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Are international students required to stay on campus at Xiamen University Malaysia?",
     "answer": "International students (excluding students from China) must stay on campus during the first year of their study and can apply to shift off campus upon approval from ISAO after completing a year on campus.",
-    "keywords": [
-      "accommodation",
-      "on-campus",
-      "housing"
-    ]
+    "keywords": ["accommodation", "on-campus", "housing"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Can international students open a local bank account in Malaysia?",
     "answer": "Yes, students may open a local bank account after obtaining their student visa, with guidance from the International Student Affairs Office.",
-    "keywords": [
-      "bank account",
-      "post-arrival",
-      "financial"
-    ]
+    "keywords": ["bank account", "post-arrival", "financial"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the two primary categories of student visas offered in Malaysia?",
     "answer": "Malaysia offers two primary categories of student visas: Yearly Student Visa and Full-term Student Visa.",
-    "keywords": [
-      "student visa",
-      "categories",
-      "types"
-    ]
+    "keywords": ["student visa", "categories", "types"]
   },
   {
     "module": "academic_navigation",
@@ -1588,11 +1192,7 @@
     "sub_intent": "visa_immigration",
     "question": "What factors determine the type of student visa an international student receives in Malaysia?",
     "answer": "The type of student visa (yearly or full-term) depends on university policies, immigration requirements, nationality, and other eligibility criteria set by Education Malaysia Global Services (EMGS) and Immigration Malaysia.",
-    "keywords": [
-      "visa determination",
-      "factors",
-      "emgs"
-    ]
+    "keywords": ["visa determination", "factors", "emgs"]
   },
   {
     "module": "academic_navigation",
@@ -1641,174 +1241,112 @@
     "sub_intent": "visa_immigration",
     "question": "What is the processing time for student visa endorsement after approval?",
     "answer": "The processing time for student visa endorsement after approval is 4 to 6 weeks.",
-    "keywords": [
-      "visa endorsement",
-      "processing time"
-    ]
+    "keywords": ["visa endorsement", "processing time"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What key considerations should international students make before changing their study program in Malaysia?",
     "answer": "Before changing programs, students must consider eligibility for the new course, visa implications (may require a new visa or update), potential for credit transfer, and approval from both the university and EMGS.",
-    "keywords": [
-      "program transfer",
-      "considerations",
-      "visa"
-    ]
+    "keywords": ["program transfer", "considerations", "visa"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Do international students need to return to their home country when transferring programs within the same university?",
     "answer": "International students who transfer programs within 12 months can proceed without returning to their home country. However, if the transfer exceeds 12 months, they must return to their home country during the new visa application process.",
-    "keywords": [
-      "program transfer",
-      "home country",
-      "duration"
-    ]
+    "keywords": ["program transfer", "home country", "duration"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the visa implications if an international student changes to a different university?",
     "answer": "If an international student changes to a different university, their current student visa must be cancelled, and a new student visa application is required.",
-    "keywords": [
-      "visa implications",
-      "university change"
-    ]
+    "keywords": ["visa implications", "university change"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the eligibility criteria for an international student to defer their studies at Xiamen University Malaysia?",
     "answer": "Students cannot defer during their first semester, deferment is allowed only once during the entire programme duration, valid supporting documents must be provided, and the deferment period must comply with the university’s maximum allowable duration.",
-    "keywords": [
-      "deferment",
-      "eligibility",
-      "criteria"
-    ]
+    "keywords": ["deferment", "eligibility", "criteria"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Under what conditions is an international student visa withdrawal required?",
     "answer": "A student visa withdrawal is required if a student withdraws permanently from the university, transfers to another institution in Malaysia, or is dismissed from the university.",
-    "keywords": [
-      "visa withdrawal",
-      "conditions",
-      "required"
-    ]
+    "keywords": ["visa withdrawal", "conditions", "required"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the consequences of failing to follow the visa withdrawal process?",
     "answer": "Consequences of failing to follow the visa withdrawal process include immigration blacklisting, overstaying fines and legal action (detention, deportation), denial of future student visas, and university disciplinary action.",
-    "keywords": [
-      "withdrawal",
-      "consequences",
-      "penalties"
-    ]
+    "keywords": ["withdrawal", "consequences", "penalties"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "When is an international student visa cancellation required upon completion of studies?",
     "answer": "Visa cancellation is required if a student has successfully completed their program (graduation), completed an exchange or short-term study program, or finished their final semester and does not plan to continue further studies in Malaysia.",
-    "keywords": [
-      "visa cancellation",
-      "graduation",
-      "completion"
-    ]
+    "keywords": ["visa cancellation", "graduation", "completion"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is a Checkout Memo (COM) and why is it important for international students completing their studies?",
     "answer": "A Checkout Memo (COM) is issued by the Malaysian Immigration Department after visa cancellation for students completing their studies. It is required to exit Malaysia and must be presented at immigration checkpoints when departing.",
-    "keywords": [
-      "checkout memo",
-      "com",
-      "departure"
-    ]
+    "keywords": ["checkout memo", "com", "departure"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the consequences if an international student fails to cancel their visa upon completion of studies?",
     "answer": "Failure to cancel the student visa can result in overstaying penalties (heavy fines, deportation, or detention), immigration blacklisting, and denial of future Malaysian visas.",
-    "keywords": [
-      "visa cancellation",
-      "failure",
-      "consequences"
-    ]
+    "keywords": ["visa cancellation", "failure", "consequences"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the first step an international student should take after losing their passport in Malaysia?",
     "answer": "The first step an international student should take after losing their passport is to visit the nearest police station and file an official police report as soon as possible.",
-    "keywords": [
-      "lost passport",
-      "police report",
-      "first step"
-    ]
+    "keywords": ["lost passport", "police report", "first step"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "After obtaining a new passport, what is the process for transferring the student pass endorsement?",
     "answer": "The process involves obtaining a confirmation letter from ISAO, cancelling the student pass on the lost passport with ISAO's assistance, and then applying for a student pass transfer to the new passport with required documents.",
-    "keywords": [
-      "passport transfer",
-      "student pass",
-      "endorsement"
-    ]
+    "keywords": ["passport transfer", "student pass", "endorsement"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the general rules and regulations for international students in Malaysia?",
     "answer": "International students in Malaysia must comply with Malaysian laws, university regulations, and student visa requirements set by Education Malaysia Global Services (EMGS) and the Immigration Department of Malaysia.",
-    "keywords": [
-      "rules",
-      "regulations",
-      "compliance"
-    ]
+    "keywords": ["rules", "regulations", "compliance"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the consequences of engaging in illegal activities or unauthorized employment for international students in Malaysia?",
     "answer": "Engaging in illegal activities, unauthorized employment, or falsifying documents will lead to immediate deportation, visa cancellation, legal action, and permanent blacklisting from entering Malaysia.",
-    "keywords": [
-      "illegal activities",
-      "employment",
-      "deportation"
-    ]
+    "keywords": ["illegal activities", "employment", "deportation"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "Is an international student visa strictly for study purposes?",
     "answer": "Yes, a student visa is strictly for study purposes and cannot be used for employment unless permitted by immigration.",
-    "keywords": [
-      "student visa",
-      "purpose",
-      "employment"
-    ]
+    "keywords": ["student visa", "purpose", "employment"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What are the consequences for international students involved in drug offenses in Malaysia?",
     "answer": "Consequences include life imprisonment or the death penalty for drug trafficking, imprisonment and heavy fines for drug possession or consumption, and immediate visa cancellation, deportation, and blacklisting.",
-    "keywords": [
-      "drug offenses",
-      "consequences",
-      "penalties"
-    ]
+    "keywords": ["drug offenses", "consequences", "penalties"]
   },
   {
     "module": "academic_navigation",
@@ -1828,56 +1366,35 @@
     "sub_intent": "visa_immigration",
     "question": "Can international students participate in political activities or demonstrations in Malaysia?",
     "answer": "No, international students are strictly prohibited from participating in political activities, protests, or demonstrations in Malaysia, with consequences including immediate arrest, legal prosecution, deportation, and blacklisting.",
-    "keywords": [
-      "political activities",
-      "prohibition",
-      "demonstrations"
-    ]
+    "keywords": ["political activities", "prohibition", "demonstrations"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What driving documents are required for international students to drive in Malaysia?",
     "answer": "International students must hold a valid Malaysian or International Driving Permit (IDP) to drive in Malaysia, along with valid road tax and insurance.",
-    "keywords": [
-      "driving",
-      "license",
-      "idp",
-      "regulations"
-    ]
+    "keywords": ["driving", "license", "idp", "regulations"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "How should a student report illegal activities they witness or are a victim of?",
     "answer": "Students should immediately report to the Xiamen University Malaysia Security Office, the International Student Affairs Office (ISAO), or the Local Police Station (Emergency Hotline: 999).",
-    "keywords": [
-      "reporting crime",
-      "emergency",
-      "security"
-    ]
+    "keywords": ["reporting crime", "emergency", "security"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "visa_immigration",
     "question": "What is the expected general code of conduct for international students on campus?",
     "answer": "International students are expected to maintain a high standard of respect, professionalism, and integrity, including respect for authority, peers, diversity, and campus property.",
-    "keywords": [
-      "code of conduct",
-      "campus",
-      "respect"
-    ]
+    "keywords": ["code of conduct", "campus", "respect"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What forms of academic dishonesty are strictly prohibited?",
     "answer": "Academic dishonesty, including cheating, plagiarism, or forgery, is a serious violation and strictly prohibited.",
-    "keywords": [
-      "academic dishonesty",
-      "cheating",
-      "plagiarism"
-    ]
+    "keywords": ["academic dishonesty", "cheating", "plagiarism"]
   },
   {
     "module": "academic_navigation",
@@ -1926,14 +1443,7 @@
     "sub_intent": "postgrad_resources",
     "question": "What are the minimum study durations for PhD programmes (part-time)?",
     "answer": "For part-time PhD programmes: Mixed and Research modes require a minimum of 4 years.",
-    "keywords": [
-      "phd",
-      "postgraduate",
-      "postgrad",
-      "master",
-      "ph.d.",
-      "psu"
-    ]
+    "keywords": ["phd", "postgraduate", "postgrad", "master", "ph.d.", "psu"]
   },
   {
     "module": "academic_navigation",
@@ -2526,130 +2036,77 @@
     "sub_intent": "finance_fees",
     "question": "What types of scholarships and study grants does Xiamen University Malaysia (XMUM) offer for Academic Year 2026?",
     "answer": "XMUM offers Merit Scholarships based on academic achievements and study grants for students with siblings studying at XMUM or who are teachers' children. Scholarships are also available for SPM students using their trial results.",
-    "keywords": [
-      "merit",
-      "study grants",
-      "academic year"
-    ]
+    "keywords": ["merit", "study grants", "academic year"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "How can SPM students apply for scholarships at XMUM for Academic Year 2026?",
     "answer": "SPM students can apply for scholarships using their SPM Trial Results for Academic Year 2026.",
-    "keywords": [
-      "spm",
-      "trial results",
-      "application"
-    ]
+    "keywords": ["spm", "trial results", "application"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the Merit Scholarship percentages for SPM / O-Level students for Foundation Programmes?",
     "answer": "Merit Scholarship percentages for SPM / O-Level students for Foundation Programmes range from 5% for 1 Grade A, up to 60% for 7 Grade As. Grade A includes A+, A, and A-.",
-    "keywords": [
-      "spm",
-      "o-level",
-      "foundation",
-      "grades"
-    ]
+    "keywords": ["spm", "o-level", "foundation", "grades"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the Merit Scholarship percentages for STPM / A-Level students for Undergraduate Programmes?",
     "answer": "Merit Scholarship percentages for STPM / A-Level students for Undergraduate Programmes range from 25% for 1 Grade A, up to 100% for 4 Grade As. Grade A includes A+, A, and A-.",
-    "keywords": [
-      "stpm",
-      "a-level",
-      "undergraduate",
-      "grades"
-    ]
+    "keywords": ["stpm", "a-level", "undergraduate", "grades"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the eligibility criteria for the Merit Scholarship for undergraduate programmes based on SACE / AUSMAT / NEW HSC results?",
     "answer": "For Malaysian applicants, eligibility is: ATAR 90 for 25% scholarship, ATAR 92 for 50%, ATAR 96 for 75%, and ATAR 98 for 100% scholarship.",
-    "keywords": [
-      "undergraduate",
-      "atar",
-      "sace",
-      "ausmat"
-    ]
+    "keywords": ["undergraduate", "atar", "sace", "ausmat"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What types of study grants are available and what are their percentages?",
     "answer": "XMUM offers the Teacher's Children grant (10%), Sibling grant (15%), and Bumiputera & Indian Community (BIC) grant (20%).",
-    "keywords": [
-      "study grants",
-      "teachers",
-      "siblings",
-      "bic"
-    ]
+    "keywords": ["study grants", "teachers", "siblings", "bic"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "Can a student apply for both a scholarship and a study grant?",
     "answer": "No, applicants are only allowed to apply for either the scholarship or the study grant, whichever offers a higher percentage.",
-    "keywords": [
-      "application",
-      "multiple",
-      "choice",
-      "higher"
-    ]
+    "keywords": ["application", "multiple", "choice", "higher"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What is the renewal policy for an undergraduate scholarship of 80% to 100%?",
     "answer": "To renew an undergraduate scholarship of 80% to 100%, students must achieve an academic standing in the Top 25% among students of the same academic programme and same intake.",
-    "keywords": [
-      "renewal",
-      "policy",
-      "undergraduate",
-      "top 25%"
-    ]
+    "keywords": ["renewal", "policy", "undergraduate", "top 25%"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "What are the renewal criteria for the Teacher's Children, Sibling, and Bumiputera & Indian Community (BIC) study grants?",
     "answer": "All Teacher's Children, Sibling, and Bumiputera & Indian Community (BIC) study grants require a minimum CGPA of 2.00 out of 4.00 at the end of each academic year for renewal.",
-    "keywords": [
-      "study grants",
-      "renewal",
-      "cgpa",
-      "minimum"
-    ]
+    "keywords": ["study grants", "renewal", "cgpa", "minimum"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "finance_fees",
     "question": "Who should international students contact regarding scholarships?",
     "answer": "International students seeking information on scholarships should contact the International Student Recruitment Office.",
-    "keywords": [
-      "international",
-      "contact",
-      "office",
-      "scholarships"
-    ]
+    "keywords": ["international", "contact", "office", "scholarships"]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "exams_grades",
     "question": "What are the XMUM Progression Scholarship criteria for undergraduate programmes for XMUM Foundation students?",
     "answer": "For Malaysian students from XMUM foundation programmes, a CGPA ≥ 3.00 grants 25%, CGPA ≥ 3.30 grants 50%, and CGPA ≥ 3.50 grants 100% scholarship.",
-    "keywords": [
-      "progression",
-      "xmum",
-      "foundation",
-      "cgpa"
-    ]
+    "keywords": ["progression", "xmum", "foundation", "cgpa"]
   },
   {
     "module": "academic_navigation",
@@ -3081,7 +2538,10 @@
       "police report",
       "3 working days",
       "before exam date",
-      "supporting evidence"
+      "supporting evidence",
+      "how do i apply for final assessment deferment",
+      "apply final assessment deferment",
+      "final assessment deferment"
     ]
   },
   {
@@ -3182,6 +2642,164 @@
       "accreditation standards",
       "academic coordinator",
       "academic affairs office"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "courses_syllabus",
+    "question": "How many credit hours do I need?",
+    "answer": "Credit-hour requirements depend on your programme and study plan. For the total credit hours needed for graduation, refer to your course / programme handbook or ask your Academic Advisor / Academic Affairs Office. For semester load limits, the local database lists a maximum of 21 credit hours for a long semester and 7 credit hours for a short semester.",
+    "keywords": [
+      "how many credit hours do i need",
+      "credit hours do i need",
+      "credit hours needed",
+      "total credit hours",
+      "graduation credit hours",
+      "course handbook",
+      "programme handbook",
+      "study plan credit hours"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "exams_grades",
+    "question": "When is the final exam?",
+    "answer": "Final exam dates depend on the academic calendar and your registered courses. Check the official Academic Calendar for the final examination week, and check your personalised exam timetable through the XMUM Academic Affairs Online System / AC System. Final exam timetables are normally released by the Academic Affairs Office one week before the final examination week.",
+    "keywords": [
+      "when is the final exam",
+      "final exam date",
+      "final examination date",
+      "exam week",
+      "final examination week",
+      "personal exam timetable",
+      "exam timetable release"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "exams_grades",
+    "question": "How do I apply for final assessment deferment?",
+    "answer": "For final assessment deferment, notify the University as early as possible and submit the Final Assessment Deferment Form with supporting evidence, such as a medical certificate or police report. The form should be submitted before the exam date or, where permitted for emergencies, no later than 3 working days after the scheduled exam date. Confirm the latest requirements with Academic Affairs because deferment is an official academic action.",
+    "keywords": [
+      "how do i apply for final assessment deferment",
+      "apply final assessment deferment",
+      "final assessment deferment",
+      "final assessment deferment form",
+      "defer final exam",
+      "exam deferment application",
+      "medical certificate exam"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "finance_fees",
+    "question": "Where can I find tuition fee information?",
+    "answer": "For tuition fee amounts, refer to the official XMUM tuition fee information for your programme and intake, or contact the Finance Office for payment and invoice matters. Fees can vary by programme, intake, student category, and scholarship or grant status, so use official sources for final confirmation.",
+    "keywords": [
+      "tuition fees",
+      "tuition fee information",
+      "fee amount",
+      "programme fees",
+      "how much tuition",
+      "tuition fee",
+      "fee structure"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "finance_fees",
+    "question": "How do I pay tuition fees?",
+    "answer": "Tuition fee payment should be made through the official payment methods accepted by XMUM. The local database lists Cash, Cheque or Bank Draft, Bank Transfer, and Flywire for new international students. Check your invoice and Finance Office instructions before paying, and contact finance@xmu.edu.my or the Finance Office if your case is unclear.",
+    "keywords": [
+      "how do i pay tuition fees",
+      "pay tuition fees",
+      "tuition payment",
+      "fee payment",
+      "pay fees",
+      "payment methods",
+      "bank transfer",
+      "flywire",
+      "finance office payment"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "finance_fees",
+    "question": "How do I apply for scholarship?",
+    "answer": "Scholarship application steps and eligibility depend on your intake, qualification, programme, and student category. Check XMUM Scholarships & Financial Aids information and prepare the required scholarship or grant form and supporting academic documents. For international scholarship questions, contact the International Student Recruitment Office; for current-student billing or award reflection issues, check with the relevant scholarship office or Finance Office.",
+    "keywords": [
+      "how do i apply for scholarship",
+      "apply scholarship",
+      "scholarship application",
+      "scholarships financial aids",
+      "scholarship form",
+      "study grant",
+      "merit scholarship",
+      "scholarship requirements"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "finance_fees",
+    "question": "Does XMUM support PTPTN loan applications?",
+    "answer": "The local database says the Student Helpdesk / Student Affairs Office handles PTPTN enquiries and can provide guidance on PTPTN eligibility, loan amounts, online application flow, schedules, and application guidelines. For official loan approval and final requirements, refer to PTPTN and the responsible XMUM office.",
+    "keywords": [
+      "does xmum support ptptn loan applications",
+      "ptptn loan",
+      "ptptn application",
+      "ptptn enquiries",
+      "student helpdesk ptptn",
+      "student affairs ptptn",
+      "ptptn support"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "admissions_enrollment",
+    "question": "What intakes are available?",
+    "answer": "The local database lists undergraduate intakes in February, April, and September. Foundation programme intakes are listed in April, August, and December. Always verify the latest available intakes for your programme with Admissions because intake availability may change.",
+    "keywords": [
+      "what intakes are available",
+      "intakes available",
+      "available intakes",
+      "undergraduate intakes",
+      "foundation intakes",
+      "february april september",
+      "april august december",
+      "admission intake"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "admissions_enrollment",
+    "question": "What should I do after receiving an offer letter?",
+    "answer": "After receiving an XMUM Offer Letter, first confirm your acceptance by signing and returning the acceptance form. Then follow the official next steps for registration, fee payment, accommodation if needed, visa matters for international students, and orientation. Use the instructions in your offer package and contact Admissions for admission or campus visit questions, Finance for payment or invoice questions, Accommodation for residence matters, and ISAO for international visa matters.",
+    "keywords": [
+      "offer letter next steps",
+      "received offer letter",
+      "after offer letter",
+      "registration payment accommodation orientation",
+      "acceptance form",
+      "new student registration",
+      "orientation after offer",
+      "admission next steps"
+    ]
+  },
+  {
+    "module": "academic_navigation",
+    "sub_intent": "visa_immigration",
+    "question": "My EMGS status has not moved and I am worried about overstay. What should I do?",
+    "answer": "If your EMGS status has not moved and you are worried about overstay, contact the International Student Affairs Office (ISAO) immediately. Prepare your full name, student ID, passport number, nationality, current visa / student pass expiry date, EMGS application number or status screenshot, and any travel plans. Do not wait until the expiry date; visa and overstay issues are official and time-sensitive.",
+    "keywords": [
+      "emgs status has not moved",
+      "emgs status stuck",
+      "worried about overstay",
+      "overstay",
+      "emgs application number",
+      "visa status delayed",
+      "student pass expiry",
+      "contact isao emgs",
+      "emgs status"
     ]
   }
 ]
