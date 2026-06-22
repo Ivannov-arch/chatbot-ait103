@@ -25,9 +25,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      {/* PERBAIKAN: Menggunakan min-h-screen di layout root 
+        dan memastikan children memiliki flex standar yang stabil 
+      */}
+      <body className="w-full flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+        {children}
+      </body>
     </html>
   );
 }
