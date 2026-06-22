@@ -402,49 +402,30 @@ export default function ChatbotHome() {
       )}
 
       {/* Sidebar */}
+      {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex h-full shrink-0 transform flex-col border-r border-blue-900/50 bg-blue-950 text-white transition-all duration-300 ease-in-out md:static
-          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
-          ${isDesktopCollapsed ? "md:w-16" : "md:w-80"}`}
+        className={`fixed inset-y-0 left-0 z-50 flex h-full flex-col border-r border-blue-900/50 bg-blue-950 text-white transition-all duration-300 ease-in-out md:static
+    ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
+    ${isDesktopCollapsed ? "md:w-16" : "md:w-80"}`}
       >
-        <div className="flex flex-col gap-3 border-b border-blue-900/40 p-4">
-          <div className="flex items-center justify-between">
+        {/* Header Sidebar (Tetap di atas) */}
+        <div className="flex-none border-b border-blue-900/40 p-4">
+          <div className="flex items-center justify-between mb-4">
             {!isDesktopCollapsed ? (
               <div>
                 <h2 className="flex items-center gap-2 text-base font-bold text-blue-200">
-                  <span>📚</span>
-                  Campus FAQ
+                  <span>📚</span> Campus FAQ
                 </h2>
-                <p className="mt-0.5 text-xs text-blue-400">
-                  Click to ask the bot directly
-                </p>
               </div>
             ) : (
-              <div
-                className="mx-auto hidden text-xl md:flex"
-                title="Campus FAQ"
-              >
-                📚
-              </div>
+              <div className="mx-auto hidden text-xl md:flex">📚</div>
             )}
 
             <div className="flex items-center gap-1">
-              {/* Desktop collapse toggle */}
-              <button
-                onClick={() => setIsDesktopCollapsed((prev) => !prev)}
-                className="hidden rounded-lg border border-blue-800 p-1.5 text-sm text-blue-300 transition-colors hover:bg-blue-900/50 hover:text-white md:block"
-                title={
-                  isDesktopCollapsed ? "Expand Sidebar" : "Collapse Sidebar"
-                }
-                type="button"
-              >
-                {isDesktopCollapsed ? "→" : "←"}
-              </button>
-
-              {/* Mobile close */}
+              {/* Mobile close — Sekarang pasti terlihat karena ada di atas */}
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="rounded-lg p-1 text-lg text-blue-300 hover:text-white md:hidden"
+                className="rounded-lg p-2 text-xl text-blue-300 hover:text-white md:hidden"
                 type="button"
               >
                 ✕
@@ -458,80 +439,43 @@ export default function ChatbotHome() {
           >
             <input
               type="text"
-              placeholder="Search questions..."
+              placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-blue-800 bg-blue-900/40 py-1.5 pl-8 pr-3 text-sm text-white placeholder-blue-300/60 transition-all focus:border-blue-400 focus:bg-blue-900/60 focus:outline-none"
+              className="w-full rounded-lg border border-blue-800 bg-blue-900/40 py-1.5 pl-8 pr-3 text-sm text-white"
             />
-
-            <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-blue-300">
-              🔍
-            </span>
-
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-blue-300 hover:text-white"
-                type="button"
-              >
-                ✕
-              </button>
-            )}
+            {/* ... icon search ... */}
           </div>
         </div>
 
-        {/* FAQ list */}
+        {/* FAQ list — Area yang bisa di-scroll */}
         <div
-          className={`flex-1 select-none space-y-6 overflow-y-auto p-4 ${
-            isDesktopCollapsed ? "md:hidden" : "block"
-          }`}
+          className={`flex-1 overflow-y-auto p-4 ${isDesktopCollapsed ? "md:hidden" : "block"}`}
         >
           {Object.keys(groupedFaqs).length === 0 ? (
-            <p className="py-4 text-center text-sm text-blue-300/60">
-              {faqs.length === 0
-                ? "Loading FAQs..."
-                : "No matching questions found."}
-            </p>
+            <p className="text-center text-sm text-blue-300/60">No results</p>
           ) : (
             Object.entries(groupedFaqs).map(([moduleName, items]) => (
-              <div key={moduleName} className="space-y-2">
-                <h3 className="px-1 text-xs font-bold uppercase tracking-wider text-blue-300">
+              <div key={moduleName} className="mb-6">
+                <h3 className="mb-2 text-xs font-bold uppercase text-blue-300">
                   {moduleName}
                 </h3>
-
-                <div className="space-y-1">
-                  {items.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        void handleSend(item.question);
-                        setIsSidebarOpen(false);
-                      }}
-                      disabled={isLoading}
-                      className="block w-full truncate rounded-lg px-3 py-2 text-left text-sm text-slate-200 transition-all duration-200 hover:bg-blue-900/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
-                      title={item.question}
-                      type="button"
-                    >
-                      • {item.question}
-                    </button>
-                  ))}
-                </div>
+                {items.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      void handleSend(item.question);
+                      setIsSidebarOpen(false); // Otomatis tutup saat klik
+                    }}
+                    className="block w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-blue-900/50"
+                  >
+                    • {item.question}
+                  </button>
+                ))}
               </div>
             ))
           )}
         </div>
-
-        {/* Collapsed vertical indicator */}
-        {isDesktopCollapsed && (
-          <div
-            className="hidden flex-1 cursor-pointer flex-col items-center space-y-4 pt-6 text-sm text-blue-400 md:flex"
-            onClick={() => setIsDesktopCollapsed(false)}
-          >
-            <span className="writing-mode-vertical font-bold uppercase tracking-widest opacity-40">
-              FAQ PANEL
-            </span>
-          </div>
-        )}
       </aside>
 
       {/* Main chat container */}
