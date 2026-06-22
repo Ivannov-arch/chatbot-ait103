@@ -38,19 +38,6 @@ const FALLBACK_SUGGESTIONS = [
   "Bus schedule",
 ];
 
-const SESSION_STORAGE_KEY = "xmum-chat-session-id";
-
-function getBrowserSessionId() {
-  if (typeof window === "undefined") return "browser-default";
-
-  const existing = window.localStorage.getItem(SESSION_STORAGE_KEY);
-  if (existing) return existing;
-
-  const sessionId = `web-${crypto.randomUUID()}`;
-  window.localStorage.setItem(SESSION_STORAGE_KEY, sessionId);
-  return sessionId;
-}
-
 export default function ChatbotHome() {
   const [apiBaseUrl, setApiBaseUrl] = useState("");
   const [apiStatus, setApiStatus] = useState<
@@ -104,9 +91,9 @@ export default function ChatbotHome() {
     checkAdmin();
   }, []);
 
-  // ── Resolve browser session ───────────────────────────────────────────────
+  // ── Resolve API base URL ──────────────────────────────────────────────────
   useEffect(() => {
-    sessionIdRef.current = getBrowserSessionId();
+    setApiBaseUrl(process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000");
   }, []);
 
   // ── Health check + greeting + suggestions ─────────────────────────────────
@@ -199,11 +186,7 @@ export default function ChatbotHome() {
     let debug: DebugData | undefined;
 
     try {
-      const payload = {
-        message: text,
-        session_id: sessionIdRef.current,
-        debug: showDebug,
-      };
+      const payload = { message: text, debug: showDebug };
       let response: Response | undefined;
 
       for (const path of ["/api/chat", "/chat"]) {

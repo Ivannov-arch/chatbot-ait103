@@ -1,15 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import Optional, Dict, List
 
 
 class ChatRequest(BaseModel):
-    message: str = Field(..., min_length=1, max_length=1000)
-    session_id: str = Field(default="default", min_length=1, max_length=128)
+    message: str
     debug: bool = False
-
-
-class ResetChatRequest(BaseModel):
-    session_id: str = Field(default="default", min_length=1, max_length=128)
 
 
 class ChatResponse(BaseModel):
@@ -20,7 +15,6 @@ class ChatResponse(BaseModel):
     sub_intent: Optional[str] = None
     entities: Optional[Dict[str, List[str]]] = None
     debug: Optional[str] = None
-    session_id: str = "default"
 
 
 class SuggestionsResponse(BaseModel):

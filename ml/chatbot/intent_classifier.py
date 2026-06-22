@@ -17,25 +17,10 @@ import re
 from chatbot.preprocessor import build_augmented_query, build_search_terms, normalize
 
 KNOWN_MODULES = [
-    "general",
     "admin_directory",
     "campus_life",
     "academic_navigation",
 ]
-
-LOW_SIGNAL_CLASSIFIER_TERMS = {
-    "answer",
-    "answers",
-    "chatbot",
-    "current",
-    "data",
-    "information",
-    "location",
-    "question",
-    "questions",
-    "source",
-    "support",
-}
 
 
 class IntentClassifier:
@@ -49,24 +34,6 @@ class IntentClassifier:
 
         # Maps each fine-grained sub_intent to its parent module
         self.sub_intent_to_module = {
-            # --- General / chatbot self-service ---
-            "bot_identity": "general",
-            "bot_capabilities": "general",
-            "bot_functionality": "general",
-            "bot_nature": "general",
-            "bot_scope": "general",
-            "bot_limitations": "general",
-            "bot_official_status": "general",
-            "bot_information_source": "general",
-            "bot_accuracy": "general",
-            "bot_action_limitations": "general",
-            "bot_privacy": "general",
-            "bot_version": "general",
-            "help_request": "general",
-            "clarification_request": "general",
-            "language_capability": "general",
-            "answer_feedback": "general",
-
             # --- Module 1: Administrative & Campus Directory ---
             "about_xmum": "admin_directory",
             "contact_us": "admin_directory",
@@ -100,118 +67,6 @@ class IntentClassifier:
 
         # Fine-grained keyword mapping targeting specific sub_intents
         self.keyword_map = {
-            "bot_identity": [
-                "who are you", "what are you", "what is your name",
-                "your name", "introduce yourself", "tell me about yourself",
-                "about yourself", "xmum campus assistant"
-            ],
-            "bot_capabilities": [
-                "what can you do", "what do you do", "how can you help",
-                "capabilities", "features", "help me", "what can this chatbot do",
-                "what can the chatbot do", "chatbot information",
-                "chatbot info", "about this chatbot", "about the chatbot",
-                "chatbot help"
-            ],
-            "bot_scope": [
-                "what topics can you answer", "topics can you answer",
-                "what can i ask about", "covered topics", "available topics",
-                "chatbot scope", "answer topics", "questions can i ask",
-                "main categories of questions", "categories of questions",
-                "main categories", "designed to handle",
-                "hostel exams food offices",
-                "can you help with non-campus questions",
-                "can you help with non campus questions",
-                "non-campus questions", "non campus questions",
-                "outside campus questions", "off topic questions",
-                "general questions not about xmum", "non xmum questions"
-            ],
-            "bot_limitations": [
-                "what can you not do", "what can't you do", "cannot do",
-                "cant do", "limitations", "chatbot limitations",
-                "not able to do", "things you cannot do"
-            ],
-            "bot_functionality": [
-                "how do you work", "how does this work", "how are you built",
-                "how are you made", "how does the chatbot work",
-                "how does this chatbot work"
-            ],
-            "bot_nature": [
-                "robot", "bot", "chatbot", "ai", "artificial intelligence",
-                "are you human", "are you a person", "real person"
-            ],
-            "bot_official_status": [
-                "are you an official xmum chatbot", "official xmum chatbot",
-                "official chatbot", "are you official", "official assistant",
-                "official source", "official xmum assistant"
-            ],
-            "bot_information_source": [
-                "where does your information come from",
-                "where do you get your information", "information source",
-                "data source", "knowledge source", "source of information",
-                "knowledge base", "where is your data from"
-            ],
-            "bot_accuracy": [
-                "is your information accurate", "is your information up to date",
-                "accurate information", "up to date information",
-                "is your answer accurate", "are you updated",
-                "how accurate are you", "current information"
-            ],
-            "bot_action_limitations": [
-                "can you contact offices for me", "contact offices for me",
-                "contact office for me", "can you contact the office",
-                "can you call the office", "call office for me",
-                "email office for me", "message office for me",
-                "can you make bookings", "make bookings", "make a booking",
-                "can you book", "book for me", "reserve for me",
-                "can you reserve", "confirm reservation",
-                "can you submit forms", "can you submit a form",
-                "submit forms for me", "submit form for me",
-                "submit application for me", "file form for me",
-                "send form for me", "submit documents for me"
-            ],
-            "bot_privacy": [
-                "can you remember my data", "remember my data",
-                "remember my information", "remember me", "store my data",
-                "save my data", "personal memory", "will you remember me",
-                "what data do you collect", "data do you collect",
-                "what information do you collect", "do you collect data",
-                "privacy", "personal data", "collect my data", "chat logs"
-            ],
-            "bot_version": [
-                "what version are you", "version", "chatbot version",
-                "which version", "build version", "dataset version",
-                "release version"
-            ],
-            "help_request": [
-                "i need help", "assist me", "need assistance", "support"
-            ],
-            "clarification_request": [
-                "i don't understand", "don't get it", "confused", "not sure",
-                "unclear", "what do you mean"
-            ],
-            "language_capability": [
-                "speak malay", "bahasa melayu", "boleh cakap melayu",
-                "speak chinese", "mandarin", "putonghua", "cantonese",
-                "do you support malay and chinese",
-                "support malay and chinese", "support bahasa and chinese",
-                "support bahasa melayu", "support chinese",
-                "support mandarin", "malay and chinese",
-                "multilingual support", "can i ask in chinese",
-                "ask in chinese", "ask chinese", "can i use chinese",
-                "can i type chinese", "can i ask in mandarin",
-                "ask in mandarin", "use mandarin"
-            ],
-            "answer_feedback": [
-                "how do i report a wrong answer", "report a wrong answer",
-                "report wrong answer", "wrong answer feedback",
-                "incorrect answer feedback", "report chatbot mistake",
-                "report error", "feedback about answer",
-                "what should i do if your answer is wrong",
-                "if your answer is wrong", "your answer is wrong",
-                "answer is incorrect", "wrong response",
-                "incorrect response", "chatbot answer wrong",
-                "what if you are wrong"
-            ],
             # about_xmum (Admin Directory)
             "about_xmum": [
                 "about", "founder", "motto", "vision", "mission", "history", 
@@ -222,18 +77,7 @@ class IntentClassifier:
             "contact_us": [
                 "contact", "phone", "address", "call", "hotline", 
                 "office location", "office number", "contact email",
-                "office email",
-                "official office hours",
-                "official hours",
-                "where can i find official office hours",
-                "working hours",
-                "counter hours",
-                "parent call xmum",
-                "parents contact",
-                "campus visit arrangements",
-                "admission fees campus visit",
-                "official contact admission fees",
-                "admissions contact"
+                "office email"
             ],
             # hostel_rules_maintenance (Campus Life)
             "hostel_rules_maintenance": [
@@ -245,27 +89,12 @@ class IntentClassifier:
                 "public refrigerator", "residence rule", "residence rules",
                 "maintenance request", "repair request", "repair form",
                 "maintenance form", "aska maintenance", "report defect",
-                "maintenance website", "maintenance webpage",
-                "aska",
-                "laundry room",
-                "where is laundry room",
-                "laundry facilities",
-                "public refrigerators",
-                "common pantry",
-                "hostel refrigerator",
-                "residence refrigerator"
+                "maintenance website", "maintenance webpage"
             ],
             # internship_career (Campus Life)
             "internship_career": [
                 "internship", "industrial", "practical", "intern", "placement", 
-                "career", "job", "resume", "cv", "employment", "recruitment",
-                "career services", "career services office",
-                "career service office", "cso",
-                "career services appointment",
-                "career service appointment",
-                "make an appointment with the career services office",
-                "appointment with the career services office",
-                "career coaching appointment"
+                "career", "job", "resume", "cv", "employment", "recruitment"
             ],
             # clubs_activities (Campus Life)
             "clubs_activities": [
@@ -286,22 +115,7 @@ class IntentClassifier:
                 "police", "helpline", "emergency helpline", "smoke", "medical",
                 "medical assistance", "plux", "hospital", "insurance",
                 "need help", "help on campus", "urgent help", "emergency help",
-                "medical issue", "security emergency",
-                "student fainted",
-                "fainted",
-                "student collapsed",
-                "medical emergency",
-                "campus emergency",
-                "call security",
-                "contact campus security",
-                "campus security",
-                "security hotline",
-                "stress counselling",
-                "stress counseling",
-                "cannot focus",
-                "mental health support",
-                "counselling appointment",
-                "counseling appointment"
+                "medical issue", "security emergency"
             ],
             # facilities_services (Campus Life)
             "facilities_services": [
@@ -347,31 +161,14 @@ class IntentClassifier:
                 "wifi password", "captive portal", "campus email", "outlook",
                 "teams", "office 365", "moodle", "aska", "cas",
                 "password reset", "forgot password", "reset password",
-                "account password", "email password",
-                "wifi connection problem",
-                "wi-fi connection problem",
-                "student id wifi",
-                "campus id wifi",
-                "student wifi problem",
-                "network login",
-                "student email login",
-                "login student email",
-                "campus email login",
-                "microsoft 365",
-                "microsoft office portal"
+                "account password", "email password"
             ],
             # library (Campus Life)
             "library": [
                 "library", "borrow book", "borrow books", "journal", "e-resource", 
                 "librarian", "study room", "return book", "return books",
                 "opac", "makerspace", "document delivery", "printing", "print",
-                "computer", "turnitin", "discussion room",
-                "renew borrowed book",
-                "renew a borrowed book",
-                "renew book",
-                "library renewal",
-                "borrowed book renewal",
-                "extend book loan"
+                "computer", "turnitin", "discussion room"
             ],
             "food_dining": [
                 "food", "eat", "canteen", "cafeteria", "cafe", "restaurant", 
@@ -397,13 +194,7 @@ class IntentClassifier:
                 "chinese food recommendation", "western food recommendation",
                 "japanese food recommendation", "korean food recommendation",
                 "middle eastern food", "halal food", "muslim-friendly food",
-                "vegetarian food", "coffee shop", "dessert shop",
-                "lunch suggestion",
-                "dinner suggestion",
-                "eat lunch",
-                "eat dinner",
-                "canteen meal",
-                "cafeteria meal"
+                "vegetarian food", "coffee shop", "dessert shop"
             ],
             "housing_application": [
                 "accommodation", "hostel application", "room application", "move in",
@@ -434,12 +225,7 @@ class IntentClassifier:
                 "visa approval letter", "sev", "evisa", "student visa",
                 "i-kad", "ikad", "mdac", "medical screening",
                 "part-time work", "work part-time", "checkout memo",
-                "com", "visa cancellation", "visa renewal",
-                "emgs status",
-                "emgs status stuck",
-                "emgs status has not moved",
-                "student pass expiry",
-                "visa status delayed"
+                "com", "visa cancellation", "visa renewal"
             ],
             # postgrad_resources (Academic Navigation)
             "postgrad_resources": [
@@ -467,29 +253,13 @@ class IntentClassifier:
                 "add courses", "drop courses", "add/drop", "add or drop",
                 "course offering", "course offerings", "class schedule",
                 "study plan", "academic advisor", "academic coordinator",
-                "programme", "department", "faculty", "curriculum",
-                "credit hours",
-                "credit hours needed",
-                "how many credit hours do i need",
-                "course handbook",
-                "programme handbook",
-                "study plan credit hours"
+                "programme", "department", "faculty", "curriculum"
             ],
             # finance_fees (Academic Navigation)
             "finance_fees": [
                 "fees", "tuition", "payment", "invoice", "receipt", "pay", 
                 "bursary", "scholarship", "financial aid", "refund", "ptptn", 
-                "loan", "sponsor",
-                "tuition fees",
-                "pay tuition fees",
-                "tuition payment",
-                "fee payment",
-                "payment methods",
-                "apply scholarship",
-                "scholarship application",
-                "ptptn loan",
-                "ptptn application",
-                "ptptn enquiries"
+                "loan", "sponsor"
             ],
             # exams_grades (Academic Navigation)
             "exams_grades": [
@@ -513,16 +283,7 @@ class IntentClassifier:
             # admissions_enrollment (Academic Navigation)
             "admissions_enrollment": [
                 "admission", "enrollment", "registration", "enrol", 
-                "register", "intake", "orientation",
-                "intakes",
-                "available intakes",
-                "what intakes are available",
-                "offer letter",
-                "offer letter next steps",
-                "received offer letter",
-                "after offer letter",
-                "acceptance form",
-                "new student registration"
+                "register", "intake", "orientation"
             ],
             # programme_transfer (Academic Navigation)
             "programme_transfer": [
@@ -560,14 +321,7 @@ class IntentClassifier:
             token_count = len(normalized_keyword.split())
             return 3.0 + (0.5 * max(token_count - 1, 0))
 
-        keyword_terms = {
-            term for term in build_search_terms(normalized_keyword)
-            if term not in LOW_SIGNAL_CLASSIFIER_TERMS
-        }
-        search_terms = {
-            term for term in search_terms
-            if term not in LOW_SIGNAL_CLASSIFIER_TERMS
-        }
+        keyword_terms = set(build_search_terms(normalized_keyword))
         overlap = keyword_terms & search_terms
         if not overlap:
             return 0.0
@@ -589,9 +343,6 @@ class IntentClassifier:
         """
         normalized = self._normalize(message)
         search_terms = set(build_search_terms(message))
-
-        if normalize(message) == "aska":
-            return "campus_life", "hostel_rules_maintenance"
 
         best_sub_intent = "unknown"
         best_score = 0.0

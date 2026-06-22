@@ -970,27 +970,20 @@
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What is the maximum credit hours allowed for a long semester?",
-    "answer": "The maximum credit hours for a long semester is 21. If you are asking how many credit hours your programme requires for graduation, refer to your course / programme handbook or study plan because total graduation credit requirements vary by programme.",
+    "answer": "The maximum credit hours for a long semester is 21.",
     "keywords": [
       "credit hours",
-      "long semester",
-      "how many credit hours do i need",
-      "credit hours needed",
-      "graduation credit hours",
-      "programme handbook",
-      "course handbook"
+      "long semester"
     ]
   },
   {
     "module": "academic_navigation",
     "sub_intent": "courses_syllabus",
     "question": "What is the maximum credit hours allowed for a short semester?",
-    "answer": "The maximum credit hours for a short semester is 7. If you need your required total programme credits, refer to your course / programme handbook or study plan because the total depends on your programme.",
+    "answer": "The maximum credit hours for a short semester is 7.",
     "keywords": [
       "credit hours",
-      "short semester",
-      "short semester credit limit",
-      "credit hours needed"
+      "short semester"
     ]
   },
   {
@@ -3088,10 +3081,7 @@
       "police report",
       "3 working days",
       "before exam date",
-      "supporting evidence",
-      "how do i apply for final assessment deferment",
-      "apply final assessment deferment",
-      "final assessment deferment"
+      "supporting evidence"
     ]
   },
   {
@@ -3192,164 +3182,6 @@
       "accreditation standards",
       "academic coordinator",
       "academic affairs office"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "courses_syllabus",
-    "question": "How many credit hours do I need?",
-    "answer": "Credit-hour requirements depend on your programme and study plan. For the total credit hours needed for graduation, refer to your course / programme handbook or ask your Academic Advisor / Academic Affairs Office. For semester load limits, the local database lists a maximum of 21 credit hours for a long semester and 7 credit hours for a short semester.",
-    "keywords": [
-      "how many credit hours do i need",
-      "credit hours do i need",
-      "credit hours needed",
-      "total credit hours",
-      "graduation credit hours",
-      "course handbook",
-      "programme handbook",
-      "study plan credit hours"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "exams_grades",
-    "question": "When is the final exam?",
-    "answer": "Final exam dates depend on the academic calendar and your registered courses. Check the official Academic Calendar for the final examination week, and check your personalised exam timetable through the XMUM Academic Affairs Online System / AC System. Final exam timetables are normally released by the Academic Affairs Office one week before the final examination week.",
-    "keywords": [
-      "when is the final exam",
-      "final exam date",
-      "final examination date",
-      "exam week",
-      "final examination week",
-      "personal exam timetable",
-      "exam timetable release"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "exams_grades",
-    "question": "How do I apply for final assessment deferment?",
-    "answer": "For final assessment deferment, notify the University as early as possible and submit the Final Assessment Deferment Form with supporting evidence, such as a medical certificate or police report. The form should be submitted before the exam date or, where permitted for emergencies, no later than 3 working days after the scheduled exam date. Confirm the latest requirements with Academic Affairs because deferment is an official academic action.",
-    "keywords": [
-      "how do i apply for final assessment deferment",
-      "apply final assessment deferment",
-      "final assessment deferment",
-      "final assessment deferment form",
-      "defer final exam",
-      "exam deferment application",
-      "medical certificate exam"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "finance_fees",
-    "question": "Where can I find tuition fee information?",
-    "answer": "For tuition fee amounts, refer to the official XMUM tuition fee information for your programme and intake, or contact the Finance Office for payment and invoice matters. Fees can vary by programme, intake, student category, and scholarship or grant status, so use official sources for final confirmation.",
-    "keywords": [
-      "tuition fees",
-      "tuition fee information",
-      "fee amount",
-      "programme fees",
-      "how much tuition",
-      "tuition fee",
-      "fee structure"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "finance_fees",
-    "question": "How do I pay tuition fees?",
-    "answer": "Tuition fee payment should be made through the official payment methods accepted by XMUM. The local database lists Cash, Cheque or Bank Draft, Bank Transfer, and Flywire for new international students. Check your invoice and Finance Office instructions before paying, and contact finance@xmu.edu.my or the Finance Office if your case is unclear.",
-    "keywords": [
-      "how do i pay tuition fees",
-      "pay tuition fees",
-      "tuition payment",
-      "fee payment",
-      "pay fees",
-      "payment methods",
-      "bank transfer",
-      "flywire",
-      "finance office payment"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "finance_fees",
-    "question": "How do I apply for scholarship?",
-    "answer": "Scholarship application steps and eligibility depend on your intake, qualification, programme, and student category. Check XMUM Scholarships & Financial Aids information and prepare the required scholarship or grant form and supporting academic documents. For international scholarship questions, contact the International Student Recruitment Office; for current-student billing or award reflection issues, check with the relevant scholarship office or Finance Office.",
-    "keywords": [
-      "how do i apply for scholarship",
-      "apply scholarship",
-      "scholarship application",
-      "scholarships financial aids",
-      "scholarship form",
-      "study grant",
-      "merit scholarship",
-      "scholarship requirements"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "finance_fees",
-    "question": "Does XMUM support PTPTN loan applications?",
-    "answer": "The local database says the Student Helpdesk / Student Affairs Office handles PTPTN enquiries and can provide guidance on PTPTN eligibility, loan amounts, online application flow, schedules, and application guidelines. For official loan approval and final requirements, refer to PTPTN and the responsible XMUM office.",
-    "keywords": [
-      "does xmum support ptptn loan applications",
-      "ptptn loan",
-      "ptptn application",
-      "ptptn enquiries",
-      "student helpdesk ptptn",
-      "student affairs ptptn",
-      "ptptn support"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "admissions_enrollment",
-    "question": "What intakes are available?",
-    "answer": "The local database lists undergraduate intakes in February, April, and September. Foundation programme intakes are listed in April, August, and December. Always verify the latest available intakes for your programme with Admissions because intake availability may change.",
-    "keywords": [
-      "what intakes are available",
-      "intakes available",
-      "available intakes",
-      "undergraduate intakes",
-      "foundation intakes",
-      "february april september",
-      "april august december",
-      "admission intake"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "admissions_enrollment",
-    "question": "What should I do after receiving an offer letter?",
-    "answer": "After receiving an XMUM Offer Letter, first confirm your acceptance by signing and returning the acceptance form. Then follow the official next steps for registration, fee payment, accommodation if needed, visa matters for international students, and orientation. Use the instructions in your offer package and contact Admissions for admission or campus visit questions, Finance for payment or invoice questions, Accommodation for residence matters, and ISAO for international visa matters.",
-    "keywords": [
-      "offer letter next steps",
-      "received offer letter",
-      "after offer letter",
-      "registration payment accommodation orientation",
-      "acceptance form",
-      "new student registration",
-      "orientation after offer",
-      "admission next steps"
-    ]
-  },
-  {
-    "module": "academic_navigation",
-    "sub_intent": "visa_immigration",
-    "question": "My EMGS status has not moved and I am worried about overstay. What should I do?",
-    "answer": "If your EMGS status has not moved and you are worried about overstay, contact the International Student Affairs Office (ISAO) immediately. Prepare your full name, student ID, passport number, nationality, current visa / student pass expiry date, EMGS application number or status screenshot, and any travel plans. Do not wait until the expiry date; visa and overstay issues are official and time-sensitive.",
-    "keywords": [
-      "emgs status has not moved",
-      "emgs status stuck",
-      "worried about overstay",
-      "overstay",
-      "emgs application number",
-      "visa status delayed",
-      "student pass expiry",
-      "contact isao emgs",
-      "emgs status"
     ]
   }
 ]

@@ -63,8 +63,6 @@ class TestIntentClassifier:
         assert classifier.classify("Can you recommend Chinese food at the canteen?") == ("campus_life", "food_dining")
     def test_campus_life_maintenance_request_query(self, classifier):
         assert classifier.classify("How do I submit a maintenance repair request?") == ("campus_life", "hostel_rules_maintenance")
-    def test_campus_life_aska_defaults_to_maintenance(self, classifier):
-        assert classifier.classify("AskA") == ("campus_life", "hostel_rules_maintenance")
     def test_campus_life_sport_query(self, classifier):
         assert classifier.classify("What sport facilities are available?") == ("campus_life", "facilities_services")
     def test_campus_life_gym_query(self, classifier):
@@ -81,35 +79,6 @@ class TestIntentClassifier:
         assert classifier.classify("Where can I collect my parcel?") == ("campus_life", "documents_identity")
     def test_campus_life_clubs_query(self, classifier):
         assert classifier.classify("What clubs and societies can I join?") == ("campus_life", "clubs_activities")
-    def test_general_bot_identity_query(self, classifier):
-        assert classifier.classify("Who are you?") == ("general", "bot_identity")
-    def test_general_bot_capabilities_query(self, classifier):
-        assert classifier.classify("What can you do?") == ("general", "bot_capabilities")
-    def test_general_chatbot_information_query(self, classifier):
-        assert classifier.classify("What chatbot information can you provide?") == ("general", "bot_capabilities")
-    @pytest.mark.parametrize(
-        ("message", "sub_intent"),
-        [
-            ("What topics can you answer?", "bot_scope"),
-            ("What can you not do?", "bot_limitations"),
-            ("Can you help with non-campus questions?", "bot_scope"),
-            ("Are you an official XMUM chatbot?", "bot_official_status"),
-            ("Where does your information come from?", "bot_information_source"),
-            ("Is your information accurate / up to date?", "bot_accuracy"),
-            ("Can you contact offices for me?", "bot_action_limitations"),
-            ("Can you make bookings?", "bot_action_limitations"),
-            ("Can you submit forms?", "bot_action_limitations"),
-            ("Can you remember my data?", "bot_privacy"),
-            ("What data do you collect?", "bot_privacy"),
-            ("What version are you?", "bot_version"),
-            ("Do you support Malay and Chinese?", "language_capability"),
-            ("Can I ask in Chinese?", "language_capability"),
-            ("How do I report a wrong answer?", "answer_feedback"),
-            ("What should I do if your answer is wrong?", "answer_feedback"),
-        ],
-    )
-    def test_general_chatbot_policy_queries(self, classifier, message, sub_intent):
-        assert classifier.classify(message) == ("general", sub_intent)
     def test_admin_directory_about(self, classifier):
         assert classifier.classify("Who is the founder of XMU?") == ("admin_directory", "about_xmum")
     def test_admin_directory_founded_synonym(self, classifier):
