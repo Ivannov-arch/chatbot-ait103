@@ -37,8 +37,6 @@ STOP_WORDS = {
     "the",
     "there",
     "tell",
-    "this",
-    "through",
     "to",
     "what",
     "when",
@@ -46,10 +44,6 @@ STOP_WORDS = {
     "who",
     "with",
     "would",
-    "you",
-    "your",
-    "yours",
-    "yourself",
 }
 
 SYNONYM_MAP: dict[str, str] = {

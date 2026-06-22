@@ -1,7 +1,6 @@
 # bot.py
 
 from chatbot.entity_recognizer import extract_entities
-from chatbot.context_manager import ContextManager
 from chatbot.intent_classifier import IntentClassifier
 from chatbot.preprocessor import is_greeting
 from chatbot.retriever import KnowledgeRetriever, KnowledgeItem
@@ -41,7 +40,6 @@ class Bot:
         Loads knowledge base from the configured source.
         """
         self.intent_classifier = IntentClassifier()
-        self.context = ContextManager()
         self.retriever = KnowledgeRetriever()
         print(
             "[Chatbot] ✓ Initialized with intent classifier and "
@@ -65,7 +63,6 @@ class Bot:
     def process_message(
         self,
         user_message: str,
-        session_id: str = "default",
         debug: bool = True,
     ) -> ChatbotResponse:
         """
@@ -78,104 +75,45 @@ class Bot:
         Returns:
             ChatbotResponse with answer and metadata
         """
-        contextual_query = self.context.build_contextual_query(session_id, user_message)
-
         # Step 0: Handle short conversational greetings
         if is_greeting(user_message):
-            response = self._handle_greeting(debug)
-            self._store_turns(session_id, user_message, response)
-            return response
+            return self._handle_greeting(debug)
 
         # Step 1: Extract Entities
-        entities = extract_entities(contextual_query)
+        entities = extract_entities(user_message)
 
         # Step 2: Classify Intent
-        module, sub_intent = self.intent_classifier.classify(contextual_query)
+        module, sub_intent = self.intent_classifier.classify(user_message)
 
         # Step 3: Retrieve Answer
         if module == "unknown":
             fallback_response = self._try_global_retrieval(
-                contextual_query, entities, debug, reason="intent_unknown"
+                user_message, entities, debug, reason="intent_unknown"
             )
             if fallback_response:
-                self._append_context_debug(
-                    fallback_response, user_message, contextual_query, debug
-                )
-                self._store_turns(session_id, user_message, fallback_response)
                 return fallback_response
-            response = self._handle_unknown(user_message, entities, debug)
-            self._append_context_debug(response, user_message, contextual_query, debug)
-            self._store_turns(session_id, user_message, response)
-            return response
+            return self._handle_unknown(user_message, entities, debug)
 
         best_item, confidence, all_scores = self.retriever.retrieve(
             module=module,
-            user_message=contextual_query,
+            user_message=user_message,
             extracted_entities=entities,
             sub_intent=sub_intent
         )
 
         # Step 4: Build Response
         if best_item and confidence > 0:
-            response = self._build_success_response(
+            return self._build_success_response(
                 best_item, confidence, all_scores,
                 module, sub_intent, entities, debug
             )
-            self._append_context_debug(response, user_message, contextual_query, debug)
-            self._store_turns(session_id, user_message, response)
-            return response
         else:
             fallback_response = self._try_global_retrieval(
-                contextual_query, entities, debug, reason=f"no_match:{module}/{sub_intent}"
+                user_message, entities, debug, reason=f"no_match:{module}/{sub_intent}"
             )
             if fallback_response:
-                self._append_context_debug(
-                    fallback_response, user_message, contextual_query, debug
-                )
-                self._store_turns(session_id, user_message, fallback_response)
                 return fallback_response
-            response = self._handle_no_match(module, entities, debug)
-            self._append_context_debug(response, user_message, contextual_query, debug)
-            self._store_turns(session_id, user_message, response)
-            return response
-
-    def reset(self, session_id: str = "default") -> None:
-        """Clear conversation context for one session."""
-        self.context.clear(session_id)
-
-    def _store_turns(
-        self,
-        session_id: str,
-        user_message: str,
-        response: ChatbotResponse,
-    ) -> None:
-        self.context.add_turn(session_id, "user", user_message)
-        self.context.add_turn(
-            session_id,
-            "bot",
-            response.answer,
-            module=response.module,
-            sub_intent=response.sub_intent,
-            confidence=response.confidence_score,
-            matched_question=response.matched_question,
-        )
-
-    def _append_context_debug(
-        self,
-        response: ChatbotResponse,
-        user_message: str,
-        contextual_query: str,
-        debug: bool,
-    ) -> None:
-        if not debug or contextual_query == user_message:
-            return
-
-        context_note = f"[Context] Query expanded to: {contextual_query}"
-        response.debug_info = (
-            f"{response.debug_info} | {context_note}"
-            if response.debug_info
-            else context_note
-        )
+            return self._handle_no_match(module, entities, debug)
 
     def _try_global_retrieval(
         self,
