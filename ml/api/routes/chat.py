@@ -1,5 +1,10 @@
 from fastapi import APIRouter, HTTPException, Request
-from api.schemas.chat_schema import ChatRequest, ChatResponse, SuggestionsResponse
+from api.schemas.chat_schema import (
+    ChatRequest,
+    ChatResponse,
+    ResetChatRequest,
+    SuggestionsResponse,
+)
 
 router = APIRouter()
 
@@ -14,8 +19,24 @@ async def chat(req: ChatRequest, request: Request):
         raise HTTPException(status_code=400, detail="Message cannot be empty")
 
     from chatbot_main import ResponseFormatter
-    response = chatbot.process_message(req.message.strip(), debug=req.debug)
-    return ResponseFormatter.to_dict(response)
+    response = chatbot.process_message(
+        req.message.strip(),
+        session_id=req.session_id,
+        debug=req.debug,
+    )
+    payload = ResponseFormatter.to_dict(response)
+    payload["session_id"] = req.session_id
+    return payload
+
+
+@router.post("/chat/reset")
+async def reset_chat(req: ResetChatRequest, request: Request):
+    chatbot = request.app.state.chatbot
+    if not chatbot:
+        raise HTTPException(status_code=503, detail="Chatbot not initialized")
+
+    chatbot.reset(req.session_id)
+    return {"session_id": req.session_id, "status": "cleared"}
 
 
 @router.get("/suggestions", response_model=SuggestionsResponse)
