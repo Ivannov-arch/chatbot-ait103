@@ -56,16 +56,23 @@ def chat():
             return jsonify({"error": "Missing 'message' field"}), 400
         
         user_message = data['message'].strip()
+        session_id = str(data.get('session_id') or 'default')
         debug = data.get('debug', False)
         
         if not user_message:
             return jsonify({"error": "Message cannot be empty"}), 400
         
         # Process through chatbot pipeline
-        response = chatbot.process_message(user_message, debug=debug)
+        response = chatbot.process_message(
+            user_message,
+            session_id=session_id,
+            debug=debug,
+        )
         
         # Return as JSON
-        return jsonify(ResponseFormatter.to_dict(response)), 200
+        payload = ResponseFormatter.to_dict(response)
+        payload["session_id"] = session_id
+        return jsonify(payload), 200
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
