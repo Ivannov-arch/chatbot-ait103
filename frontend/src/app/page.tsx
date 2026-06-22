@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { getKnowledgeItems } from "@/services/knowledgeService";
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────────────────────────────────
+
+type ApiStatus = "connecting" | "connected" | "error";
+
 interface DebugData {
   matched_question?: string;
   confidence?: number;
@@ -24,12 +29,30 @@ interface Message {
 
 interface FAQItem {
   id: string;
-  module: string;
+  module: string | null;
   question: string;
 }
 
-// ─── Suggested topics shown as chips ─────────────────────────────────────────
-const FALLBACK_SUGGESTIONS = [
+interface ChatResponse {
+  answer?: string;
+  matched_question?: string;
+  confidence?: number;
+  module?: string;
+  sub_intent?: string;
+  entities?: string[];
+}
+
+interface SuggestionsResponse {
+  suggestions?: string[];
+}
+
+type GroupedFaqs = Record<string, FAQItem[]>;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Suggested topics shown as chips
+// ─────────────────────────────────────────────────────────────────────────────
+
+const FALLBACK_SUGGESTIONS: string[] = [
   "Library opening hours",
   "How to connect to WiFi",
   "Hostel application",
@@ -39,70 +62,120 @@ const FALLBACK_SUGGESTIONS = [
 ];
 
 export default function ChatbotHome() {
-  const [apiBaseUrl, setApiBaseUrl] = useState("");
-  const [apiStatus, setApiStatus] = useState<
-    "connecting" | "connected" | "error"
-  >("connecting");
-  const [apiStatusMsg, setApiStatusMsg] = useState("Connecting to backend...");
+  const [apiBaseUrl, setApiBaseUrl] = useState<string>("");
+  const [apiStatus, setApiStatus] = useState<ApiStatus>("connecting");
+  const [apiStatusMsg, setApiStatusMsg] = useState<string>(
+    "Connecting to backend...",
+  );
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [inputVal, setInputVal] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [inputVal, setInputVal] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // FAQ Sidebar State & Search State
+  // FAQ sidebar
   const [faqs, setFaqs] = useState<FAQItem[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Mobile & Desktop sidebar states
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
+  // Sidebar states
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState<boolean>(false);
 
-  // Debug — hidden from regular users, shown only to admins (Supabase session check)
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showDebug, setShowDebug] = useState(false);
+  // Admin / debug
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [showDebug, setShowDebug] = useState<boolean>(false);
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
+  // ───────────────────────────────────────────────────────────────────────────
   // Fetch FAQs for sidebar
+  // ───────────────────────────────────────────────────────────────────────────
+
   useEffect(() => {
     async function loadFAQs() {
       try {
         const data = await getKnowledgeItems();
-        if (data) {
-          setFaqs(data as FAQItem[]);
+
+        // Defensive normalization in case service shape is uncertain
+        if (Array.isArray(data)) {
+          const normalized: FAQItem[] = data
+            .filter(
+              (
+                item,
+              ): item is Partial<FAQItem> & { id: string; question: string } =>
+                !!item &&
+                typeof item === "object" &&
+                typeof item.id === "string" &&
+                typeof item.question === "string",
+            )
+            .map((item) => ({
+              id: item.id,
+              question: item.question,
+              module:
+                typeof item.module === "string" || item.module === null
+                  ? item.module
+                  : null,
+            }));
+
+          setFaqs(normalized);
+        } else {
+          setFaqs([]);
         }
       } catch (error) {
         console.error("Error fetching FAQs for sidebar:", error);
+        setFaqs([]);
       }
     }
+
     loadFAQs();
   }, []);
 
-  // ── Check Supabase admin session ─────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
+  // Check Supabase admin session
+  // ───────────────────────────────────────────────────────────────────────────
+
   useEffect(() => {
     async function checkAdmin() {
-      const { data } = await supabase.auth.getSession();
-      const email = data?.session?.user?.email;
-      if (email) {
-        setIsAdmin(true);
+      try {
+        const { data } = await supabase.auth.getSession();
+        const email = data?.session?.user?.email;
+
+        // For now: any signed-in user with email becomes admin.
+        // If you want real admin logic, this should be tightened.
+        if (email) {
+          setIsAdmin(true);
+        }
+      } catch (error) {
+        console.error("Error checking admin session:", error);
+        setIsAdmin(false);
       }
     }
+
     checkAdmin();
   }, []);
 
-  // ── Resolve API base URL ──────────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
+  // Resolve API base URL
+  // ───────────────────────────────────────────────────────────────────────────
+
   useEffect(() => {
     setApiBaseUrl(process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000");
   }, []);
 
-  // ── Health check + greeting + suggestions ─────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
+  // Health check + greeting + suggestions
+  // ───────────────────────────────────────────────────────────────────────────
+
   useEffect(() => {
     if (!apiBaseUrl) return;
+
     let alive = true;
 
     async function init() {
       let ok = false;
+
+      // Health check
       for (const path of ["/api/health", "/health"]) {
         try {
           const r = await fetch(`${apiBaseUrl}${path}`);
@@ -111,7 +184,7 @@ export default function ChatbotHome() {
             break;
           }
         } catch {
-          /* try next */
+          // try next
         }
       }
 
@@ -120,21 +193,30 @@ export default function ChatbotHome() {
       if (ok) {
         setApiStatus("connected");
         setApiStatusMsg("✓ Connected");
-        setTimeout(() => alive && setApiStatusMsg(""), 3000);
 
+        setTimeout(() => {
+          if (alive) setApiStatusMsg("");
+        }, 3000);
+
+        // Fetch suggestions
         for (const path of [
           "/api/suggestions?limit=8",
           "/suggestions?limit=8",
         ]) {
           try {
             const r = await fetch(`${apiBaseUrl}${path}`);
+
             if (r.ok) {
-              const d = await r.json();
-              if (alive) setSuggestions(d.suggestions || []);
+              const d: SuggestionsResponse = await r.json();
+              if (alive) {
+                setSuggestions(
+                  Array.isArray(d.suggestions) ? d.suggestions : [],
+                );
+              }
               break;
             }
           } catch {
-            /* try next */
+            // try next
           }
         }
       } else {
@@ -144,39 +226,51 @@ export default function ChatbotHome() {
       }
     }
 
-    const t = setTimeout(() => {
-      if (alive) {
-        setMessages([
-          {
-            id: "greeting",
-            role: "bot",
-            text: "Hi there! 👋 I'm <strong>XMUM Campus Assistant</strong>.<br/>Ask me anything — library, hostel, WiFi, scholarships, food, transport, and more!",
-          },
-        ]);
-      }
+    const greetingTimeout = setTimeout(() => {
+      if (!alive) return;
+
+      setMessages([
+        {
+          id: "greeting",
+          role: "bot",
+          text: "Hi there! 👋 I'm <strong>XMUM Campus Assistant</strong>.<br/>Ask me anything — library, hostel, WiFi, scholarships, food, transport, and more!",
+        },
+      ]);
     }, 250);
 
     init();
+
     return () => {
       alive = false;
-      clearTimeout(t);
+      clearTimeout(greetingTimeout);
     };
   }, [apiBaseUrl]);
 
-  // ── Auto-scroll ───────────────────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
+  // Auto-scroll
+  // ───────────────────────────────────────────────────────────────────────────
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
-  // ── Send message ──────────────────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
+  // Send message
+  // ───────────────────────────────────────────────────────────────────────────
+
   const handleSend = async (override?: string) => {
     const text = (override ?? inputVal).trim();
     if (!text || isLoading) return;
 
     setMessages((prev) => [
       ...prev,
-      { id: `u-${Date.now()}`, role: "user", text },
+      {
+        id: `u-${Date.now()}`,
+        role: "user",
+        text,
+      },
     ]);
+
     setInputVal("");
     setIsLoading(true);
     inputRef.current?.focus();
@@ -186,25 +280,38 @@ export default function ChatbotHome() {
     let debug: DebugData | undefined;
 
     try {
-      const payload = { message: text, debug: showDebug };
+      const payload = {
+        message: text,
+        debug: showDebug,
+      };
+
       let response: Response | undefined;
 
       for (const path of ["/api/chat", "/chat"]) {
         try {
-          response = await fetch(`${apiBaseUrl}${path}`, {
+          const r = await fetch(`${apiBaseUrl}${path}`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify(payload),
           });
-          if (response.ok || response.status !== 404) break;
+
+          response = r;
+
+          // stop if success OR if endpoint exists but returns non-404
+          if (r.ok || r.status !== 404) {
+            break;
+          }
         } catch {
-          /* try next */
+          // try next
         }
       }
 
       if (response?.ok) {
-        const d = await response.json();
-        answer = d.answer || "No response received.";
+        const d: ChatResponse = await response.json();
+
+        answer = d.answer ?? "No response received.";
         debug = {
           matched_question: d.matched_question,
           confidence: d.confidence,
@@ -234,71 +341,87 @@ export default function ChatbotHome() {
         debugData: debug,
       },
     ]);
+
     setIsLoading(false);
   };
 
+  // ───────────────────────────────────────────────────────────────────────────
+  // Input key handler
+  // ───────────────────────────────────────────────────────────────────────────
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") handleSend();
+    if (e.key === "Enter") {
+      void handleSend();
+    }
   };
 
-  // Filter and group FAQs by module
+  // ───────────────────────────────────────────────────────────────────────────
+  // Filter + group FAQs by module
+  // ───────────────────────────────────────────────────────────────────────────
+
   const filteredFaqs = faqs.filter((item) => {
     const query = searchQuery.toLowerCase();
+
     return (
       item.question.toLowerCase().includes(query) ||
-      (item.module && item.module.toLowerCase().includes(query))
+      (item.module?.toLowerCase().includes(query) ?? false)
     );
   });
 
-  const groupedFaqs = filteredFaqs.reduce(
-    (acc, item) => {
-      const moduleName = item.module || "General";
-      if (!acc[moduleName]) {
-        acc[moduleName] = [];
-      }
-      acc[moduleName].push(item);
-      return acc;
-    },
-    {} as Record<string, FAQItem[]>,
-  );
+  const groupedFaqs = filteredFaqs.reduce<GroupedFaqs>((acc, item) => {
+    const moduleName = item.module || "General";
 
-  const statusDot = {
+    if (!acc[moduleName]) {
+      acc[moduleName] = [];
+    }
+
+    acc[moduleName].push(item);
+    return acc;
+  }, {});
+
+  const statusDotMap: Record<ApiStatus, string> = {
     connecting: "bg-amber-400 animate-pulse",
     connected: "bg-emerald-400",
     error: "bg-red-500",
-  }[apiStatus];
+  };
+
+  const statusDot = statusDotMap[apiStatus];
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Render
+  // ───────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex h-screen w-full overflow-hidden relative bg-slate-900">
-      {/* Backdrop overlay — mobile only, closes sidebar on outside click */}
+    <div className="relative flex h-screen w-full overflow-hidden bg-slate-900">
+      {/* Backdrop overlay — mobile only */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-40 md:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-black/40 transition-opacity md:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar — Blue theme (bg-blue-950) & Dynamic width on large screens (lg) */}
+      {/* Sidebar */}
       <aside
-        className={`fixed md:static inset-y-0 left-0 z-50 bg-blue-950 border-r border-blue-900/50 flex flex-col h-full transform transition-all duration-300 ease-in-out shrink-0 text-white
-          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 
+        className={`fixed inset-y-0 left-0 z-50 flex h-full shrink-0 transform flex-col border-r border-blue-900/50 bg-blue-950 text-white transition-all duration-300 ease-in-out md:static
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
           ${isDesktopCollapsed ? "md:w-16" : "md:w-80"}`}
       >
-        <div className="p-4 border-b border-blue-900/40 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 border-b border-blue-900/40 p-4">
           <div className="flex items-center justify-between">
-            {/* Only show text if not collapsed */}
             {!isDesktopCollapsed ? (
               <div>
-                <h2 className="text-base font-bold text-blue-200 flex items-center gap-2">
-                  <span>📚</span> Campus FAQ
+                <h2 className="flex items-center gap-2 text-base font-bold text-blue-200">
+                  <span>📚</span>
+                  Campus FAQ
                 </h2>
-                <p className="text-xs text-blue-400 mt-0.5">
+                <p className="mt-0.5 text-xs text-blue-400">
                   Click to ask the bot directly
                 </p>
               </div>
             ) : (
               <div
-                className="hidden md:flex mx-auto text-xl"
+                className="mx-auto hidden text-xl md:flex"
                 title="Campus FAQ"
               >
                 📚
@@ -306,28 +429,30 @@ export default function ChatbotHome() {
             )}
 
             <div className="flex items-center gap-1">
-              {/* Toggle Hide/Show button for Desktop */}
+              {/* Desktop collapse toggle */}
               <button
-                onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
-                className="hidden md:block text-blue-300 hover:text-white hover:bg-blue-900/50 p-1.5 rounded-lg text-sm transition-colors border border-blue-800"
+                onClick={() => setIsDesktopCollapsed((prev) => !prev)}
+                className="hidden rounded-lg border border-blue-800 p-1.5 text-sm text-blue-300 transition-colors hover:bg-blue-900/50 hover:text-white md:block"
                 title={
                   isDesktopCollapsed ? "Expand Sidebar" : "Collapse Sidebar"
                 }
+                type="button"
               >
                 {isDesktopCollapsed ? "→" : "←"}
               </button>
 
-              {/* Close button — mobile only */}
+              {/* Mobile close */}
               <button
                 onClick={() => setIsSidebarOpen(false)}
-                className="md:hidden text-blue-300 hover:text-white p-1 rounded-lg text-lg"
+                className="rounded-lg p-1 text-lg text-blue-300 hover:text-white md:hidden"
+                type="button"
               >
                 ✕
               </button>
             </div>
           </div>
 
-          {/* Search Keyword — Hide completely if collapsed on large screens */}
+          {/* Search input */}
           <div
             className={`relative ${isDesktopCollapsed ? "md:hidden" : "block"}`}
           >
@@ -336,15 +461,18 @@ export default function ChatbotHome() {
               placeholder="Search questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-sm pl-8 pr-3 py-1.5 bg-blue-900/40 border border-blue-800 rounded-lg focus:outline-none focus:border-blue-400 focus:bg-blue-900/60 text-white transition-all placeholder-blue-300/60"
+              className="w-full rounded-lg border border-blue-800 bg-blue-900/40 py-1.5 pl-8 pr-3 text-sm text-white placeholder-blue-300/60 transition-all focus:border-blue-400 focus:bg-blue-900/60 focus:outline-none"
             />
-            <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-blue-300 pointer-events-none text-xs">
+
+            <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-blue-300">
               🔍
             </span>
+
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-blue-300 hover:text-white text-xs"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-blue-300 hover:text-white"
+                type="button"
               >
                 ✕
               </button>
@@ -352,12 +480,14 @@ export default function ChatbotHome() {
           </div>
         </div>
 
-        {/* FAQ List Content — Hide menu contents when collapsed */}
+        {/* FAQ list */}
         <div
-          className={`flex-1 overflow-y-auto p-4 space-y-6 select-none ${isDesktopCollapsed ? "md:hidden" : "block"}`}
+          className={`flex-1 select-none space-y-6 overflow-y-auto p-4 ${
+            isDesktopCollapsed ? "md:hidden" : "block"
+          }`}
         >
           {Object.keys(groupedFaqs).length === 0 ? (
-            <p className="text-sm text-blue-300/60 text-center py-4">
+            <p className="py-4 text-center text-sm text-blue-300/60">
               {faqs.length === 0
                 ? "Loading FAQs..."
                 : "No matching questions found."}
@@ -365,20 +495,22 @@ export default function ChatbotHome() {
           ) : (
             Object.entries(groupedFaqs).map(([moduleName, items]) => (
               <div key={moduleName} className="space-y-2">
-                <h3 className="text-xs font-bold text-blue-300 uppercase tracking-wider px-1">
+                <h3 className="px-1 text-xs font-bold uppercase tracking-wider text-blue-300">
                   {moduleName}
                 </h3>
+
                 <div className="space-y-1">
                   {items.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => {
-                        handleSend(item.question);
+                        void handleSend(item.question);
                         setIsSidebarOpen(false);
                       }}
                       disabled={isLoading}
-                      className="w-full text-left text-sm text-slate-200 hover:text-white hover:bg-blue-900/50 px-3 py-2 rounded-lg transition-all duration-200 block truncate"
+                      className="block w-full truncate rounded-lg px-3 py-2 text-left text-sm text-slate-200 transition-all duration-200 hover:bg-blue-900/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
                       title={item.question}
+                      type="button"
                     >
                       • {item.question}
                     </button>
@@ -389,26 +521,26 @@ export default function ChatbotHome() {
           )}
         </div>
 
-        {/* Vertical mini indicator when sidebar is collapsed */}
+        {/* Collapsed vertical indicator */}
         {isDesktopCollapsed && (
           <div
-            className="hidden md:flex flex-1 flex-col items-center pt-6 space-y-4 text-blue-400 text-sm cursor-pointer"
+            className="hidden flex-1 cursor-pointer flex-col items-center space-y-4 pt-6 text-sm text-blue-400 md:flex"
             onClick={() => setIsDesktopCollapsed(false)}
           >
-            <span className="writing-mode-vertical tracking-widest font-bold uppercase opacity-40 ">
+            <span className="writing-mode-vertical font-bold uppercase tracking-widest opacity-40">
               FAQ PANEL
             </span>
           </div>
         )}
       </aside>
 
-      {/* ── CHAT CONTAINER MAIN ── */}
-      <main className="flex-1 flex justify-center items-center p-4 lg:p-6 h-full overflow-hidden">
-        <div className="chat-shell w-full max-w-4xl h-full flex flex-col overflow-hidden">
-          {/* ── Header ── */}
+      {/* Main chat container */}
+      <main className="flex h-full flex-1 items-center justify-center overflow-hidden p-4 lg:p-6">
+        <div className="chat-shell flex h-full w-full max-w-4xl flex-col overflow-hidden">
+          {/* Header */}
           <header className="chat-header">
             <div className="chat-header-brand flex items-center gap-2">
-              {/* Hamburger button — mobile or when desktop is collapsed */}
+              {/* Hamburger */}
               <button
                 onClick={() => {
                   if (window.innerWidth < 768) {
@@ -417,11 +549,12 @@ export default function ChatbotHome() {
                     setIsDesktopCollapsed(false);
                   }
                 }}
-                className={`${isDesktopCollapsed ? "md:flex" : "md:hidden"} flex items-center justify-center p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors mr-1`}
+                className={`${isDesktopCollapsed ? "md:flex" : "md:hidden"} mr-1 flex items-center justify-center rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100`}
                 aria-label="Open FAQ Menu"
+                type="button"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2.2"
@@ -436,6 +569,7 @@ export default function ChatbotHome() {
               </button>
 
               <div className="brand-avatar">XMU</div>
+
               <div>
                 <p className="brand-name">XMUM Campus Assistant</p>
                 <p className="brand-sub">NLP-Powered · Python Backend</p>
@@ -453,9 +587,10 @@ export default function ChatbotHome() {
 
               {isAdmin && (
                 <button
-                  onClick={() => setShowDebug((v) => !v)}
+                  onClick={() => setShowDebug((prev) => !prev)}
                   className={`pill-btn ${showDebug ? "pill-btn--active" : ""}`}
                   title="Admin-only debug toggle"
+                  type="button"
                 >
                   🛠{" "}
                   <span className="hidden sm:inline">
@@ -470,17 +605,19 @@ export default function ChatbotHome() {
             </div>
           </header>
 
-          {/* ── Suggestion chips ── */}
+          {/* Suggestion chips */}
           {suggestions.length > 0 && (
             <div className="chip-bar">
               <span className="chip-label">Try asking:</span>
+
               <div className="chip-list">
                 {suggestions.map((s, i) => (
                   <button
-                    key={i}
+                    key={`${s}-${i}`}
                     className="chip"
                     disabled={isLoading}
-                    onClick={() => handleSend(s)}
+                    onClick={() => void handleSend(s)}
+                    type="button"
                   >
                     {s.length > 42 ? `${s.slice(0, 42)}…` : s}
                   </button>
@@ -489,22 +626,26 @@ export default function ChatbotHome() {
             </div>
           )}
 
-          {/* ── Messages ── */}
+          {/* Messages */}
           <div className="messages-pane" id="msgs">
             {messages.map((msg) => (
               <div key={msg.id} className={`msg-row msg-row--${msg.role}`}>
                 <div
-                  className={`msg-avatar ${msg.role === "user" ? "msg-avatar--user" : ""}`}
+                  className={`msg-avatar ${
+                    msg.role === "user" ? "msg-avatar--user" : ""
+                  }`}
                 >
                   {msg.role === "user" ? "U" : "🤖"}
                 </div>
 
                 <div
-                  className={`bubble ${msg.role === "user" ? "bubble--user" : "bubble--bot"} ${msg.error ? "bubble--error" : ""}`}
+                  className={`bubble ${
+                    msg.role === "user" ? "bubble--user" : "bubble--bot"
+                  } ${msg.error ? "bubble--error" : ""}`}
                 >
                   <div dangerouslySetInnerHTML={{ __html: msg.text }} />
 
-                  {/* Debug panel (admin only) */}
+                  {/* Debug panel */}
                   {isAdmin &&
                     showDebug &&
                     msg.debugData &&
@@ -512,6 +653,7 @@ export default function ChatbotHome() {
                     !msg.error && (
                       <div className="debug-panel">
                         <p className="debug-title">🛠 Debug Info</p>
+
                         {msg.debugData.matched_question && (
                           <div className="debug-row">
                             <span className="debug-key">Best match</span>
@@ -520,6 +662,7 @@ export default function ChatbotHome() {
                             </span>
                           </div>
                         )}
+
                         {msg.debugData.confidence !== undefined && (
                           <div className="debug-row">
                             <span className="debug-key">Confidence</span>
@@ -528,6 +671,7 @@ export default function ChatbotHome() {
                             </span>
                           </div>
                         )}
+
                         {msg.debugData.module && (
                           <div className="debug-row">
                             <span className="debug-key">Module</span>
@@ -536,6 +680,7 @@ export default function ChatbotHome() {
                             </span>
                           </div>
                         )}
+
                         {msg.debugData.sub_intent && (
                           <div className="debug-row">
                             <span className="debug-key">Intent</span>
@@ -564,7 +709,7 @@ export default function ChatbotHome() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* ── Input ── */}
+          {/* Input */}
           <div className="input-bar">
             <input
               ref={inputRef}
@@ -577,11 +722,13 @@ export default function ChatbotHome() {
               placeholder="Ask me anything about XMUM campus…"
               autoComplete="off"
             />
+
             <button
               id="sendBtn"
-              onClick={() => handleSend()}
+              onClick={() => void handleSend()}
               disabled={!inputVal.trim() || isLoading}
               aria-label="Send message"
+              type="button"
             >
               <svg
                 viewBox="0 0 24 24"
