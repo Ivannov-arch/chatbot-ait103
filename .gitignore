@@ -36,7 +36,6 @@ coverage.xml
 
 # Logs
 *.log
-logs/
 
 # Node (if frontend is added)
 node_modules/

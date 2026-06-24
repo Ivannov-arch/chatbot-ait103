@@ -101,22 +101,23 @@ export default function ChatbotHome() {
         if (Array.isArray(data)) {
           const normalized: FAQItem[] = data
             .filter(
-              (
-                item,
-              ): item is Partial<FAQItem> & { id: string; question: string } =>
+              (item) =>
                 !!item &&
                 typeof item === "object" &&
-                typeof item.id === "string" &&
-                typeof item.question === "string",
+                typeof (item as Record<string, unknown>).id === "string" &&
+                typeof (item as Record<string, unknown>).question === "string",
             )
-            .map((item) => ({
-              id: item.id,
-              question: item.question,
-              module:
-                typeof item.module === "string" || item.module === null
-                  ? item.module
-                  : null,
-            }));
+            .map((item) => {
+              const row = item as Record<string, unknown>;
+              return {
+                id: row.id as string,
+                question: row.question as string,
+                module:
+                  typeof row.module === "string" || row.module === null
+                    ? (row.module as string | null)
+                    : null,
+              };
+            });
 
           setFaqs(normalized);
         } else {
@@ -575,17 +576,15 @@ export default function ChatbotHome() {
             {messages.map((msg) => (
               <div key={msg.id} className={`msg-row msg-row--${msg.role}`}>
                 <div
-                  className={`msg-avatar ${
-                    msg.role === "user" ? "msg-avatar--user" : ""
-                  }`}
+                  className={`msg-avatar ${msg.role === "user" ? "msg-avatar--user" : ""
+                    }`}
                 >
                   {msg.role === "user" ? "U" : "🤖"}
                 </div>
 
                 <div
-                  className={`bubble ${
-                    msg.role === "user" ? "bubble--user" : "bubble--bot"
-                  } ${msg.error ? "bubble--error" : ""}`}
+                  className={`bubble ${msg.role === "user" ? "bubble--user" : "bubble--bot"
+                    } ${msg.error ? "bubble--error" : ""}`}
                 >
                   <div dangerouslySetInnerHTML={{ __html: msg.text }} />
 
