@@ -39,3 +39,11 @@ lxml>=5.2.0                 # HTML parser
 # Optional: code quality
 # black>=24.4.0
 # ruff>=0.4.0
+
+# --- Gemini AI Semantic Retriever ---
+# Uses Gemini REST API via 'requests' (already listed above).
+# No extra SDK needed — the chatbot calls Gemini over HTTPS directly.
+# Set GEMINI_API_KEY in .env to enable semantic matching.
+# See: https://aistudio.google.com/apikey
+# Optional: if you want to use google-genai SDK instead:
+# google-genai>=1.0.0

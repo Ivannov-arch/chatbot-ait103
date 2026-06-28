@@ -20,6 +20,7 @@ from dataclasses import dataclass
 from dotenv import load_dotenv
 
 from chatbot.preprocessor import build_augmented_query, build_search_terms, normalize
+from chatbot.gemini_matcher import GeminiMatcher
 
 # Load environment variables from .env
 load_dotenv()
@@ -84,6 +85,7 @@ class KnowledgeRetriever:
         self.source = "unknown"
         self.knowledge_base: List[KnowledgeItem] = []
         self.module_index: Dict[str, List[KnowledgeItem]] = {}
+        self.gemini_matcher = GeminiMatcher()
         source = _get_kb_source()
         if source in LOCAL_KB_SOURCES:
             self.source = "local"
@@ -198,7 +200,29 @@ class KnowledgeRetriever:
         if not candidates:
             return None, 0.0, []
         
-        # Score each candidate
+        # Try Gemini semantic matching first if available
+        if self.gemini_matcher.is_available():
+            try:
+                candidate_questions = [item.question for item in candidates]
+                matched_idx, confidence, reasoning = self.gemini_matcher.match_question(
+                    user_message, candidate_questions
+                )
+                if matched_idx != -1 and confidence >= 0.5:
+                    best_item = candidates[matched_idx]
+                    best_score = confidence * 10.0
+                    
+                    scores = []
+                    for idx, item in enumerate(candidates):
+                        if idx == matched_idx:
+                            scores.append((item, best_score))
+                        else:
+                            scores.append((item, 0.0))
+                    
+                    return best_item, best_score, scores
+            except Exception as e:
+                print(f"[Retriever] Gemini matching failed, falling back: {e}")
+
+        # Score each candidate using fallback rule-based matching
         scores = []
         for item in candidates:
             score = self._score_item(user_message, item, extracted_entities)
@@ -328,6 +352,27 @@ class KnowledgeRetriever:
         extracted_entities: Optional[Dict[str, List[str]]] = None,
     ) -> Tuple[Optional[KnowledgeItem], float, List[Tuple[KnowledgeItem, float]]]:
         """Retrieve the best item without relying on intent classification."""
+        # Try Gemini semantic matching first if available
+        if self.gemini_matcher.is_available():
+            try:
+                candidates = [item for item in self.knowledge_base if item.module != "general"]
+                candidate_questions = [item.question for item in candidates]
+                matched_idx, confidence, reasoning = self.gemini_matcher.match_question(
+                    user_message, candidate_questions
+                )
+                if matched_idx != -1 and confidence >= 0.5:
+                    best_item = candidates[matched_idx]
+                    best_score = confidence * 10.0
+                    scores = []
+                    for idx, item in enumerate(candidates):
+                        if idx == matched_idx:
+                            scores.append((item, best_score))
+                        else:
+                            scores.append((item, 0.0))
+                    return best_item, best_score, scores
+            except Exception as e:
+                print(f"[Retriever] Gemini global matching failed, falling back: {e}")
+
         scores = [
             (item, self._score_item(user_message, item, extracted_entities))
             for item in self.knowledge_base
