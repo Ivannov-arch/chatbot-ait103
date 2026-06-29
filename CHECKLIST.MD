@@ -1,0 +1,4 @@
+1. add debug button on the frontend to show the best match and confidence, but it should only appear when debugging mode is enabled (admin only)
+2. add new feature on the frontend by creating a form for users to suggest unresolved questions with a new table (currently uncreated on supabase) for admin to verify and add to the knowledge base
+3. integrate gemini LLM API to fix user input's grammar or translate another language, process it with the available knowledge base (not generating answer from model's assumption), and return the most relevant answer with the knowledge base and also translate it back to user's language
+4. add more knowledge base from another 2 pdf (foundation student and MBA student handbooks) without interrupting current knowledge base (just adding on top) but also not adding redundant info or duplicates

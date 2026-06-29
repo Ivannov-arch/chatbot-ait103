@@ -15,6 +15,9 @@ class ChatResponse(BaseModel):
     sub_intent: Optional[str] = None
     entities: Optional[Dict[str, List[str]]] = None
     debug: Optional[str] = None
+    original_query: Optional[str] = None
+    detected_language: Optional[str] = None
+    translated_answer: Optional[str] = None
 
 
 class SuggestionsResponse(BaseModel):

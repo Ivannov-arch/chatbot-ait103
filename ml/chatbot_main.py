@@ -21,6 +21,7 @@ from chatbot.entity_recognizer import extract_entities, print_entities
 from chatbot.intent_classifier import IntentClassifier
 from chatbot.preprocessor import is_greeting
 from chatbot.retriever import KnowledgeRetriever, KnowledgeItem
+from chatbot.translator import GeminiTranslator
 
 
 @dataclass
@@ -34,6 +35,9 @@ class ChatbotResponse:
     extracted_entities: Optional[Dict[str, List[str]]] = None
     top_alternatives: Optional[List[Tuple[str, float]]] = None
     debug_info: Optional[str] = None
+    original_query: Optional[str] = None
+    detected_language: Optional[str] = None
+    translated_answer: Optional[str] = None
 
 
 class XMUMChatbot:
@@ -56,9 +60,10 @@ class XMUMChatbot:
         self.intent_classifier = IntentClassifier()
         self.context = ContextManager()
         self.retriever = KnowledgeRetriever()
+        self.translator = GeminiTranslator()
         print(
-            "[Chatbot] ✓ Initialized with intent classifier and "
-            f"{self.retriever.source} knowledge base"
+            "[Chatbot] ✓ Initialized with intent classifier, "
+            f"{self.retriever.source} knowledge base, and translator."
         )
     
     def process_message(
@@ -77,8 +82,6 @@ class XMUMChatbot:
         Returns:
             ChatbotResponse with answer and metadata
         """
-        contextual_query = self.context.build_contextual_query(session_id, user_message)
-
         # ──────────────────────────────────────────────────────────────
         # Step 0: Handle short conversational greetings
         # ──────────────────────────────────────────────────────────────
@@ -86,6 +89,21 @@ class XMUMChatbot:
             response = self._handle_greeting(debug)
             self._store_turns(session_id, user_message, response)
             return response
+
+        # ──────────────────────────────────────────────────────────────
+        # Step 0.5: Translate & Correct Query (Preprocessing)
+        # ──────────────────────────────────────────────────────────────
+        detected_language = "English"
+        is_english = True
+        cleaned_query = user_message
+
+        if self.translator.is_available():
+            translation_info = self.translator.preprocess_query(user_message)
+            detected_language = translation_info.get("detected_language", "English")
+            is_english = translation_info.get("is_english", True)
+            cleaned_query = translation_info.get("cleaned_english_query", user_message)
+
+        contextual_query = self.context.build_contextual_query(session_id, cleaned_query)
 
         # ──────────────────────────────────────────────────────────────
         # Step 1: Extract Entities
@@ -105,48 +123,59 @@ class XMUMChatbot:
                 contextual_query, entities, debug, reason="intent_unknown"
             )
             if fallback_response:
-                self._append_context_debug(
-                    fallback_response, user_message, contextual_query, debug
-                )
-                self._store_turns(session_id, user_message, fallback_response)
-                return fallback_response
-            response = self._handle_unknown(user_message, entities, debug)
-            self._append_context_debug(response, user_message, contextual_query, debug)
-            self._store_turns(session_id, user_message, response)
-            return response
-        
-        best_item, confidence, all_scores = self.retriever.retrieve(
-            module=module,
-            user_message=contextual_query,
-            extracted_entities=entities,
-            sub_intent=sub_intent
-        )
-        
-        # ──────────────────────────────────────────────────────────────
-        # Step 4: Build Response
-        # ──────────────────────────────────────────────────────────────
-        if best_item and confidence > 0:
-            response = self._build_success_response(
-                best_item, confidence, all_scores, module, sub_intent,
-                entities, debug
-            )
-            self._append_context_debug(response, user_message, contextual_query, debug)
-            self._store_turns(session_id, user_message, response)
-            return response
+                response = fallback_response
+            else:
+                response = self._handle_unknown(cleaned_query, entities, debug)
         else:
-            fallback_response = self._try_global_retrieval(
-                contextual_query, entities, debug, reason=f"no_match:{module}/{sub_intent}"
+            best_item, confidence, all_scores = self.retriever.retrieve(
+                module=module,
+                user_message=contextual_query,
+                extracted_entities=entities,
+                sub_intent=sub_intent
             )
-            if fallback_response:
-                self._append_context_debug(
-                    fallback_response, user_message, contextual_query, debug
+            
+            # ──────────────────────────────────────────────────────────────
+            # Step 4: Build Response
+            # ──────────────────────────────────────────────────────────────
+            if best_item and confidence > 0:
+                response = self._build_success_response(
+                    best_item, confidence, all_scores, module, sub_intent,
+                    entities, debug
                 )
-                self._store_turns(session_id, user_message, fallback_response)
-                return fallback_response
-            response = self._handle_no_match(module, entities, debug)
-            self._append_context_debug(response, user_message, contextual_query, debug)
-            self._store_turns(session_id, user_message, response)
-            return response
+            else:
+                fallback_response = self._try_global_retrieval(
+                    contextual_query, entities, debug, reason=f"no_match:{module}/{sub_intent}"
+                )
+                if fallback_response:
+                    response = fallback_response
+                else:
+                    response = self._handle_no_match(module, entities, debug)
+
+        self._append_context_debug(response, cleaned_query, contextual_query, debug)
+
+        # Populate translation metadata in response
+        response.original_query = user_message
+        response.detected_language = detected_language
+
+        # ──────────────────────────────────────────────────────────────
+        # Step 5: Translate Response back to User's Language (Postprocessing)
+        # ──────────────────────────────────────────────────────────────
+        if not is_english and response.answer:
+            english_answer = response.answer
+            translated_ans = self.translator.translate_response(english_answer, detected_language)
+            response.answer = translated_ans
+            response.translated_answer = translated_ans
+            
+            if debug:
+                translation_debug = f"[Translation] Original English Answer: {english_answer}"
+                response.debug_info = (
+                    f"{response.debug_info} | {translation_debug}"
+                    if response.debug_info
+                    else translation_debug
+                )
+
+        self._store_turns(session_id, user_message, response)
+        return response
 
     def reset(self, session_id: str = "default") -> None:
         """Clear conversation context for one session."""
@@ -385,6 +414,9 @@ class ResponseFormatter:
             "sub_intent": response.sub_intent,
             "entities": response.extracted_entities,
             "debug": response.debug_info if response.debug_info else None,
+            "original_query": response.original_query,
+            "detected_language": response.detected_language,
+            "translated_answer": response.translated_answer,
         }
     
     @staticmethod
