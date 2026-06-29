@@ -18,6 +18,7 @@ class ChatResponse(BaseModel):
     original_query: Optional[str] = None
     detected_language: Optional[str] = None
     translated_answer: Optional[str] = None
+    cleaned_query: Optional[str] = None
 
 
 class SuggestionsResponse(BaseModel):

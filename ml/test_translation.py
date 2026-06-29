@@ -3,6 +3,10 @@ import os
 import sys
 from dotenv import load_dotenv
 
+# Ensure stdout supports UTF-8 on Windows console
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 # Load environment variables
 load_dotenv()
 
@@ -69,6 +73,8 @@ for idx, tc in enumerate(test_cases, 1):
         print(f"  Original Query: {response.original_query}")
         print(f"  Matched Q:      {response.matched_question}")
         print(f"  Answer:         {response.answer[:150]}...")
+        if response.debug_info:
+            print(f"  Debug Info:     {response.debug_info}")
         
         # Verify if it matched the correct concept
         # We check the debug info or the matched question to see if the expected keyword is present

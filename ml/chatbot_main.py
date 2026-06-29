@@ -38,6 +38,7 @@ class ChatbotResponse:
     original_query: Optional[str] = None
     detected_language: Optional[str] = None
     translated_answer: Optional[str] = None
+    cleaned_query: Optional[str] = None
 
 
 class XMUMChatbot:
@@ -62,7 +63,7 @@ class XMUMChatbot:
         self.retriever = KnowledgeRetriever()
         self.translator = GeminiTranslator()
         print(
-            "[Chatbot] ✓ Initialized with intent classifier, "
+            "[Chatbot] [OK] Initialized with intent classifier, "
             f"{self.retriever.source} knowledge base, and translator."
         )
     
@@ -156,6 +157,7 @@ class XMUMChatbot:
         # Populate translation metadata in response
         response.original_query = user_message
         response.detected_language = detected_language
+        response.cleaned_query = cleaned_query
 
         # ──────────────────────────────────────────────────────────────
         # Step 5: Translate Response back to User's Language (Postprocessing)
@@ -417,6 +419,7 @@ class ResponseFormatter:
             "original_query": response.original_query,
             "detected_language": response.detected_language,
             "translated_answer": response.translated_answer,
+            "cleaned_query": response.cleaned_query,
         }
     
     @staticmethod
