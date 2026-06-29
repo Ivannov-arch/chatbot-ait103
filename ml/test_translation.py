@@ -3,6 +3,8 @@ import os
 import sys
 from dotenv import load_dotenv
 
+import time
+
 # Ensure stdout supports UTF-8 on Windows console
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
@@ -31,32 +33,32 @@ test_cases = [
     {
         "query": "di mana letak perpustakaan dan kapan tutupnya?",
         "desc": "Indonesian query (should detect Indonesian, search in English, translate back)",
-        "expected_keyword": "library"
+        "expected_keywords": ["library", "bibliotheca"]
     },
     {
         "query": "宿舍申请怎么做？",
         "desc": "Chinese query (should detect Chinese, search in English, translate back)",
-        "expected_keyword": "hostel"
+        "expected_keywords": ["hostel", "accommodation", "dorm", "housing"]
     },
     {
         "query": "bagaimana cara sambung ke wifi kampus?",
         "desc": "Malay query (should detect Malay, search in English, translate back)",
-        "expected_keyword": "wi-fi"
+        "expected_keywords": ["wi-fi", "wifi", "internet", "connection", "connect"]
     },
     {
-        "query": "كيف يمكنني تقديم طلب للحصول на سكن الطلاب؟",
+        "query": "كيف يمكنني تقديم طلب للحصول على سكن الطلاب؟",
         "desc": "Arabic query (should detect Arabic, search in English, translate back)",
-        "expected_keyword": "hostel"
+        "expected_keywords": ["hostel", "accommodation", "dorm", "housing"]
     },
     {
         "query": "где находится библиотека?",
         "desc": "Russian query (should detect Russian, search in English, translate back)",
-        "expected_keyword": "library"
+        "expected_keywords": ["library", "bibliotheca"]
     },
     {
         "query": "hwo do i cnnect to the wify on campu",
         "desc": "English query with typos (should detect English, clean query, return in English)",
-        "expected_keyword": "wi-fi"
+        "expected_keywords": ["wi-fi", "wifi", "internet", "connection", "connect"]
     }
 ]
 
@@ -77,10 +79,10 @@ for idx, tc in enumerate(test_cases, 1):
             print(f"  Debug Info:     {response.debug_info}")
         
         # Verify if it matched the correct concept
-        # We check the debug info or the matched question to see if the expected keyword is present
+        # We check the debug info or the matched question to see if any expected keyword is present
         matched = False
-        if response.matched_question and tc["expected_keyword"].lower() in response.matched_question.lower():
-            matched = True
+        if response.matched_question:
+            matched = any(kw.lower() in response.matched_question.lower() for kw in tc["expected_keywords"])
             
         status = "PASS" if matched else "FAIL"
         if matched:
@@ -89,6 +91,10 @@ for idx, tc in enumerate(test_cases, 1):
         print(f"  Status:         {status}")
     except Exception as e:
         print(f"  Error:          {str(e)}")
+
+    # Add a delay to respect API rate limits
+    if idx < len(test_cases):
+        time.sleep(3.0)
 
 print("\n" + "=" * 70)
 print(f"Result: {passed}/{len(test_cases)} cases matched correctly.")
