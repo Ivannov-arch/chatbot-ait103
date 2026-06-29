@@ -92,6 +92,40 @@ class XMUMChatbot:
             return response
 
         # ──────────────────────────────────────────────────────────────
+        # Step 0.1: Check for exact match in database (fast-path)
+        # ──────────────────────────────────────────────────────────────
+        exact_match_item = None
+        cleaned_input = user_message.strip().lower().rstrip('?').strip()
+        for item in self.retriever.knowledge_base:
+            db_question = item.question.strip().lower().rstrip('?').strip()
+            if cleaned_input == db_question:
+                exact_match_item = item
+                break
+
+        if exact_match_item:
+            response = self._build_success_response(
+                best_item=exact_match_item,
+                confidence=10.0,
+                all_scores=[(exact_match_item, 10.0)],
+                module=exact_match_item.module,
+                sub_intent=exact_match_item.sub_intent or "exact_match",
+                entities={},
+                debug=debug
+            )
+            if debug:
+                response.debug_info = (
+                    f"{response.debug_info} | [Exact Match] Bypassed Gemini translation and NLP pipeline."
+                    if response.debug_info
+                    else "[Exact Match] Bypassed Gemini translation and NLP pipeline."
+                )
+            response.original_query = user_message
+            response.detected_language = "English"
+            response.cleaned_query = user_message
+            
+            self._store_turns(session_id, user_message, response)
+            return response
+
+        # ──────────────────────────────────────────────────────────────
         # Step 0.5: Translate & Correct Query (Preprocessing)
         # ──────────────────────────────────────────────────────────────
         detected_language = "English"
