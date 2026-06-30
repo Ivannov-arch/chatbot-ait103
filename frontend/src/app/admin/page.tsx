@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { getPendingCount } from "@/services/suggestionService";
 
 type BackendStatus = "checking" | "online" | "offline";
 
@@ -12,6 +13,7 @@ export default function AdminDashboard() {
     academicCount: 0,
     campusLifeCount: 0,
     conversationCount: 0,
+    pendingSuggestions: 0,
   });
 
   const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -74,11 +76,14 @@ export default function AdminDashboard() {
           .from("conversation_logs")
           .select("*", { count: "exact", head: true });
 
+        const pendingSuggestions = await getPendingCount();
+
         setStats({
           knowledgeCount: total,
           academicCount: academic,
           campusLifeCount: campusLife,
           conversationCount: count || 0,
+          pendingSuggestions,
         });
       } catch (err) {
         console.error("Error fetching stats:", err);
@@ -131,6 +136,11 @@ export default function AdminDashboard() {
             value={stats.conversationCount}
             accent="text-emerald-400"
           />
+          <StatCard
+            label="Pending Suggestions"
+            value={stats.pendingSuggestions}
+            accent={stats.pendingSuggestions > 0 ? "text-amber-400" : "text-slate-400"}
+          />
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -147,6 +157,14 @@ export default function AdminDashboard() {
             title="Conversation Logs"
             description="Review chat history and debug interactions."
             cta="View Logs"
+          />
+          <ActionCard
+            href="/admin/suggestions"
+            eyebrow="Community Feedback"
+            title="Suggested Questions"
+            description="Review questions submitted by users and add them to the knowledge base."
+            cta="Review Suggestions"
+            badge={stats.pendingSuggestions > 0 ? stats.pendingSuggestions : undefined}
           />
         </section>
       </div>
@@ -175,23 +193,30 @@ function StatCard({
   );
 }
 
-function ActionCard({ href, eyebrow, title, description, cta }: any) {
+function ActionCard({ href, eyebrow, title, description, cta, badge }: any) {
   return (
     <Link
       href={href}
       className="group flex flex-col justify-between rounded-[2rem] border border-white/5 bg-slate-900/40 p-10 hover:bg-slate-900/60 transition-all shadow-lg"
     >
       <div className="space-y-4">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-400">
-          {eyebrow}
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-indigo-400">
+            {eyebrow}
+          </p>
+          {badge !== undefined && (
+            <span className="text-xs font-bold bg-amber-500 text-white rounded-full px-2.5 py-0.5">
+              {badge} pending
+            </span>
+          )}
+        </div>
         <h3 className="text-2xl font-bold text-white">{title}</h3>
         <p className="text-base text-slate-400 leading-relaxed">
           {description}
         </p>
       </div>
       <span className="text-sm font-bold text-indigo-300 mt-12 group-hover:translate-x-2 transition-transform">
-        {cta} →
+        {cta} &rarr;
       </span>
     </Link>
   );

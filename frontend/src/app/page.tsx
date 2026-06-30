@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import { getKnowledgeItems } from "@/services/knowledgeService";
+import { submitSuggestion } from "@/services/suggestionService";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -25,6 +26,8 @@ interface Message {
   text: string;
   error?: boolean;
   debugData?: DebugData;
+  lowConfidence?: boolean;  // triggers suggestion button
+  originalQuery?: string;   // the user's raw question
 }
 
 interface FAQItem {
@@ -84,6 +87,25 @@ export default function ChatbotHome() {
   // Admin / debug
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [showDebug, setShowDebug] = useState<boolean>(false);
+
+  // Suggestion form state
+  const [suggestionTarget, setSuggestionTarget] = useState<{query: string; msgId: string} | null>(null);
+  const [suggestionQuestion, setSuggestionQuestion] = useState("");
+  const [suggestionAnswer, setSuggestionAnswer] = useState("");
+  const [suggestionSubmitting, setSuggestionSubmitting] = useState(false);
+  const [suggestionToast, setSuggestionToast] = useState<string | null>(null);
+
+  // Stable session ID for tracking
+  const sessionIdRef = useRef<string>(
+    typeof window !== "undefined"
+      ? (sessionStorage.getItem("chatSessionId") ||
+          (() => {
+            const id = `s-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+            sessionStorage.setItem("chatSessionId", id);
+            return id;
+          })())
+      : `s-${Date.now()}`
+  );
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -332,6 +354,16 @@ export default function ChatbotHome() {
       answer = "Failed to reach the backend. Is the server running?";
     }
 
+    // Low-confidence detection: confidence < 0.45 OR answer starts with "Sorry"
+    const LOW_CONFIDENCE_THRESHOLD = 0.45;
+    const isLowConfidence =
+      !hasError &&
+      (debug?.confidence !== undefined
+        ? debug.confidence < LOW_CONFIDENCE_THRESHOLD
+        : answer.toLowerCase().startsWith("sorry") ||
+          answer.toLowerCase().includes("don't have") ||
+          answer.toLowerCase().includes("not find"));
+
     setMessages((prev) => [
       ...prev,
       {
@@ -340,6 +372,8 @@ export default function ChatbotHome() {
         text: answer,
         error: hasError,
         debugData: debug,
+        lowConfidence: isLowConfidence,
+        originalQuery: text,
       },
     ]);
 
@@ -387,6 +421,43 @@ export default function ChatbotHome() {
   };
 
   const statusDot = statusDotMap[apiStatus];
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Suggestion form handlers
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  const openSuggestionForm = (query: string, msgId: string) => {
+    setSuggestionTarget({ query, msgId });
+    setSuggestionQuestion(query);
+    setSuggestionAnswer("");
+  };
+
+  const closeSuggestionForm = () => {
+    setSuggestionTarget(null);
+    setSuggestionQuestion("");
+    setSuggestionAnswer("");
+  };
+
+  const handleSubmitSuggestion = async () => {
+    if (!suggestionQuestion.trim()) return;
+    setSuggestionSubmitting(true);
+    try {
+      await submitSuggestion({
+        question: suggestionQuestion,
+        suggested_answer: suggestionAnswer || undefined,
+        user_message: suggestionTarget?.query,
+        session_id: sessionIdRef.current,
+      });
+      setSuggestionToast("Thank you! Your suggestion has been submitted. ✅");
+      closeSuggestionForm();
+      setTimeout(() => setSuggestionToast(null), 4000);
+    } catch {
+      setSuggestionToast("Failed to submit suggestion. Please try again.");
+      setTimeout(() => setSuggestionToast(null), 3000);
+    } finally {
+      setSuggestionSubmitting(false);
+    }
+  };
 
   // ───────────────────────────────────────────────────────────────────────────
   // Render
@@ -470,13 +541,28 @@ export default function ChatbotHome() {
                     }}
                     className="block w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-blue-900/50"
                   >
-                    • {item.question}
+                    &bull; {item.question}
                   </button>
                 ))}
               </div>
             ))
           )}
         </div>
+
+        {/* Permanent suggest button at sidebar bottom */}
+        {!isDesktopCollapsed && (
+          <div className="flex-none border-t border-blue-900/40 p-4">
+            <button
+              id="sidebar-suggest-btn"
+              onClick={() => openSuggestionForm("", "manual")}
+              className="w-full flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-semibold text-blue-300 border border-blue-700/50 hover:bg-blue-900/40 hover:text-white transition-all"
+              type="button"
+            >
+              <span>💡</span>
+              Suggest a Question
+            </button>
+          </div>
+        )}
       </aside>
 
       {/* Main chat container */}
@@ -601,7 +687,7 @@ export default function ChatbotHome() {
                           <div className="debug-row">
                             <span className="debug-key">Best match</span>
                             <span className="debug-val">
-                              "{msg.debugData.matched_question}"
+                              &ldquo;{msg.debugData.matched_question}&rdquo;
                             </span>
                           </div>
                         )}
@@ -634,6 +720,23 @@ export default function ChatbotHome() {
                         )}
                       </div>
                     )}
+
+                  {/* Contextual suggest button — appears on low-confidence bot answers */}
+                  {msg.role === "bot" && msg.lowConfidence && !msg.error && (
+                    <div className="mt-3 pt-3 border-t border-white/10">
+                      <button
+                        id={`suggest-btn-${msg.id}`}
+                        onClick={() =>
+                          openSuggestionForm(msg.originalQuery ?? "", msg.id)
+                        }
+                        className="flex items-center gap-1.5 text-xs text-indigo-300 hover:text-indigo-100 transition-colors"
+                        type="button"
+                      >
+                        <span>💡</span>
+                        <span>Couldn&apos;t find an answer? Suggest this question</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -688,6 +791,85 @@ export default function ChatbotHome() {
           </div>
         </div>
       </main>
+
+      {/* ──────────────── Suggestion Modal ──────────────── */}
+      {suggestionTarget && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 px-4">
+          <div className="w-full max-w-md bg-slate-900 border border-white/10 rounded-2xl p-6 space-y-5 shadow-2xl">
+            <div className="flex items-center justify-between">
+              <h3 className="text-white font-bold text-lg">💡 Suggest a Question</h3>
+              <button
+                onClick={closeSuggestionForm}
+                className="text-slate-400 hover:text-white text-xl leading-none"
+                type="button"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-slate-400 text-sm">
+              Help us improve the chatbot by submitting a question we should know the answer to.
+            </p>
+
+            <div className="space-y-3">
+              <div>
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1.5">
+                  Your Question *
+                </label>
+                <input
+                  id="suggestion-question-input"
+                  type="text"
+                  value={suggestionQuestion}
+                  onChange={(e) => setSuggestionQuestion(e.target.value)}
+                  placeholder="e.g. What time does the library close on weekends?"
+                  className="w-full rounded-lg bg-slate-800 border border-white/10 text-white px-4 py-2.5 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1.5">
+                  Your Answer{" "}
+                  <span className="text-slate-600 normal-case font-normal">(optional — share if you know it!)</span>
+                </label>
+                <textarea
+                  id="suggestion-answer-input"
+                  value={suggestionAnswer}
+                  onChange={(e) => setSuggestionAnswer(e.target.value)}
+                  placeholder="e.g. The library closes at 10pm on Saturday and Sunday."
+                  rows={3}
+                  className="w-full rounded-lg bg-slate-800 border border-white/10 text-white px-4 py-2.5 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 resize-none"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 pt-1">
+              <button
+                onClick={closeSuggestionForm}
+                className="flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-all"
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                id="submit-suggestion-btn"
+                onClick={() => void handleSubmitSuggestion()}
+                disabled={!suggestionQuestion.trim() || suggestionSubmitting}
+                className="flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition-all disabled:opacity-40"
+                type="button"
+              >
+                {suggestionSubmitting ? "Submitting..." : "Submit Suggestion"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast notification */}
+      {suggestionToast && (
+        <div className="fixed bottom-6 right-6 z-[1000] px-5 py-3 rounded-xl text-sm font-semibold bg-indigo-700 text-white shadow-xl">
+          {suggestionToast}
+        </div>
+      )}
     </div>
   );
 }

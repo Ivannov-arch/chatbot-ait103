@@ -3,42 +3,70 @@
     "module": "general",
     "question": "Hi",
     "answer": "Hi there! 👋 I'm the XMUM Campus Assistant. How can I help you today?",
-    "keywords": ["hi", "hey", "hello", "hiya", "sup", "yo"],
+    "keywords": [
+      "hi",
+      "hey",
+      "hello",
+      "hiya",
+      "sup",
+      "yo"
+    ],
     "sub_intent": "greeting"
   },
   {
     "module": "general",
     "question": "Hello",
     "answer": "Hello! 😊 Welcome to the XMUM Campus Assistant. Feel free to ask me anything about campus life, academics, or administrative matters!",
-    "keywords": ["hello", "hi", "hey", "greetings"],
+    "keywords": [
+      "hello",
+      "hi",
+      "hey",
+      "greetings"
+    ],
     "sub_intent": "greeting"
   },
   {
     "module": "general",
     "question": "Good morning",
     "answer": "Good morning! ☀️ Hope you're having a great day. How can I assist you?",
-    "keywords": ["good morning", "morning", "gm"],
+    "keywords": [
+      "good morning",
+      "morning",
+      "gm"
+    ],
     "sub_intent": "time_based_greeting"
   },
   {
     "module": "general",
     "question": "Good afternoon",
     "answer": "Good afternoon! 🌤️ How can I help you today?",
-    "keywords": ["good afternoon", "afternoon"],
+    "keywords": [
+      "good afternoon",
+      "afternoon"
+    ],
     "sub_intent": "time_based_greeting"
   },
   {
     "module": "general",
     "question": "Good evening",
     "answer": "Good evening! 🌙 How can I assist you?",
-    "keywords": ["good evening", "evening"],
+    "keywords": [
+      "good evening",
+      "evening"
+    ],
     "sub_intent": "time_based_greeting"
   },
   {
     "module": "general",
     "question": "What is your name?",
     "answer": "I'm the XMUM Campus Assistant — a chatbot built to help students of Xiamen University Malaysia navigate campus life, academics, and administrative matters.",
-    "keywords": ["name", "who are you", "what are you", "your name", "called"],
+    "keywords": [
+      "name",
+      "who are you",
+      "what are you",
+      "your name",
+      "called"
+    ],
     "sub_intent": "bot_identity"
   },
   {

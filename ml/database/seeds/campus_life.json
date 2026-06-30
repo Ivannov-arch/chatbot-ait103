@@ -158,84 +158,140 @@
     "sub_intent": "general_info",
     "question": "How is XMUM’s parent university –XMU ranked globally?",
     "answer": "XMU, founded in 1921 by Mr. Tan Kah Kee, was the first Chinese higher educational institution established by an overseas Chinese. According to the “2025–2026 Best Global Universities Rankings,” XMU is ranked 189th globally.",
-    "keywords": ["parent university", "ranking", "xmu", "global"]
+    "keywords": [
+      "parent university",
+      "ranking",
+      "xmu",
+      "global"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Where is XMUM located?",
     "answer": "XMUM is located at Jalan Sunsuria, Bandar Sunsuria, Sepang, only a 5-minute drive from ERL Salak Tinggi, a 10-minute drive from Kuala Lumpur International Airport, and a 15-minute drive from the Government Administrative Center - Putrajaya.",
-    "keywords": ["location", "address", "sepang", "airport"]
+    "keywords": [
+      "location",
+      "address",
+      "sepang",
+      "airport"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "How is the campus of XMUM?",
     "answer": "XMUM has a purpose-built campus occupying an area of 150 acres with an estimated total investment of RM 1.3 billion. The maximum capacity of the campus is 10,000 students.",
-    "keywords": ["campus", "size", "investment", "capacity"]
+    "keywords": [
+      "campus",
+      "size",
+      "investment",
+      "capacity"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What are the facilities available to students?",
     "answer": "XMUM is equipped with state-of-the-art facilities, such as multimedia lecture halls, seminar rooms, tutorial rooms, multi-purpose student activity center with Olympic-sized swimming pool, gym, library, and labs.",
-    "keywords": ["facilities", "campus", "amenities", "students"]
+    "keywords": [
+      "facilities",
+      "campus",
+      "amenities",
+      "students"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What are the programmes offered? What are the most popular programmes of XMUM?",
     "answer": "Each programme is endowed with its own merits and students have the liberty to choose the programmes that piques their interests.",
-    "keywords": ["programmes", "courses", "offerings"]
+    "keywords": [
+      "programmes",
+      "courses",
+      "offerings"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "How many semesters are there in each academic year?",
     "answer": "There are three semesters per academic year for all programmes.",
-    "keywords": ["semesters", "academic year", "duration"]
+    "keywords": [
+      "semesters",
+      "academic year",
+      "duration"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the medium of instruction?",
     "answer": "Except for some Chinese Studies and Traditional Chinese Medicine courses conducted in Chinese, all the other programmes will be delivered in English.",
-    "keywords": ["language", "instruction", "english", "chinese"]
+    "keywords": [
+      "language",
+      "instruction",
+      "english",
+      "chinese"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Where are the teaching faculty from?",
     "answer": "About 30% of our teaching faculty are from Xiamen University in China, while the rest are recruited from around the globe. In addition, 80% of our academic staff hold doctoral degrees.",
-    "keywords": ["faculty", "staff", "origin", "qualifications"]
+    "keywords": [
+      "faculty",
+      "staff",
+      "origin",
+      "qualifications"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Are the programmes at XMUM recognised internationally?",
     "answer": "Yes, all the programmes offered are internationally recognised, with dual approval from both the Malaysian and Chinese governments.",
-    "keywords": ["recognition", "international", "accreditation"]
+    "keywords": [
+      "recognition",
+      "international",
+      "accreditation"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What do students need to do if they want to transfer credits of their previous studies?",
     "answer": "Students need to complete the External Credit Transfer Application Form, provide transcripts and detailed syllabi of their previous studies for us to make assessment. Only when the similarity of the two courses reaches 80% can credit transfer be considered. In such cases, students may be exempted from qualified courses and receive the corresponding fee waiver. The application for credit transfer will only be processed after the students have been admitted to XMUM.",
-    "keywords": ["credit transfer", "application", "transcripts", "syllabi"]
+    "keywords": [
+      "credit transfer",
+      "application",
+      "transcripts",
+      "syllabi"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "How long does it take to complete a degree?",
     "answer": "The duration for bachelor degree programmes of arts, management and economics is three years while it takes four years to complete the engineering and science degree progammes. The traditional Chinese medicine programme is 5-year in length.",
-    "keywords": ["degree duration", "length", "bachelor", "programmes"]
+    "keywords": [
+      "degree duration",
+      "length",
+      "bachelor",
+      "programmes"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the average class size?",
     "answer": "About 20 - 40 students per class.",
-    "keywords": ["class size", "students", "learning"]
+    "keywords": [
+      "class size",
+      "students",
+      "learning"
+    ]
   },
   {
     "module": "campus_life",
@@ -254,49 +310,84 @@
     "sub_intent": "general_info",
     "question": "How many intakes are there in one year?",
     "answer": "For undergraduate programmes, the intakes are in February, April and September. For foundation programmes, the intakes are in April, August, and December.",
-    "keywords": ["intakes", "admissions", "enrollment", "dates"]
+    "keywords": [
+      "intakes",
+      "admissions",
+      "enrollment",
+      "dates"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "How much does a degree cost?",
     "answer": "For tuition fees, please click here.",
-    "keywords": ["tuition fees", "cost", "degree", "expenses"]
+    "keywords": [
+      "tuition fees",
+      "cost",
+      "degree",
+      "expenses"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Does XMUM provide any scholarships? What are the minimum requirements for receiving the scholarships?",
     "answer": "Merit-based scholarships are available based on the academic achievements of students. Study grants are provided to students with siblings studying at XMUM or students whose parents are teachers.",
-    "keywords": ["scholarships", "financial aid", "grants", "merit-based"]
+    "keywords": [
+      "scholarships",
+      "financial aid",
+      "grants",
+      "merit-based"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "Is on-campus accommodation provided?",
     "answer": "XMUM provides on-campus accommodation to all registered students. Students are encouraged to live in campus residences, as living on campus fosters a spirit of cooperation and camaraderie that develops into lifelong friendships, and facilitates participation in extra-curricular activities through various cultural, recreational and social programmes.",
-    "keywords": ["accommodation", "on-campus", "housing", "residence"]
+    "keywords": [
+      "accommodation",
+      "on-campus",
+      "housing",
+      "residence"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "How much is the rental?",
     "answer": "The rental ranges from RM 340 to RM 460 per month. Each of the registered student who lives in the campus residences is required to pay a deposit of RM500 (refundable) together with one-semester rental upon check-in.",
-    "keywords": ["rental", "cost", "deposit", "monthly"]
+    "keywords": [
+      "rental",
+      "cost",
+      "deposit",
+      "monthly"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What security precautions does the University take on campus?",
     "answer": "The hostel is guarded by security guards and is under 24 hour CCTV surveillance every day. We have also installed access controller for main entrances of each hostel block and students need to get through by their Student ID card. Unauthorized guests are barred from entering or staying in the compound of student hostels including rooms and communal areas.",
-    "keywords": ["security", "safety", "hostel", "cctv"]
+    "keywords": [
+      "security",
+      "safety",
+      "hostel",
+      "cctv"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "Do students need to observe any curfew regulation?",
     "answer": "The curfew set for the residences is 12:00 am. Residents who wish to leave or return to the campus ground after 12:00 am must report at the guardhouse with their student IDs.",
-    "keywords": ["curfew", "regulations", "hostel", "reporting"]
+    "keywords": [
+      "curfew",
+      "regulations",
+      "hostel",
+      "reporting"
+    ]
   },
   {
     "module": "campus_life",
@@ -322,28 +413,48 @@
     "sub_intent": "hostel_rules_maintenance",
     "question": "Do students need to bring their own cleaning supplies to clean their rooms?",
     "answer": "Yes, students need to bring cleaning supplies, as they are responsible for the tidiness and cleanliness of their own bedrooms.",
-    "keywords": ["cleaning", "supplies", "rooms", "responsibility"]
+    "keywords": [
+      "cleaning",
+      "supplies",
+      "rooms",
+      "responsibility"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "Is mattress provided in the room?",
     "answer": "Yes, we provide quality mattress. However, students need to bring their own pillows and other necessary bedding items.",
-    "keywords": ["mattress", "bedding", "room", "provided"]
+    "keywords": [
+      "mattress",
+      "bedding",
+      "room",
+      "provided"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "Is electric fan allowed to be used in the hostel room?",
     "answer": "There is an air-conditioner in each room. If it is necessary, students may bring their own electric fan.",
-    "keywords": ["electric fan", "air-conditioner", "room", "appliances"]
+    "keywords": [
+      "electric fan",
+      "air-conditioner",
+      "room",
+      "appliances"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "food_dining",
     "question": "Is there a variety of food offered at XMUM canteen?",
     "answer": "Yes, there are different vendors selling different types of food, catering to the different needs of students.",
-    "keywords": ["food", "canteen", "vendors", "dining"]
+    "keywords": [
+      "food",
+      "canteen",
+      "vendors",
+      "dining"
+    ]
   },
   {
     "module": "campus_life",
@@ -371,7 +482,12 @@
     "sub_intent": "health_safety",
     "question": "Are there any student insurance plans available?",
     "answer": "XMUM purchases student personal accident insurance plan to provide adequate coverage for all the registered students. The personal accident insurance covers the cost of hospitalization. However, students need to pay the difference if the medical charges exceed the maximum coverage amount.",
-    "keywords": ["insurance", "accident", "medical", "coverage"]
+    "keywords": [
+      "insurance",
+      "accident",
+      "medical",
+      "coverage"
+    ]
   },
   {
     "module": "campus_life",
@@ -411,266 +527,455 @@
     "sub_intent": "health_safety",
     "question": "Are there counselling services available to students?",
     "answer": "Yes, we have a Counselling Center which provides a range of free and strictly confidential services to promote the intellectual, emotional, social growth and development of XMUM students. The range of services include Individual counselling, group counselling, psychological testing, etc.",
-    "keywords": ["counselling", "mental health", "support", "free"]
+    "keywords": [
+      "counselling",
+      "mental health",
+      "support",
+      "free"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What department manages clubs and societies at Xiamen University Malaysia?",
     "answer": "The Extra-Curricular Activities (ECA) Department manages clubs and societies at Xiamen University Malaysia.",
-    "keywords": ["eca", "department", "xiamen", "malaysia"]
+    "keywords": [
+      "eca",
+      "department",
+      "xiamen",
+      "malaysia"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What is the overall goal of joining clubs and societies at Xiamen University Malaysia?",
     "answer": "The overall goal of joining clubs and societies at Xiamen University Malaysia is to \"Unleash Your Potential\" through Extra-Curricular Activities (ECA).",
-    "keywords": ["potential", "eca", "activities", "growth"]
+    "keywords": [
+      "potential",
+      "eca",
+      "activities",
+      "growth"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What types of activities do sports clubs offer?",
     "answer": "Sports clubs offer activities to fuel competitive spirit and help students stay active, catering to every level of athletic ability.",
-    "keywords": ["sports", "active", "competitive", "athletic"]
+    "keywords": [
+      "sports",
+      "active",
+      "competitive",
+      "athletic"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Can you list some of the sports clubs available at Xiamen University Malaysia?",
     "answer": "Some of the sports clubs available include Badminton Club, Swimming Club, Acrux Cheerleading Club, Football Club, Martial Arts Club, Basketball Club (Sharks), Table Tennis Club, Tennis Club, Volleyball Club, Track & Field Club, Fitness Club, Outdoor Adventure Club, Kendo Club, Chess Club, Blaze Dodgeball Club, Ultimate Frisbee Club (Krakens), E-Sport Club (Vulcan), Scuba Diving Club, and Yoga Club.",
-    "keywords": ["sports", "list", "clubs", "physical"]
+    "keywords": [
+      "sports",
+      "list",
+      "clubs",
+      "physical"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What is the main objective of the 'General' category clubs?",
     "answer": "The main objective of the General clubs is to allow students to explore a wide range of interests, develop new skills, engage in meaningful discussions, connect with peers, and grow personally and socially outside the classroom.",
-    "keywords": ["general", "skills", "social", "interests"]
+    "keywords": [
+      "general",
+      "skills",
+      "social",
+      "interests"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Which clubs fall under the 'General' category?",
     "answer": "Clubs under the 'General' category include Board Games Society, XMUM Business Association, Chinese Debate Society, English Language Society, Math Society, Photography Society, Speak-T Society, Environmental Club, Astronomy Club, X-Tech Club, Robotic Club, Rubik's Club, Coding Club, and AI Club.",
-    "keywords": ["general", "academic", "diverse", "hobbies"]
+    "keywords": [
+      "general",
+      "academic",
+      "diverse",
+      "hobbies"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What talents can students showcase in Performing Arts clubs?",
     "answer": "Students can showcase their talents in music, dance, or drama through Performing Arts clubs, which light up the stage with performances, concerts, and creative showcases.",
-    "keywords": ["performing", "arts", "music", "dance"]
+    "keywords": [
+      "performing",
+      "arts",
+      "music",
+      "dance"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Name some clubs dedicated to performing arts.",
     "answer": "Performing arts clubs include XMUM Philharmonic Orchestra (XMPO), Music Club, Ukulele Society, Yanan Chinese Orchestra (YCO), Dance Club, Drama Society, 24 Festive Drums Club, and Diabolo Club.",
-    "keywords": ["orchestra", "drama", "dance", "music"]
+    "keywords": [
+      "orchestra",
+      "drama",
+      "dance",
+      "music"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What is the focus of the Culture & Arts clubs?",
     "answer": "The focus of the Culture & Arts clubs is to explore creativity and global perspectives through culture, art, and expression, connecting members and bringing diverse worlds to campus life.",
-    "keywords": ["culture", "art", "global", "diversity"]
+    "keywords": [
+      "culture",
+      "art",
+      "global",
+      "diversity"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Which clubs promote culture and arts?",
     "answer": "Clubs promoting culture and arts are Visual Art Club, Nanqiang Calligraphy Society, Chinese Society, Christian Fellowship Club, Traditional Chinese Medicine Society, Buddhist Society, Korean Cultures & Arts Society, ACG Research Society, Tea Club, Coffee Club - The Brewix, Muslim Society, and Handcraft Society.",
-    "keywords": ["cultural", "societies", "art", "traditional"]
+    "keywords": [
+      "cultural",
+      "societies",
+      "art",
+      "traditional"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What is the purpose of Service & Volunteerism clubs?",
     "answer": "The purpose of Service & Volunteerism clubs is to make a difference through community service and social impact initiatives, empowering students to give back, raise awareness, and become agents of positive change.",
-    "keywords": ["service", "volunteer", "community", "impact"]
+    "keywords": [
+      "service",
+      "volunteer",
+      "community",
+      "impact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "List some Service & Volunteerism clubs.",
     "answer": "Some Service & Volunteerism clubs include First Aid Society, AIESEC, Omega Leo Club, Rotaract Club, and Youth Leader Association.",
-    "keywords": ["charity", "help", "aid", "leadership"]
+    "keywords": [
+      "charity",
+      "help",
+      "aid",
+      "leadership"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What do International Communities clubs offer students?",
     "answer": "International Communities clubs offer students a global community experience on campus, allowing them to celebrate cultural identities, foster cross-cultural understanding, and build global friendships.",
-    "keywords": ["international", "community", "culture", "global"]
+    "keywords": [
+      "international",
+      "community",
+      "culture",
+      "global"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Can you name specific international student communities at Xiamen University Malaysia?",
     "answer": "Specific international student communities are International Student Ambassador (ISA), XMUM Yemen Student Community, XMUM Central Asia Student Community (CASC), and XMUM Indonesian Student Community - Garuda Dwi Pantara (GADPA).",
-    "keywords": ["international", "students", "ambassador", "communities"]
+    "keywords": [
+      "international",
+      "students",
+      "ambassador",
+      "communities"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the main website for Xiamen University Malaysia?",
     "answer": "The main website for Xiamen University Malaysia is www.xmu.edu.my.",
-    "keywords": ["website", "malaysia", "url", "contact"]
+    "keywords": [
+      "website",
+      "malaysia",
+      "url",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the general enquiry phone number for the Malaysia Campus?",
     "answer": "The general enquiry phone number for the Malaysia Campus is +03 8800 6800.",
-    "keywords": ["phone", "general", "malaysia", "contact"]
+    "keywords": [
+      "phone",
+      "general",
+      "malaysia",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the phone number for course and enrollment enquiries at the Malaysia Campus?",
     "answer": "The phone number for course and enrollment enquiries at the Malaysia Campus is +03 7610 2079.",
-    "keywords": ["enrollment", "courses", "phone", "malaysia"]
+    "keywords": [
+      "enrollment",
+      "courses",
+      "phone",
+      "malaysia"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the physical address of Xiamen University Malaysia Campus?",
     "answer": "The physical address of Xiamen University Malaysia Campus is Jalan Sunsuria, Bandar Sunsuria, 43900 Sepang, Selangor Darul Ehsan, Malaysia.",
-    "keywords": ["address", "malaysia", "location", "campus"]
+    "keywords": [
+      "address",
+      "malaysia",
+      "location",
+      "campus"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "How can prospective local students contact Xiamen University Malaysia?",
     "answer": "Prospective local students can contact Xiamen University Malaysia via email at enquiry@xmu.edu.my.",
-    "keywords": ["local", "student", "email", "enquiry"]
+    "keywords": [
+      "local",
+      "student",
+      "email",
+      "enquiry"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the email address for international student enquiries?",
     "answer": "The email address for international student enquiries is int.enquiry@xmu.edu.my.",
-    "keywords": ["international", "student", "email", "contact"]
+    "keywords": [
+      "international",
+      "student",
+      "email",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the estimated train travel time from KLIA to Salak Tinggi ERL station?",
     "answer": "The estimated train travel time from KLIA to Salak Tinggi ERL station is 7 minutes.",
-    "keywords": ["train", "klia", "travel", "duration"]
+    "keywords": [
+      "train",
+      "klia",
+      "travel",
+      "duration"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the estimated car travel time from KLIA to Xiamen University Malaysia Campus?",
     "answer": "The estimated car travel time from KLIA to Xiamen University Malaysia Campus is 20 minutes (approximately 15.3km).",
-    "keywords": ["car", "travel", "klia", "distance"]
+    "keywords": [
+      "car",
+      "travel",
+      "klia",
+      "distance"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What is the contact email for accommodation enquiries?",
     "answer": "The contact email for accommodation enquiries is studentaccommodation@xmu.edu.my.",
-    "keywords": ["accommodation", "housing", "email", "student"]
+    "keywords": [
+      "accommodation",
+      "housing",
+      "email",
+      "student"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What are the website and phone numbers for the Xiamen University China Office?",
     "answer": "The website for the China Office is xmu.edu.cn and the phone numbers are +86 592 2183989 / 2188700.",
-    "keywords": ["china", "office", "contact", "phone"]
+    "keywords": [
+      "china",
+      "office",
+      "contact",
+      "phone"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What book services are available at Xiamen University Malaysia Library?",
     "answer": "The library offers Loan & Return, Fines & Report Lost, Purchase Request, and Document Delivery services.",
-    "keywords": ["book", "services", "loan", "return"]
+    "keywords": [
+      "book",
+      "services",
+      "loan",
+      "return"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What learning services are provided by the Xiamen University Malaysia Library?",
     "answer": "Learning services include Moodle, Turnitin, Computers, Printing, and Scholarly Work support.",
-    "keywords": ["learning", "services", "moodle", "printing"]
+    "keywords": [
+      "learning",
+      "services",
+      "moodle",
+      "printing"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What e-resources can be accessed through the Xiamen University Malaysia Library?",
     "answer": "Users can access Library E-Resources, OPAC, E-Books, and E-Journals.",
-    "keywords": ["e-resources", "opac", "e-books", "e-journals"]
+    "keywords": [
+      "e-resources",
+      "opac",
+      "e-books",
+      "e-journals"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What is the OPAC system and what are its functions?",
     "answer": "The OPAC (Online Public Access Catalog) system allows patrons to search diverse book collections (course reserves, reference, general reading), access account information, check borrowed books, and view fines.",
-    "keywords": ["opac", "catalog", "search", "books"]
+    "keywords": [
+      "opac",
+      "catalog",
+      "search",
+      "books"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What are the Xiamen University Malaysia Library's opening hours during the semester?",
     "answer": "During the semester (from April 6, 2026 onwards), the library is open Monday - Friday from 09:00 - 22:00, and Saturday - Sunday from 09:00 - 17:00.",
-    "keywords": ["opening hours", "semester", "schedule", "library"]
+    "keywords": [
+      "opening hours",
+      "semester",
+      "schedule",
+      "library"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "How do public holidays affect the library's opening hours during the semester?",
     "answer": "On some public holidays like Eid al-Adha or Wesak Day (May 27, May 31, June 2, 2026), the library is open from 09:00 - 17:00. On others, like Agong's Birthday (June 1, 2026), it is closed.",
-    "keywords": ["public holidays", "hours", "closed", "open"]
+    "keywords": [
+      "public holidays",
+      "hours",
+      "closed",
+      "open"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "Where can I find information about the Makerspace at Xiamen University Malaysia Library?",
     "answer": "Information is available regarding About Makerspace, How to Apply, Safety Guidelines, Rules and Regulations, and the Makerspace Calendar.",
-    "keywords": ["makerspace", "apply", "guidelines", "rules"]
+    "keywords": [
+      "makerspace",
+      "apply",
+      "guidelines",
+      "rules"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What types of physical spaces are available at the Xiamen University Malaysia Library?",
     "answer": "The library offers various spaces including a Makerspace, Instruction Room, and a Mini Cinema (with 3D).",
-    "keywords": ["spaces", "cinema", "instruction", "makerspace"]
+    "keywords": [
+      "spaces",
+      "cinema",
+      "instruction",
+      "makerspace"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "How can users stay updated on changes to the library's operating hours?",
     "answer": "Operating hours are subject to change; users should refer to the latest announcements on the library website or contact librarian@xmu.edu.my.",
-    "keywords": ["hours", "changes", "contact", "website"]
+    "keywords": [
+      "hours",
+      "changes",
+      "contact",
+      "website"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What is the Student Helpdesk at Xiamen University Malaysia (XMUM)?",
     "answer": "The Student Helpdesk acts as the first point of contact for students to Xiamen University Malaysia (XMUM).",
-    "keywords": ["helpdesk", "contact", "xmum", "students"]
+    "keywords": [
+      "helpdesk",
+      "contact",
+      "xmum",
+      "students"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What types of assistance and services does the Student Helpdesk provide?",
     "answer": "The Student Helpdesk provides assistance and services mainly for Student Vehicle Registration, Feedback, Lost and Found, Student Verification, Student Personal Accident Insurance, and PTPTN Enquiries.",
-    "keywords": ["services", "assistance", "helpdesk", "student"]
+    "keywords": [
+      "services",
+      "assistance",
+      "helpdesk",
+      "student"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Does the Student Helpdesk assist with student vehicle registration?",
     "answer": "Yes, the Student Helpdesk provides assistance for Student Vehicle Registration.",
-    "keywords": ["vehicle", "registration", "student", "campus"]
+    "keywords": [
+      "vehicle",
+      "registration",
+      "student",
+      "campus"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Can students provide feedback through the Student Helpdesk?",
     "answer": "Yes, the Student Helpdesk provides services for students to submit Feedback.",
-    "keywords": ["feedback", "suggestions", "student"]
+    "keywords": [
+      "feedback",
+      "suggestions",
+      "student"
+    ]
   },
   {
     "module": "campus_life",
@@ -690,21 +995,36 @@
     "sub_intent": "documents_identity",
     "question": "For what purposes does the Student Helpdesk offer Student Verification?",
     "answer": "The Student Helpdesk offers Student Verification for purposes such as lost/damaged student ID card reports and public transport discount card registration.",
-    "keywords": ["verification", "id card", "transport", "discount"]
+    "keywords": [
+      "verification",
+      "id card",
+      "transport",
+      "discount"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Does the Student Helpdesk provide services related to student personal accident insurance?",
     "answer": "Yes, the Student Helpdesk provides services concerning Student Personal Accident Insurance.",
-    "keywords": ["insurance", "accident", "personal", "student"]
+    "keywords": [
+      "insurance",
+      "accident",
+      "personal",
+      "student"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Can students make PTPTN enquiries at the Student Helpdesk?",
     "answer": "Yes, the Student Helpdesk handles PTPTN Enquiries.",
-    "keywords": ["ptptn", "enquiries", "financial", "loan"]
+    "keywords": [
+      "ptptn",
+      "enquiries",
+      "financial",
+      "loan"
+    ]
   },
   {
     "module": "campus_life",
@@ -855,7 +1175,13 @@
     "sub_intent": "it_connectivity",
     "question": "Should I archive my campus email data?",
     "answer": "Yes, you should archive your important email or data regularly while your campus email account is still active, as it will be removed upon leaving or graduating.",
-    "keywords": ["archive", "data", "backup", "student email", "campus email"]
+    "keywords": [
+      "archive",
+      "data",
+      "backup",
+      "student email",
+      "campus email"
+    ]
   },
   {
     "module": "campus_life",
@@ -1009,28 +1335,48 @@
     "sub_intent": "it_connectivity",
     "question": "What is the main role of the Student Helpdesk at Xiamen University Malaysia?",
     "answer": "The Student Helpdesk acts as the first point of contact for students to Xiamen University Malaysia (XMUM).",
-    "keywords": ["role", "contact", "students", "xmum"]
+    "keywords": [
+      "role",
+      "contact",
+      "students",
+      "xmum"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What services does the Student Helpdesk primarily provide?",
     "answer": "The Student Helpdesk mainly provides assistance and services for Student Vehicle Registration, Feedback, Lost and Found, Student Verification, Student Personal Accident Insurance, and PTPTN Enquiries.",
-    "keywords": ["services", "assistance", "help", "support"]
+    "keywords": [
+      "services",
+      "assistance",
+      "help",
+      "support"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Can the Student Helpdesk assist with student vehicle registration?",
     "answer": "Yes, the Student Helpdesk provides assistance and services for Student Vehicle Registration.",
-    "keywords": ["vehicle", "registration", "campus", "driving"]
+    "keywords": [
+      "vehicle",
+      "registration",
+      "campus",
+      "driving"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Does the Student Helpdesk handle student feedback?",
     "answer": "Yes, the Student Helpdesk provides assistance and services related to student Feedback.",
-    "keywords": ["feedback", "complaints", "suggestions", "opinions"]
+    "keywords": [
+      "feedback",
+      "complaints",
+      "suggestions",
+      "opinions"
+    ]
   },
   {
     "module": "campus_life",
@@ -1051,35 +1397,62 @@
     "sub_intent": "documents_identity",
     "question": "What purposes does Student Verification by the Helpdesk serve?",
     "answer": "Student Verification is provided for purposes such as lost/damaged student ID card reports and public transport discount card registration.",
-    "keywords": ["verification", "id card", "transport", "discount"]
+    "keywords": [
+      "verification",
+      "id card",
+      "transport",
+      "discount"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Can the Student Helpdesk assist with Student Personal Accident Insurance?",
     "answer": "Yes, the Student Helpdesk provides assistance and services for Student Personal Accident Insurance.",
-    "keywords": ["insurance", "accident", "personal", "coverage"]
+    "keywords": [
+      "insurance",
+      "accident",
+      "personal",
+      "coverage"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Does the Student Helpdesk handle PTPTN enquiries?",
     "answer": "Yes, the Student Helpdesk provides assistance and services for PTPTN Enquiries.",
-    "keywords": ["ptptn", "enquiries", "questions", "loan"]
+    "keywords": [
+      "ptptn",
+      "enquiries",
+      "questions",
+      "loan"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Are campus buildings fully covered by wireless network signal?",
     "answer": "Yes, all campus building areas are fully covered by the campus wireless network signal.",
-    "keywords": ["coverage", "campus", "signal", "wireless", "it services"]
+    "keywords": [
+      "coverage",
+      "campus",
+      "signal",
+      "wireless",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "How do users access the campus WIFI network?",
     "answer": "Users can access the WIFI network through the University’s Central Authentication System (CAS) and obtain an IP address and configuration setting automatically via DHCP.",
-    "keywords": ["access", "cas", "dhcp", "authentication", "it services"]
+    "keywords": [
+      "access",
+      "cas",
+      "dhcp",
+      "authentication",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
@@ -1099,7 +1472,13 @@
     "sub_intent": "it_connectivity",
     "question": "What are the WIFI SSIDs for students?",
     "answer": "The WIFI SSIDs for students are 'Student-5G' or 'Student'.",
-    "keywords": ["student", "ssid", "name", "identification", "it services"]
+    "keywords": [
+      "student",
+      "ssid",
+      "name",
+      "identification",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
@@ -1119,203 +1498,332 @@
     "sub_intent": "it_connectivity",
     "question": "What are the WIFI SSIDs for staff and how is authentication handled?",
     "answer": "The WIFI SSIDs for staff are 'Staff-5G' or 'Staff'. The password will be advised by the IT Department. Currently, user authentication is not required, but it will be imposed in a later phase.",
-    "keywords": ["staff", "ssid", "password", "authentication", "it services"]
+    "keywords": [
+      "staff",
+      "ssid",
+      "password",
+      "authentication",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What is the WIFI SSID for the International Academic Exchange Centre and how do users get the password?",
     "answer": "The WIFI SSID for the International Academic Exchange Centre is 'XMU-IAEC'. The password will be advised by IAEC staff.",
-    "keywords": ["iaec", "ssid", "password", "access", "it services"]
+    "keywords": [
+      "iaec",
+      "ssid",
+      "password",
+      "access",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Is it allowed to use a personal wireless router on campus?",
     "answer": "If you would like to use your own wireless router, you must seek approval from the IT Department.",
-    "keywords": ["router", "personal", "approval", "it", "it services"]
+    "keywords": [
+      "router",
+      "personal",
+      "approval",
+      "it",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What are the restrictions for naming personal WIFI SSIDs on campus?",
     "answer": "The WIFI name (SSID) for personal use cannot begin with 'XMU' and cannot use the same SSID names as Guest, Staff, Student, etc.",
-    "keywords": ["personal", "ssid", "restrictions", "naming", "it services"]
+    "keywords": [
+      "personal",
+      "ssid",
+      "restrictions",
+      "naming",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Is internet access provided by the university free of charge?",
     "answer": "Yes, internet access provided by the University is currently free of charge.",
-    "keywords": ["internet", "cost", "free", "university", "it services"]
+    "keywords": [
+      "internet",
+      "cost",
+      "free",
+      "university",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "How can users get assistance with WIFI issues?",
     "answer": "Users can visit the IT Office A3-103 (1F) during working hours, email IT at it@xmu.edu.my, or raise an 'AskA' request for further assistance.",
-    "keywords": ["support", "contact", "it", "assistance", "it services"]
+    "keywords": [
+      "support",
+      "contact",
+      "it",
+      "assistance",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What are some general rules for student dress code at XMUM?",
     "answer": "Students are required to be appropriately attired in a manner befitting the status of university students at all times and must wear their student ID card in all academic and public venues. They must also abide by guidelines for specific sports/recreational venues.",
-    "keywords": ["dress code", "student id", "general rules"]
+    "keywords": [
+      "dress code",
+      "student id",
+      "general rules"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What apparel is NOT allowed in public venues and formal occasions at XMUM?",
     "answer": "Shorts, skirts that show the knee, sleeveless/singlets, see-through clothing, and flip-flops are not allowed in public venues and formal occasions.",
-    "keywords": ["dress code", "prohibited", "attire"]
+    "keywords": [
+      "dress code",
+      "prohibited",
+      "attire"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Who enforces the dress code at XMUM?",
     "answer": "All XMUM staff members are empowered to issue warnings and to bar any students who violate the rules.",
-    "keywords": ["dress code", "enforcement", "staff"]
+    "keywords": [
+      "dress code",
+      "enforcement",
+      "staff"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What is the purpose of the XMUM Academic Guide and Regulations handbook?",
     "answer": "The handbook aims to strengthen the implementation of standardized academic regulations for undergraduate programmes leading to Bachelor's Degrees, considering current and future university needs.",
-    "keywords": ["academic guide", "regulations", "purpose"]
+    "keywords": [
+      "academic guide",
+      "regulations",
+      "purpose"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What are some key responsibilities of students regarding academic regulations?",
     "answer": "Students must read and understand all regulations, familiarize themselves with programme specifics, complete course registration on time, check university email/bulletin board regularly, pay tuition fees on time, attend activities, adhere to appointments, seek advice, and be responsible for consequences of non-compliance.",
-    "keywords": ["student responsibilities", "academic", "regulations"]
+    "keywords": [
+      "student responsibilities",
+      "academic",
+      "regulations"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Who determines entry requirements for Bachelor's Degree Programmes?",
     "answer": "Entry requirements for Bachelor's Degree Programmes are determined by the University.",
-    "keywords": ["admission", "entry requirements"]
+    "keywords": [
+      "admission",
+      "entry requirements"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What is the official communication channel between the University and students?",
     "answer": "The university email will be the official communication channel between the University and students.",
-    "keywords": ["communication", "official", "email"]
+    "keywords": [
+      "communication",
+      "official",
+      "email"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What are the required purposes for carrying a student ID card on campus?",
     "answer": "The student ID card is required for entering the campus, paying fees at the Finance Office, using library facilities, sitting for final examinations, and any other purposes on campus.",
-    "keywords": ["student id", "campus access", "facilities"]
+    "keywords": [
+      "student id",
+      "campus access",
+      "facilities"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What is the process for withdrawing from the university?",
     "answer": "Students wishing to withdraw must fill out a \"Programme Withdrawal Form\" from the Admissions Office, return university property, and settle all outstanding fees. The process takes up to 5 working days.",
-    "keywords": ["withdrawal", "process", "fees", "forms"]
+    "keywords": [
+      "withdrawal",
+      "process",
+      "fees",
+      "forms"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "How can Malaysian students change their study programme?",
     "answer": "Malaysian students can change their study programme by filling out a prescribed form from the Academic Affairs Office and submitting it within two weeks before the end of a semester, provided they meet the new programme's entry requirements.",
-    "keywords": ["change programme", "malaysian students"]
+    "keywords": [
+      "change programme",
+      "malaysian students"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What is the maximum duration for deferment of study?",
     "answer": "Students shall not defer their studies for more than one year, except in the case of a health condition certified by a qualified medical practitioner.",
-    "keywords": ["deferment", "study", "duration", "health"]
+    "keywords": [
+      "deferment",
+      "study",
+      "duration",
+      "health"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is the maximum duration of study allowed at XMUM?",
     "answer": "The maximum length of study must not exceed 6 years (7 years for Bachelor of Medicine in Traditional Chinese Medicine (Honours)).",
-    "keywords": ["study duration", "maximum", "degree"]
+    "keywords": [
+      "study duration",
+      "maximum",
+      "degree"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What is plagiarism and collusion?",
     "answer": "Plagiarism is copying another person's work without proper acknowledgment, including using AI tools for direct copying or paraphrasing. Collusion is collaborating with others in preparing and writing work when it should be individual effort.",
-    "keywords": ["plagiarism", "collusion", "academic misconduct"]
+    "keywords": [
+      "plagiarism",
+      "collusion",
+      "academic misconduct"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What are the penalties for academic misconduct like plagiarism or collusion?",
     "answer": "Any form of academic misconduct will result in a zero mark for the entire assignment or a portion of it. If collusion involves multiple people, all involved will face the same penalty.",
-    "keywords": ["academic misconduct", "penalty", "zero mark"]
+    "keywords": [
+      "academic misconduct",
+      "penalty",
+      "zero mark"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What are the grounds for appealing against a decision made on academic misconduct/disciplinary matters?",
     "answer": "Appeals will be allowed based on grounds such as students believing they have been unfairly judged or major administrative mistakes affecting academic records.",
-    "keywords": ["appeal", "disciplinary", "misconduct"]
+    "keywords": [
+      "appeal",
+      "disciplinary",
+      "misconduct"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the office hours for the Academic Affairs Office?",
     "answer": "The Academic Affairs Office (Room A3#702) is open Monday to Friday from 8:30 am to 5:30 pm, with a lunch break from 12:30 pm to 1:30 pm.",
-    "keywords": ["academic affairs", "office hours", "contact"]
+    "keywords": [
+      "academic affairs",
+      "office hours",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the contact details and office hours for the Finance Office?",
     "answer": "The Finance Office (Room A3-7-11) is open Monday to Friday from 9:00 am to 5:00 pm. Email: finance@xmu.edu.my, Phone: 03-8800 6856.",
-    "keywords": ["finance office", "contact", "office hours"]
+    "keywords": [
+      "finance office",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What services does the Student Helpdesk provide?",
     "answer": "The Student Helpdesk provides assistance with student vehicle registration, feedback, lost and found, student verification, student personal accident insurance, and PTPTN enquiries.",
-    "keywords": ["student helpdesk", "services", "support"]
+    "keywords": [
+      "student helpdesk",
+      "services",
+      "support"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What is the policy on lost/damaged student ID cards?",
     "answer": "Lost/damaged ID cards must be immediately reported to the Student Helpdesk during working hours and will incur an administrative charge. Only one student ID card is permitted per person at a time.",
-    "keywords": ["student id", "lost", "damaged", "policy"]
+    "keywords": [
+      "student id",
+      "lost",
+      "damaged",
+      "policy"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What does the Student Group Personal Accident Insurance cover for local students?",
     "answer": "For local students, the policy covers accidental death, accidental permanent disablement, accidental death on public common carrier or in school premises, ambulance fees (RM50 private, RM25 government), kidnapping extension (RM15,000), bereavement allowance (RM2,000), daily hospital cash allowance (RM50 private, RM25 government), accidental dental treatment (RM500), and allowance for school/tuition fees.",
-    "keywords": ["insurance", "personal accident", "local students"]
+    "keywords": [
+      "insurance",
+      "personal accident",
+      "local students"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "Where can students get information about PTPTN (National Higher Education Fund Corporation)?",
     "answer": "Students can visit the helpdesk of the Student Affairs Office to consult on PTPTN eligibilities, loan amounts, online application flow chat, online schedule, and application guidelines.",
-    "keywords": ["ptptn", "enquiries", "student affairs"]
+    "keywords": [
+      "ptptn",
+      "enquiries",
+      "student affairs"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the contact details and office hours for the Student Affairs Office?",
     "answer": "The Student Affairs Office (Room B1 # 107) is open Monday to Friday from 8:30 am to 5:30 pm. International Student Affairs Office email: internationaloffice@xmu.edu.my, Phone: 03-8800 6838 / 03-8705 5048.",
-    "keywords": ["student affairs", "contact", "office hours"]
+    "keywords": [
+      "student affairs",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What services does the Counselling Centre provide?",
     "answer": "The Counselling Centre provides free individual and group counselling, supporting students with adaptation, self-exploration, study stress, emotion, grief and loss, sexuality/gender, family, boy-girl relationships, friendship, and career guidance.",
-    "keywords": ["counselling centre", "services", "support"]
+    "keywords": [
+      "counselling centre",
+      "services",
+      "support"
+    ]
   },
   {
     "module": "campus_life",
@@ -1340,196 +1848,313 @@
     "sub_intent": "health_safety",
     "question": "What are the contact details and office hours for the Counselling Centre?",
     "answer": "The Counselling Centre (Room B1 # 111) is open Monday to Friday from 8:30 am to 5:30 pm. Email: counselling@xmu.edu.my, Phone: 03-8705 5059.",
-    "keywords": ["counselling centre", "contact", "office hours"]
+    "keywords": [
+      "counselling centre",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the contact details and office hours for the International Student Affairs Office?",
     "answer": "The International Student Affairs Office (Room B1 # 104) is open Monday to Friday from 9:00 am to 5:00 pm. Email: internationaloffice@xmu.edu.my, Phone: 03-8800 6838 / 03-8705 5048.",
-    "keywords": ["international student", "contact", "office hours"]
+    "keywords": [
+      "international student",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What is the purpose of the Extra-curricular Activities Guidebook?",
     "answer": "The Guidebook is designed to assist in the formation and operation of students' clubs and societies, and to help create an efficient and clear administrative focus.",
-    "keywords": ["eca", "guidebook", "clubs", "societies"]
+    "keywords": [
+      "eca",
+      "guidebook",
+      "clubs",
+      "societies"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What types of clubs/societies are students generally allowed to form?",
     "answer": "Students are generally allowed to form any types of clubs or societies except those which are politically affiliated, believed to be duplicates of existing clubs/societies, or in contravention of the law.",
-    "keywords": ["clubs", "societies", "formation", "rules"]
+    "keywords": [
+      "clubs",
+      "societies",
+      "formation",
+      "rules"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What must be included in a club/society constitution for approval?",
     "answer": "The constitution must include the name, logo, objectives, Pro-Tem committee members list (min. 7 students), duties of EXCO/Sub-committee, Principal Advisor/Co-advisor details and roles, election procedures, resignation/vacancies/dismissals, AGM details, membership/subscription fees, amendments to constitution, and signatures.",
-    "keywords": ["clubs", "constitution", "requirements"]
+    "keywords": [
+      "clubs",
+      "constitution",
+      "requirements"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Who oversees all activities of a club/society and acts as a liaison with university authorities?",
     "answer": "The Advisor(s), who must be a permanent staff of XMUM, oversee all activities and act as a liaison between the club/society and the university authorities.",
-    "keywords": ["clubs", "advisor", "roles"]
+    "keywords": [
+      "clubs",
+      "advisor",
+      "roles"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "When must an Annual General Meeting (AGM) for clubs/societies be held?",
     "answer": "An Annual General Meeting (AGM) must be held in October each year.",
-    "keywords": ["agm", "clubs", "societies", "timing"]
+    "keywords": [
+      "agm",
+      "clubs",
+      "societies",
+      "timing"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What are the requirements for clubs and societies to maintain active status?",
     "answer": "To remain active, clubs/societies must submit event/activity proposals, submit semester activity reports (twice a year), participate in recruitment drives, attend yearly leaders briefing, organize regular activities, and complete submission of required documents.",
-    "keywords": ["clubs", "active status", "requirements"]
+    "keywords": [
+      "clubs",
+      "active status",
+      "requirements"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What are the recognition criteria for International Student Communities?",
     "answer": "International Communities must submit a brief Community Profile (objectives, target group, vision) and an updated annual committee list with at least three named representatives to be officially recognized.",
-    "keywords": ["international students", "communities", "recognition"]
+    "keywords": [
+      "international students",
+      "communities",
+      "recognition"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "When must an event/activity proposal be submitted to the Extra-Curricular Activities Unit (ECA)?",
     "answer": "An event/activity Proposal has to be submitted at least 1 month before major events and two weeks before minor events.",
-    "keywords": ["event proposal", "submission", "eca"]
+    "keywords": [
+      "event proposal",
+      "submission",
+      "eca"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What are the guidelines for postering by clubs/societies?",
     "answer": "All posters require prior approval from the Student Affairs Office, can only be posted on designated notice boards using pins, and are allowed for a maximum of 14 days (or until a day after the event for advertising). A penalty of RM50 applies for late removal.",
-    "keywords": ["postering", "guidelines", "clubs"]
+    "keywords": [
+      "postering",
+      "guidelines",
+      "clubs"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What is required for students participating in field trips or special events?",
     "answer": "All students participating in any field trip or special event MUST sign a Letter Release and Waiver of Liability Form, and those under 18 must have a parent/guardian sign it.",
-    "keywords": ["field trip", "waiver", "liability"]
+    "keywords": [
+      "field trip",
+      "waiver",
+      "liability"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Are student clubs and societies eligible for funding from XMUM?",
     "answer": "Yes, all Student Clubs & Societies are eligible to apply for funding from XMUM for various activities like training, events, trips, registration fees, and equipment, provided they meet specific criteria.",
-    "keywords": ["clubs", "funding", "eligibility"]
+    "keywords": [
+      "clubs",
+      "funding",
+      "eligibility"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the contact details and office hours for Extra-Curricular Activities (ECA)?",
     "answer": "Extra-Curricular Activities (Room B1 # B1-103) is open Monday to Friday from 8:30 am to 5:30 pm. Email: ECA@xmu.edu.my, Phone: 03-8800 6818.",
-    "keywords": ["eca", "contact", "office hours"]
+    "keywords": [
+      "eca",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "Who writes the Residences Management Rules & Regulations?",
     "answer": "The Residences Management Rules & Regulations are written by the Student Affairs Office (SAO) and Accommodation Office (AO) of Xiamen University Malaysia.",
-    "keywords": ["residences", "rules", "management"]
+    "keywords": [
+      "residences",
+      "rules",
+      "management"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "Who is eligible to apply for XMUM student residences?",
     "answer": "All active full-time students of the University studying in the Malaysia campus for at least two semesters, whose home address is not within Kota Warisan area, and whose application is received before the closing date are eligible.",
-    "keywords": ["residences", "eligibility", "application"]
+    "keywords": [
+      "residences",
+      "eligibility",
+      "application"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What deposit and rental payment is required upon check-in for student residences?",
     "answer": "Successful applicants are required to pay a refundable deposit of Ringgit Malaysia Five Hundred (RM500) together with one semester's rental upon check-in.",
-    "keywords": ["residences", "deposit", "rental"]
+    "keywords": [
+      "residences",
+      "deposit",
+      "rental"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "Are residents allowed to change units or duplicate keys without approval?",
     "answer": "No, residents are not allowed to change units and duplicate key(s) without the approval of the Accommodation Office (AO). Duplication of key(s) without approval is a severe offence.",
-    "keywords": ["residences", "room changes", "keys"]
+    "keywords": [
+      "residences",
+      "room changes",
+      "keys"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the administrative charges for room key replacement or room unlock services?",
     "answer": "The administrative charge for room key replacement or room unlock services is RM20.00 during office hours (Mon-Fri, 9 am-6 pm) and RM30.00 during non-office hours (Mon-Sun, 6 pm-10 pm, including public holidays).",
-    "keywords": ["residences", "key replacement", "fees"]
+    "keywords": [
+      "residences",
+      "key replacement",
+      "fees"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What is the visitor policy for student residential units?",
     "answer": "Visitors are not allowed to stay overnight. Registered visitors must wait at designated areas and leave by 8:00 pm. Visitors of the opposite gender are strictly not allowed to enter residential units at any time, except immediate family/guardians before 8:00 pm, who must register.",
-    "keywords": ["residences", "visitors", "policy", "gender"]
+    "keywords": [
+      "residences",
+      "visitors",
+      "policy",
+      "gender"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What is the curfew for student residences?",
     "answer": "The curfew set for the residences is 12:00 am (midnight). Residents wishing to leave or return after 12:00 am must report at the guardhouse with their student IDs.",
-    "keywords": ["residences", "curfew", "security"]
+    "keywords": [
+      "residences",
+      "curfew",
+      "security"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What are some prohibited items and activities in student residences?",
     "answer": "Prohibited items/activities include making excessive noise after restricted hours, illicit businesses, visiting opposite gender units, keeping pets, tampering with facilities, possession/consumption of prohibited drugs or pornographic materials, lethal weapons, harassment, smoking/vaping, consumption/display of alcohol, chewing gum, littering, ball games indoors, religious altars, and moving furniture.",
-    "keywords": ["residences", "prohibited", "rules"]
+    "keywords": [
+      "residences",
+      "prohibited",
+      "rules"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "Is cooking allowed in student residential units?",
     "answer": "Cooking is strictly prohibited in the units. Light cooking is allowed at the pantry, but extreme care must be exercised.",
-    "keywords": ["residences", "cooking", "pantry"]
+    "keywords": [
+      "residences",
+      "cooking",
+      "pantry"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What electrical appliances are permitted in student rooms?",
     "answer": "Only haircare equipment, clock/radio, and computer equipment are permitted in rooms to reduce fire risk. Mini fridges, microwaves, hot plates, induction cookers, and large musical instruments are not permitted.",
-    "keywords": ["residences", "electrical appliances", "permitted"]
+    "keywords": [
+      "residences",
+      "electrical appliances",
+      "permitted"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What is the fine for tampering with firefighting equipment in residences?",
     "answer": "If found tampering with any firefighting equipment, the resident(s) concerned will be fined a minimum of Ringgit Malaysia Three Hundred (RM300) or depending on the severity of the damage.",
-    "keywords": ["residences", "firefighting", "fine"]
+    "keywords": [
+      "residences",
+      "firefighting",
+      "fine"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What is the check-out procedure for student residences?",
     "answer": "Residents must fill in check-out documents, ensure units are clean (or face RM100 fine), remove personal belongings, return keys, and vacate rooms by 12:00 pm on the specified date. Failure to follow procedures results in deposit forfeiture.",
-    "keywords": ["residences", "check-out", "procedure"]
+    "keywords": [
+      "residences",
+      "check-out",
+      "procedure"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What are the consequences of withdrawal or premature termination of tenancy from student residences?",
     "answer": "Any request for cancellation or premature termination of tenancy after check-in will result in the forfeiture of all rentals paid. Residents must give one-month written notice after a minimum one-semester stay or face a penalty of one-month rental and/or deposit forfeiture.",
-    "keywords": ["residences", "tenancy", "termination", "refund"]
+    "keywords": [
+      "residences",
+      "tenancy",
+      "termination",
+      "refund"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What is the policy on electricity consumption in student residences?",
     "answer": "Student residents will be billed for their electricity consumption monthly, with charges equally borne by all residents in a shared unit. A late payment charge of RM10.00 per month applies after 30 days of the billing date.",
-    "keywords": ["residences", "utilities", "electricity"]
+    "keywords": [
+      "residences",
+      "utilities",
+      "electricity"
+    ]
   },
   {
     "module": "campus_life",
@@ -1557,84 +2182,133 @@
     "sub_intent": "general_info",
     "question": "What is the location and operating hours of The English Lounge?",
     "answer": "The English Lounge is located at B1G03 and is open from 9 am to 6 pm every weekday. Consultation hours are 2 pm to 5 pm on Mon, Wed & Fri, and by appointment.",
-    "keywords": ["english lounge", "location", "hours"]
+    "keywords": [
+      "english lounge",
+      "location",
+      "hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What services are provided at The English Lounge?",
     "answer": "The English Lounge provides personalized/small-group coaching, peer mentoring, a \"Writing Clinic\", access to English reference books, audio-visual materials, novels, newspapers, magazines, eLearning resources, a self-directed digital portal, and \"Let's Chat\" coffee chat sessions.",
-    "keywords": ["english lounge", "services", "language support"]
+    "keywords": [
+      "english lounge",
+      "services",
+      "language support"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "general_info",
     "question": "What are the contact details for The English Lounge?",
     "answer": "Email: eled@xmu.edu.my or jennymaganran@xmu.edu.my. Phone: 03-8880 5112 or 017-674 0300.",
-    "keywords": ["english lounge", "contact", "phone"]
+    "keywords": [
+      "english lounge",
+      "contact",
+      "phone"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "Where is the library located?",
     "answer": "The library is located in the A3 Building.",
-    "keywords": ["library", "location", "building"]
+    "keywords": [
+      "library",
+      "location",
+      "building"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What main services does the library provide?",
     "answer": "The library provides Course Reserves, Circulation Services, diverse Learning Spaces, Creative & Experiential Zones (Makerspace, Robotic Lab, Mini Cinema, Instruction Room), Self-Service Printing, and Digital Access (desktop computers).",
-    "keywords": ["library", "services", "resources"]
+    "keywords": [
+      "library",
+      "services",
+      "resources"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What are the loan periods for general books for students and staff?",
     "answer": "For General Books, students can borrow for 30 days (10 items), and staff for 30 days (10 items).",
-    "keywords": ["library", "lending", "books"]
+    "keywords": [
+      "library",
+      "lending",
+      "books"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "How are charges determined for lost books?",
     "answer": "Charges for lost books are calculated as Book Price *2 + RM30 (Processing Fees), subject to library assessment and justification, based on price comparison from e-commerce platforms.",
-    "keywords": ["library", "lost books", "charges"]
+    "keywords": [
+      "library",
+      "lost books",
+      "charges"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What are some prohibited actions in the library?",
     "answer": "Prohibited actions include leaving belongings unattended, vandalism, accessing illegal websites, rearranging furniture without permission, bringing food/beverages into all study areas, soliciting donations, taking photos/videos without consent, playing cards/games, smoking/vaping, and engaging in misconduct/harassment.",
-    "keywords": ["library", "prohibited", "rules"]
+    "keywords": [
+      "library",
+      "prohibited",
+      "rules"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What is the rule for food and beverages in the library?",
     "answer": "Food and beverages are allowed only at the A3 1st floor's dedicated library areas, but not in all study areas or library rooms. Bottled plain drinking water is generally allowed in library rooms.",
-    "keywords": ["library", "food", "beverages"]
+    "keywords": [
+      "library",
+      "food",
+      "beverages"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What is the disciplinary action for breaching library rules or misconduct?",
     "answer": "Violations may result in disciplinary action in accordance with the University’s Code of Conduct, including warnings from the Student Affairs Office or restrictions from future room bookings.",
-    "keywords": ["library", "disciplinary", "misconduct"]
+    "keywords": [
+      "library",
+      "disciplinary",
+      "misconduct"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What are the contact details for the Library's Circulation Counter?",
     "answer": "The Library's Circulation Counter (A3-2nd Floor) phone number is 03-8800 6801. Email: librarian@xmu.edu.my.",
-    "keywords": ["library", "contact", "circulation"]
+    "keywords": [
+      "library",
+      "contact",
+      "circulation"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What is the general policy regarding IT facilities and campus network use?",
     "answer": "IT facilities and campus network are primarily for educational use. Users are prohibited from viewing pornographic websites, downloading unauthorized copyrighted materials, or engaging in online gambling. Misconduct can lead to suspension, expulsion, or legal proceedings.",
-    "keywords": ["it", "network use", "policy", "rules"]
+    "keywords": [
+      "it",
+      "network use",
+      "policy",
+      "rules"
+    ]
   },
   {
     "module": "campus_life",
@@ -1660,63 +2334,99 @@
     "sub_intent": "it_connectivity",
     "question": "Is it allowed to use personal wireless routers on campus?",
     "answer": "To use personal wireless routers, approval from the IT Department is required. The Wi-Fi name (SSID) for personal use cannot begin with \"XMU\" or use existing SSID names like Staff, Guest, Student.",
-    "keywords": ["it", "personal router", "rules"]
+    "keywords": [
+      "it",
+      "personal router",
+      "rules"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What is the official communication channel used by the University for announcements?",
     "answer": "The University will use email as one of the communication channels to make announcements.",
-    "keywords": ["it", "email", "communication"]
+    "keywords": [
+      "it",
+      "email",
+      "communication"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What IT facilities and services can be accessed using the Campus ID?",
     "answer": "The Campus ID can be used to access book borrowing, door access, discussion room bookings, VPN access, University learning portal (Moodle), Academic Affairs Online Systems, AskA, and the student portal.",
-    "keywords": ["it", "campus id", "access"]
+    "keywords": [
+      "it",
+      "campus id",
+      "access"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What is the Campus ECard used for?",
     "answer": "The Campus ECard can be used in canteens, supermarkets, and for Library's fine payments.",
-    "keywords": ["it", "campus ecard", "payments"]
+    "keywords": [
+      "it",
+      "campus ecard",
+      "payments"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How can users access XMUM's secured network remotely?",
     "answer": "Users can access XMUM's secured network remotely via WebVPN (https://linc.xmu.edu.my/ -> Technologies -> Network & Connectivity -> Secured Network Access (VPN)) using their Campus ID and password, limited to academic and research purposes.",
-    "keywords": ["it", "vpn", "remote access"]
+    "keywords": [
+      "it",
+      "vpn",
+      "remote access"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What are the contact details and office hours for the IT Department?",
     "answer": "The IT Department (B1-G09, A3-1st Floor-103) is open Monday - Friday from 8:30 am to 5:30 pm. Phone: 03-8705 5003, 03-8705 5014. Email: ITService@xmu.edu.my.",
-    "keywords": ["it", "contact", "office hours"]
+    "keywords": [
+      "it",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the general services provided by the Operations and Maintenance Department?",
     "answer": "The Operations and Maintenance Department is responsible for the functionality and well-being of XMUM in terms of outdoor surroundings and indoor building-related facilities, as well as providing a safe and secured environment.",
-    "keywords": ["operations", "maintenance", "services"]
+    "keywords": [
+      "operations",
+      "maintenance",
+      "services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the operation hours for the Operations and Maintenance Department?",
     "answer": "Weekdays (Mon-Fri): 8:30 am to 5:30 pm (full department), after 5:30 pm (Security & Maintenance only). Weekends & Public Holidays: 24 hours (Security only), 8:30 am to midnight (Maintenance only).",
-    "keywords": ["operations", "maintenance", "hours"]
+    "keywords": [
+      "operations",
+      "maintenance",
+      "hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "hostel_rules_maintenance",
     "question": "What is the policy on smoking and vaping on campus?",
     "answer": "XMUM imposes a blanket ban on smoking and vaping in all areas of the campus, including student hostels.",
-    "keywords": ["campus rules", "smoking", "vaping"]
+    "keywords": [
+      "campus rules",
+      "smoking",
+      "vaping"
+    ]
   },
   {
     "module": "campus_life",
@@ -1738,28 +2448,44 @@
     "sub_intent": "facilities_services",
     "question": "What are the penalties for parking violations?",
     "answer": "Vehicles are subject to being immobilized with a wheel lock/tire clamp by Campus Security, and a fine of RM50 will be imposed to release it.",
-    "keywords": ["parking", "violations", "penalties"]
+    "keywords": [
+      "parking",
+      "violations",
+      "penalties"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What should students do if they smell smoke or see fire on campus?",
     "answer": "They should immediately activate the fire alarm system, evacuate the building to the nearest designated Emergency Assembly Point without using lifts, and contact Security (019-348 9999).",
-    "keywords": ["fire safety", "emergency", "procedures"]
+    "keywords": [
+      "fire safety",
+      "emergency",
+      "procedures"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What are the emergency contact numbers for Police Stations near XMUM?",
     "answer": "Bandar Baru Salak Tinggi Police: 03-8777 4484. Dengkil Police: 03-8768 6222. Sepang Police: 03-8777 4222.",
-    "keywords": ["emergency", "police", "contact"]
+    "keywords": [
+      "emergency",
+      "police",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What are the emergency contact numbers for Fire Brigades near XMUM?",
     "answer": "Sepang Fire Brigade: 03-3142 1333. Kuala Lumpur International Airport (KLIA) Fire Brigade: 03-8787 4970.",
-    "keywords": ["emergency", "fire brigade", "contact"]
+    "keywords": [
+      "emergency",
+      "fire brigade",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
@@ -1785,7 +2511,12 @@
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the contact details and office hours for the Operations and Maintenance Department?",
     "answer": "The Operations and Maintenance Department (Room B11 # G13) is open Monday to Friday from 8:30 am to 5:30 pm. Maintenance Hotline: 017-313 5947. Security Hotline: 019-348 9999.",
-    "keywords": ["operations", "maintenance", "contact", "hours"]
+    "keywords": [
+      "operations",
+      "maintenance",
+      "contact",
+      "hours"
+    ]
   },
   {
     "module": "campus_life",
@@ -1859,7 +2590,11 @@
     "sub_intent": "hostel_rules_maintenance",
     "question": "What are the rules for self-service laundry rooms?",
     "answer": "Users must be mindful of time usage, collect clothes promptly, maintain cleanliness, and are prohibited from washing shoes/floor mats/flammable items or bringing pets into laundry rooms.",
-    "keywords": ["laundry", "rules", "self-service"]
+    "keywords": [
+      "laundry",
+      "rules",
+      "self-service"
+    ]
   },
   {
     "module": "campus_life",
@@ -2134,84 +2869,140 @@
     "sub_intent": "health_safety",
     "question": "What is the name of the counselling service?",
     "answer": "The service is called the Counselling Service, provided by the XMUM Counselling Centre.",
-    "keywords": ["service", "name", "centre", "xmum"]
+    "keywords": [
+      "service",
+      "name",
+      "centre",
+      "xmum"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What types of counselling are available?",
     "answer": "The Counselling Centre provides individual and group counselling.",
-    "keywords": ["types", "individual", "group", "services"]
+    "keywords": [
+      "types",
+      "individual",
+      "group",
+      "services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "Who provides the counselling services?",
     "answer": "The counselling services are provided by licensed counsellors.",
-    "keywords": ["counsellors", "staff", "licensed"]
+    "keywords": [
+      "counsellors",
+      "staff",
+      "licensed"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "Is the counselling service free for students?",
     "answer": "Yes, the counselling service is free for all students.",
-    "keywords": ["cost", "free", "price", "students"]
+    "keywords": [
+      "cost",
+      "free",
+      "price",
+      "students"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "Is counselling confidential?",
     "answer": "Yes, the service ensures the confidentiality and privacy of all students.",
-    "keywords": ["confidentiality", "privacy", "secure"]
+    "keywords": [
+      "confidentiality",
+      "privacy",
+      "secure"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What kinds of issues does the Counselling Centre support?",
     "answer": "The Counselling Centre supports issues such as adaptation, self-exploration, study stress, emotion, grief and loss, sexuality/gender, family, boy-girl relationships, friendship, and career guidance.",
-    "keywords": ["issues", "support", "help", "concerns"]
+    "keywords": [
+      "issues",
+      "support",
+      "help",
+      "concerns"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "How can students make an appointment for counselling?",
     "answer": "Students can make an appointment by filling in the online form at https://forms.office.com/r/thC285mjta, or by visiting the Counselling Centre in room B1-110 during office hours.",
-    "keywords": ["appointment", "schedule", "contact", "form"]
+    "keywords": [
+      "appointment",
+      "schedule",
+      "contact",
+      "form"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "Where is the Counselling Centre located?",
     "answer": "The Counselling Centre is located in room B1-110.",
-    "keywords": ["location", "room", "b1-110"]
+    "keywords": [
+      "location",
+      "room",
+      "b1-110"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "facilities_services",
     "question": "Why did Xiamen University (XMU) establish a campus in Malaysia?",
     "answer": "Xiamen University (XMU) established a campus in Malaysia as a historic reciprocation, 93 years after its founding, in the country where its founder Mr. Tan Kah Kee achieved great success in his career.",
-    "keywords": ["campus", "malaysia", "reciprocation", "history"]
+    "keywords": [
+      "campus",
+      "malaysia",
+      "reciprocation",
+      "history"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "facilities_services",
     "question": "What is the financial model of Xiamen University Malaysia (XMUM)?",
     "answer": "Xiamen University Malaysia (XMUM) will remain a not-for-profit institution, with no funds repatriated to China. Any surplus funds will be channelled back into research and scholarships for its students.",
-    "keywords": ["not-for-profit", "funds", "research", "scholarships"]
+    "keywords": [
+      "not-for-profit",
+      "funds",
+      "research",
+      "scholarships"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "facilities_services",
     "question": "What does the establishment of Xiamen University Malaysia (XMUM) signify for China-Malaysia relations?",
     "answer": "The establishment of Xiamen University Malaysia (XMUM) sets new heights in the areas of cooperation and exchange in education between China and Malaysia.",
-    "keywords": ["cooperation", "exchange", "china", "malaysia"]
+    "keywords": [
+      "cooperation",
+      "exchange",
+      "china",
+      "malaysia"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "facilities_services",
     "question": "What is Xiamen University (XMU)'s goal for its Malaysia campus?",
     "answer": "Xiamen University (XMU) is driven to build its Malaysia campus into one of Malaysia's best, enriching Malaysia's tertiary education landscape and producing high-quality talents with international competitiveness.",
-    "keywords": ["goal", "campus", "tertiary education"]
+    "keywords": [
+      "goal",
+      "campus",
+      "tertiary education"
+    ]
   },
   {
     "module": "campus_life",
@@ -2231,14 +3022,26 @@
     "sub_intent": "it_connectivity",
     "question": "Who does the IT Services Policies apply to?",
     "answer": "The policy applies to all users of Xiamen University Malaysia, including students, permanent or temporary staff, contractors, guests, visitors, and any other authorized users or organizations, as well as personally owned devices connected to University IT Facilities.",
-    "keywords": ["users", "scope", "authorization", "devices", "it services"]
+    "keywords": [
+      "users",
+      "scope",
+      "authorization",
+      "devices",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What Malaysian legislation must Users comply with when using the University's IT Facilities?",
     "answer": "Users must comply with relevant Malaysian legislation, including but not limited to the Computer Crime Act 1997, Copyright Act 1987, Communications and Multimedia Act 1998, and Personal Data Protection Act 2010.",
-    "keywords": ["legislation", "compliance", "laws", "malaysia", "it services"]
+    "keywords": [
+      "legislation",
+      "compliance",
+      "laws",
+      "malaysia",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
@@ -2336,7 +3139,13 @@
     "sub_intent": "it_connectivity",
     "question": "Who are the Xiamen University Malaysia IT Services Policies applicable to?",
     "answer": "The IT Services Policies apply to all users of Xiamen University Malaysia's information technology facilities, including students, permanent or temporary staff, contractors, guests, visitors, and any other authorized users or organizations.",
-    "keywords": ["policy", "users", "scope", "it facilities", "it services"]
+    "keywords": [
+      "policy",
+      "users",
+      "scope",
+      "it facilities",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
@@ -2395,21 +3204,39 @@
     "sub_intent": "it_connectivity",
     "question": "What security and privacy risks are associated with using the internet via University IT Facilities?",
     "answer": "Significant security, privacy, and confidentiality risks are inherent, including interception of transmissions, data threats, and the distribution of viruses. The University does not take responsibility for the loss, damage, or recovery of files associated with illegal usage.",
-    "keywords": ["internet", "security", "privacy", "risks", "it services"]
+    "keywords": [
+      "internet",
+      "security",
+      "privacy",
+      "risks",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What types of internet usage are explicitly prohibited under the IT Services Policies?",
     "answer": "Prohibited activities include spamming, intellectual property violations, hacking, transferring illegal technology, distributing viruses, export control violations, uttering threats, illegal advertising (Ponzi schemes, gambling), distributing pornography, and human rights violations.",
-    "keywords": ["prohibited", "internet", "illegal", "hacking", "it services"]
+    "keywords": [
+      "prohibited",
+      "internet",
+      "illegal",
+      "hacking",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What are the guidelines for appropriate email usage within the University's IT Facilities?",
     "answer": "Users must not disrupt IT systems, harm the University's reputation, access restricted areas, or send offensive, abusive, discriminatory, defamatory, or illegal content. Sending chain letters or joke emails from a University account is also prohibited.",
-    "keywords": ["email", "guidelines", "prohibited", "conduct", "it services"]
+    "keywords": [
+      "email",
+      "guidelines",
+      "prohibited",
+      "conduct",
+      "it services"
+    ]
   },
   {
     "module": "campus_life",
@@ -2442,14 +3269,24 @@
     "sub_intent": "clubs_activities",
     "question": "What is the primary role of the Extra-Curricular Activities (ECA) Department at Xiamen University Malaysia?",
     "answer": "The ECA Department plays a pivotal role in creating a dynamic campus experience by encouraging students to engage in meaningful activities that develop leadership, creativity, and personal growth.",
-    "keywords": ["eca", "role", "student development", "campus experience"]
+    "keywords": [
+      "eca",
+      "role",
+      "student development",
+      "campus experience"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "How many student clubs and societies does the ECA Department oversee?",
     "answer": "The ECA Department oversees more than 60 active student clubs and societies under five major categories.",
-    "keywords": ["clubs", "societies", "number", "categories"]
+    "keywords": [
+      "clubs",
+      "societies",
+      "number",
+      "categories"
+    ]
   },
   {
     "module": "campus_life",
@@ -2468,182 +3305,301 @@
     "sub_intent": "clubs_activities",
     "question": "How can students join clubs or get involved in extra-curricular activities?",
     "answer": "Students can join clubs during the Recruitment Drive, held twice a year, or reach out directly to club leaders through their club social media.",
-    "keywords": ["join clubs", "recruitment", "social media", "get involved"]
+    "keywords": [
+      "join clubs",
+      "recruitment",
+      "social media",
+      "get involved"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "Where is the ECA Department located?",
     "answer": "The ECA Department is located at B1 #103, Xiamen University Malaysia, Jalan Sunsuria, Bandar Sunsuria, 43900 Sepang, Selangor.",
-    "keywords": ["location", "contact", "address", "department"]
+    "keywords": [
+      "location",
+      "contact",
+      "address",
+      "department"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What are the operating hours for the ECA Department?",
     "answer": "The ECA Department operates Monday - Friday, from 8.30am - 5.30pm.",
-    "keywords": ["operating hours", "contact", "office hours"]
+    "keywords": [
+      "operating hours",
+      "contact",
+      "office hours"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "What is the contact email for the ECA Department?",
     "answer": "The contact email for the ECA Department is ECA@xmu.edu.my.",
-    "keywords": ["email", "contact", "address"]
+    "keywords": [
+      "email",
+      "contact",
+      "address"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "clubs_activities",
     "question": "How can students stay updated on ECA events and news?",
     "answer": "Students can follow the ECA Department on Instagram at @xlife.eca for the latest updates and events.",
-    "keywords": ["instagram", "social media", "updates", "events"]
+    "keywords": [
+      "instagram",
+      "social media",
+      "updates",
+      "events"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "How can students apply for on-campus accommodation?",
     "answer": "Students may apply for on-campus accommodation during the application process, with details provided in the official application materials.",
-    "keywords": ["accommodation", "on-campus", "apply", "housing"]
+    "keywords": [
+      "accommodation",
+      "on-campus",
+      "apply",
+      "housing"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "Who should be contacted for admissions inquiries at XMUM?",
     "answer": "For admissions inquiries, you can contact admissions@xmu.edu.my.",
-    "keywords": ["admissions", "contact", "email", "inquiry"]
+    "keywords": [
+      "admissions",
+      "contact",
+      "email",
+      "inquiry"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What is a Campus ID?",
     "answer": "A Campus ID is a unique identification card for all staff and students.",
-    "keywords": ["identification", "staff", "students", "unique"]
+    "keywords": [
+      "identification",
+      "staff",
+      "students",
+      "unique"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How do I set or reset my Campus ID password?",
     "answer": "Upon receiving your Campus ID, you need to access https://id.xmu.edu.my to set or reset your password. A link will be sent to your Campus Email Address (Outlook Inbox/Spam/Junk).",
-    "keywords": ["password", "reset", "set", "email"]
+    "keywords": [
+      "password",
+      "reset",
+      "set",
+      "email"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What are the main uses of the Campus ID and password?",
     "answer": "The Campus ID and password can be used to log in to multiple information service systems, including borrowing books, self-service printing, door access, discussion room booking, VPN access, Moodle, Academic Affairs Online Systems, upcoming student portal, and Turnitin. The Campus ID (ECard) can also be used in canteens, supermarkets, and for paying fines in the Library.",
-    "keywords": ["uses", "services", "login", "access"]
+    "keywords": [
+      "uses",
+      "services",
+      "login",
+      "access"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "What is the fee for a replacement Campus ID card?",
     "answer": "A replacement card is free of charge only if your card is stolen (with a police report presented), damaged, or no longer works. Otherwise, a lost card fee of RM30 will be imposed for a replacement Campus Staff/Student ID ECard.",
-    "keywords": ["fee", "replacement", "lost", "stolen"]
+    "keywords": [
+      "fee",
+      "replacement",
+      "lost",
+      "stolen"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How do students apply for a replacement Campus ID card?",
     "answer": "Students should email or visit B1-107 (Student Affairs Office) to report a lost Campus/Student ID. After reporting, proceed to make payment at the Finance office before submitting the card replacement form to IT.",
-    "keywords": ["students", "replacement", "lost", "process"]
+    "keywords": [
+      "students",
+      "replacement",
+      "lost",
+      "process"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How do staff apply for a replacement Campus ID card?",
     "answer": "Staff should fill in the \"Staff ECard Replacement eForm\", proceed to make payment of RM30 at the Finance office, and then submit the card replacement form to IT.",
-    "keywords": ["staff", "replacement", "lost", "eform"]
+    "keywords": [
+      "staff",
+      "replacement",
+      "lost",
+      "eform"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "When do new and progress students need to upload their photo for the Campus ECard?",
     "answer": "New and progress students need to upload their photo by the first week of new class commencement. More details can be found on \"How to upload a photo for Campus ECard processing.",
-    "keywords": ["photo", "upload", "new students", "deadline"]
+    "keywords": [
+      "photo",
+      "upload",
+      "new students",
+      "deadline"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "When is a Campus ID inactivated?",
     "answer": "Your Campus ID will be inactivated once you have left or graduated from the University.",
-    "keywords": ["inactivated", "graduated", "left", "university"]
+    "keywords": [
+      "inactivated",
+      "graduated",
+      "left",
+      "university"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How can I get assistance for Campus ID related issues?",
     "answer": "For further assistance, you can email it@xmu.edu.my or raise an AskA request. IT support attends to requests during working hours (Monday-Friday).",
-    "keywords": ["assistance", "support", "it", "contact"]
+    "keywords": [
+      "assistance",
+      "support",
+      "it",
+      "contact"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What is the booking fee for student residences?",
     "answer": "A non-refundable Booking Fee to Residence Application Fee of Ringgit Malaysia One Hundred (RM100) has to be paid when submitting the \"Student Residences Application Form\".",
-    "keywords": ["residences", "booking fee", "application"]
+    "keywords": [
+      "residences",
+      "booking fee",
+      "application"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "Is the booking fee for student residences ever refundable?",
     "answer": "The booking fee is refundable only if the University fails to allocate accommodation to the applicants.",
-    "keywords": ["residences", "booking fee", "refund"]
+    "keywords": [
+      "residences",
+      "booking fee",
+      "refund"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "housing_application",
     "question": "What is the administrative fee for requesting a change of unit in student residences?",
     "answer": "An administration fee of Ringgit Malaysia Thirty (RM30) will be imposed for requesting a change of unit.",
-    "keywords": ["residences", "room change", "fee"]
+    "keywords": [
+      "residences",
+      "room change",
+      "fee"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "library",
     "question": "What are the overdue fines for books and course reserve items?",
     "answer": "Overdue fines are RM 0.20 per day for general books and RM 0.50 per hour for Course Reserve items.",
-    "keywords": ["library", "fines", "overdue"]
+    "keywords": [
+      "library",
+      "fines",
+      "overdue"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How do students enroll in a course on Moodle?",
     "answer": "To enroll in a course on Moodle, students log in with their Campus ID and password, select a course, and enter the Enrolment Key provided by the lecturer.",
-    "keywords": ["it", "moodle", "course enrollment"]
+    "keywords": [
+      "it",
+      "moodle",
+      "course enrollment"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "documents_identity",
     "question": "How can students submit questions or feedback to the IT or Library department?",
     "answer": "Students can use AskA (https://app.xmu.edu.my/AskA) by logging in with their Campus ID and Password to submit questions or feedback.",
-    "keywords": ["it", "library", "aska", "feedback"]
+    "keywords": [
+      "it",
+      "library",
+      "aska",
+      "feedback"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "How can students provide feedback regarding cafeterias?",
     "answer": "Students can provide feedback via email (canteen.inquiry@xmu.edu.my), scanning a QR code for an online form (AskA), writing in the anonymous feedback book at the counter, or through the canteen supervision committee under the student council.",
-    "keywords": ["cafeteria", "feedback", "channels"]
+    "keywords": [
+      "cafeteria",
+      "feedback",
+      "channels"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "health_safety",
     "question": "What are the consequences of disrespectful or inappropriate behavior on campus?",
     "answer": "Consequences can include a formal warning or counseling, disciplinary action (suspension, probation, or expulsion), and legal action for serious offenses such as harassment or threats.",
-    "keywords": ["disrespect", "consequences", "disciplinary"]
+    "keywords": [
+      "disrespect",
+      "consequences",
+      "disciplinary"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What are the guidelines for proper email communication with university staff?",
     "answer": "Guidelines include using a polite and professional tone, starting with a proper greeting, clearly stating the purpose, using proper grammar and spelling, and ending with a thank you and a professional closing.",
-    "keywords": ["email etiquette", "communication", "guidelines"]
+    "keywords": [
+      "email etiquette",
+      "communication",
+      "guidelines"
+    ]
   },
   {
     "module": "campus_life",
     "sub_intent": "it_connectivity",
     "question": "What types of language are strictly prohibited in emails to university staff?",
     "answer": "Strictly prohibited language in emails includes rude or demanding language, disrespectful tones or accusations, using ALL CAPS or excessive punctuation, and threats, harassment, or any inappropriate content.",
-    "keywords": ["email", "prohibited language", "communication"]
+    "keywords": [
+      "email",
+      "prohibited language",
+      "communication"
+    ]
   },
   {
     "module": "campus_life",
@@ -3507,6 +4463,124 @@
       "make counselling appointment",
       "make counseling appointment",
       "thc285mjta"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "housing_application",
+    "question": "What is the residence application fee and is it refundable?",
+    "answer": "The residence application fee is RM 100, and it is non-refundable. It must accompany the submission of the application form.",
+    "keywords": [
+      "application",
+      "fee",
+      "non-refundable",
+      "rm100"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "health_safety",
+    "question": "What is the mission of the XMUM Counselling Centre?",
+    "answer": "The XMUM Counselling Centre values the diversity of all students and aims to promote their mental well-being, meeting unique needs irrespective of age, socioeconomic status, ethnicity, culture, religion, gender identity, and sexual orientation.",
+    "keywords": [
+      "mission",
+      "goal",
+      "well-being",
+      "diversity",
+      "counselling",
+      "counseling",
+      "mental health"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "facilities_services",
+    "question": "Who founded Xiamen University (XMU)?",
+    "answer": "Xiamen University (XMU) was founded by the Malayan Chinese Mr. Tan Kah Kee in 1921.",
+    "keywords": [
+      "founder",
+      "xmu",
+      "tan kah kee",
+      "1921",
+      "facilities",
+      "student activity centre"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "facilities_services",
+    "question": "What spirit does Xiamen University Malaysia (XMUM) pledge to uphold?",
+    "answer": "Xiamen University Malaysia (XMUM) solemnly pledges to uphold Mr. Tan Kah Kee’s spirit of selfless dedication to the noble causes of education.",
+    "keywords": [
+      "spirit",
+      "tan kah kee",
+      "dedication",
+      "education",
+      "facilities",
+      "student activity centre"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "facilities_services",
+    "question": "What is the vision of Xiamen University Malaysia (XMUM)?",
+    "answer": "The vision of Xiamen University Malaysia (XMUM) is to become a university with a distinct global outlook, featuring first-class teaching and research, and embracing cultural diversity.",
+    "keywords": [
+      "vision",
+      "global",
+      "teaching",
+      "research",
+      "facilities",
+      "student activity centre"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "facilities_services",
+    "question": "What is the mission of Xiamen University Malaysia (XMUM)?",
+    "answer": "The mission of Xiamen University Malaysia (XMUM) is to nurture young talents with dignity and wisdom, turning them into fine citizens of the region who will contribute to the prosperity of the people and social progress of Malaysia, China and Southeast Asia.",
+    "keywords": [
+      "mission",
+      "talents",
+      "citizens",
+      "progress",
+      "facilities",
+      "student activity centre"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "library",
+    "question": "What are the Xiamen University Malaysia Library's opening hours during semester breaks?",
+    "answer": "During semester breaks, the library is open Monday - Friday from 09:00 - 17:00 and is closed on Saturday - Sunday.",
+    "keywords": [
+      "semester break",
+      "hours",
+      "closed",
+      "library"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "library",
+    "question": "What are the library's operation hours during weekdays?",
+    "answer": "The library's operation hours are Monday to Friday from 9:00 AM to 10:00 PM.",
+    "keywords": [
+      "library",
+      "hours",
+      "weekdays"
+    ]
+  },
+  {
+    "module": "campus_life",
+    "sub_intent": "library",
+    "question": "What are the library's operation hours during weekends and public holidays?",
+    "answer": "The library's operation hours are Saturday and Sunday from 9:00 AM to 5:00 PM, and on Public Holidays from 9:00 AM to 5:00 PM (except for specific closed holidays).",
+    "keywords": [
+      "library",
+      "hours",
+      "weekends",
+      "holidays"
     ]
   }
 ]

@@ -52,6 +52,8 @@ SOURCE_MAP: dict[str, tuple[str, str]] = {
     "student_email": ("campus_life", "it_connectivity"),
     "student_helpdesk": ("campus_life", "documents_identity"),
     "wifi_network": ("campus_life", "it_connectivity"),
+    "foundation_student": ("academic_navigation", "courses_syllabus"),
+    "mba_student": ("academic_navigation", "courses_syllabus"),
 }
 
 SOURCE_KEYWORD_EXTRAS: dict[str, list[str]] = {

@@ -3,7 +3,11 @@
 # Knowledge Base Seed Script
 # Run with: python -m database.seed
 #
-# Reads all JSON files from database/seeds/ and inserts them into Supabase.
+# Reads all JSON files from database/seeds/ and UPSERTS them into Supabase.
+# Uses upsert (insert-or-update) so existing rows added via the admin panel
+# are NEVER deleted. Rows in the seeds will be added or updated; rows only
+# in Supabase (added manually) are left untouched.
+#
 # Uses SERVICE ROLE KEY (admin) to bypass RLS during seeding.
 #
 # JSON format expected per entry:
@@ -37,15 +41,47 @@ def load_seed_file(module_name: str) -> list[dict]:
     return data
 
 
-def insert_in_batches(client, items: list[dict], module_name: str) -> int:
-    """Insert rows into Supabase in batches. Returns total rows inserted."""
+def upsert_in_batches(client, items: list[dict], module_name: str) -> int:
+    """Add only NEW rows to Supabase. Existing rows (by question+module) are skipped.
+    
+    Fetches the current set of questions from Supabase for this module,
+    then inserts only the rows that are not already there.
+    Rows added manually in Supabase are completely untouched.
+    """
+    # Fetch existing questions for this module from Supabase
+    existing_resp = (
+        client.table("knowledge_items")
+        .select("question")
+        .eq("module", module_name)
+        .execute()
+    )
+    existing_questions = {
+        row["question"].strip().lower()
+        for row in (existing_resp.data or [])
+    }
+
+    # Filter to only new rows
+    new_items = [
+        item for item in items
+        if item.get("question", "").strip().lower() not in existing_questions
+    ]
+
+    if not new_items:
+        print(f"  All {len(items)} rows already exist in Supabase. Nothing to insert.")
+        return 0
+
+    skipped = len(items) - len(new_items)
+    if skipped:
+        print(f"  Skipping {skipped} already-existing rows.")
+
     total = 0
-    for i in range(0, len(items), BATCH_SIZE):
-        batch = items[i : i + BATCH_SIZE]
-        response = client.table("knowledge_items").insert(batch).execute()
+    for i in range(0, len(new_items), BATCH_SIZE):
+        batch = new_items[i : i + BATCH_SIZE]
+        client.table("knowledge_items").insert(batch).execute()
         total += len(batch)
         print(f"  Inserted batch {i // BATCH_SIZE + 1}: {len(batch)} rows")
     return total
+
 
 
 def main():
@@ -56,11 +92,7 @@ def main():
     print("\nConnecting to Supabase...")
     client = get_admin_client()
     print("Connection OK.")
-
-    print("\nClearing existing knowledge items...")
-    # Delete all rows in the table to prevent duplicates during re-seed
-    client.table("knowledge_items").delete().neq("id", "00000000-0000-0000-0000-000000000000").execute()
-    print("Clear complete.")
+    print("[INFO] Using UPSERT mode — existing manually-added rows in Supabase will NOT be deleted.")
 
     grand_total = 0
     for module in MODULES:
@@ -68,13 +100,14 @@ def main():
         items = load_seed_file(module)
         if not items:
             continue
-        inserted = insert_in_batches(client, items, module)
+        inserted = upsert_in_batches(client, items, module)
         grand_total += inserted
-        print(f"  Done: {inserted} rows inserted for '{module}'.")
+        print(f"  Done: {inserted} rows upserted for '{module}'.")
 
 
     print("\n" + "=" * 55)
-    print(f"  Seeding complete. Total rows inserted: {grand_total}")
+    print(f"  Seeding complete. Total rows upserted: {grand_total}")
+    print("  (Manually-added rows in Supabase were preserved)")
     print("=" * 55)
 
 

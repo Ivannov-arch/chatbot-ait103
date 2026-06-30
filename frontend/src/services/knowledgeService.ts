@@ -1,14 +1,26 @@
 import { supabase } from "@/lib/supabaseClient";
 
 export async function getKnowledgeItems() {
-    const { data, error } = await supabase
-        .from('knowledge_items')
-        .select('id, module, question, answer, keywords')
-        .order('module', { ascending: true })
+    let allData: any[] = [];
+    let from = 0;
+    const batchSize = 1000;
     
-    if (error) throw error;
+    while (true) {
+        const { data, error } = await supabase
+            .from('knowledge_items')
+            .select('id, module, question, answer, keywords')
+            .order('module', { ascending: true })
+            .range(from, from + batchSize - 1);
+        
+        if (error) throw error;
+        if (!data || data.length === 0) break;
+        
+        allData = allData.concat(data);
+        if (data.length < batchSize) break;
+        from += batchSize;
+    }
 
-    return data || [];
+    return allData;
 }
 
 export async function createKnowledgeItem({module, question, answer, keywordsArray}: {module:string, question:string, answer:string, keywordsArray:string[]}) {
