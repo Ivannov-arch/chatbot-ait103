@@ -490,7 +490,14 @@ export default function ChatbotHome() {
                 </h2>
               </div>
             ) : (
-              <div className="mx-auto hidden text-xl md:flex">📚</div>
+              <button
+                onClick={() => setIsDesktopCollapsed(false)}
+                className="mx-auto hidden text-xl md:flex hover:bg-blue-900/50 p-2 rounded-lg transition-colors cursor-pointer"
+                title="Expand FAQ Sidebar"
+                type="button"
+              >
+                📚
+              </button>
             )}
 
             <div className="flex items-center gap-1">
@@ -539,7 +546,13 @@ export default function ChatbotHome() {
           {Object.keys(groupedFaqs).length === 0 ? (
             <p className="text-center text-sm text-blue-300/60">No results</p>
           ) : (
-            Object.entries(groupedFaqs).map(([moduleName, items]) => (
+            Object.entries(groupedFaqs)
+              .sort(([a], [b]) => {
+                if (a.toLowerCase() === "general") return -1;
+                if (b.toLowerCase() === "general") return 1;
+                return a.localeCompare(b);
+              })
+              .map(([moduleName, items]) => (
               <div key={moduleName} className="mb-6">
                 <h3 className="mb-2 text-xs font-bold uppercase text-blue-300">
                   {moduleName}
