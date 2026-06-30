@@ -494,7 +494,19 @@ export default function ChatbotHome() {
             )}
 
             <div className="flex items-center gap-1">
-              {/* Mobile close — Sekarang pasti terlihat karena ada di atas */}
+              {/* Close/Collapse Button for Desktop */}
+              {!isDesktopCollapsed && (
+                <button
+                  onClick={() => setIsDesktopCollapsed(true)}
+                  className="hidden md:flex rounded-lg p-1.5 text-blue-300 hover:text-white hover:bg-blue-900/50 transition-colors text-sm items-center justify-center"
+                  type="button"
+                  title="Collapse FAQ Sidebar"
+                >
+                  ✕
+                </button>
+              )}
+
+              {/* Mobile close — Hanya muncul di mobile */}
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="rounded-lg p-2 text-xl text-blue-300 hover:text-white md:hidden"
