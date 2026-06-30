@@ -181,6 +181,10 @@ export default function KnowledgeBaseCMS() {
   const [formAnswer, setFormAnswer] = useState("");
   const [formKeywords, setFormKeywords] = useState("");
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+
   // Toast
   const [toast, setToast] = useState<{
     message: string;
@@ -212,6 +216,17 @@ export default function KnowledgeBaseCMS() {
       selectedModule === "all" || item.module === selectedModule;
     return matchesSearch && matchesModule;
   });
+
+  // Reset pagination on filter or search change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedModule]);
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+  const paginatedItems = filteredItems.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   /* ── Fetch from Supabase ── */
   const fetchItems = async () => {
@@ -487,7 +502,8 @@ export default function KnowledgeBaseCMS() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5 text-xs sm:text-sm text-slate-300">
-                  {filteredItems.map((item, idx) => {
+                  {paginatedItems.map((item, idx) => {
+                    const globalIdx = (currentPage - 1) * itemsPerPage + idx;
                     const truncated =
                       item.answer.length > 120
                         ? item.answer.slice(0, 120) + "…"
@@ -502,7 +518,7 @@ export default function KnowledgeBaseCMS() {
                         {/* Row # */}
                         <td className="py-4 px-4 text-center">
                           <span className="text-xs font-bold text-slate-600">
-                            {idx + 1}
+                            {globalIdx + 1}
                           </span>
                         </td>
 
@@ -590,6 +606,39 @@ export default function KnowledgeBaseCMS() {
             </div>
           )}
         </div>
+
+        {/* ── Pagination Controls ── */}
+        {filteredItems.length > itemsPerPage && (
+          <div className="bg-slate-900/40 p-4 rounded-2xl border border-white/5 flex items-center justify-between text-xs sm:text-sm">
+            <span className="text-slate-400">
+              Showing <strong className="text-slate-200">{(currentPage - 1) * itemsPerPage + 1}</strong> to{" "}
+              <strong className="text-slate-200">
+                {Math.min(currentPage * itemsPerPage, filteredItems.length)}
+              </strong>{" "}
+              of <strong className="text-slate-200">{filteredItems.length}</strong> items
+            </span>
+
+            <div className="flex gap-2">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                className="px-4 py-2 bg-slate-950/60 border border-white/5 text-slate-300 rounded-xl hover:text-white hover:bg-slate-900 transition-all disabled:opacity-40"
+              >
+                Previous
+              </button>
+              <div className="flex items-center px-2 text-slate-400 font-semibold">
+                Page {currentPage} of {totalPages}
+              </div>
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                className="px-4 py-2 bg-slate-950/60 border border-white/5 text-slate-300 rounded-xl hover:text-white hover:bg-slate-900 transition-all disabled:opacity-40"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* ── ADD MODAL ── */}
         {isAddOpen && (
