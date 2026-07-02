@@ -14,7 +14,15 @@ class GeminiTranslator:
     using the Gemini API via REST.
     """
     def __init__(self):
-        self.api_key = os.getenv("GEMINI_API_KEY")
+        self.api_keys = []
+        for key_name in ["GEMINI_API_KEY", "GEMINI_API_KEY_2", "GEMINI_API_KEY_3"]:
+            val = os.getenv(key_name)
+            if val and val.strip() and val.strip() != "your-gemini-api-key-here":
+                self.api_keys.append(val.strip())
+        
+        # Keep self.api_key for backward compatibility
+        self.api_key = self.api_keys[0] if self.api_keys else None
+
         # Define fallback models in order of preference
         primary_model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         fallback_candidates = [
@@ -38,12 +46,8 @@ class GeminiTranslator:
                 self.models.append(m)
 
     def is_available(self) -> bool:
-        """Check if Gemini API Key is configured."""
-        return bool(
-            self.api_key
-            and self.api_key.strip()
-            and self.api_key != "your-gemini-api-key-here"
-        )
+        """Check if at least one Gemini API Key is configured."""
+        return len(self.api_keys) > 0
 
     def preprocess_query(self, user_query: str) -> Dict[str, Any]:
         """
@@ -106,31 +110,37 @@ User Input: "{user_query}"
 
         headers = {"Content-Type": "application/json"}
 
-        for model_name in self.models:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={self.api_key}"
-            try:
-                response = requests.post(url, headers=headers, json=payload, timeout=10)
-                if response.status_code != 200:
-                    print(f"[Translator] Gemini API error with model {model_name}: {response.status_code} - {response.text}. Trying fallback...")
-                    continue
-                
-                res_data = response.json()
-                candidates = res_data.get("candidates", [])
-                if not candidates:
-                    print(f"[Translator] Empty response with model {model_name}. Trying fallback...")
-                    continue
+        for api_key in self.api_keys:
+            key_exhausted = False
+            for model_name in self.models:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+                try:
+                    response = requests.post(url, headers=headers, json=payload, timeout=10)
+                    if response.status_code == 200:
+                        res_data = response.json()
+                        candidates = res_data.get("candidates", [])
+                        if not candidates:
+                            print(f"[Translator] Empty response with model {model_name} using key {api_key[:8]}... Trying fallback...")
+                            continue
+                            
+                        result_text = candidates[0].get("content", {}).get("parts", [])[0].get("text", "").strip()
+                        result_json = json.loads(result_text)
+                        
+                        return {
+                            "detected_language": result_json.get("detected_language", "English"),
+                            "is_english": bool(result_json.get("is_english", True)),
+                            "cleaned_english_query": result_json.get("cleaned_english_query", user_query)
+                        }
                     
-                result_text = candidates[0].get("content", {}).get("parts", [])[0].get("text", "").strip()
-                result_json = json.loads(result_text)
-                
-                return {
-                    "detected_language": result_json.get("detected_language", "English"),
-                    "is_english": bool(result_json.get("is_english", True)),
-                    "cleaned_english_query": result_json.get("cleaned_english_query", user_query)
-                }
-
-            except Exception as e:
-                print(f"[Translator] Error preprocessing query with model {model_name}: {str(e)}. Trying fallback...")
+                    print(f"[Translator] Gemini API error: Key={api_key[:8]}..., Model={model_name}, Status={response.status_code}, Response={response.text}")
+                    if response.status_code in (429, 403):
+                        key_exhausted = True
+                        break  # Break inner loop to try next API key
+                        
+                except Exception as e:
+                    print(f"[Translator] Error preprocessing query with model {model_name} using key {api_key[:8]}...: {str(e)}")
+                    continue
+            if key_exhausted:
                 continue
 
         print("[Translator] All Gemini models failed or were exhausted for preprocessing.")
@@ -186,26 +196,32 @@ English Answer:
 
         headers = {"Content-Type": "application/json"}
 
-        for model_name in self.models:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={self.api_key}"
-            try:
-                response = requests.post(url, headers=headers, json=payload, timeout=10)
-                if response.status_code != 200:
-                    print(f"[Translator] Gemini translation API error with model {model_name}: {response.status_code}. Trying fallback...")
-                    continue
-                
-                res_data = response.json()
-                candidates = res_data.get("candidates", [])
-                if not candidates:
-                    print(f"[Translator] Empty translation response with model {model_name}. Trying fallback...")
-                    continue
+        for api_key in self.api_keys:
+            key_exhausted = False
+            for model_name in self.models:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+                try:
+                    response = requests.post(url, headers=headers, json=payload, timeout=10)
+                    if response.status_code == 200:
+                        res_data = response.json()
+                        candidates = res_data.get("candidates", [])
+                        if not candidates:
+                            print(f"[Translator] Empty translation response with model {model_name} using key {api_key[:8]}... Trying fallback...")
+                            continue
+                            
+                        result_text = candidates[0].get("content", {}).get("parts", [])[0].get("text", "").strip()
+                        result_json = json.loads(result_text)
+                        return result_json.get("translated_text", english_answer)
                     
-                result_text = candidates[0].get("content", {}).get("parts", [])[0].get("text", "").strip()
-                result_json = json.loads(result_text)
-                return result_json.get("translated_text", english_answer)
-
-            except Exception as e:
-                print(f"[Translator] Error translating response with model {model_name}: {str(e)}. Trying fallback...")
+                    print(f"[Translator] Gemini translation API error: Key={api_key[:8]}..., Model={model_name}, Status={response.status_code}, Response={response.text}")
+                    if response.status_code in (429, 403):
+                        key_exhausted = True
+                        break  # Break inner loop to try next API key
+                        
+                except Exception as e:
+                    print(f"[Translator] Error translating response with model {model_name} using key {api_key[:8]}...: {str(e)}")
+                    continue
+            if key_exhausted:
                 continue
 
         print("[Translator] All Gemini models failed or were exhausted for translation.")

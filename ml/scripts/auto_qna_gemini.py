@@ -62,41 +62,48 @@ Here is the raw text:
 """
 
 
-def call_gemini_rest(prompt: str, api_key: str) -> str:
-    """Try each fallback model in order; return the text output or raise RuntimeError."""
+def call_gemini_rest(prompt: str, api_keys: list[str]) -> str:
+    """Try each API key and model fallback; return the text output or raise RuntimeError."""
     headers = {"Content-Type": "application/json"}
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"temperature": 0.2, "maxOutputTokens": 8192},
     }
 
-    for model in FALLBACK_MODELS:
-        url = (
-            f"https://generativelanguage.googleapis.com/v1beta/models/"
-            f"{model}:generateContent?key={api_key}"
-        )
-        try:
-            resp = requests.post(url, headers=headers, json=payload, timeout=120)
-            if resp.status_code == 200:
-                data = resp.json()
-                candidates = data.get("candidates", [])
-                if candidates:
-                    text = (
-                        candidates[0]
-                        .get("content", {})
-                        .get("parts", [{}])[0]
-                        .get("text", "")
-                        .strip()
-                    )
-                    print(f"  [OK] Model: {model}")
-                    return text
-                print(f"  [WARN] Model {model} returned empty candidates.")
-            else:
-                print(f"  [SKIP] Model {model}: HTTP {resp.status_code}. Trying next...")
-        except Exception as exc:
-            print(f"  [SKIP] Model {model}: {exc}. Trying next...")
+    for api_key in api_keys:
+        key_exhausted = False
+        for model in FALLBACK_MODELS:
+            url = (
+                f"https://generativelanguage.googleapis.com/v1beta/models/"
+                f"{model}:generateContent?key={api_key}"
+            )
+            try:
+                resp = requests.post(url, headers=headers, json=payload, timeout=120)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    candidates = data.get("candidates", [])
+                    if candidates:
+                        text = (
+                            candidates[0]
+                            .get("content", {})
+                            .get("parts", [{}])[0]
+                            .get("text", "")
+                            .strip()
+                        )
+                        print(f"  [OK] Key: {api_key[:8]}..., Model: {model}")
+                        return text
+                    print(f"  [WARN] Key: {api_key[:8]}..., Model {model} returned empty candidates.")
+                else:
+                    print(f"  [SKIP] Key: {api_key[:8]}..., Model {model}: HTTP {resp.status_code}. Trying next...")
+                    if resp.status_code in (429, 403):
+                        key_exhausted = True
+                        break
+            except Exception as exc:
+                print(f"  [SKIP] Key: {api_key[:8]}..., Model {model}: {exc}. Trying next...")
+        if key_exhausted:
+            continue
 
-    raise RuntimeError("All Gemini models failed or are rate-limited.")
+    raise RuntimeError("All Gemini API keys or models failed or are rate-limited.")
 
 
 def clean_csv_output(text: str) -> str:
@@ -115,9 +122,14 @@ def clean_csv_output(text: str) -> str:
 # ---------------------------------------------------------------------------
 
 def convert_text_to_csv(input_file: str, output_file: str, module_name: str) -> bool:
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-    if not api_key or api_key == "your-gemini-api-key-here":
-        print("ERROR: GEMINI_API_KEY is not set in .env")
+    api_keys = []
+    for key_name in ["GEMINI_API_KEY", "GEMINI_API_KEY_2", "GEMINI_API_KEY_3"]:
+        val = os.environ.get(key_name, "").strip()
+        if val and val != "your-gemini-api-key-here":
+            api_keys.append(val)
+            
+    if not api_keys:
+        print("ERROR: No valid GEMINI_API_KEY, GEMINI_API_KEY_2, or GEMINI_API_KEY_3 found in .env")
         return False
 
     # Read source file
@@ -150,7 +162,7 @@ def convert_text_to_csv(input_file: str, output_file: str, module_name: str) -> 
         print(f"\n[CHUNK {idx}/{total}] Sending {len(chunk):,} chars to Gemini API...")
         prompt = build_prompt(chunk, module_name)
         try:
-            output = call_gemini_rest(prompt, api_key)
+            output = call_gemini_rest(prompt, api_keys)
             output = clean_csv_output(output)
             # Drop any repeated header lines the model may emit
             for line in output.splitlines():

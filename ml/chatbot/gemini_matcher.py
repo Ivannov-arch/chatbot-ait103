@@ -13,17 +13,21 @@ class GeminiMatcher:
     Bypasses the need for google-genai SDK.
     """
     def __init__(self):
-        self.api_key = os.getenv("GEMINI_API_KEY")
+        self.api_keys = []
+        for key_name in ["GEMINI_API_KEY", "GEMINI_API_KEY_2", "GEMINI_API_KEY_3"]:
+            val = os.getenv(key_name)
+            if val and val.strip() and val.strip() != "your-gemini-api-key-here":
+                self.api_keys.append(val.strip())
+        
+        # Keep self.api_key for backward compatibility
+        self.api_key = self.api_keys[0] if self.api_keys else None
+
         # Default model for cost-effective and fast matching
         self.model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         
     def is_available(self) -> bool:
-        """Check if Gemini API Key is configured and not a placeholder."""
-        return bool(
-            self.api_key
-            and self.api_key.strip()
-            and self.api_key != "your-gemini-api-key-here"
-        )
+        """Check if at least one Gemini API Key is configured."""
+        return len(self.api_keys) > 0
 
     def match_question(self, user_query: str, candidates: List[str]) -> Tuple[int, float, str]:
         """
@@ -94,34 +98,49 @@ Candidate Questions:
             }
         }
 
-        try:
-            response = requests.post(url, headers=headers, json=payload, timeout=10)
-            if response.status_code != 200:
-                return -1, 0.0, f"Gemini API returned status code {response.status_code}: {response.text}"
-            
-            res_data = response.json()
-            # Extract text containing JSON from response structure
-            candidates_response = res_data.get("candidates", [])
-            if not candidates_response:
-                return -1, 0.0, "Gemini API returned no candidates."
-                
-            content = candidates_response[0].get("content", {})
-            parts = content.get("parts", [])
-            if not parts:
-                return -1, 0.0, "Gemini API returned no parts in response content."
-                
-            result_text = parts[0].get("text", "").strip()
-            result_json = json.loads(result_text)
-            
-            matched_index = int(result_json.get("matched_index", -1))
-            confidence = float(result_json.get("confidence", 0.0))
-            reasoning = result_json.get("reasoning", "")
-            
-            # Ensure matched_index is within bounds
-            if matched_index < -1 or matched_index >= len(candidates):
-                matched_index = -1
-                
-            return matched_index, confidence, reasoning
+        last_error = "All API keys failed or were exhausted"
+        for api_key in self.api_keys:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={api_key}"
+            try:
+                response = requests.post(url, headers=headers, json=payload, timeout=10)
+                if response.status_code == 200:
+                    res_data = response.json()
+                    # Extract text containing JSON from response structure
+                    candidates_response = res_data.get("candidates", [])
+                    if not candidates_response:
+                        print(f"[Matcher] Empty response with key {api_key[:8]}... Trying fallback...")
+                        last_error = "Gemini API returned no candidates."
+                        continue
+                        
+                    content = candidates_response[0].get("content", {})
+                    parts = content.get("parts", [])
+                    if not parts:
+                        print(f"[Matcher] Empty parts in response with key {api_key[:8]}... Trying fallback...")
+                        last_error = "Gemini API returned no parts in response content."
+                        continue
+                        
+                    result_text = parts[0].get("text", "").strip()
+                    result_json = json.loads(result_text)
+                    
+                    matched_index = int(result_json.get("matched_index", -1))
+                    confidence = float(result_json.get("confidence", 0.0))
+                    reasoning = result_json.get("reasoning", "")
+                    
+                    # Ensure matched_index is within bounds
+                    if matched_index < -1 or matched_index >= len(candidates):
+                        matched_index = -1
+                        
+                    return matched_index, confidence, reasoning
 
-        except Exception as e:
-            return -1, 0.0, f"Error calling Gemini REST API: {str(e)}"
+                print(f"[Matcher] Gemini API error: Key={api_key[:8]}..., Status={response.status_code}, Response={response.text}")
+                last_error = f"Gemini API returned status code {response.status_code}: {response.text}"
+                # If key is out of quota/auth issue, continue to next key
+                if response.status_code in (429, 403):
+                    continue
+
+            except Exception as e:
+                print(f"[Matcher] Error matching question using key {api_key[:8]}...: {str(e)}")
+                last_error = f"Error calling Gemini REST API: {str(e)}"
+                continue
+
+        return -1, 0.0, last_error
