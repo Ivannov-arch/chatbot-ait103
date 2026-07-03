@@ -24,9 +24,9 @@ except ImportError:
 
 # Fallback model order: cheapest/fastest first, premium last
 FALLBACK_MODELS = [
+    "gemini-3.5-flash",
     "gemini-2.5-flash",
     "gemini-2.5-flash-lite",
-    "gemini-2.0-flash",
     "gemini-flash-latest",
     "gemini-2.5-pro",
 ]
@@ -95,7 +95,7 @@ def call_gemini_rest(prompt: str, api_keys: list[str]) -> str:
                     print(f"  [WARN] Key: {api_key[:8]}..., Model {model} returned empty candidates.")
                 else:
                     print(f"  [SKIP] Key: {api_key[:8]}..., Model {model}: HTTP {resp.status_code}. Trying next...")
-                    if resp.status_code in (429, 403):
+                    if resp.status_code in (429, 403) or (resp.status_code == 400 and "API key" in resp.text):
                         key_exhausted = True
                         break
             except Exception as exc:

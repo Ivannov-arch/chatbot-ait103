@@ -26,11 +26,9 @@ class GeminiTranslator:
         # Define fallback models in order of preference
         primary_model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         fallback_candidates = [
+            "gemini-3.5-flash",
+            "gemini-2.5-flash-lite",
             "gemini-2.5-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-2.0-flash",
-            "gemini-2.0-flash-lite",
-            "gemini-2.5-flash-lite",
             "gemini-flash-latest",
             "gemini-pro-latest",
             "gemini-2.5-pro",
@@ -133,7 +131,7 @@ User Input: "{user_query}"
                         }
                     
                     print(f"[Translator] Gemini API error: Key={api_key[:8]}..., Model={model_name}, Status={response.status_code}, Response={response.text}")
-                    if response.status_code in (429, 403):
+                    if response.status_code in (429, 403) or (response.status_code == 400 and "API key" in response.text):
                         key_exhausted = True
                         break  # Break inner loop to try next API key
                         
@@ -214,7 +212,7 @@ English Answer:
                         return result_json.get("translated_text", english_answer)
                     
                     print(f"[Translator] Gemini translation API error: Key={api_key[:8]}..., Model={model_name}, Status={response.status_code}, Response={response.text}")
-                    if response.status_code in (429, 403):
+                    if response.status_code in (429, 403) or (response.status_code == 400 and "API key" in response.text):
                         key_exhausted = True
                         break  # Break inner loop to try next API key
                         
