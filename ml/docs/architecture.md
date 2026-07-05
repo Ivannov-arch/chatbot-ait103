@@ -12,6 +12,11 @@ User Input
     │
     ▼
 ┌─────────────────────┐
+│    Preprocessing    │  ← Preprocessing of the user input
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────┐
 │   ContextManager    │  ← stores conversation history per session
 └────────┬────────────┘
          │ enriched message + history
