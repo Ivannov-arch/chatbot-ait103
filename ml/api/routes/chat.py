@@ -28,8 +28,9 @@ async def get_suggestions(request: Request, module: str = None, limit: int = 10)
         suggestions = chatbot.get_module_suggestions(module, limit)
     else:
         suggestions = []
+        per_module = max(1, limit // 3)
         for mod in ["admin_directory", "campus_life", "academic_navigation"]:
-            suggestions.extend(chatbot.get_module_suggestions(mod, limit // 3))
+            suggestions.extend(chatbot.get_module_suggestions(mod, per_module))
         suggestions = suggestions[:limit]
 
     return {"suggestions": suggestions}

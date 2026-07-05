@@ -43,3 +43,5 @@ node_modules/
 
 # NLTK data (downloaded at runtime by chatbot/entity_recognizer.py)
 nltk_data/
+
+report/
