@@ -12,12 +12,6 @@ CREATE TABLE IF NOT EXISTS knowledge_items (
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
     keywords TEXT[] NOT NULL DEFAULT '{}',
-    source_name TEXT,
-    source_url TEXT,
-    source_page TEXT,
-    effective_from DATE,
-    effective_to DATE,
-    last_verified DATE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
