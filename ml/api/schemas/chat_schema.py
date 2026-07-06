@@ -5,6 +5,7 @@ from typing import Optional, Dict, List
 class ChatRequest(BaseModel):
     message: str
     debug: bool = False
+    session_id: Optional[str] = None
 
 
 class ChatResponse(BaseModel):

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 /* ──────────────────────────────────────────
    Types
@@ -129,7 +130,8 @@ function RoleBadge({ role }: { role: string }) {
    Main Page
 ────────────────────────────────────────── */
 export default function ConversationLogsCMS() {
-    const [logs, setLogs] = useState<LogEntry[]>(INITIAL_MOCK_LOGS);
+    const [logs, setLogs] = useState<LogEntry[]>([]);
+    const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedRole, setSelectedRole] = useState("all");
     const [selectedSession, setSelectedSession] = useState("all");
@@ -152,28 +154,69 @@ export default function ConversationLogsCMS() {
         setTimeout(() => setToast(null), 3000);
     };
 
+    const fetchLogs = async () => {
+        try {
+            setLoading(true);
+            const { data, error } = await supabase
+                .from("conversation_logs")
+                .select("id, session_id, role, message, created_at")
+                .order("created_at", { ascending: false });
+            if (error) throw error;
+            setLogs(data || []);
+        } catch (err) {
+            console.error("Error fetching logs, using initial mock structure:", err);
+            setLogs(INITIAL_MOCK_LOGS);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchLogs();
+    }, []);
+
     const openDeleteModal = (log: LogEntry) => {
         setCurrentLog(log);
         setIsDeleteOpen(true);
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (!currentLog) return;
-        setLogs((prev) => prev.filter((l) => l.id !== currentLog.id));
-        triggerToast("Log entry deleted successfully!");
+        try {
+            const { error } = await supabase
+                .from("conversation_logs")
+                .delete()
+                .eq("id", currentLog.id);
+            if (error) throw error;
+            setLogs((prev) => prev.filter((l) => l.id !== currentLog.id));
+            triggerToast("Log entry deleted successfully!");
+        } catch (err) {
+            console.error("Error deleting log:", err);
+            triggerToast("Failed to delete log entry.", "error");
+        }
         setIsDeleteOpen(false);
         setCurrentLog(null);
     };
 
-    const handleClearAll = () => {
+    const handleClearAll = async () => {
         if (
             !confirm(
-                "Delete ALL conversation logs from local state? This cannot be undone.",
+                "Delete ALL conversation logs from Supabase? This cannot be undone.",
             )
         )
             return;
-        setLogs([]);
-        triggerToast("All logs cleared (local state)!");
+        try {
+            const { error } = await supabase
+                .from("conversation_logs")
+                .delete()
+                .neq("id", "00000000-0000-0000-0000-000000000000");
+            if (error) throw error;
+            setLogs([]);
+            triggerToast("All logs cleared!");
+        } catch (err) {
+            console.error("Error clearing logs:", err);
+            triggerToast("Failed to clear logs.", "error");
+        }
     };
 
     /* ── Unique sessions for dropdown ── */
@@ -288,7 +331,12 @@ export default function ConversationLogsCMS() {
 
                 {/* ── Table Area ── */}
                 <div className="bg-slate-900/30 rounded-2xl border border-white/5 shadow-sm overflow-hidden">
-                    {filteredLogs.length === 0 ? (
+                    {loading ? (
+                        <div className="p-20 text-center max-w-sm mx-auto animate-pulse">
+                            <span className="text-4xl block mb-4">⏳</span>
+                            <p className="font-bold text-slate-300 text-sm">Loading logs...</p>
+                        </div>
+                    ) : filteredLogs.length === 0 ? (
                         <div className="p-20 text-center max-w-sm mx-auto">
                             <span className="text-4xl block mb-4">📄</span>
                             <p className="font-bold text-slate-300 text-sm">No logs found</p>

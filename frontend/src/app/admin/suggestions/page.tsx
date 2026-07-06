@@ -5,8 +5,10 @@ import { supabase } from "@/lib/supabaseClient";
 import {
   getSuggestions,
   updateSuggestionStatus,
+  deleteSuggestion,
   Suggestion,
 } from "@/services/suggestionService";
+import { createKnowledgeItem } from "@/services/knowledgeService";
 
 type FilterStatus = "all" | "pending" | "approved" | "rejected";
 
@@ -23,6 +25,15 @@ export default function SuggestionsPage() {
   const [actioningId, setActioningId] = useState<string | null>(null);
   const [toast, setToast] = useState<{ msg: string; type: "ok" | "err" } | null>(null);
   const [adminEmail, setAdminEmail] = useState("");
+
+  // Approve Modal States
+  const [isApproveOpen, setIsApproveOpen] = useState(false);
+  const [approvingItem, setApprovingItem] = useState<Suggestion | null>(null);
+  const [formModule, setFormModule] = useState("campus_life");
+  const [formSubIntent, setFormSubIntent] = useState("general");
+  const [formQuestion, setFormQuestion] = useState("");
+  const [formAnswer, setFormAnswer] = useState("");
+  const [formKeywords, setFormKeywords] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -53,23 +64,91 @@ export default function SuggestionsPage() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const handleAction = async (id: string, action: "approved" | "rejected") => {
-    setActioningId(id);
+  const openApproveModal = (item: Suggestion) => {
+    setApprovingItem(item);
+    setFormQuestion(item.question);
+    setFormAnswer(item.suggested_answer || "");
+    setFormModule("campus_life");
+    setFormSubIntent("general");
+    setFormKeywords("");
+    setIsApproveOpen(true);
+  };
+
+  const handleApproveSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!approvingItem) return;
+    if (!formQuestion.trim() || !formAnswer.trim()) {
+      showToast("Question and Answer are required.", "err");
+      return;
+    }
+
+    setActioningId(approvingItem.id);
     try {
-      await updateSuggestionStatus(id, action, adminEmail);
-      showToast(
-        action === "approved" ? "Suggestion approved." : "Suggestion rejected.",
-        "ok"
-      );
+      const keywordsArray = formKeywords
+        .split(",")
+        .map((k) => k.trim())
+        .filter((k) => k.length > 0);
+
+      // 1. Insert into knowledge_items
+      await createKnowledgeItem({
+        module: formModule,
+        question: formQuestion.trim(),
+        answer: formAnswer.trim(),
+        keywordsArray,
+      });
+
+      // 2. Update status to 'approved'
+      await updateSuggestionStatus(approvingItem.id, "approved", adminEmail);
+
+      showToast("Suggestion approved and added to Knowledge Base.", "ok");
+      
       setSuggestions((prev) =>
         filter === "all"
           ? prev.map((s) =>
-              s.id === id ? { ...s, status: action, reviewed_by: adminEmail } : s
+              s.id === approvingItem.id ? { ...s, status: "approved", reviewed_by: adminEmail } : s
+            )
+          : prev.filter((s) => s.id !== approvingItem.id)
+      );
+
+      setIsApproveOpen(false);
+      setApprovingItem(null);
+    } catch (err) {
+      console.error(err);
+      showToast("Approval failed. Please try again.", "err");
+    } finally {
+      setActioningId(null);
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    setActioningId(id);
+    try {
+      await updateSuggestionStatus(id, "rejected", adminEmail);
+      showToast("Suggestion rejected.", "ok");
+      setSuggestions((prev) =>
+        filter === "all"
+          ? prev.map((s) =>
+              s.id === id ? { ...s, status: "rejected", reviewed_by: adminEmail } : s
             )
           : prev.filter((s) => s.id !== id)
       );
     } catch {
-      showToast("Action failed. Please try again.", "err");
+      showToast("Rejection failed. Please try again.", "err");
+    } finally {
+      setActioningId(null);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this suggestion permanently?")) return;
+    setActioningId(id);
+    try {
+      await deleteSuggestion(id);
+      showToast("Suggestion permanently deleted.", "ok");
+      setSuggestions((prev) => prev.filter((s) => s.id !== id));
+    } catch (err) {
+      console.error(err);
+      showToast("Deletion failed. Please try again.", "err");
     } finally {
       setActioningId(null);
     }
@@ -169,32 +248,150 @@ export default function SuggestionsPage() {
                     {s.reviewed_by && ` · Reviewed by ${s.reviewed_by}`}
                   </p>
 
-                  {s.status === "pending" && (
-                    <div className="flex gap-3">
+                  <div className="flex gap-3">
+                    {s.status === "pending" ? (
+                      <>
+                        <button
+                          id={`reject-btn-${s.id}`}
+                          disabled={actioningId === s.id}
+                          onClick={() => handleReject(s.id)}
+                          className="px-4 py-2 rounded-lg text-sm font-semibold border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 transition-all disabled:opacity-40"
+                        >
+                          Reject
+                        </button>
+                        <button
+                          id={`approve-btn-${s.id}`}
+                          disabled={actioningId === s.id}
+                          onClick={() => openApproveModal(s)}
+                          className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all disabled:opacity-40"
+                        >
+                          Approve
+                        </button>
+                      </>
+                    ) : (
                       <button
-                        id={`reject-btn-${s.id}`}
+                        id={`delete-btn-${s.id}`}
                         disabled={actioningId === s.id}
-                        onClick={() => handleAction(s.id, "rejected")}
-                        className="px-4 py-2 rounded-lg text-sm font-semibold border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 transition-all disabled:opacity-40"
+                        onClick={() => handleDelete(s.id)}
+                        className="px-4 py-2 rounded-lg text-sm font-semibold border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-all disabled:opacity-40"
                       >
-                        Reject
+                        Delete Record
                       </button>
-                      <button
-                        id={`approve-btn-${s.id}`}
-                        disabled={actioningId === s.id}
-                        onClick={() => handleAction(s.id, "approved")}
-                        className="px-4 py-2 rounded-lg text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all disabled:opacity-40"
-                      >
-                        {actioningId === s.id ? "Processing..." : "Approve"}
-                      </button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
+
+      {/* Approve Modal */}
+      {isApproveOpen && approvingItem && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-[9999]">
+          <div className="bg-slate-950 border border-white/10 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            {/* Modal Header */}
+            <div className="bg-indigo-950/40 text-indigo-300 border-b border-white/5 px-6 py-4 flex items-center gap-2">
+              <span>💡</span>
+              <h3 className="font-bold text-sm">Approve & Add to Knowledge Base</h3>
+            </div>
+
+            {/* Modal Form */}
+            <form onSubmit={handleApproveSubmit} className="p-6 space-y-4 text-slate-100">
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Module
+                </label>
+                <select
+                  value={formModule}
+                  onChange={(e) => setFormModule(e.target.value)}
+                  className="w-full px-3 py-2.5 border border-white/10 rounded-xl text-sm text-slate-200 bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                  style={{ colorScheme: "dark" }}
+                >
+                  <option value="campus_life">Campus Life</option>
+                  <option value="academic_navigation">Academic Navigation</option>
+                  <option value="admin_directory">Admin Directory</option>
+                  <option value="general">General</option>
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Sub Intent
+                </label>
+                <input
+                  type="text"
+                  value={formSubIntent}
+                  onChange={(e) => setFormSubIntent(e.target.value)}
+                  placeholder="e.g. library, wifi, hostel"
+                  className="w-full px-3 py-2.5 border border-white/10 rounded-xl text-sm text-slate-200 bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Question
+                </label>
+                <input
+                  type="text"
+                  value={formQuestion}
+                  onChange={(e) => setFormQuestion(e.target.value)}
+                  className="w-full px-3 py-2.5 border border-white/10 rounded-xl text-sm text-slate-200 bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Answer
+                </label>
+                <textarea
+                  value={formAnswer}
+                  onChange={(e) => setFormAnswer(e.target.value)}
+                  rows={3}
+                  className="w-full px-3 py-2.5 border border-white/10 rounded-xl text-sm text-slate-200 bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Keywords (comma-separated)
+                </label>
+                <input
+                  type="text"
+                  value={formKeywords}
+                  onChange={(e) => setFormKeywords(e.target.value)}
+                  placeholder="e.g. gym, workout, fitness"
+                  className="w-full px-3 py-2.5 border border-white/10 rounded-xl text-sm text-slate-200 bg-slate-900/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                />
+              </div>
+
+              {/* Actions Panel */}
+              <div className="flex justify-end gap-3 pt-3 border-t border-white/5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsApproveOpen(false);
+                    setApprovingItem(null);
+                  }}
+                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 text-sm font-semibold rounded-xl border border-white/5 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={actioningId === approvingItem.id}
+                  className="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-600/40 text-white text-sm font-semibold rounded-xl shadow transition"
+                >
+                  {actioningId === approvingItem.id ? "Saving..." : "Save & Approve"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Toast */}
       {toast && (

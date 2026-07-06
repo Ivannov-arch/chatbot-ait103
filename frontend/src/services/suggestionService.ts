@@ -66,6 +66,15 @@ export async function updateSuggestionStatus(
   if (error) throw error;
 }
 
+/** Delete a suggestion permanently (admin only). */
+export async function deleteSuggestion(id: string): Promise<void> {
+  const { error } = await supabase
+    .from("suggested_questions")
+    .delete()
+    .eq("id", id);
+  if (error) throw error;
+}
+
 /** Get count of pending suggestions (for admin dashboard badge). */
 export async function getPendingCount(): Promise<number> {
   const { count, error } = await supabase

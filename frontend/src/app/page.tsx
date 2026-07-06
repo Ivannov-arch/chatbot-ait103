@@ -306,6 +306,7 @@ export default function ChatbotHome() {
       const payload = {
         message: text,
         debug: showDebug,
+        session_id: sessionIdRef.current,
       };
 
       let response: Response | undefined;

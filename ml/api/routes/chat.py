@@ -14,7 +14,33 @@ async def chat(req: ChatRequest, request: Request):
         raise HTTPException(status_code=400, detail="Message cannot be empty")
 
     from chatbot_main import ResponseFormatter
-    response = chatbot.process_message(req.message.strip(), debug=req.debug)
+    session_id = req.session_id or "default"
+    response = chatbot.process_message(req.message.strip(), session_id=session_id, debug=req.debug)
+    
+    try:
+        supabase_client = getattr(chatbot.retriever, "supabase", None)
+        if supabase_client:
+            # Log User turn
+            supabase_client.table("conversation_logs").insert({
+                "session_id": session_id,
+                "role": "user",
+                "message": req.message.strip()
+            }).execute()
+            
+            # Log Bot turn
+            formatted = ResponseFormatter.to_dict(response)
+            supabase_client.table("conversation_logs").insert({
+                "session_id": session_id,
+                "role": "bot",
+                "message": formatted.get("answer", ""),
+                "module": formatted.get("module"),
+                "sub_intent": formatted.get("sub_intent"),
+                "confidence": formatted.get("confidence"),
+                "matched_question": formatted.get("matched_question")
+            }).execute()
+    except Exception as log_err:
+        print(f"[API Logs Error] Failed to write conversation logs to Supabase: {log_err}")
+
     return ResponseFormatter.to_dict(response)
 
 
